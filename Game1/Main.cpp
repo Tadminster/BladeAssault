@@ -1,7 +1,5 @@
 #include "stdafx.h"
-#include "Bullet.h"
 #include "Player.h"
-#include "Mutal.h"
 #include "Main.h"
 
 Main::Main()

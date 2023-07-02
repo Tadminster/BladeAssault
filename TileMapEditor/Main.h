@@ -1,20 +1,17 @@
 #pragma once
-#define BONOMAX 11
-#define SCOREMAX 30
 
 class Main : public Scene
 {
-
 private:
-	ObImage* bg;
-	ObImage* bg2;
-	class Sonic* sonic;
-	class Bono* bono[BONOMAX];
-	class Score* score[SCOREMAX];
-	int	  socreSpawnY;
 
-	float vol1 = 1.0f;
-	float vol2 = 1.0f;
+	ObTileMap*	tileMap[5];
+	Int2		tileSize;
+	ObRect*		LineX, *LineY;
+
+	int			brushImgIdx;
+	Int2		brushFrame;
+	int			layer;
+
 
 public:
 	Main();
