@@ -42,10 +42,6 @@ void Main::Update()
 
 void Main::LateUpdate()
 {
-	Vector2 playerPos = pl->GetWorldPos();
-	ImGui::Text("playerPos_y: %f\n", playerPos.x);
-	ImGui::Text("playerPos_y: %f\n", playerPos.y);
-
 
 	Int2 plIdx;
 	if (tileMap[1]->WorldPosToTileIdx(pl->GetWorldPos(), plIdx))
@@ -54,9 +50,8 @@ void Main::LateUpdate()
 		{
 			
 
+			Vector2 playerPos = pl->GetWorldPos();
 			Vector2 tilePos = Vector2(tileMap[1]->GetTilePosition(plIdx).x * 50 + 25, tileMap[1]->GetTilePosition(plIdx).y * 50 + 25);
-			ImGui::Text("tilePos_x: %f\n", tilePos.x);
-			ImGui::Text("tilePos_y: %f\n", tilePos.y);
 
 
 			Vector2 Dir = playerPos - tilePos;

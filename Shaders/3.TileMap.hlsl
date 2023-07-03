@@ -141,10 +141,10 @@ float4 PS(PixelInput input) : SV_TARGET //SV_TARGET 은 타겟이될 색깔
 	
     //에디터에서만 확인할때 추가할것
     
-    if (input.tileState == 1.0f)
-    {
-        return TextureColor + float4(0.5, 0, 0, 0);
-    }
+    //if (input.tileState == 1.0f)
+    //{
+    //    return TextureColor + float4(0.5, 0, 0, 0);
+    //}
     
     
     return saturate(TextureColor);
