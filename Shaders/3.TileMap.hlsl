@@ -1,25 +1,25 @@
 
 struct VertexInput
 {
-    float4  position : POSITION0;
-    float2  uv : UV0;
-    float4  color : COLOR0; //섞을색상
-    float   tileMapIdx : INDICES0;
-    float   tileState : STATE0;
+    float4 position : POSITION0;
+    float2 uv : UV0;
+    float4 color : COLOR0; //섞을색상
+    float tileMapIdx : INDICES0;
+    float tileState : STATE0;
 };
 // PI
 struct PixelInput
 {
-    float4  position : SV_POSITION; //화면좌표계 포지션
-    float2  uv : UV0; //매핑된 좌표
-    float4  color : COLOR0; //섞을색상
-    float   tileMapIdx : INDICES0;
-    float   tileState : STATE0;
+    float4 position : SV_POSITION; //화면좌표계 포지션
+    float2 uv : UV0; //매핑된 좌표
+    float4 color : COLOR0; //섞을색상
+    float tileMapIdx : INDICES0;
+    float tileState : STATE0;
 };
 
 //상수버퍼 크기는 16byte배수로 만들어야한다.
 
-cbuffer VS_WVP : register(b0) 
+cbuffer VS_WVP : register(b0)
 {
     matrix WVP;
 }
@@ -35,11 +35,11 @@ cbuffer VS_WVP : register(b0)
 
 cbuffer PS_LIGHT : register(b0)
 {
-	float2 screenPos; //스크린좌표
-	float radius; //반지름크기
-	float select; //조명 타입 선택
-	float4 lightColor; //조명 색
-	float4 outColor; //외곽 색
+    float2 screenPos; //스크린좌표
+    float radius; //반지름크기
+    float select; //조명 타입 선택
+    float4 lightColor; //조명 색
+    float4 outColor; //외곽 색
 };
 
 
@@ -52,7 +52,7 @@ PixelInput VS(VertexInput input)
     //공간변환이 있을 예정인 곳
     PixelInput output;
     output.position = mul(input.position, WVP);
-	output.color = input.color;
+    output.color = input.color;
     output.uv = input.uv;
     output.tileMapIdx = input.tileMapIdx;
     output.tileState = input.tileState;
@@ -113,31 +113,39 @@ float4 PS(PixelInput input) : SV_TARGET //SV_TARGET 은 타겟이될 색깔
     TextureColor = saturate(TextureColor);
 
       //조명효과
-	float2 Minus = input.position.xy - screenPos;
-	float dis = sqrt(Minus.x * Minus.x + Minus.y * Minus.y);
-	if (select == 0.0f)
-	{
-		if (dis > radius)
-		{
-			TextureColor.rgb += (outColor.rgb * 2.0f - 1.0f);
-		}
-		else
-		{
-			TextureColor.rgb += (lightColor.rgb * 2.0f - 1.0f);
-		}
-	}
-	else
-	{
+    float2 Minus = input.position.xy - screenPos;
+    float dis = sqrt(Minus.x * Minus.x + Minus.y * Minus.y);
+    if (select == 0.0f)
+    {
+        if (dis > radius)
+        {
+            TextureColor.rgb += (outColor.rgb * 2.0f - 1.0f);
+        }
+        else
+        {
+            TextureColor.rgb += (lightColor.rgb * 2.0f - 1.0f);
+        }
+    }
+    else
+    {
         //외각선이 0 가운데가 1
-		float temp2 = pow(saturate(dis / radius), 3.0f);
-		float temp = 1.0f - temp2;
+        float temp2 = pow(saturate(dis / radius), 3.0f);
+        float temp = 1.0f - temp2;
         
-		TextureColor.rgb =
+        TextureColor.rgb =
 		saturate((TextureColor.rgb + (lightColor.rgb * 2.0f - 1.0f)) * temp) +
 		saturate((TextureColor.rgb + (outColor.rgb * 2.0f - 1.0f)) * temp2);
         
 		//TextureColor.rgb *= temp;
-	}
-	//return float4(1.0f - saturate(TextureColor).rgb, TextureColor.a);
-	return saturate(TextureColor);
+    }
+	
+    //에디터에서만 확인할때 추가할것
+    
+    if (input.tileState == 1.0f)
+    {
+        return TextureColor + float4(0.5, 0, 0, 0);
+    }
+    
+    
+    return saturate(TextureColor);
 }

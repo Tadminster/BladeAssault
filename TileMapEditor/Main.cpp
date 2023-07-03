@@ -29,6 +29,8 @@ Main::Main()
 	brushImgIdx = 0;
 	brushFrame.x = 0;
 	brushFrame.y = 0;
+	brushColor = Color(0.5f, 0.5f, 0.5f, 0.5f);
+	brushState = 0;
 
 	layer = 0;
 }
@@ -161,8 +163,8 @@ void Main::Update()
 	}
 
 	//"감바스";
-//L"감바스";
-//ImgIdx
+	//L"감바스";
+	//ImgIdx
 	if (ImGui::InputInt("ImgIdx", &brushImgIdx))
 	{
 		brushImgIdx = Utility::Saturate(brushImgIdx, 0, 3);
@@ -227,9 +229,10 @@ void Main::Update()
 	if (INPUT->KeyPress(VK_LBUTTON))
 	{
 		Int2 Idx;
+		//?
 		if (tileMap[layer]->WorldPosToTileIdx(INPUT->GetWorldMousePos(), Idx))
 		{
-			tileMap[layer]->SetTile(Idx, brushFrame);
+			tileMap[layer]->SetTile(Idx, brushFrame, brushImgIdx, brushState, brushColor);
 		}
 
 	}
