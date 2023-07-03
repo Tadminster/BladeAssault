@@ -5,7 +5,7 @@ class Main : public Scene
 private:
 
 	class Player* pl;
-	ObTileMap* map;
+	ObTileMap* tileMap[2];
 
 
 public:

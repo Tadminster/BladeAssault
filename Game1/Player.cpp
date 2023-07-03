@@ -11,14 +11,14 @@ Player::Player()
     walk->maxFrame.y = 8;
     walk->scale.x = walk->imageSize.x / 6.0f * 3.0f;
     walk->scale.y = walk->imageSize.y / 8.0f * 3.0f;
-    walk->pivot = OFFSET_B;
+    //walk->pivot = OFFSET_B;
 
     walk_shadow = new ObImage(L"player_walk.png");
     walk_shadow->maxFrame.x = 6;
     walk_shadow->maxFrame.y = 8;
     walk_shadow->scale.x = walk->imageSize.x / 6.0f * 3.0f;
     walk_shadow->scale.y = walk->imageSize.y / 8.0f * 3.0f;
-    walk_shadow->pivot = OFFSET_B;
+    //walk_shadow->pivot = OFFSET_B;
     walk_shadow->color = Color(0, 0, 0,0.5);
 
 
@@ -27,17 +27,17 @@ Player::Player()
     roll->maxFrame.y = 8;
     roll->scale.x = roll->imageSize.x / 6.0f * 3.0f;
     roll->scale.y = roll->imageSize.y / 8.0f * 3.0f;
-    roll->pivot = OFFSET_B;
+    //roll->pivot = OFFSET_B;
 
     roll_shadow = new ObImage(L"player_roll.png");
     roll_shadow->maxFrame.x = 6;
     roll_shadow->maxFrame.y = 8;
     roll_shadow->scale.x = roll->imageSize.x / 6.0f * 3.0f;
     roll_shadow->scale.y = roll->imageSize.y / 8.0f * 3.0f;
-    roll_shadow->pivot = OFFSET_B;
+    //roll_shadow->pivot = OFFSET_B;
     roll_shadow->color = Color(0, 0, 0, 0.5);
 
-    this->pivot = OFFSET_B;
+    //this->pivot = OFFSET_B;
 
     scale.x = walk->scale.x * 0.6f;
     scale.y = walk->scale.y * 0.8f;
@@ -100,18 +100,6 @@ void Player::Control()
 
 void Player::Update()
 {
-    if (ImGui::SliderAngle("rotX", &roll_shadow->rotation.x))
-    {
-        walk_shadow->rotation = roll_shadow->rotation;
-    }
-    if (ImGui::SliderAngle("rotY", &roll_shadow->rotation.y))
-    {
-        walk_shadow->rotation = roll_shadow->rotation;
-    }
-    if (ImGui::SliderAngle("rotZ", &roll_shadow->rotation.z))
-    {
-        walk_shadow->rotation = roll_shadow->rotation;
-    }
 
     ObRect::Update();
    
@@ -157,7 +145,7 @@ void Player::Update()
         //0 ~ 1 * 180
         ;
 
-        MoveWorldPos(dir * DELTA *( 250.0f * rollTime / 0.6f * PI + 100.0f));
+        MoveWorldPos(dir * DELTA * 200.0f);
         LookTarget(GetWorldPos() + dir);
         //roll->idle
         if (roll->isAniStop())

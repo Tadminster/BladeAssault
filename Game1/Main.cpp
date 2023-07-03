@@ -4,10 +4,15 @@
 
 Main::Main()
 {
-	map = new ObTileMap();
-	map->file = "map1.txt";
-	map->Load();
-	map->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
+	tileMap[0] = new ObTileMap();
+	tileMap[0]->file = "map1.txt";
+	tileMap[0]->Load();
+	//tileMap[0]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
+
+	tileMap[1] = new ObTileMap();
+	tileMap[1]->file = "map2.txt";
+	tileMap[1]->Load();
+	//tileMap[1]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
 
 	pl = new Player();
 }
@@ -30,17 +35,41 @@ void Main::Update()
 {
     ImGui::Text("FPS : %d", (int)TIMER->GetFramePerSecond());
 	pl->Update();
-	map->Update();
+	for (auto& map : tileMap)
+		map->Update();
 	CAM->position = pl->GetWorldPos();
 }
 
 void Main::LateUpdate()
 {
+	Vector2 playerPos = pl->GetWorldPos();
+	ImGui::Text("playerPos_y: %f\n", playerPos.x);
+	ImGui::Text("playerPos_y: %f\n", playerPos.y);
+
+
+	Int2 plIdx;
+	if (tileMap[1]->WorldPosToTileIdx(pl->GetWorldPos(), plIdx))
+	{
+		if (tileMap[1]->GetTileState(plIdx) == TILE_WALL)
+		{
+			
+
+			Vector2 tilePos = Vector2(tileMap[1]->GetTilePosition(plIdx).x * 50 + 25, tileMap[1]->GetTilePosition(plIdx).y * 50 + 25);
+			ImGui::Text("tilePos_x: %f\n", tilePos.x);
+			ImGui::Text("tilePos_y: %f\n", tilePos.y);
+
+
+			Vector2 Dir = playerPos - tilePos;
+			Dir.Normalize();
+			pl->MoveWorldPos(Dir * 300 * DELTA);
+		}
+	}
 }
 
 void Main::Render()
 {
-	map->Render();
+	for (auto& map : tileMap)
+		map->Render();
 	pl->Render();
 }
 
