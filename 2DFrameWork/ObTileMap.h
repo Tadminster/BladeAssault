@@ -55,15 +55,15 @@ public:
     virtual bool        WorldPosToTileIdx(Vector2 WPos, Int2& TileIdx);
     virtual void        ResizeTile(Int2 TileSize);
 
-    Vector2     GetTilePosition(Int2 TileIdx);
-    void    Render() override;
-    void    SetTile(Int2 TileIdx, Int2 FrameIdx, int ImgIdx = 0,
-        int TileState = TILE_NONE, Color color = Color(0.5f, 0.5f, 0.5f, 0.5f));
-    int     GetTileState(Int2 TileIdx);
-    void    Save();
+    Vector2         GetTilePosition(Int2 TileIdx);
+    void            Render() override;
+    void            SetTile(Int2 TileIdx, Int2 FrameIdx, int ImgIdx = 0,
+    int             TileState = TILE_NONE, Color color = Color(0.5f, 0.5f, 0.5f, 0.5f));
+    int             GetTileState(Int2 TileIdx);
+    void            Save();
     virtual void    Load();
-    Int2    GetTileSize() { return tileSize; };
+    Int2            GetTileSize() { return tileSize; };
     virtual void    CreateTileCost();
-    bool    PathFinding(Int2 sour, Int2 dest, OUT vector<Tile*>& way);
+    bool            PathFinding(Int2 sour, Int2 dest, OUT vector<Tile*>& way);
 };
 
