@@ -5,7 +5,7 @@ class Tile
 public:
     int         F, G, H;//타일 비용
     Int2        idx;    //타일 인덱스
-    Tile* P;      //나를 갱신시킨 타일
+    Tile* P;            //나를 갱신시킨 타일
     bool        isFind; //검사한적이 있는가?
     int         state;
     Vector2     Pos;
@@ -40,12 +40,12 @@ enum TileState
 class ObTileMap : public GameObject
 {
 protected:
-    VertexTile* vertices;
-    ID3D11Buffer* vertexBuffer;
+    VertexTile*             vertices;
+    ID3D11Buffer*           vertexBuffer;
     Int2                    tileSize;   //10x10 , 4x4
     vector<vector<Tile>>    Tiles;
 public:
-    ObImage* tileImages[4];
+    ObImage*                tileImages[4];
     string                  file;
 
 public:
