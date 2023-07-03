@@ -10,6 +10,8 @@ private:
 
 	int			brushImgIdx;
 	Int2		brushFrame;
+	int			brushState;
+	Color		brushColor;
 	int			layer;
 
 

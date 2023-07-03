@@ -122,7 +122,7 @@ void Main::Update()
 		tileMap[1]->ResizeTile(tileSize);
 	}
 
-	//TileScale
+	// TileScale
 	//ImGui::SliderFloat2("TileScale", (float*)&tileMap[layer]->scale, 1.0f, 200.0f);
 	if (ImGui::InputFloat("TileScale", (float*)&tileMap[layer]->scale.x, 1.0f, 200.0f))
 	{
@@ -130,7 +130,7 @@ void Main::Update()
 		tileMap[1]->scale.y = tileMap[layer]->scale.x;
 	}
 
-	//TilePos
+	// TilePos
 	Vector2 pos = tileMap[layer]->GetWorldPos();
 	if (ImGui::SliderFloat2("TilePos", (float*)&pos, -1000.0f, 1000.0f))
 	{
@@ -138,6 +138,44 @@ void Main::Update()
 		tileMap[1]->SetWorldPos(pos);
 	}
 
+	for (int i = 0; i < 4; i++)
+	{
+		string str = "Texture" + to_string(i);
+		if (GUI->FileImGui(str.c_str(), str.c_str(),
+			".jpg,.png,.bmp,.dds,.tga", "../Contents/Images"))
+		{
+			string path = ImGuiFileDialog::Instance()->GetFilePathName();
+			Utility::Replace(&path, "\\", "/");
+			size_t tok = path.find("/Images/") + 8;
+			path = path.substr(tok, path.length());
+			SafeDelete(tileMap[layer]->tileImages[i]);
+			wstring wImgFile = L"";
+			wImgFile.assign(path.begin(), path.end());
+			tileMap[layer]->tileImages[i] = new ObImage(wImgFile);
+			break;
+		}
+		if (i < 3)
+		{
+			ImGui::SameLine();
+		}
+	}
+
+	//"감바스";
+//L"감바스";
+//ImgIdx
+	if (ImGui::InputInt("ImgIdx", &brushImgIdx))
+	{
+		brushImgIdx = Utility::Saturate(brushImgIdx, 0, 3);
+
+		if (not tileMap[layer]->tileImages[brushImgIdx])
+		{
+			brushImgIdx = 0;
+		}
+	}
+	//maxFrame
+	ImGui::InputInt2("maxFrame", (int*)&tileMap[layer]->tileImages[brushImgIdx]->maxFrame);
+
+	// Layer
 	const char* items[] = { "0", "1" };
 	static int item_current = 0;
 	if (ImGui::Combo("Layer", &item_current, items, IM_ARRAYSIZE(items)))
@@ -177,6 +215,13 @@ void Main::Update()
 			ImGui::PopID();
 		}
 	}
+
+
+	//TileState
+	ImGui::SliderInt("TileState", &brushState, TILE_NONE, TILE_SIZE - 1);
+	//TileColor
+	ImGui::ColorEdit4("TileColor", (float*)&brushColor, ImGuiColorEditFlags_PickerHueWheel);
+	
 
 
 	if (INPUT->KeyPress(VK_LBUTTON))

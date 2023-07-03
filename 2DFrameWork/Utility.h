@@ -34,6 +34,8 @@ namespace Utility
 
     Vector2 WorldToScreen(Vector2 wol);
 
+    void Replace(string* str, string comp, string rep);
+
     //템플릿 함수는 선언,정의 분리 불가
     template<typename T>
     T Saturate(T src, T min = 0, T max = 1)
