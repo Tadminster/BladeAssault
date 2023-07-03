@@ -1,8 +1,0 @@
-﻿  Main.cpp
-C:\Users\null\Desktop\Framework\MapTool\Main.cpp(89,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\null\Desktop\Framework\MapTool\Main.cpp(91,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\null\Desktop\Framework\MapTool\Main.cpp(154,38): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\null\Desktop\Framework\MapTool\Main.cpp(154,33): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\null\Desktop\Framework\MapTool\Main.cpp(154,28): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-     C:\Users\null\Desktop\Framework\\Build\MapTool.lib 라이브러리 및 C:\Users\null\Desktop\Framework\\Build\MapTool.exp 개체를 생성하고 있습니다.
-  MapTool.vcxproj -> C:\Users\null\Desktop\Framework\Build\MapTool.exe
