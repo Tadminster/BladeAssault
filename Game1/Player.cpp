@@ -142,13 +142,14 @@ void Player::Update()
         rollTime += DELTA;
 
         //0 ~ 1 * 180
-        ;
+        speed = (250.0f * rollTime / 0.6f * PI + 100.0f);
 
-        MoveWorldPos(dir * DELTA * 200.0f);
+        MoveWorldPos(dir * DELTA * speed);
         LookTarget(GetWorldPos() + dir);
         //roll->idle
         if (roll->isAniStop())
         {
+            speed = 200.0f;
             state = PlayerState::IDLE;
             walk->ChangeAnim(ANIMSTATE::STOP, 0.1f);
             roll_shadow->isVisible = roll->isVisible = false;

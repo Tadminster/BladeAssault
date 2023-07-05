@@ -65,6 +65,6 @@ void PathTrail::Resize(int value, vector<Tile*>& way)
         //(*it)->pivot = OFFSET_B;
         (*it)->scale.x = 50;
         (*it)->scale.y = 50;
-        (*it)->color = Vector4(0.5, 1, 0.75, 0.2);
+        (*it)->color = Vector4(0.5, 1, 0.5, 0.2);
     }
 }

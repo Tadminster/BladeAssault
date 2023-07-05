@@ -6,6 +6,9 @@ protected:
 	Vector2 moveDir;
 	Vector2 target;
 public:
+	bool isMoving;
+
+public:
 	ObCircle* col;
 	virtual void Move(Vector2 TargetPos);
 	virtual void Attack(Vector2 TargetPos);

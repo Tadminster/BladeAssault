@@ -63,6 +63,10 @@ void Main::Update()
 		}
 		else cout << "±æ ¾øÀ½" << endl;
 	}
+	if (INPUT->KeyDown(VK_F2))
+	{
+		mutal->isMoving = true;
+	}
 
     ImGui::Text("FPS : %d", (int)TIMER->GetFramePerSecond());
 	player->Update();

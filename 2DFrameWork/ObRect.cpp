@@ -13,19 +13,19 @@ void ObRect::CreateStaticMember()
     //좌 하단
     Vertex[0].position.x = -0.5f;
     Vertex[0].position.y = -0.5f;
-    Vertex[0].color = Color(0, 0, 0, 1.0f);
+    Vertex[0].color = Color(0.5, 0.5, 0.5, 0.5f);
     //좌 상단
     Vertex[1].position.x = -0.5f;
     Vertex[1].position.y = 0.5f;
-    Vertex[1].color = Color(0, 0, 0, 1.0f);
+    Vertex[1].color = Color(0.5, 0.5, 0.5, 0.5f);
     //우 하단
     Vertex[2].position.x = 0.5f;
     Vertex[2].position.y = -0.5f;
-    Vertex[2].color = Color(1, 1, 1, 1.0f);
+    Vertex[2].color = Color(0.5, 0.5, 0.5, 0.5f);
     //우 상단
     Vertex[3].position.x = 0.5f;
     Vertex[3].position.y = 0.5f;
-    Vertex[3].color = Color(1 , 1, 1, 1.0f);
+    Vertex[3].color = Color(0.5, 0.5, 0.5, 0.5f);
 
     //CreateVertexBuffer
     { //익명스코프

@@ -37,6 +37,8 @@ Mutal::Mutal()
 	col->isFilled = false;
 	img->SetParentT(*col);
 	index = 0;
+
+	isMoving = false;
 }
 
 void Mutal::Init(Vector2 spawn)
@@ -48,6 +50,22 @@ void Mutal::Init(Vector2 spawn)
 void Mutal::Update()
 {
 	lastPos = col->GetWorldPos();
+
+	if (isMoving)
+	{
+		if (way.size() > 0)
+		{
+			target = way.back()->Pos;
+			Mutal::Move(target);
+
+			if ((target - col->GetWorldPos()).Length() < 5)
+			{
+				way.pop_back();
+			}
+		}
+		else isMoving = false;
+	}
+
 
 	col->MoveWorldPos(moveDir * moveSpeed * DELTA);
 
