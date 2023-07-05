@@ -26,6 +26,8 @@ Gui::Gui()
 	io.ConfigViewportsNoDefaultParent = true;
 	io.ConfigDockingAlwaysTabBar = true;
 
+	io.Fonts->AddFontFromFileTTF("..\\Contents\\Fonts\\malgun.ttf", 16.0f, NULL, io.Fonts->GetGlyphRangesKorean());
+
 	ImGui::StyleColorsDark();
 
 	// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.

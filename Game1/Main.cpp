@@ -69,6 +69,9 @@ void Main::Update()
 	}
 
     ImGui::Text("FPS : %d", (int)TIMER->GetFramePerSecond());
+	ImGui::Text(u8"[ F1 ] °æ·Î¼³Á¤\n");
+	ImGui::Text(u8"[ F2 ] ¹ÂÅ»ÀÌµ¿\n");
+	ImGui::Text("\n");
 	player->Update();
 	mutal->Update();
 	pathTrail->Update();

@@ -94,7 +94,7 @@ void Mutal::Move(Vector2 TargetPos)
 {
 	Unit::Move(TargetPos);
 
-	moveSpeed = 200.0f;
+	moveSpeed = 250.0f;
 
 	//0 ~ 2PI -> 0 ~ 15
 	index =
