@@ -22,7 +22,8 @@ class Player : public ObRect
 	Vector2		dir;
 	int Frame[8];
 	float rollTime;
-	//시계프레임
+
+	Vector2 lastPos;
 public:
 	Player();
 	virtual ~Player();
@@ -31,10 +32,8 @@ public:
 	void Update() override;
 	void Render() override;
 	void LookTarget(Vector2 target);
-	/*float GetHp() { return gauge2->scale.x; }
-	Bullet* GetBullet(int i) const { return bullet[i]; }
-	void Damage(float dmg) { gauge2->scale.x -= dmg; }*/
-	//const Bullet** GetBullet() { return bullet; }
+	Vector2 GetFoot();
+	void GoBack();
 };
 
 //class Sloider : public Player

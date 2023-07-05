@@ -4,7 +4,9 @@ class Main : public Scene
 {
 private:
 
-	class Player* pl;
+	class Player* player;
+	class Mutal* mutal;
+	class PathTrail* pathTrail;
 	ObTileMap* tileMap[2];
 
 

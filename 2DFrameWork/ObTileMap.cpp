@@ -359,7 +359,6 @@ void ObTileMap::CreateTileCost()
 
 bool ObTileMap::PathFinding(Int2 sour, Int2 dest, OUT vector<Tile*>& way)
 {
-
     //둘중에 하나가 벽이면 갈 수 있는길이 없다.
     if (Tiles[dest.x][dest.y].state == TILE_WALL ||
         Tiles[sour.x][sour.y].state == TILE_WALL)

@@ -11,14 +11,14 @@ Player::Player()
     walk->maxFrame.y = 8;
     walk->scale.x = walk->imageSize.x / 6.0f * 3.0f;
     walk->scale.y = walk->imageSize.y / 8.0f * 3.0f;
-    //walk->pivot = OFFSET_B;
+    walk->pivot = OFFSET_B;
 
     walk_shadow = new ObImage(L"player_walk.png");
     walk_shadow->maxFrame.x = 6;
     walk_shadow->maxFrame.y = 8;
     walk_shadow->scale.x = walk->imageSize.x / 6.0f * 3.0f;
     walk_shadow->scale.y = walk->imageSize.y / 8.0f * 3.0f;
-    //walk_shadow->pivot = OFFSET_B;
+    walk_shadow->pivot = OFFSET_B;
     walk_shadow->color = Color(0, 0, 0,0.5);
 
 
@@ -27,17 +27,17 @@ Player::Player()
     roll->maxFrame.y = 8;
     roll->scale.x = roll->imageSize.x / 6.0f * 3.0f;
     roll->scale.y = roll->imageSize.y / 8.0f * 3.0f;
-    //roll->pivot = OFFSET_B;
+    roll->pivot = OFFSET_B;
 
     roll_shadow = new ObImage(L"player_roll.png");
     roll_shadow->maxFrame.x = 6;
     roll_shadow->maxFrame.y = 8;
     roll_shadow->scale.x = roll->imageSize.x / 6.0f * 3.0f;
     roll_shadow->scale.y = roll->imageSize.y / 8.0f * 3.0f;
-    //roll_shadow->pivot = OFFSET_B;
+    roll_shadow->pivot = OFFSET_B;
     roll_shadow->color = Color(0, 0, 0, 0.5);
 
-    //this->pivot = OFFSET_B;
+    this->pivot = OFFSET_B;
 
     scale.x = walk->scale.x * 0.6f;
     scale.y = walk->scale.y * 0.8f;
@@ -75,7 +75,6 @@ void Player::Init(Vector2 spawn)
 void Player::Control()
 {
     dir = Vector2();
-
     //계속 누를때
     if (INPUT->KeyPress('W'))
     {
@@ -100,7 +99,7 @@ void Player::Control()
 
 void Player::Update()
 {
-
+    lastPos = GetWorldPos();
     ObRect::Update();
    
     if (state == PlayerState::IDLE)
@@ -184,4 +183,20 @@ void Player::LookTarget(Vector2 target)
 
     walk->frame.y = Frame[index];
     roll->frame.y = Frame[index];
+}
+
+Vector2 Player::GetFoot()
+{
+    //29 38
+/*Utility::RECT r(GetWorldPos()+ Vector2(0, 10), Vector2(15, 10));
+Utility::IntersectRectRect()*/
+
+//                              중앙에서나갈위치    발중앙위치 보정
+    return GetWorldPos() + dir * Vector2(15, 10) + Vector2(0, 10);
+}
+
+void Player::GoBack()
+{
+    SetWorldPos(lastPos);
+    Update();
 }
