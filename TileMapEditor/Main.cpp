@@ -126,10 +126,11 @@ void Main::Update()
 
 	// TileScale
 	//ImGui::SliderFloat2("TileScale", (float*)&tileMap[layer]->scale, 1.0f, 200.0f);
-	if (ImGui::InputFloat("TileScale", (float*)&tileMap[layer]->scale.x, 1.0f, 200.0f))
+	if (ImGui::InputFloat("TileScale", (float*)&tileMap[0]->scale.x, 1.0f, 200.0f))
 	{
-		tileMap[0]->scale.y = tileMap[layer]->scale.x;
-		tileMap[1]->scale.y = tileMap[layer]->scale.x;
+		tileMap[0]->scale.y = tileMap[0]->scale.x;
+		tileMap[1]->scale.x = tileMap[0]->scale.x;
+		tileMap[1]->scale.y = tileMap[0]->scale.x;
 	}
 
 	// TilePos

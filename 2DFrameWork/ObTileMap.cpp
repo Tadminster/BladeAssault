@@ -121,6 +121,17 @@ Vector2 ObTileMap::GetTilePosition(Int2 TileIdx)
     return Vector2(vertices[tileIdx * 6].position.x, vertices[tileIdx * 6].position.y);
 }
 
+int ObTileMap::GetTileState(Vector2 WorldPos)
+{
+    Int2 plIdx;
+    if (WorldPosToTileIdx(WorldPos, plIdx))
+    {
+        return GetTileState(plIdx);
+    }
+
+    return TILE_SIZE;
+}
+
 
 bool ObTileMap::WorldPosToTileIdx(Vector2 WPos, Int2& TileIdx)
 {
@@ -485,4 +496,16 @@ bool ObTileMap::PathFinding(Int2 sour, Int2 dest, OUT vector<Tile*>& way)
         }
     }
     return true;
+}
+
+bool ObTileMap::PathFinding(Vector2 sour, Vector2 dest, OUT vector<Tile*>& way)
+{
+    Int2 sourIdx, destIdx;
+    if (WorldPosToTileIdx(sour, sourIdx) and
+        WorldPosToTileIdx(dest, destIdx))
+    {
+        return PathFinding(sourIdx, destIdx, way);
+    }
+
+    return false;
 }

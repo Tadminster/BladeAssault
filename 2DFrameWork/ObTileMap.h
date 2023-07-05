@@ -56,6 +56,7 @@ public:
     virtual void        ResizeTile(Int2 TileSize);
 
     Vector2         GetTilePosition(Int2 TileIdx);
+    int             GetTileState(Vector2 WorldPos);
     void            Render() override;
     void            SetTile(Int2 TileIdx, Int2 FrameIdx, int ImgIdx = 0,
     int             TileState = TILE_NONE, Color color = Color(0.5f, 0.5f, 0.5f, 0.5f));
@@ -65,5 +66,6 @@ public:
     Int2            GetTileSize() { return tileSize; };
     virtual void    CreateTileCost();
     bool            PathFinding(Int2 sour, Int2 dest, OUT vector<Tile*>& way);
+    bool            PathFinding(Vector2 sour, Vector2 dest, OUT vector<Tile*>& way);
 };
 
