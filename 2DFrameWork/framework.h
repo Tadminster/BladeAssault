@@ -68,10 +68,16 @@ using namespace SimpleMath;
 #define	PI					3.1415926f	//180
 #define	HALFPI				1.5707963f	//90
 #define	QUATERPI			0.7853981f	//45
-#define	UP					Vector2(0.0f,1.0f)
-#define	DOWN				Vector2(0.0f,-1.0f)
-#define	LEFT				Vector2(-1.0f,0.0f)
+
+#define	UP					Vector2(0.0f, 1.0f)
+#define	DOWN				Vector2(0.0f, -1.0f)
+#define	LEFT				Vector2(-1.0f, 0.0f)
+#define	UP_LEFT				Vector2(-1.0f, 1.0f)
+#define	DOWN_LEFT			Vector2(-1.0f, -1.0f)
 #define	RIGHT				Vector2(1.0f, 0.0f)
+#define	UP_RIGHT			Vector2(1.0f, 1.0f)
+#define	DOWN_RIGHT			Vector2(1.0f,-1.0f)
+
 #define OFFSET_N            Vector2(0.0f, 0.0f)
 #define OFFSET_L            Vector2(0.5f, 0.0f)
 #define OFFSET_R            Vector2(-0.5f, 0.0f)
@@ -96,7 +102,7 @@ extern Application app;//Extern Global
 #include "Sound.h"
 #include "Light.h"
 #include "Dwrite.h"
-//#include "SceneManager.h"
+#include "SceneManager.h"
 
 #include "VertexType.h"
 #include "Shader.h"
@@ -122,4 +128,4 @@ extern Application app;//Extern Global
 #define SOUND		Sound::GetInstance()
 #define LIGHT		Light::GetInstance()->Get()
 #define DWRITE		Dwrite::GetInstance()
-//#define SCENE       SceneManager::GetInstance()
+#define SCENE       SceneManager::GetInstance()

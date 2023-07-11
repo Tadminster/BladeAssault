@@ -23,6 +23,8 @@
     <ClInclude Include="Mutal.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PathTrail.h" />
+    <ClInclude Include="Scene2_inGame.h" />
+    <ClInclude Include="Scene1_title.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +32,8 @@
     <ClCompile Include="Mutal.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PathTrail.cpp" />
+    <ClCompile Include="Scene2_inGame.cpp" />
+    <ClCompile Include="Scene1_title.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

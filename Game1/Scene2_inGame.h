@@ -1,14 +1,15 @@
 #pragma once
-
-class Main : public Scene
+class Scene2_inGame : public Scene
 {
 private:
-	class Scene1_title* sc1_title;
-	class Scene2_inGame* sc2_inGame;
+	class Player* player;
+	class Mutal* mutal;
+	class PathTrail* pathTrail;
+	ObTileMap* tileMap[2];
 
 public:
-	Main();
-	~Main();
+	Scene2_inGame();
+	~Scene2_inGame();
 	virtual void Init() override;
 	virtual void Release() override; //«ÿ¡¶
 	virtual void Update() override;
