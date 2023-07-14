@@ -162,6 +162,7 @@
     <ClInclude Include="Direct3D11.h" />
     <ClInclude Include="Dwrite.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Gui.h" />
     <ClInclude Include="Input.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Direct3D11.cpp" />
     <ClCompile Include="Dwrite.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Input.cpp" />

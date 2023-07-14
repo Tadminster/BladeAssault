@@ -72,6 +72,7 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="MapManager.h" />
+    <ClInclude Include="GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -149,5 +150,6 @@
       <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
 </Project>

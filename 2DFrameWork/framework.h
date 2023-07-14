@@ -102,6 +102,7 @@ extern Application app;//Extern Global
 #include "Sound.h"
 #include "Light.h"
 #include "Dwrite.h"
+#include "GameManager.h"
 #include "SceneManager.h"
 #include "MapManager.h"
 
@@ -129,4 +130,6 @@ extern Application app;//Extern Global
 #define SOUND		Sound::GetInstance()
 #define LIGHT		Light::GetInstance()->Get()
 #define DWRITE		Dwrite::GetInstance()
+#define GM			GameManager::GetInstance()
 #define SCENE       SceneManager::GetInstance()
+#define MM			MapManager::GetInstance()
