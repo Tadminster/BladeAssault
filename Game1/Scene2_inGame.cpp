@@ -44,7 +44,7 @@ void Scene2_inGame::Update()
 {
 	ImGui::Text("FPS : %d", (int)TIMER->GetFramePerSecond());
 
-	CAM->position = player->GetWorldPos();
+	CAM->position = player->GetCollider()->GetWorldPos();
 
 	for (auto& map : tileMap)
 		map->Update();

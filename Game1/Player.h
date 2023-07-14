@@ -4,16 +4,16 @@
 enum class PlayerState
 {
 	IDLE,
-	WALK,
-	ROLL,
+	RUN,
 	//DAMAGE
 };
 
 
-class Player : public ObRect
+class Player
 {
-	class Bullet* bullet[30];
-	ObImage* walk;
+	ObRect* collider;
+	ObImage* idle;
+	ObImage* run;
 	ObImage* roll;
 	ObImage* walk_shadow;
 	ObImage* roll_shadow;
@@ -29,11 +29,13 @@ public:
 	virtual ~Player();
 	void Init(Vector2 spawn);
 	void Control();
-	void Update() override;
-	void Render() override;
+	void Update();
+	void Render();
 	void LookTarget(Vector2 target);
 	Vector2 GetFoot();
 	void GoBack();
+
+	ObRect* GetCollider() { return collider; };
 };
 
 //class Sloider : public Player
