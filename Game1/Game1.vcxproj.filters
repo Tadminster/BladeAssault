@@ -5,12 +5,6 @@
     <ClInclude Include="Scene1_title.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Mutal.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PathTrail.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -22,12 +16,6 @@
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
       <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Mutal.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PathTrail.cpp">
-      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Object</Filter>
@@ -43,6 +31,9 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{355ff697-d03c-4bdd-bdae-32eee4c60bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{c87bda9f-da72-4617-a343-cc9148ae49d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

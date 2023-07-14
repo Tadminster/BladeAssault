@@ -30,7 +30,7 @@ void Main::Release()
 
 void Main::Update()
 {
-	SCENE->Release();
+	SCENE->Update();
 }
 
 void Main::LateUpdate()
@@ -52,7 +52,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prevInstance, LPWSTR param, in
 {
     app.SetAppName(L"Game1");
     app.SetInstance(instance);
-	app.InitWidthHeight(800.0f,600.0f);
+	app.InitWidthHeight(1200.0f,800.0f);
     app.background = Color(0.3, 0.3, 0.3);
 	WIN->Create();
 	Main* main = new Main();

@@ -3,16 +3,24 @@
 
 Main::Main()
 {
+	tileSize[0] = Int2(20, 20);
+	tileSize[1] = Int2(20, 20);
+	tileSize[2] = Int2(20, 20);
+
 	tileMap[0] = new ObTileMap();
-	tileMap[0]->file = "map1.txt";
+	tileMap[0]->file = "map0.txt";
 	tileMap[0]->Load();
 	tileMap[0]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
 
 	tileMap[1] = new ObTileMap();
-	tileMap[1]->file = "map2.txt";
+	tileMap[1]->file = "map1.txt";
 	tileMap[1]->Load();
 	tileMap[1]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
-	tileSize = Int2(20, 20);
+
+	tileMap[2] = new ObTileMap();
+	tileMap[2]->file = "map2.txt";
+	tileMap[2]->Load();
+	tileMap[2]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
 
 	LineX = new ObRect();
 	LineX->color = Color(1.0f, 0.0f, 0.0f, 1.0f);
@@ -66,6 +74,7 @@ void Main::Update()
 		{
 			tileMap[0]->Save();
 			tileMap[1]->Save();
+			tileMap[2]->Save();
 		}
 
 		if (ImGui::MenuItem("\xef\x81\xbc" " Open", "Ctrl + O"))
@@ -73,6 +82,7 @@ void Main::Update()
 			//tileMap[layer]->file = "tileMap[layer]1.txt";
 			tileMap[0]->Load();
 			tileMap[1]->Load();
+			tileMap[2]->Load();
 			//OpenProject(lua, assetManager, renderer, canvas, tileSize);
 		}
 
@@ -118,27 +128,40 @@ void Main::Update()
 	}
 
 	//TileSize
-	if (ImGui::SliderInt2("TileSize", (int*)&tileSize, 1, 100))
+	if (ImGui::SliderInt2("TileSize", (int*)&tileSize[layer], 1, 100))
 	{
-		tileMap[0]->ResizeTile(tileSize);
-		tileMap[1]->ResizeTile(tileSize);
+		tileMap[layer]->ResizeTile(tileSize[layer]);
 	}
 
 	// TileScale
-	//ImGui::SliderFloat2("TileScale", (float*)&tileMap[layer]->scale, 1.0f, 200.0f);
-	if (ImGui::InputFloat("TileScale", (float*)&tileMap[0]->scale.x, 1.0f, 200.0f))
+	//if (ImGui::InputFloat("TileScale", (float*)&tileMap[layer]->scale.x, 1.0f, 200.0f))
+	//{
+	//	tileMap[layer]->scale.y = tileMap[layer]->scale.x;
+	//}
+	if (ImGui::InputFloat("TileScaleX", (float*)&tileMap[layer]->scale.x, 1.0f, 200.0f))
 	{
-		tileMap[0]->scale.y = tileMap[0]->scale.x;
-		tileMap[1]->scale.x = tileMap[0]->scale.x;
-		tileMap[1]->scale.y = tileMap[0]->scale.x;
+	}
+	if (ImGui::InputFloat("TileScaleY", (float*)&tileMap[layer]->scale.y, 1.0f, 200.0f))
+	{
 	}
 
 	// TilePos
-	Vector2 pos = tileMap[layer]->GetWorldPos();
-	if (ImGui::SliderFloat2("TilePos", (float*)&pos, -1000.0f, 1000.0f))
+	//Vector2 pos = tileMap[layer]->GetWorldPos();
+	//if (ImGui::SliderFloat2("TilePos", (float*)&pos, -1000.0f, 1000.0f))
+	//{
+	//	tileMap[layer]->SetWorldPos(pos);
+	//}
+
+	static int pos_x[3], pos_y[3];
+	for (int i = 0; i < 3; i++)
 	{
-		tileMap[0]->SetWorldPos(pos);
-		tileMap[1]->SetWorldPos(pos);
+		pos_x[layer] = tileMap[layer]->GetWorldPos().x;
+		pos_y[layer] = tileMap[layer]->GetWorldPos().y;
+	}
+
+	if (ImGui::DragIntRange2("TilePos", &pos_x[layer], &pos_y[layer], 5, 0, 0, "X: %d", "Y: %d"))
+	{
+		tileMap[layer]->SetWorldPos(Vector2(pos_x[layer], pos_y[layer]));
 	}
 
 	for (int i = 0; i < 4; i++)
@@ -179,7 +202,7 @@ void Main::Update()
 	ImGui::InputInt2("maxFrame", (int*)&tileMap[layer]->tileImages[brushImgIdx]->maxFrame);
 
 	// Layer
-	const char* items[] = { "0", "1" };
+	const char* items[] = { "0", "1", "2" };
 	static int item_current = 0;
 	if (ImGui::Combo("Layer", &item_current, items, IM_ARRAYSIZE(items)))
 	{
@@ -240,6 +263,7 @@ void Main::Update()
 
 	tileMap[0]->Update();
 	tileMap[1]->Update();
+	tileMap[2]->Update();
 	LineX->Update();
 	LineY->Update();
 }
@@ -252,6 +276,7 @@ void Main::Render()
 {
 	tileMap[0]->Render();
 	tileMap[1]->Render();
+	tileMap[2]->Render();
 
 	LineX->Render();
 	LineY->Render();

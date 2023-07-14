@@ -2,7 +2,8 @@
 class Scene1_title : public Scene
 {
 private:
-	class ObImage* bg_title;
+	class ObImage* titleLogo;
+	class ObImage* titleBg;
 	//class ObImage* skin_btnStart;
 	//class ObImage* skin_btnExit;
 	class ObRect* btnStart;
@@ -10,6 +11,8 @@ private:
 
 	RECT textBox_start;
 	RECT textBox_exit;
+
+	float titleAnimTime = 0.0f;
 
 public:
 	Scene1_title();
@@ -20,8 +23,8 @@ public:
 	virtual void LateUpdate() override;//°»½Å
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
-
-
+	
+	void ResizeText(int type);
 	void OnClick();
 };
 

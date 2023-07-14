@@ -5,7 +5,7 @@ private:
 	class Player* player;
 	class Mutal* mutal;
 	class PathTrail* pathTrail;
-	ObTileMap* tileMap[2];
+	ObTileMap* tileMap[3];
 
 public:
 	Scene2_inGame();

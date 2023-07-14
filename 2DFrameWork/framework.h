@@ -103,6 +103,7 @@ extern Application app;//Extern Global
 #include "Light.h"
 #include "Dwrite.h"
 #include "SceneManager.h"
+#include "MapManager.h"
 
 #include "VertexType.h"
 #include "Shader.h"

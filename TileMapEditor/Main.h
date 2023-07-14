@@ -4,8 +4,8 @@ class Main : public Scene
 {
 private:
 
-	ObTileMap*	tileMap[5];
-	Int2		tileSize;
+	ObTileMap*	tileMap[3];
+	Int2		tileSize[3];
 	ObRect*		LineX, *LineY;
 
 	int			brushImgIdx;
