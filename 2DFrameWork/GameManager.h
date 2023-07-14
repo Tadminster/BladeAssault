@@ -1,7 +1,7 @@
 #pragma once
 class GameManager :public Singleton<GameManager>
 {
-private:
+public:
     bool	DEBUG_MODE = false;
 
 public:

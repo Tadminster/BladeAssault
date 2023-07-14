@@ -11,12 +11,12 @@ Scene2_inGame::Scene2_inGame()
 	tileMap[1] = new ObTileMap();
 	tileMap[1]->file = "map1.txt";
 	tileMap[1]->Load();
-	tileMap[1]->CreateTileCost();
+	//tileMap[1]->CreateTileCost();
 
 	tileMap[2] = new ObTileMap();
 	tileMap[2]->file = "map2.txt";
 	tileMap[2]->Load();
-	tileMap[2]->CreateTileCost();
+	//tileMap[2]->CreateTileCost();
 
 	player = new Player();
 }
@@ -58,8 +58,10 @@ void Scene2_inGame::LateUpdate()
 
 void Scene2_inGame::Render()
 {
-	for (auto& map : tileMap)
-		map->Render();
+	tileMap[0]->Render();
+	tileMap[1]->Render();
+	if (GM->DEBUG_MODE) tileMap[2]->Render();
+	
 	player->Render();
 }
 

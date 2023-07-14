@@ -30,6 +30,7 @@ void Main::Release()
 
 void Main::Update()
 {
+	GM->Update();
 	SCENE->Update();
 }
 
