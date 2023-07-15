@@ -33,7 +33,7 @@ Scene2_inGame::~Scene2_inGame()
 
 void Scene2_inGame::Init()
 {
-	player->Init(Vector2(100, 100));
+	player->Init(Vector2(800, 550));
 }
 
 void Scene2_inGame::Release()

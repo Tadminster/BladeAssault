@@ -1,27 +1,19 @@
 #pragma once
-
-
 enum class PlayerState
 {
 	IDLE,
 	RUN,
-	//DAMAGE
 };
-
 
 class Player
 {
 	ObRect* collider;
 	ObImage* idle;
 	ObImage* run;
-	ObImage* roll;
-	ObImage* walk_shadow;
-	ObImage* roll_shadow;
+
 	PlayerState  state;
 	float		speed;
 	Vector2		dir;
-	int Frame[8];
-	float rollTime;
 
 	Vector2 lastPos;
 public:
@@ -37,8 +29,3 @@ public:
 
 	ObRect* GetCollider() { return collider; };
 };
-
-//class Sloider : public Player
-//{
-//
-//};
