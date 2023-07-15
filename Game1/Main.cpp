@@ -30,6 +30,12 @@ void Main::Release()
 
 void Main::Update()
 {
+	if (GM->DEBUG_MODE)
+	{
+		ImGui::Text("mouse_x, %f\n", INPUT->GetWorldMousePos().x);
+		ImGui::Text("mouse_y, %f\n", INPUT->GetWorldMousePos().y);
+	}
+
 	GM->Update();
 	SCENE->Update();
 }

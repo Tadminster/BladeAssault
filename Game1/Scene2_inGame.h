@@ -2,10 +2,15 @@
 class Scene2_inGame : public Scene
 {
 private:
-	class Player* player;
-	class Mutal* mutal;
-	class PathTrail* pathTrail;
-	ObTileMap* tileMap[3];
+	ObTileMap*		tileMap[3];
+	ObImage*		lightCeiling;
+	ObImage*		lightRoom;
+
+	bool			isLightDown;
+	bool			isLightOn;
+	float			LightOffTime;
+
+	Vector2			startPostion;
 
 public:
 	Scene2_inGame();

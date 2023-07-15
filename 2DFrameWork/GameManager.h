@@ -2,6 +2,8 @@
 class GameManager :public Singleton<GameManager>
 {
 public:
+    class Player*   player;
+
     bool	DEBUG_MODE = false;
 
 public:
