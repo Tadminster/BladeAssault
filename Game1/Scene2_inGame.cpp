@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Player_kill.h"
 #include "Scene2_inGame.h"
 
 Scene2_inGame::Scene2_inGame()
@@ -11,7 +12,7 @@ Scene2_inGame::Scene2_inGame()
 	lightCeiling = new ObImage(L"hankroom_light.png");
 	lightRoom = new ObImage(L"squareGlow.png");
 
-	GM->player = new Player();
+	GM->player = new Player_kill();
 }
 
 Scene2_inGame::~Scene2_inGame()
@@ -103,18 +104,17 @@ void Scene2_inGame::Update()
 	}
 
 	// 寒鸥老 面倒 贸府
-	Int2 plIdx;
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), plIdx))
-	{
-		if (tileMap[2]->GetTileState(plIdx) == TILE_WALL)
-		{
-			if (!GM->player->onFloor)
-				GM->player->onFloor = true;
+	if (OnFloor()) GM->player->OnFloorAction();
+	else GM->player->onFloor = false;
 
-			if (!GM->player->isJumping)
-				GM->player->GoBack();
-		}
-	}
+	//Int2 playerlndexHead;
+	//if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndexHead))
+	//{
+	//	if (tileMap[2]->GetTileState(playerlndexHead) == TILE_WALL)
+	//	{
+	//		GM->player->GoBack();
+	//	}
+	//}
 
 	for (auto& map : tileMap)
 		map->Update();
@@ -138,9 +138,23 @@ void Scene2_inGame::Render()
 		lightRoom->Render();
 		lightCeiling->Render();
 	}
+
 	GM->player->Render();
 }
 
 void Scene2_inGame::ResizeScreen()
 {
+}
+
+bool Scene2_inGame::OnFloor()
+{
+	Int2 playerlndex;
+	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
+	{
+		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
+		{
+			return true;
+		}
+	}
+	return false;
 }
