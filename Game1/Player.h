@@ -36,6 +36,8 @@ public:
 	void GoBack();
 	void Control();
 	void OnFloorAction();
+	void OnWallAction();
+
 
 	// Get
 	ObRect* GetCollider() { return collider; };

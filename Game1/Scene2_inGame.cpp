@@ -104,17 +104,20 @@ void Scene2_inGame::Update()
 	}
 
 	// 寒鸥老 面倒 贸府
+	if (OnWall()) GM->player->OnWallAction();
+
+	// 官蹿鸥老 面倒 贸府
 	if (OnFloor()) GM->player->OnFloorAction();
 	else GM->player->onFloor = false;
 
-	//Int2 playerlndexHead;
-	//if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndexHead))
-	//{
-	//	if (tileMap[2]->GetTileState(playerlndexHead) == TILE_WALL)
-	//	{
-	//		GM->player->GoBack();
-	//	}
-	//}
+	Int2 playerlndexHead;
+	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndexHead))
+	{
+		if (tileMap[2]->GetTileState(playerlndexHead) == TILE_WALL)
+		{
+			GM->player->GoBack();
+		}
+	}
 
 	for (auto& map : tileMap)
 		map->Update();
@@ -147,6 +150,19 @@ void Scene2_inGame::ResizeScreen()
 }
 
 bool Scene2_inGame::OnFloor()
+{
+	Int2 playerlndex;
+	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
+	{
+		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Scene2_inGame::OnWall()
 {
 	Int2 playerlndex;
 	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))

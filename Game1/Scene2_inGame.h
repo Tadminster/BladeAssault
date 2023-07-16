@@ -22,4 +22,5 @@ public:
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
 	virtual bool OnFloor();
+	virtual bool OnWall();
 };
