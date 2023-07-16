@@ -1,4 +1,4 @@
-0 hankroom_t.png 1 1
+0 hankroom.png 1 1
 1 N
 2 N
 3 N

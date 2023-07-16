@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "Scene1_title.h"
 #include "Scene2_inGame.h"
+#include "Scene3_jazzBar.h"
 #include "Main.h"
 
 Main::Main()
 {
 	sc1_title = new Scene1_title();
 	sc2_inGame = new Scene2_inGame();
+	sc3_jazzBar = new Scene3_jazzBar();
 }
 
 Main::~Main()
@@ -18,8 +20,10 @@ void Main::Init()
 {
 	sc1_title->Init();
 	sc2_inGame->Init();
+	sc3_jazzBar->Init();
 	SCENE->AddScene("sc1", sc1_title);
 	SCENE->AddScene("sc2", sc2_inGame);
+	SCENE->AddScene("sc3", sc3_jazzBar);
 	SCENE->ChangeScene("sc1");
 }
 

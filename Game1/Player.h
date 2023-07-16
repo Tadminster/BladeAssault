@@ -25,6 +25,7 @@ protected:
 public:
 	float		gravity;
 	bool		onFloor;
+	bool		onWall;
 	//bool		isJumping;
 	
 public:
@@ -37,6 +38,7 @@ public:
 	void Control();
 	void OnFloorAction();
 	void OnWallAction();
+	void OnWallSlideAction();
 
 
 	// Get

@@ -24,6 +24,8 @@
     <ClInclude Include="Player_kill.h" />
     <ClInclude Include="Scene2_inGame.h" />
     <ClInclude Include="Scene1_title.h" />
+    <ClInclude Include="Scene3_jazzBar.h" />
+    <ClInclude Include="Scene_proto.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +34,8 @@
     <ClCompile Include="Player_kill.cpp" />
     <ClCompile Include="Scene2_inGame.cpp" />
     <ClCompile Include="Scene1_title.cpp" />
+    <ClCompile Include="Scene3_jazzBar.cpp" />
+    <ClCompile Include="Scene_proto.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,12 +1,10 @@
 #pragma once
-class Scene2_inGame : public Scene
+class Scene3_jazzBar : public Scene
 {
 private:
-	ObTileMap*		tileMap[3];
-	ObImage*		lightCeiling;
-	ObImage*		lightRoom;
-
-	ObRect*			nextMap;
+	ObTileMap* tileMap[3];
+	ObImage* lightCeiling;
+	ObImage* lightRoom;
 
 	bool			isLightDown;
 	bool			isLightOn;
@@ -15,11 +13,9 @@ private:
 	Vector2			startPostion;
 	Vector2			floorPostion;
 
-	float			elapsedTime;
-
 public:
-	Scene2_inGame();
-	~Scene2_inGame();
+	Scene3_jazzBar();
+	~Scene3_jazzBar();
 	virtual void Init() override;
 	virtual void Release() override; //«ÿ¡¶
 	virtual void Update() override;

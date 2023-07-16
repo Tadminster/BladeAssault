@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Player_kill.h"
-#include "Scene2_inGame.h"
+#include "Scene3_jazzBar.h"
 
-Scene2_inGame::Scene2_inGame()
+Scene3_jazzBar::Scene3_jazzBar()
 {
 	tileMap[0] = new ObTileMap();
 	tileMap[1] = new ObTileMap();
@@ -11,28 +11,23 @@ Scene2_inGame::Scene2_inGame()
 
 	lightCeiling = new ObImage(L"hankroom_light.png");
 	lightRoom = new ObImage(L"squareGlow.png");
-
-	nextMap = new ObRect();
-
-	GM->player = new Player_kill();
 }
 
-Scene2_inGame::~Scene2_inGame()
+Scene3_jazzBar::~Scene3_jazzBar()
 {
 	for (int i = 0; i < 3; i++)
 		delete[] tileMap[i];
 
 	delete lightCeiling;
 	delete lightRoom;
-	delete nextMap;
 }
 
-void Scene2_inGame::Init()
+void Scene3_jazzBar::Init()
 {
 
-	tileMap[0]->file = "scene2_hankroom_0.txt";
-	tileMap[1]->file = "scene2_hankroom_1.txt";
-	tileMap[2]->file = "scene2_hankroom_2.txt";
+	tileMap[0]->file = "scene3_jazzbar_0.txt";
+	tileMap[1]->file = "scene3_jazzbar_1.txt";
+	tileMap[2]->file = "scene3_jazzbar_2.txt";
 
 	lightCeiling->SetWorldPos(Vector2(935, 770));
 	lightCeiling->maxFrame.x = 1;
@@ -54,33 +49,24 @@ void Scene2_inGame::Init()
 	tileMap[1]->Load();
 	tileMap[2]->Load();
 
-	nextMap->SetWorldPos(Vector2(1300, 600));
-	nextMap->scale = Vector2(100, 100);
-	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	nextMap->isFilled = true;
-
-	startPostion = Vector2(850, 700);
+	startPostion = Vector2(2820, 1810);
 	floorPostion = Vector2(0, 600);
 
-	isLightDown		= true;
-	isLightOn		= true;
-	LightOffTime	= 0.0f;
+	isLightDown = true;
+	isLightOn = true;
+	LightOffTime = 0.0f;
 
 
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
-
-	elapsedTime = 0.0f;
 }
 
-void Scene2_inGame::Release()
+void Scene3_jazzBar::Release()
 {
 }
 
-void Scene2_inGame::Update()
+void Scene3_jazzBar::Update()
 {
-	elapsedTime += DELTA;
-
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
 	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
 	ImGui::Text("player_posY : %f\n", GM->player->GetCollider()->GetWorldPos().y);
@@ -122,23 +108,17 @@ void Scene2_inGame::Update()
 	}
 
 
-	if (nextMap->Intersect(GM->player->GetCollider()))
-	{
-		cout << "nextMap" << endl;
-		if (elapsedTime > 1.0f)
-		SCENE->ChangeScene("sc3");
-	}
+
 
 
 	for (auto& map : tileMap)
 		map->Update();
 	lightRoom->Update();
 	lightCeiling->Update();
-	nextMap->Update();
 	GM->player->Update();
 }
 
-void Scene2_inGame::LateUpdate()
+void Scene3_jazzBar::LateUpdate()
 {
 	// 寒鸥老 面倒 贸府
 	if (OnWall())
@@ -155,16 +135,12 @@ void Scene2_inGame::LateUpdate()
 	//else GM->player->onFloor = false;
 }
 
-void Scene2_inGame::Render()
+void Scene3_jazzBar::Render()
 {
 	tileMap[0]->Render();
 	tileMap[1]->Render();
-	if (GM->DEBUG_MODE)
-	{
-		tileMap[2]->Render();
-		nextMap->Render();
-	}
-	
+	if (GM->DEBUG_MODE) tileMap[2]->Render();
+
 	if (isLightOn)
 	{
 		lightRoom->Render();
@@ -174,11 +150,11 @@ void Scene2_inGame::Render()
 	GM->player->Render();
 }
 
-void Scene2_inGame::ResizeScreen()
+void Scene3_jazzBar::ResizeScreen()
 {
 }
 
-bool Scene2_inGame::OnFloor()
+bool Scene3_jazzBar::OnFloor()
 {
 	Int2 playerlndex;
 	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
@@ -191,7 +167,7 @@ bool Scene2_inGame::OnFloor()
 	return false;
 }
 
-bool Scene2_inGame::OnWall()
+bool Scene3_jazzBar::OnWall()
 {
 	Int2 playerlndex;
 	// TOP 面倒 眉农

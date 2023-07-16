@@ -5,6 +5,7 @@ class Main : public Scene
 private:
 	class Scene1_title* sc1_title;
 	class Scene2_inGame* sc2_inGame;
+	class Scene3_jazzBar* sc3_jazzBar;
 
 public:
 	Main();
