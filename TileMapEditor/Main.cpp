@@ -8,19 +8,24 @@ Main::Main()
 	tileSize[2] = Int2(20, 20);
 
 	tileMap[0] = new ObTileMap();
-	tileMap[0]->file = "map0.txt";
-	tileMap[0]->Load();
-	tileMap[0]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
-
 	tileMap[1] = new ObTileMap();
-	tileMap[1]->file = "map1.txt";
-	tileMap[1]->Load();
-	tileMap[1]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
-
 	tileMap[2] = new ObTileMap();
+
+	tileMap[0]->file = "map0.txt";
+	tileMap[1]->file = "map1.txt";
 	tileMap[2]->file = "map2.txt";
+
+	tileMap[0]->Load();
+	tileMap[1]->Load();
 	tileMap[2]->Load();
+
+	tileMap[0]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
+	tileMap[1]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
 	tileMap[2]->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
+
+	brushState[0] = 0;
+	brushState[1] = 0;
+	brushState[2] = 0;
 
 	LineX = new ObRect();
 	LineX->color = Color(1.0f, 0.0f, 0.0f, 1.0f);
@@ -38,7 +43,6 @@ Main::Main()
 	brushFrame.x = 0;
 	brushFrame.y = 0;
 	brushColor = Color(0.5f, 0.5f, 0.5f, 0.5f);
-	brushState = 0;
 
 	layer = 0;
 }
@@ -202,9 +206,9 @@ void Main::Update()
 	ImGui::InputInt2("maxFrame", (int*)&tileMap[layer]->tileImages[brushImgIdx]->maxFrame);
 
 	// Layer
-	const char* items[] = { "0", "1", "2" };
+	const char* itemsLayer[] = { "0", "1", "2" };
 	static int item_current = 0;
-	if (ImGui::Combo("Layer", &item_current, items, IM_ARRAYSIZE(items)))
+	if (ImGui::Combo("Layer", &item_current, itemsLayer, IM_ARRAYSIZE(itemsLayer)))
 	{
 		layer = item_current;
 	}
@@ -244,10 +248,25 @@ void Main::Update()
 
 
 	//TileState
-	ImGui::SliderInt("TileState", &brushState, TILE_NONE, TILE_SIZE - 1);
+	const char* itemsState[] = { "NONE", "WALL", "FLOOR", "DOOR", "TRAP", "WATER"};
+	if (ImGui::BeginListBox("TileState"))
+	{
+		for (int n = 0; n < IM_ARRAYSIZE(itemsState); n++)
+		{
+			const bool is_selected = (brushState[layer] == n);
+			if (ImGui::Selectable(itemsState[n], is_selected))
+				brushState[layer] = n;
+
+			// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+			if (is_selected)
+				ImGui::SetItemDefaultFocus();
+		}
+		ImGui::EndListBox();
+	}
+
 	//TileColor
 	ImGui::ColorEdit4("TileColor", (float*)&brushColor, ImGuiColorEditFlags_PickerHueWheel);
-	
+
 
 
 	if (INPUT->KeyPress(VK_LBUTTON))
@@ -256,7 +275,7 @@ void Main::Update()
 		//?
 		if (tileMap[layer]->WorldPosToTileIdx(INPUT->GetWorldMousePos(), Idx))
 		{
-			tileMap[layer]->SetTile(Idx, brushFrame, brushImgIdx, brushState, brushColor);
+			tileMap[layer]->SetTile(Idx, brushFrame, brushImgIdx, brushState[layer], brushColor);
 		}
 
 	}

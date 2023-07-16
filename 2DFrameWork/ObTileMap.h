@@ -30,6 +30,7 @@ enum TileState
 {
     TILE_NONE,
     TILE_WALL,
+    TILE_FLOOR,
     TILE_DOOR,
     TILE_TRAP,
     TILE_WATER,
