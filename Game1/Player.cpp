@@ -156,7 +156,6 @@ void Player::OnWallAction()
 {
     GoBack();
     collider->Update();
-
 }
 
 Vector2 Player::GetFoot()
