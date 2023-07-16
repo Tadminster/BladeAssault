@@ -143,7 +143,12 @@ float4 PS(PixelInput input) : SV_TARGET //SV_TARGET Àº Å¸°ÙÀÌµÉ »ö±ò
     
     if (input.tileState == 1.0f)
     {
-        return TextureColor + float4(0.5, 0, 0, 0);
+        return TextureColor + float4(0.5, 0, 0, 0.4);
+    }
+    
+    if (input.tileState == 2.0f)
+    {
+        return TextureColor + float4(0.0, 0.5, 0, 0.4);
     }
     
     
