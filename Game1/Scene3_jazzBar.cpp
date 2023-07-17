@@ -113,7 +113,6 @@ void Scene3_jazzBar::LateUpdate()
 	// 바닥(TILE_FLOOR)과 부딪쳤으면
 	if (OnFloor())
 	{
-		GM->player->onFloor = true;
 		GM->player->OnFloorAction();
 	}
 	else GM->player->onFloor = false;
@@ -136,16 +135,21 @@ void Scene3_jazzBar::Render()
 
 void Scene3_jazzBar::ResizeScreen()
 {
+
 }
 
 bool Scene3_jazzBar::OnFloor()
 {
-	Int2 playerlndex;
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
+	// 하강중에만 충돌 체크
+	if (GM->player->isLanding)
 	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
+		Int2 playerlndex;
+		if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
 		{
-			return true;
+			if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
+			{
+				return true;
+			}
 		}
 	}
 	return false;

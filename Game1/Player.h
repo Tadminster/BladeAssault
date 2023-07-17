@@ -4,7 +4,8 @@ enum class PlayerState
 	IDLE,
 	RUN,
 	JUMP,
-	CROUCH
+	CROUCH,
+	CROUCH_DOWN,
 };
 
 class Player
@@ -23,14 +24,16 @@ protected:
 	float		speed;
 	float		jumpSpeed;
 	float		jumpTime;
-	float		jumpPosY;
+
+	int			jumpCount;
+	int			jumpCountMax;
 
 public:
 	float		gravity;
 	bool		onFloor;
 	bool		onWall;
 	bool		onWallSlide;
-	bool		isDown;
+	bool		isLanding;
 	//bool		isJumping;
 	
 public:

@@ -29,7 +29,10 @@ void Player::Init()
 
 	gravity = 0.0f;
 	onFloor = false;
-	isDown = false;
+	isLanding = true;
+
+	jumpCount = 0;
+	jumpCountMax = 2;
 }
 
 void Player::Update()
@@ -68,21 +71,44 @@ void Player::Update()
 	}
 	else if (state == PlayerState::JUMP)
 	{
-		// 상승할 때, 하강할 때 프레임
-		if (gravity < 0)  jump->frame.y = 0;
+		// 상승
+		if (gravity < 0)
+		{
+			jump->frame.y = 0;
+			isLanding = false;
+
+		}
+		// 하강
 		else
 		{
 			jump->frame.y = 1;
+			isLanding = true;
 
 			// jump -> idle
 			if (onFloor || onWall)
+			{
+				jumpCount = 0;
 				state = PlayerState::IDLE;
+			}
 		}
 
 		collider->MoveWorldPos(dir * speed * DELTA);
 	}
 	else if (state == PlayerState::CROUCH)
 	{
+	}
+	else if (state == PlayerState::CROUCH_DOWN)
+	{
+		jump->frame.y = 1;
+		jumpTime += DELTA;
+		isLanding = false;
+
+		if (jumpTime > 0.3f || onWall)
+		{
+			isLanding = true;
+			jumpTime = 0.0f;
+			state = PlayerState::IDLE;
+		}
 	}
 
 
@@ -114,6 +140,8 @@ void Player::Render()
 		jump->Render();
 	else if (state == PlayerState::CROUCH)
 		crouch->Render();
+	else if (state == PlayerState::CROUCH_DOWN)
+		jump->Render();
 }
 
 
@@ -180,6 +208,7 @@ void Player::Control()
 	}
 	else if (state == PlayerState::JUMP)
 	{
+		// jump 중 이동
 		if (INPUT->KeyPress('A'))
 		{
 			dir = LEFT;
@@ -187,6 +216,13 @@ void Player::Control()
 		else if (INPUT->KeyPress('D'))
 		{
 			dir = RIGHT;
+		}
+		
+		// jump -> jump
+		if (INPUT->KeyDown('W') && jumpCount < jumpCountMax)
+		{
+			jumpCount++;
+			gravity = -900;
 		}
 	}
 	else if (state == PlayerState::CROUCH)
@@ -210,10 +246,9 @@ void Player::Control()
 		// crouch -> down
 		if (INPUT->KeyDown(VK_SHIFT))
 		{
-			jumpPosY = collider->GetWorldPos().y;
-			isDown = true;
-			state = PlayerState::JUMP;
-			
+			jumpCount = 1;
+			gravity = 0;
+			state = PlayerState::CROUCH_DOWN;
 		}
 	}
 }
@@ -221,15 +256,7 @@ void Player::Control()
 void Player::OnFloorAction()
 {
 	onFloor = true;
-
-	if (isDown)
-	{
-		if (jumpPosY - collider->GetWorldPos().y > 50.0f)
-		{
-			isDown = false;
-		}
-	}
-	else gravity = 0;
+	gravity = 0;
 }
 
 void Player::OnWallAction()
