@@ -11,9 +11,9 @@ Main::Main()
 	tileMap[1] = new ObTileMap();
 	tileMap[2] = new ObTileMap();
 
-	tileMap[0]->file = "scene_0.txt";
-	tileMap[1]->file = "scene_1.txt";
-	tileMap[2]->file = "scene_2.txt";
+	tileMap[0]->file = "scene3_jazzbar_0.txt";
+	tileMap[1]->file = "scene3_jazzbar_1.txt";
+	tileMap[2]->file = "scene3_jazzbar_2.txt";
 
 	tileMap[0]->Load();
 	tileMap[1]->Load();
@@ -248,7 +248,7 @@ void Main::Update()
 
 
 	//TileState
-	const char* itemsState[] = { "NONE", "WALL", "FLOOR", "DOOR", "TRAP", "WATER"};
+	const char* itemsState[] = { "NONE", "WALL", "WALLSIDE", "FLOOR", "DOOR", "TRAP", "WATER"};
 	if (ImGui::BeginListBox("TileState"))
 	{
 		for (int n = 0; n < IM_ARRAYSIZE(itemsState); n++)

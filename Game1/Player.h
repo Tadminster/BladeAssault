@@ -42,6 +42,7 @@ public:
 
 
 	// Get
+	PlayerState GetState() { return state; }
 	ObRect* GetCollider() { return collider; };
 	Vector2 GetFoot();
 	Vector2 GetHead();

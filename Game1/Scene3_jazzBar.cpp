@@ -78,39 +78,6 @@ void Scene3_jazzBar::Update()
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
 	CAM->position.y = GM->player->GetCollider()->GetWorldPos().y + 200;
 
-	// 전등 빛
-	{
-		// 불빛 세기 조절
-		if (lightCeiling->color.w == 0.5f)
-			isLightDown = true;
-		else if (lightCeiling->color.w <= 0.35f)
-			isLightDown = false;
-
-		float randomBrightness = RANDOM->Float(0.0f, 0.3f);
-		if (isLightDown)
-			lightCeiling->color.w = max(0.35f, lightCeiling->color.w - randomBrightness * DELTA);
-		else
-			lightCeiling->color.w = min(0.5f, lightCeiling->color.w + randomBrightness * DELTA);
-
-		// 전등 ON/OFF 조절
-		if (isLightOn)
-		{
-			int randomLightOff = RANDOM->Int(0, 3500);
-			if (!randomLightOff) isLightOn = false;
-		}
-		else
-		{
-			int randomLightOn = RANDOM->Int(0, 2000);
-			if (!randomLightOn) isLightOn = true;
-		}
-
-		lightRoom->color.w = lightCeiling->color.w * 0.03;
-	}
-
-
-
-
-
 	for (auto& map : tileMap)
 		map->Update();
 	lightRoom->Update();
@@ -121,11 +88,21 @@ void Scene3_jazzBar::Update()
 void Scene3_jazzBar::LateUpdate()
 {
 	// 벽타일 충돌 처리
+
+	
+
+
+	
+	// 벽과 부딪쳤으면
 	if (OnWall())
 	{
-		if (GM->player->GetCollider()->GetWorldPos().y > this->floorPostion.y)
+		// 벽에 붙어있는 상태
+		GM->player->onWall = true;
+		// 점프중이면
+		if (GM->player->GetState() == PlayerState::JUMP)
 			GM->player->OnWallSlideAction();
-		else
+		// 점프중이 아니면
+		else 
 			GM->player->OnWallAction();
 	}
 	else GM->player->onWall = false;
@@ -133,6 +110,34 @@ void Scene3_jazzBar::LateUpdate()
 	// 바닥타일 충돌 처리
 	//if (OnFloor()) GM->player->OnFloorAction();
 	//else GM->player->onFloor = false;
+
+
+	// generator a function Player colliders and wall colliders no longer move forward when they collide
+	/*if (GM->player->onWall)
+	{
+		if (GM->player->GetState() == PlayerState::WALLSLIDE)
+		{
+			if (GM->player->GetCollider()->GetWorldPos().x < GM->player->GetWallCollider()->GetWorldPos().x)
+			{
+				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x - 50, GM->player->GetCollider()->GetWorldPos().y));
+			}
+			else if (GM->player->GetCollider()->GetWorldPos().x > GM->player->GetWallCollider()->GetWorldPos().x)
+			{
+				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x + 50, GM->player->GetCollider()->GetWorldPos().y));
+			}
+		}
+		else if (GM->player->GetState() == PlayerState::WALL)
+		{
+			if (GM->player->GetCollider()->GetWorldPos().x < GM->player->GetWallCollider()->GetWorldPos().x)
+			{
+				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x - 50, GM->player->GetCollider()->GetWorldPos().y));
+			}
+			else if (GM->player->GetCollider()->GetWorldPos().x > GM->player->GetWallCollider()->GetWorldPos().x)
+			{
+				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x + 50, GM->player->GetCollider()->GetWorldPos().y));
+			}
+		}
+	}*/
 }
 
 void Scene3_jazzBar::Render()

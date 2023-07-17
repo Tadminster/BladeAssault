@@ -141,12 +141,17 @@ float4 PS(PixelInput input) : SV_TARGET //SV_TARGET 은 타겟이될 색깔
 	
     //에디터에서만 확인할때 추가할것
     
-    if (input.tileState == 1.0f)
+    if (input.tileState == 1.0f) // wall
     {
-        return TextureColor + float4(0.5, 0, 0, 0.4);
+        return TextureColor + float4(0.6, 0, 0, 0.4);
     }
     
-    if (input.tileState == 2.0f)
+    if (input.tileState == 2.0f) // wallside
+    {
+        return TextureColor + float4(0.5, 0.5, 0.0, 0.4);
+    }
+    
+    if (input.tileState == 3.0f) // floor
     {
         return TextureColor + float4(0.0, 0.5, 0, 0.4);
     }

@@ -12,6 +12,7 @@ private:
 	bool			isLightOn;
 	float			LightOffTime;
 
+
 	Vector2			startPostion;
 	Vector2			floorPostion;
 
@@ -20,12 +21,13 @@ private:
 public:
 	Scene2_inGame();
 	~Scene2_inGame();
-	virtual void Init() override;
-	virtual void Release() override; //해제
-	virtual void Update() override;
-	virtual void LateUpdate() override;//갱신
-	virtual void Render() override;
-	virtual void ResizeScreen() override;
+	void Init() override;
+	void Release() override; //해제
+	void Update() override;
+	void LateUpdate() override;//갱신
+	void Render() override;
+	void ResizeScreen() override;
+
 	virtual bool OnFloor();
 	virtual bool OnWall();
 };

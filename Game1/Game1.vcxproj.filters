@@ -18,9 +18,6 @@
     <ClInclude Include="Scene3_jazzBar.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_proto.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -37,9 +34,6 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Scene3_jazzBar.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene_proto.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
