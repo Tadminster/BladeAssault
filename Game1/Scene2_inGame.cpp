@@ -59,7 +59,7 @@ void Scene2_inGame::Init()
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
 
-	startPostion = Vector2(850, 700);
+	startPostion = Vector2(850, 600);
 	floorPostion = Vector2(0, 600);
 
 	isLightDown		= true;

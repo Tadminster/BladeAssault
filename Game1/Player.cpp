@@ -7,6 +7,7 @@ Player::Player()
 	idle = nullptr;
 	run = nullptr;
 	jump = nullptr;
+	crouch = nullptr;
 }
 
 Player::~Player()
@@ -15,19 +16,20 @@ Player::~Player()
 	delete idle;
 	delete run;
 	delete jump;
+	delete crouch;
 }
 
 void Player::Init()
 {
 	state = PlayerState::IDLE;
 
-	speed = 300.0f;
+	speed = 350.0f;
 	jumpSpeed = 700;
 	jumpTime = 0.0f;
 
 	gravity = 0.0f;
 	onFloor = false;
-
+	isDown = false;
 }
 
 void Player::Update()
@@ -46,43 +48,23 @@ void Player::Update()
 		idle->reverseLR = true;
 		run->reverseLR = true;
 		jump->reverseLR = true;
+		crouch->reverseLR = true;
 	}
 	else if (dir == RIGHT)
 	{
 		idle->reverseLR = false;
 		run->reverseLR = false;
 		jump->reverseLR = false;
+		crouch->reverseLR = false;
 	}
 
 	// 상태 업데이트
 	if (state == PlayerState::IDLE)
 	{
-		// idle > walk
-		if (INPUT->KeyPress('A') || INPUT->KeyPress('D'))
-		{
-			state = PlayerState::RUN;
-		}
-
-		// idle > jump
-		if (INPUT->KeyDown('W'))
-		{
-			state = PlayerState::JUMP;
-		}
 	}
 	else if (state == PlayerState::RUN)
 	{
-		// run -> idle
-		if (!(INPUT->KeyPress('A') || INPUT->KeyPress('D')))
-		{
-			state = PlayerState::IDLE;
-			run->frame.x = 0;
-		}
-
-		// run -> jump
-		if (INPUT->KeyDown('W'))
-		{
-			state = PlayerState::JUMP;
-		}
+		collider->MoveWorldPos(dir * speed * DELTA);
 	}
 	else if (state == PlayerState::JUMP)
 	{
@@ -94,18 +76,21 @@ void Player::Update()
 
 			// jump -> idle
 			if (onFloor || onWall)
-			{
 				state = PlayerState::IDLE;
-			}
 		}
 
+		collider->MoveWorldPos(dir * speed * DELTA);
 	}
+	else if (state == PlayerState::CROUCH)
+	{
+	}
+
 
 	// 중력
 	//if (!onFloor)
 	if (!onWall)
 	{
-		gravity += 600.0f * DELTA;
+		gravity += 1500.0f * DELTA;
 		collider->MoveWorldPos(DOWN * gravity * DELTA);
 	}
 
@@ -113,6 +98,7 @@ void Player::Update()
 	idle->Update();
 	run->Update();
 	jump->Update();
+	crouch->Update();
 }
 
 void Player::Render()
@@ -126,6 +112,8 @@ void Player::Render()
 		run->Render();
 	else if (state == PlayerState::JUMP)
 		jump->Render();
+	else if (state == PlayerState::CROUCH)
+		crouch->Render();
 }
 
 
@@ -134,40 +122,120 @@ void Player::Control()
 {
 	dir = Vector2();
 
-	// 점프
-	if (INPUT->KeyDown('W'))
+	// 상태 업데이트
+	if (state == PlayerState::IDLE)
 	{
-		collider->SetWorldPosY(collider->GetWorldPos().y + 5);
-		gravity = -600;
-	}
+		// idle -> walk
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+			state = PlayerState::RUN;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+			state = PlayerState::RUN;
+		}
 
-	// 좌우이동
-	if (INPUT->KeyPress('A'))
-	{
-		dir = LEFT;
-	}
-	else if (INPUT->KeyPress('D'))
-	{
-		dir = RIGHT;
-	}
+		// idle -> jump
+		if (INPUT->KeyDown('W'))
+		{
+			collider->SetWorldPosY(collider->GetWorldPos().y + 5);
+			gravity = -900;
+			state = PlayerState::JUMP;
+		}
 
-	collider->MoveWorldPos(dir * speed * DELTA);
+		// idle -> crouch
+		if (INPUT->KeyPress('S'))
+		{
+			state = PlayerState::CROUCH;
+		}
+	}
+	else if (state == PlayerState::RUN)
+	{
+		// runing
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+		}
+
+		// run -> idle
+		if (!(INPUT->KeyPress('A') || INPUT->KeyPress('D')))
+		{
+			state = PlayerState::IDLE;
+			run->frame.x = 0;
+		}
+
+		// run -> jump
+		if (INPUT->KeyDown('W'))
+		{
+			collider->SetWorldPosY(collider->GetWorldPos().y + 5);
+			gravity = -900;
+			state = PlayerState::JUMP;
+		}
+	}
+	else if (state == PlayerState::JUMP)
+	{
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+		}
+	}
+	else if (state == PlayerState::CROUCH)
+	{
+		// crouch -> idle
+		if (!INPUT->KeyPress('S'))
+			state = PlayerState::IDLE;
+
+		// crouch -> run
+		if (INPUT->KeyPress('A') || INPUT->KeyPress('D'))
+			state = PlayerState::RUN;
+
+		// crouch -> jump
+		if (INPUT->KeyDown('W'))
+		{
+			collider->SetWorldPosY(collider->GetWorldPos().y + 5);
+			gravity = -900;
+			state = PlayerState::JUMP;
+		}
+
+		// crouch -> down
+		if (INPUT->KeyDown(VK_SHIFT))
+		{
+			jumpPosY = collider->GetWorldPos().y;
+			isDown = true;
+			state = PlayerState::JUMP;
+			
+		}
+	}
 }
 
 void Player::OnFloorAction()
 {
 	onFloor = true;
-	gravity = 0;
-	//GoBack();
-	//collider->Update();
+
+	if (isDown)
+	{
+		if (jumpPosY - collider->GetWorldPos().y > 50.0f)
+		{
+			isDown = false;
+		}
+	}
+	else gravity = 0;
 }
 
 void Player::OnWallAction()
 {
 	onWall = true;
 	gravity = 0;
-	//state = PlayerState::IDLE;
-	//GoBack();
 }
 
 void Player::OnWallSlideAction()

@@ -3,7 +3,8 @@ enum class PlayerState
 {
 	IDLE,
 	RUN,
-	JUMP
+	JUMP,
+	CROUCH
 };
 
 class Player
@@ -13,6 +14,7 @@ protected:
 	ObImage* idle;
 	ObImage* run;
 	ObImage* jump;
+	ObImage* crouch;
 
 	PlayerState  state;
 	Vector2		dir;
@@ -21,11 +23,14 @@ protected:
 	float		speed;
 	float		jumpSpeed;
 	float		jumpTime;
+	float		jumpPosY;
 
 public:
 	float		gravity;
 	bool		onFloor;
 	bool		onWall;
+	bool		onWallSlide;
+	bool		isDown;
 	//bool		isJumping;
 	
 public:

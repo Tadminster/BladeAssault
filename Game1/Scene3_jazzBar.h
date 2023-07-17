@@ -25,4 +25,5 @@ public:
 
 	virtual bool OnFloor();
 	virtual bool OnWall();
+	virtual bool OnWallside();
 };

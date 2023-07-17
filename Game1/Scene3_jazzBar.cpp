@@ -49,7 +49,7 @@ void Scene3_jazzBar::Init()
 	tileMap[1]->Load();
 	tileMap[2]->Load();
 
-	startPostion = Vector2(2820, 1810);
+	startPostion = Vector2(2820, 1850);
 	floorPostion = Vector2(0, 600);
 
 	isLightDown = true;
@@ -73,6 +73,7 @@ void Scene3_jazzBar::Update()
 
 	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
 	ImGui::Text("onWall : %d\n", GM->player->onWall);
+	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -87,57 +88,35 @@ void Scene3_jazzBar::Update()
 
 void Scene3_jazzBar::LateUpdate()
 {
-	// 벽타일 충돌 처리
-
-	
-
-
-	
-	// 벽과 부딪쳤으면
+	// 벽(TILE_WALL)과 부딪쳤으면
 	if (OnWall())
 	{
+		// 바닥에 붙어있는 상태
+		GM->player->OnWallAction();
+	}
+	else GM->player->onWall = false;
+
+	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
+	if (OnWallside())
+	{
 		// 벽에 붙어있는 상태
-		GM->player->onWall = true;
+		GM->player->onWallSlide = true;
+
 		// 점프중이면
 		if (GM->player->GetState() == PlayerState::JUMP)
 			GM->player->OnWallSlideAction();
 		// 점프중이 아니면
-		else 
-			GM->player->OnWallAction();
-	}
-	else GM->player->onWall = false;
+		else
+			GM->player->GoBack();
+	} else GM->player->onWallSlide = false;
 
-	// 바닥타일 충돌 처리
-	//if (OnFloor()) GM->player->OnFloorAction();
-	//else GM->player->onFloor = false;
-
-
-	// generator a function Player colliders and wall colliders no longer move forward when they collide
-	/*if (GM->player->onWall)
+	// 바닥(TILE_FLOOR)과 부딪쳤으면
+	if (OnFloor())
 	{
-		if (GM->player->GetState() == PlayerState::WALLSLIDE)
-		{
-			if (GM->player->GetCollider()->GetWorldPos().x < GM->player->GetWallCollider()->GetWorldPos().x)
-			{
-				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x - 50, GM->player->GetCollider()->GetWorldPos().y));
-			}
-			else if (GM->player->GetCollider()->GetWorldPos().x > GM->player->GetWallCollider()->GetWorldPos().x)
-			{
-				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x + 50, GM->player->GetCollider()->GetWorldPos().y));
-			}
-		}
-		else if (GM->player->GetState() == PlayerState::WALL)
-		{
-			if (GM->player->GetCollider()->GetWorldPos().x < GM->player->GetWallCollider()->GetWorldPos().x)
-			{
-				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x - 50, GM->player->GetCollider()->GetWorldPos().y));
-			}
-			else if (GM->player->GetCollider()->GetWorldPos().x > GM->player->GetWallCollider()->GetWorldPos().x)
-			{
-				GM->player->GetCollider()->SetWorldPos(Vector2(GM->player->GetWallCollider()->GetWorldPos().x + 50, GM->player->GetCollider()->GetWorldPos().y));
-			}
-		}
-	}*/
+		GM->player->onFloor = true;
+		GM->player->OnFloorAction();
+	}
+	else GM->player->onFloor = false;
 }
 
 void Scene3_jazzBar::Render()
@@ -180,7 +159,8 @@ bool Scene3_jazzBar::OnWall()
 	{
 		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
 		{
-			return true;
+			GM->player->GoBack();
+			//return true;
 		}
 	}
 	// BOT 충돌 체크
@@ -192,6 +172,28 @@ bool Scene3_jazzBar::OnWall()
 		}
 	}
 
-
 	return false;
 }
+
+bool Scene3_jazzBar::OnWallside()
+{
+	Int2 playerlndex;
+	// TOP 충돌 체크
+	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
+	{
+		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
+		{
+			return true;
+		}
+	}
+	// BOT 충돌 체크
+if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
+	{
+		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+

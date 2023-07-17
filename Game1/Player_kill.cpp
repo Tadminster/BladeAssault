@@ -4,9 +4,10 @@
 
 Player_kill::Player_kill()
 {
-    idle = new ObImage(L"kill_onehand_idle.png");
-    run = new ObImage(L"kill_onehand_run.png");
-    jump = new ObImage(L"kill_onehand_jump.png");
+    idle = new ObImage(L"kill_barehand_idle.png");
+    run = new ObImage(L"kill_barehand_run.png");
+    jump = new ObImage(L"kill_barehand_jump.png");
+    crouch = new ObImage(L"kill_barehand_crouch.png");
 
     //hasAxis = true;
 }
@@ -45,6 +46,14 @@ void Player_kill::Init()
     jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 3;
     jump->scale.y = jump->imageSize.y / jump->maxFrame.y * 3;
     jump->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
+
+    crouch->SetParentRT(*collider);
+    crouch->SetLocalPosY(20);
+    crouch->maxFrame.x = 6;
+    crouch->maxFrame.y = 1;
+    crouch->scale.x = crouch->imageSize.x / crouch->maxFrame.x * 3;
+    crouch->scale.y = crouch->imageSize.y / crouch->maxFrame.y * 3;
+    crouch->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     // ´É·ÂÄ¡
     Player::Init();
