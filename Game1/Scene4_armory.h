@@ -1,24 +1,20 @@
 #pragma once
-class Scene3_jazzBar : public Scene
+class Scene4_armory : public Scene
 {
 private:
-	ObTileMap*		tileMap[3];
-	ObImage*		lightCeiling;
-	ObImage*		lightRoom;
+	ObTileMap* tileMap[3];
 
-	ObRect*			nextMap[2];
-	ObRect*			stairLeft;
-	ObRect*			stairRight;
-
-	bool			isLightDown;
-	bool			isLightOn;
-	float			LightOffTime;
+	ObRect* nextMap;
+	ObRect* previousMap;
+	
+	ObRect* stair;
 
 	Vector2			startPostion;
+	Vector2			returnPosition;
 
 public:
-	Scene3_jazzBar();
-	~Scene3_jazzBar();
+	Scene4_armory();
+	~Scene4_armory();
 	virtual void Init() override;
 	virtual void Release() override; //«ÿ¡¶
 	virtual void Update() override;

@@ -14,7 +14,8 @@ Scene3_jazzBar::Scene3_jazzBar()
 
 	for (int i = 0; i < 2; i++)
 		nextMap[i] = new ObRect();
-	stair = new ObRect();
+	stairLeft = new ObRect();
+	stairRight = new ObRect();
 }
 
 Scene3_jazzBar::~Scene3_jazzBar()
@@ -26,6 +27,8 @@ Scene3_jazzBar::~Scene3_jazzBar()
 	delete lightRoom;
 	for (int i = 0; i < 2; i++)
 		delete nextMap[i];
+
+	delete stairLeft;
 }
 
 void Scene3_jazzBar::Init()
@@ -64,11 +67,17 @@ void Scene3_jazzBar::Init()
 		nextMap[i]->isFilled = true;
 	}
 
-	//3075 1175
-	stair->SetWorldPos(Vector2(3075, 1175));
-	stair->scale = Vector2(50, 50);
-	stair->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	stair->isFilled = true;
+	// 계단(왼쪽)
+	stairLeft->SetWorldPos(Vector2(3075, 1175));
+	stairLeft->scale = Vector2(50, 50);
+	stairLeft->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stairLeft->isFilled = true;
+	
+	// 계단(오른쪽)
+	stairRight->SetWorldPos(Vector2(4025, 1125));
+	stairRight->scale = Vector2(50, 50);
+	stairRight->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stairRight->isFilled = true;
 
 	startPostion = Vector2(2820, 1850);
 
@@ -76,7 +85,7 @@ void Scene3_jazzBar::Init()
 	isLightOn = true;
 	LightOffTime = 0.0f;
 
-	GM->player->Init();
+	//GM->player->Init();
 	GM->player->SetPosition(startPostion);
 }
 
@@ -98,15 +107,26 @@ void Scene3_jazzBar::Update()
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
 	CAM->position.y = GM->player->GetCollider()->GetWorldPos().y + 200;
 
+	// 다음	맵으로 이동
 	for (auto& next : nextMap)
 	{
 		if (next->Intersect(GM->player->GetCollider()))
 		{
-			SCENE->ChangeScene("sc2");
+			SCENE->ChangeScene("sc4");
 		}
 	}
-	
-	if (stair->Intersect(GM->player->GetCollider()))
+
+	// 계단(왼쪽)
+	if (stairLeft->Intersect(GM->player->GetCollider()))
+	{
+		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == PlayerState::RUN)
+		{
+			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
+		}
+	}
+
+	// 계단(오른쪽)
+	if (stairRight->Intersect(GM->player->GetCollider()))
 	{
 		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == PlayerState::RUN)
 		{
@@ -120,7 +140,8 @@ void Scene3_jazzBar::Update()
 	lightCeiling->Update();
 	nextMap[0]->Update();
 	nextMap[1]->Update();
-	stair->Update();
+	stairLeft->Update();
+	stairRight->Update();
 	GM->player->Update();
 }
 
@@ -146,7 +167,8 @@ void Scene3_jazzBar::LateUpdate()
 		// 점프중이 아니면
 		else
 			GM->player->GoBack();
-	} else GM->player->onWallSlide = false;
+	}
+	else GM->player->onWallSlide = false;
 
 	// 바닥(TILE_FLOOR)과 부딪쳤으면
 	if (OnFloor())
@@ -165,7 +187,8 @@ void Scene3_jazzBar::Render()
 		tileMap[2]->Render();
 		nextMap[0]->Render();
 		nextMap[1]->Render();
-		stair->Render();
+		stairLeft->Render();
+		stairRight->Render();
 	}
 
 	if (isLightOn)
@@ -244,4 +267,3 @@ if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
 	}
 	return false;
 }
-

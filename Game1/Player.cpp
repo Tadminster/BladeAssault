@@ -255,6 +255,29 @@ void Player::Control()
 
 void Player::Attack()
 {
+	if (INPUT->KeyDown(VK_LBUTTON))
+	{
+		//if (state == PlayerState::IDLE)
+		//{
+		//	state = PlayerState::ATTACK;
+		//	attack->frame.x = 0;
+		//}
+		//else if (state == PlayerState::RUN)
+		//{
+		//	state = PlayerState::ATTACK;
+		//	attack->frame.x = 0;
+		//}
+		//else if (state == PlayerState::JUMP)
+		//{
+		//	state = PlayerState::ATTACK;
+		//	attack->frame.x = 0;
+		//}
+		//else if (state == PlayerState::CROUCH)
+		//{
+		//	state = PlayerState::ATTACK;
+		//	attack->frame.x = 0;
+		//}
+	}
 }
 
 void Player::OnFloorAction()
@@ -271,11 +294,13 @@ void Player::OnWallAction()
 
 void Player::OnWallSlideAction()
 {
-	GoBack();
+	collider->SetWorldPosX(lastPos.x);
+	collider->Update();
 }
 
 void Player::GoBack()
 {
+	gravity = 0;
 	collider->SetWorldPos(lastPos);
 	collider->Update();
 }

@@ -25,6 +25,7 @@
     <ClInclude Include="Scene2_inGame.h" />
     <ClInclude Include="Scene1_title.h" />
     <ClInclude Include="Scene3_jazzBar.h" />
+    <ClInclude Include="Scene4_armory.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -34,6 +35,7 @@
     <ClCompile Include="Scene2_inGame.cpp" />
     <ClCompile Include="Scene1_title.cpp" />
     <ClCompile Include="Scene3_jazzBar.cpp" />
+    <ClCompile Include="Scene4_armory.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
