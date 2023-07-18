@@ -11,6 +11,9 @@ Scene3_jazzBar::Scene3_jazzBar()
 
 	lightCeiling = new ObImage(L"hankroom_light.png");
 	lightRoom = new ObImage(L"squareGlow.png");
+
+	for (int i = 0; i < 2; i++)
+		nextMap[i] = new ObRect();
 }
 
 Scene3_jazzBar::~Scene3_jazzBar()
@@ -20,6 +23,8 @@ Scene3_jazzBar::~Scene3_jazzBar()
 
 	delete lightCeiling;
 	delete lightRoom;
+	for (int i = 0; i < 2; i++)
+		delete nextMap[i];
 }
 
 void Scene3_jazzBar::Init()
@@ -49,13 +54,21 @@ void Scene3_jazzBar::Init()
 	tileMap[1]->Load();
 	tileMap[2]->Load();
 
+	nextMap[0]->SetWorldPos(Vector2(4300, 1850));
+	nextMap[1]->SetWorldPos(Vector2(4300, 1150));
+	for (int i = 0; i < 2; i++)
+	{
+		nextMap[i]->scale = Vector2(100, 100);
+		nextMap[i]->color = Vector4(0.5, 0.5, 0.5, 0.3);
+		nextMap[i]->isFilled = true;
+	}
+
+
 	startPostion = Vector2(2820, 1850);
-	floorPostion = Vector2(0, 600);
 
 	isLightDown = true;
 	isLightOn = true;
 	LightOffTime = 0.0f;
-
 
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
@@ -79,10 +92,22 @@ void Scene3_jazzBar::Update()
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
 	CAM->position.y = GM->player->GetCollider()->GetWorldPos().y + 200;
 
+	for (auto& next : nextMap)
+	{
+		if (next->Intersect(GM->player->GetCollider()))
+		{
+			//if (elapsedTime > 1.0f)
+				SCENE->ChangeScene("sc2");
+		}
+	}
+	
+
 	for (auto& map : tileMap)
 		map->Update();
 	lightRoom->Update();
 	lightCeiling->Update();
+	nextMap[0]->Update();
+	nextMap[1]->Update();
 	GM->player->Update();
 }
 
@@ -122,7 +147,12 @@ void Scene3_jazzBar::Render()
 {
 	tileMap[0]->Render();
 	tileMap[1]->Render();
-	if (GM->DEBUG_MODE) tileMap[2]->Render();
+	if (GM->DEBUG_MODE)
+	{
+		tileMap[2]->Render();
+		nextMap[0]->Render();
+		nextMap[1]->Render();
+	}
 
 	if (isLightOn)
 	{

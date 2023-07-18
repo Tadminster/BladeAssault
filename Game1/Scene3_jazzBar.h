@@ -2,16 +2,18 @@
 class Scene3_jazzBar : public Scene
 {
 private:
-	ObTileMap* tileMap[3];
-	ObImage* lightCeiling;
-	ObImage* lightRoom;
+	ObTileMap*		tileMap[3];
+	ObImage*		lightCeiling;
+	ObImage*		lightRoom;
+
+	ObRect*			nextMap[2];
 
 	bool			isLightDown;
 	bool			isLightOn;
 	float			LightOffTime;
 
 	Vector2			startPostion;
-	Vector2			floorPostion;
+	float			elapsedTime;
 
 public:
 	Scene3_jazzBar();

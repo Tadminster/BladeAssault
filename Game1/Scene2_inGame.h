@@ -14,8 +14,6 @@ private:
 
 
 	Vector2			startPostion;
-	Vector2			floorPostion;
-
 	float			elapsedTime;
 
 public:
@@ -30,4 +28,5 @@ public:
 
 	virtual bool OnFloor();
 	virtual bool OnWall();
+	virtual bool OnWallside();
 };

@@ -60,7 +60,6 @@ void Scene2_inGame::Init()
 	nextMap->isFilled = true;
 
 	startPostion = Vector2(850, 600);
-	floorPostion = Vector2(0, 600);
 
 	isLightDown		= true;
 	isLightOn		= true;
@@ -124,9 +123,8 @@ void Scene2_inGame::Update()
 
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
-		cout << "nextMap" << endl;
 		if (elapsedTime > 1.0f)
-		SCENE->ChangeScene("sc3");
+			SCENE->ChangeScene("sc3");
 	}
 
 
@@ -140,19 +138,35 @@ void Scene2_inGame::Update()
 
 void Scene2_inGame::LateUpdate()
 {
-	// 벽타일 충돌 처리
+	// 벽(TILE_WALL)과 부딪쳤으면
 	if (OnWall())
 	{
-		if (GM->player->GetCollider()->GetWorldPos().y > this->floorPostion.y)
-			GM->player->OnWallSlideAction();
-		else
-			GM->player->OnWallAction();
+		// 바닥에 붙어있는 상태
+		GM->player->OnWallAction();
 	}
 	else GM->player->onWall = false;
 
-	// 바닥타일 충돌 처리
-	//if (OnFloor()) GM->player->OnFloorAction();
-	//else GM->player->onFloor = false;
+	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
+	if (OnWallside())
+	{
+		// 벽에 붙어있는 상태
+		GM->player->onWallSlide = true;
+
+		// 점프중이면
+		if (GM->player->GetState() == PlayerState::JUMP)
+			GM->player->OnWallSlideAction();
+		// 점프중이 아니면
+		else
+			GM->player->GoBack();
+	}
+	else GM->player->onWallSlide = false;
+
+	// 바닥(TILE_FLOOR)과 부딪쳤으면
+	if (OnFloor())
+	{
+		GM->player->OnFloorAction();
+	}
+	else GM->player->onFloor = false;
 }
 
 void Scene2_inGame::Render()
@@ -178,14 +192,19 @@ void Scene2_inGame::ResizeScreen()
 {
 }
 
+
 bool Scene2_inGame::OnFloor()
 {
-	Int2 playerlndex;
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
+	// 하강중에만 충돌 체크
+	if (GM->player->isLanding)
 	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
+		Int2 playerlndex;
+		if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
 		{
-			return true;
+			if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
+			{
+				return true;
+			}
 		}
 	}
 	return false;
@@ -199,7 +218,8 @@ bool Scene2_inGame::OnWall()
 	{
 		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
 		{
-			return true;
+			GM->player->GoBack();
+			//return true;
 		}
 	}
 	// BOT 충돌 체크
@@ -211,6 +231,28 @@ bool Scene2_inGame::OnWall()
 		}
 	}
 
-
 	return false;
 }
+
+bool Scene2_inGame::OnWallside()
+{
+	Int2 playerlndex;
+	// TOP 충돌 체크
+	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
+	{
+		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
+		{
+			return true;
+		}
+	}
+	// BOT 충돌 체크
+	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
+	{
+		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
