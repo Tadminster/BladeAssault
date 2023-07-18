@@ -114,7 +114,7 @@ void Player::Update()
 
 	// ม฿ทย
 	//if (!onFloor)
-	if (!onWall)
+	if (!onWall && !onFloor)
 	{
 		gravity += 1500.0f * DELTA;
 		collider->MoveWorldPos(DOWN * gravity * DELTA);

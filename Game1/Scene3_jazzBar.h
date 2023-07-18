@@ -13,7 +13,6 @@ private:
 	float			LightOffTime;
 
 	Vector2			startPostion;
-	float			elapsedTime;
 
 public:
 	Scene3_jazzBar();

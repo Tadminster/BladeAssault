@@ -96,8 +96,7 @@ void Scene3_jazzBar::Update()
 	{
 		if (next->Intersect(GM->player->GetCollider()))
 		{
-			//if (elapsedTime > 1.0f)
-				SCENE->ChangeScene("sc2");
+			SCENE->ChangeScene("sc2");
 		}
 	}
 	
