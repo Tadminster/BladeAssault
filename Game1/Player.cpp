@@ -253,6 +253,10 @@ void Player::Control()
 	}
 }
 
+void Player::Attack()
+{
+}
+
 void Player::OnFloorAction()
 {
 	onFloor = true;

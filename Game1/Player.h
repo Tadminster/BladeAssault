@@ -6,6 +6,7 @@ enum class PlayerState
 	JUMP,
 	CROUCH,
 	CROUCH_DOWN,
+	ATTACK
 };
 
 class Player
@@ -34,7 +35,6 @@ public:
 	bool		onWall;
 	bool		onWallSlide;
 	bool		isLanding;
-	//bool		isJumping;
 	
 public:
 	Player();
@@ -43,7 +43,8 @@ public:
 	virtual void Update();
 	virtual void Render();
 	void GoBack();
-	void Control();
+	virtual void Control();
+	virtual void Attack();
 	void OnFloorAction();
 	void OnWallAction();
 	void OnWallSlideAction();
