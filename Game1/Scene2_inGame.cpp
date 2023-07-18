@@ -59,12 +59,13 @@ void Scene2_inGame::Init()
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
 
-	startPostion = Vector2(850, 600);
+	startPostion = Vector2(850, 610);
 
 	isLightDown		= true;
 	isLightOn		= true;
 	LightOffTime	= 0.0f;
 
+	
 
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);

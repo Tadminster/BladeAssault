@@ -7,6 +7,7 @@ private:
 	ObImage*		lightRoom;
 
 	ObRect*			nextMap[2];
+	ObRect*			stair;
 
 	bool			isLightDown;
 	bool			isLightOn;

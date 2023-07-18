@@ -54,6 +54,7 @@ public:
 	ObRect* GetCollider() { return collider; };
 	Vector2 GetFoot();
 	Vector2 GetHead();
+	Vector2 GetDirection() { return dir; }
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }

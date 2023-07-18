@@ -14,6 +14,7 @@ Scene3_jazzBar::Scene3_jazzBar()
 
 	for (int i = 0; i < 2; i++)
 		nextMap[i] = new ObRect();
+	stair = new ObRect();
 }
 
 Scene3_jazzBar::~Scene3_jazzBar()
@@ -63,6 +64,11 @@ void Scene3_jazzBar::Init()
 		nextMap[i]->isFilled = true;
 	}
 
+	//3075 1175
+	stair->SetWorldPos(Vector2(3075, 1175));
+	stair->scale = Vector2(50, 50);
+	stair->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stair->isFilled = true;
 
 	startPostion = Vector2(2820, 1850);
 
@@ -100,6 +106,13 @@ void Scene3_jazzBar::Update()
 		}
 	}
 	
+	if (stair->Intersect(GM->player->GetCollider()))
+	{
+		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == PlayerState::RUN)
+		{
+			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
+		}
+	}
 
 	for (auto& map : tileMap)
 		map->Update();
@@ -107,6 +120,7 @@ void Scene3_jazzBar::Update()
 	lightCeiling->Update();
 	nextMap[0]->Update();
 	nextMap[1]->Update();
+	stair->Update();
 	GM->player->Update();
 }
 
@@ -151,6 +165,7 @@ void Scene3_jazzBar::Render()
 		tileMap[2]->Render();
 		nextMap[0]->Render();
 		nextMap[1]->Render();
+		stair->Render();
 	}
 
 	if (isLightOn)
