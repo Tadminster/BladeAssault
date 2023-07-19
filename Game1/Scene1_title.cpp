@@ -136,8 +136,11 @@ void Scene1_title::Render()
 {
 	titleBg->Render();
 	titleLogo->Render();
-	btnStart->Render();
-	btnExit->Render();
+	if (GM->DEBUG_MODE)
+	{
+		btnStart->Render();
+		btnExit->Render();
+	}
 
 	if (btnStart->IntersectScreenMouse(INPUT->GetScreenMousePos()))
 	{
