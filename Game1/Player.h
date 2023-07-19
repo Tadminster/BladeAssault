@@ -3,6 +3,7 @@ enum class PlayerState
 {
 	IDLE,
 	RUN,
+	DASH,
 	JUMP,
 	CROUCH,
 	CROUCH_DOWN,
@@ -17,10 +18,14 @@ protected:
 	ObImage* run;
 	ObImage* jump;
 	ObImage* crouch;
+	ObImage* attack;
+	ObImage* dash;
 
 	PlayerState  state;
 	Vector2		dir;
 	Vector2		lastPos;
+	Vector2		dashDir;
+	Vector2		dashTargetPos;
 
 	float		speed;
 	float		jumpSpeed;
@@ -28,6 +33,9 @@ protected:
 
 	int			jumpCount;
 	int			jumpCountMax;
+
+	float		dashCooldown;
+	float		dashDealay;
 
 public:
 	float		gravity;
@@ -45,6 +53,8 @@ public:
 	void GoBack();
 	virtual void Control();
 	virtual void Attack();
+	virtual void Dash();
+	virtual	void Jump();
 	void OnFloorAction();
 	void OnWallAction();
 	void OnWallSlideAction();
