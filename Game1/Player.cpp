@@ -136,7 +136,7 @@ void Player::Update()
 	}
 	else if (Currentstate == PlayerState::ATTACK)
 	{
-		collider->MoveWorldPos(dir * speed * DELTA);
+		collider->MoveWorldPos(dir * speed * 0.5 * DELTA);
 
 		if (attack->frame.x == attack->maxFrame.x - 1)
 		{
@@ -344,11 +344,18 @@ void Player::Control()
 			dir = RIGHT;
 		}
 
-		// crouch -> jump
+		// attack -> dash
+		if (INPUT->KeyDown(VK_SPACE))
+		{
+			Dash();
+		}
+
+		// attack -> jump
 		if (INPUT->KeyDown('W'))
 		{
 			Jump();
 		}
+
 	}
 
 	if (dir == LEFT) dashDir = LEFT;
@@ -371,7 +378,11 @@ void Player::Dash()
 	dash->frame.x = 0;
 	dashTargetPos.x = collider->GetWorldPos().x + (dashDir.x * 300);
 	dashTargetPos.y = collider->GetWorldPos().y + 5;
+	
 	PrevState = Currentstate;
+	if (PrevState == PlayerState::ATTACK)
+		if (onFloor || onWall) PrevState = PlayerState::IDLE;
+		else PrevState = PlayerState::JUMP;
 	Currentstate = PlayerState::DASH;
 }
 
