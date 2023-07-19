@@ -9,6 +9,7 @@ Player_kill::Player_kill()
     dash = new ObImage(L"kill_barehand_dash.png");
     jump = new ObImage(L"kill_barehand_jump.png");
     crouch = new ObImage(L"kill_barehand_crouch.png");
+    attack = new ObImage(L"kill_barehand_sub_attack.png");
     //hasAxis = true;
 }
 
@@ -62,6 +63,14 @@ void Player_kill::Init()
     crouch->scale.x = crouch->imageSize.x / crouch->maxFrame.x * 3;
     crouch->scale.y = crouch->imageSize.y / crouch->maxFrame.y * 3;
     crouch->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
+
+    attack->SetParentRT(*collider);
+    attack->SetLocalPosY(20);
+    attack->maxFrame.x = 4;
+    attack->maxFrame.y = 1;
+    attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
+    attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
+    attack->ChangeAnim(ANIMSTATE::ONCE, 0.085f, true);
 
     // ´É·ÂÄ¡
     Player::Init();

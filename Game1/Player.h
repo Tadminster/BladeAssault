@@ -21,7 +21,8 @@ protected:
 	ObImage* attack;
 	ObImage* dash;
 
-	PlayerState  state;
+	PlayerState  PrevState;
+	PlayerState  Currentstate;
 	Vector2		dir;
 	Vector2		lastPos;
 	Vector2		dashDir;
@@ -61,7 +62,7 @@ public:
 
 
 	// Get
-	PlayerState GetState() { return state; }
+	PlayerState GetState() { return Currentstate; }
 	ObRect* GetCollider() { return collider; };
 	Vector2 GetFoot();
 	Vector2 GetHead();

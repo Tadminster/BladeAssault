@@ -6,8 +6,10 @@ Player::Player()
 	collider = new ObRect();
 	idle = nullptr;
 	run = nullptr;
+	dash = nullptr;
 	jump = nullptr;
 	crouch = nullptr;
+	attack = nullptr;
 }
 
 Player::~Player()
@@ -15,13 +17,14 @@ Player::~Player()
 	delete collider;
 	delete idle;
 	delete run;
+	delete dash;
 	delete jump;
 	delete crouch;
 }
 
 void Player::Init()
 {
-	state = PlayerState::IDLE;
+	Currentstate = PlayerState::IDLE;
 	dashDir = RIGHT;
 
 	speed = 350.0f;
@@ -42,7 +45,7 @@ void Player::Init()
 void Player::Update()
 {
 	ImGui::Text("gravity : %f\n", GM->player->gravity);
-	ImGui::Text("playerState : %d\n", GM->player->state);
+	ImGui::Text("playerState : %d\n", GM->player->Currentstate);
 
 	lastPos = collider->GetWorldPos();
 	collider->Update();
@@ -58,6 +61,7 @@ void Player::Update()
 		dash->reverseLR = true;
 		jump->reverseLR = true;
 		crouch->reverseLR = true;
+		attack->reverseLR = true;
 	}
 	else if (dir == RIGHT)
 	{
@@ -66,29 +70,30 @@ void Player::Update()
 		dash->reverseLR = false;
 		jump->reverseLR = false;
 		crouch->reverseLR = false;
+		attack->reverseLR = false;
 	}
 
 	// 상태 업데이트
-	if (state == PlayerState::IDLE)
+	if (Currentstate == PlayerState::IDLE)
 	{
 	}
-	else if (state == PlayerState::RUN)
+	else if (Currentstate == PlayerState::RUN)
 	{
 		collider->MoveWorldPos(dir * speed * DELTA);
 	}
-	else if (state == PlayerState::DASH)
+	else if (Currentstate == PlayerState::DASH)
 	{
 		static float weight = 0;
 		weight += DELTA * 3;
 		if (weight >= 1.0f || onWallSlide)
 		{
 			weight = 0;
-			state = PlayerState::JUMP;
+			Currentstate = PrevState;
 		}
 
 		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.01f));
 	}
-	else if (state == PlayerState::JUMP)
+	else if (Currentstate == PlayerState::JUMP)
 	{
 		// 상승
 		if (gravity < 0)
@@ -107,16 +112,16 @@ void Player::Update()
 			if (onFloor || onWall)
 			{
 				jumpCount = 0;
-				state = PlayerState::IDLE;
+				Currentstate = PlayerState::IDLE;
 			}
 		}
 
 		collider->MoveWorldPos(dir * speed * DELTA);
 	}
-	else if (state == PlayerState::CROUCH)
+	else if (Currentstate == PlayerState::CROUCH)
 	{
 	}
-	else if (state == PlayerState::CROUCH_DOWN)
+	else if (Currentstate == PlayerState::CROUCH_DOWN)
 	{
 		jump->frame.y = 1;
 		jumpTime += DELTA;
@@ -126,10 +131,20 @@ void Player::Update()
 		{
 			isLanding = true;
 			jumpTime = 0.0f;
-			state = PlayerState::IDLE;
+			Currentstate = PlayerState::IDLE;
+		}
+	}
+	else if (Currentstate == PlayerState::ATTACK)
+	{
+		collider->MoveWorldPos(dir * speed * DELTA);
+
+		if (attack->frame.x == attack->maxFrame.x - 1)
+		{
+			Currentstate = PrevState;
 		}
 	}
 
+	// 대쉬 쿨타임
 	if (dashCooldown > 0.0f)
 		dashCooldown -= DELTA;
 
@@ -143,18 +158,20 @@ void Player::Update()
 
 
 	collider->Update();
-	if (state == PlayerState::IDLE)
+	if (Currentstate == PlayerState::IDLE)
 		idle->Update();
-	else if (state == PlayerState::RUN)
+	else if (Currentstate == PlayerState::RUN)
 		run->Update();
-	else if (state == PlayerState::DASH)
+	else if (Currentstate == PlayerState::DASH)
 		dash->Update();
-	else if (state == PlayerState::JUMP)
+	else if (Currentstate == PlayerState::JUMP)
 		jump->Update();
-	else if (state == PlayerState::CROUCH)
+	else if (Currentstate == PlayerState::CROUCH)
 		crouch->Update();
-	else if (state == PlayerState::CROUCH_DOWN)
-		jump->Update();;
+	else if (Currentstate == PlayerState::CROUCH_DOWN)
+		jump->Update();
+	else if (Currentstate == PlayerState::ATTACK)
+		attack->Update();
 }
 
 void Player::Render()
@@ -162,18 +179,20 @@ void Player::Render()
 	if (GM->DEBUG_MODE)
 		collider->Render();
 
-	if (state == PlayerState::IDLE)
+	if (Currentstate == PlayerState::IDLE)
 		idle->Render();
-	else if (state == PlayerState::RUN)
+	else if (Currentstate == PlayerState::RUN)
 		run->Render();
-	else if (state == PlayerState::DASH)
+	else if (Currentstate == PlayerState::DASH)
 		dash->Render();
-	else if (state == PlayerState::JUMP)
+	else if (Currentstate == PlayerState::JUMP)
 		jump->Render();
-	else if (state == PlayerState::CROUCH)
+	else if (Currentstate == PlayerState::CROUCH)
 		crouch->Render();
-	else if (state == PlayerState::CROUCH_DOWN)
+	else if (Currentstate == PlayerState::CROUCH_DOWN)
 		jump->Render();
+	else if (Currentstate == PlayerState::ATTACK)
+		attack->Render();
 }
 
 
@@ -183,18 +202,18 @@ void Player::Control()
 	dir = Vector2();
 
 	// 상태 업데이트
-	if (state == PlayerState::IDLE)
+	if (Currentstate == PlayerState::IDLE)
 	{
 		// idle -> walk
 		if (INPUT->KeyPress('A'))
 		{
 			dir = LEFT;
-			state = PlayerState::RUN;
+			Currentstate = PlayerState::RUN;
 		}
 		else if (INPUT->KeyPress('D'))
 		{
 			dir = RIGHT;
-			state = PlayerState::RUN;
+			Currentstate = PlayerState::RUN;
 		}
 
 		// idle -> jump
@@ -206,7 +225,7 @@ void Player::Control()
 		// idle -> crouch
 		if (INPUT->KeyPress('S'))
 		{
-			state = PlayerState::CROUCH;
+			Currentstate = PlayerState::CROUCH;
 		}
 
 		// idle -> dash
@@ -214,8 +233,14 @@ void Player::Control()
 		{
 			Dash();
 		}
+
+		// idle -> attack
+		if (INPUT->KeyDown(VK_LBUTTON))
+		{
+			Attack();
+		}
 	}
-	else if (state == PlayerState::RUN)
+	else if (Currentstate == PlayerState::RUN)
 	{
 		// runing
 		if (INPUT->KeyPress('A'))
@@ -230,7 +255,7 @@ void Player::Control()
 		// run -> idle
 		if (!(INPUT->KeyPress('A') || INPUT->KeyPress('D')))
 		{
-			state = PlayerState::IDLE;
+			Currentstate = PlayerState::IDLE;
 			run->frame.x = 0;
 		}
 
@@ -245,8 +270,14 @@ void Player::Control()
 		{
 			Dash();
 		}
+
+		// run -> attack
+		if (INPUT->KeyDown(VK_LBUTTON))
+		{
+			Attack();
+		}
 	}
-	else if (state == PlayerState::JUMP)
+	else if (Currentstate == PlayerState::JUMP)
 	{
 		// jump 중 이동
 		if (INPUT->KeyPress('A'))
@@ -270,16 +301,22 @@ void Player::Control()
 			jumpCount++;
 			gravity = -900;
 		}
+
+		// jump -> attack
+		if (INPUT->KeyDown(VK_LBUTTON))
+		{
+			Attack();
+		}
 	}
-	else if (state == PlayerState::CROUCH)
+	else if (Currentstate == PlayerState::CROUCH)
 	{
 		// crouch -> idle
 		if (!INPUT->KeyPress('S'))
-			state = PlayerState::IDLE;
+			Currentstate = PlayerState::IDLE;
 
 		// crouch -> run
 		if (INPUT->KeyPress('A') || INPUT->KeyPress('D'))
-			state = PlayerState::RUN;
+			Currentstate = PlayerState::RUN;
 
 		// crouch -> jump
 		if (INPUT->KeyDown('W'))
@@ -292,7 +329,25 @@ void Player::Control()
 		{
 			jumpCount = 1;
 			gravity = 0;
-			state = PlayerState::CROUCH_DOWN;
+			Currentstate = PlayerState::CROUCH_DOWN;
+		}
+	}
+	else if (Currentstate == PlayerState::ATTACK)
+	{
+		// attack 중 이동
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+		}
+
+		// crouch -> jump
+		if (INPUT->KeyDown('W'))
+		{
+			Jump();
 		}
 	}
 
@@ -302,10 +357,9 @@ void Player::Control()
 
 void Player::Attack()
 {
-	if (INPUT->KeyDown(VK_LBUTTON))
-	{
-		
-	}
+	attack->frame.x = 0;
+	PrevState = Currentstate;
+	Currentstate = PlayerState::ATTACK;
 }
 
 void Player::Dash()
@@ -317,14 +371,15 @@ void Player::Dash()
 	dash->frame.x = 0;
 	dashTargetPos.x = collider->GetWorldPos().x + (dashDir.x * 300);
 	dashTargetPos.y = collider->GetWorldPos().y + 5;
-	state = PlayerState::DASH;
+	PrevState = Currentstate;
+	Currentstate = PlayerState::DASH;
 }
 
 void Player::Jump()
 {
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
 	gravity = -900;
-	state = PlayerState::JUMP;
+	Currentstate = PlayerState::JUMP;
 }
 
 void Player::OnFloorAction()
