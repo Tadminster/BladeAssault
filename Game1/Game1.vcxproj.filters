@@ -9,12 +9,6 @@
     <ClInclude Include="Scene2_inGame.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Player_kill.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Scene3_jazzBar.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -23,6 +17,24 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Object\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="redHairRat.h">
+      <Filter>Object\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_kill.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="kill_barehand_atk.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterManager.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -33,12 +45,6 @@
     <ClCompile Include="Scene2_inGame.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Player_kill.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Scene3_jazzBar.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -47,6 +53,24 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Object\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="redHairRat.cpp">
+      <Filter>Object\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_kill.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="kill_barehand_atk.cpp">
+      <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterManager.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +85,18 @@
     </Filter>
     <Filter Include="Object\Monster">
       <UniqueIdentifier>{9e9cdbe0-a186-47b6-a888-769f7303a2d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{13679068-52f5-4c44-8320-2ceeda30fde5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Weapon">
+      <UniqueIdentifier>{dba54104-7890-4102-a614-01cedfe87b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Projectile">
+      <UniqueIdentifier>{6cf875f2-5dc1-4bd9-a2d4-5b5a4363535e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{8caee8ea-1843-4428-91b5-0fa73ff54988}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

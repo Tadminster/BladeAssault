@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Player_kill.h"
+#include "MonsterManager.h"
 #include "Scene2_inGame.h"
 
 Scene2_inGame::Scene2_inGame()
@@ -15,6 +16,7 @@ Scene2_inGame::Scene2_inGame()
 	nextMap = new ObRect();
 
 	GM->player = new Player_kill();
+	GM->monster = new MonsterManager();
 }
 
 Scene2_inGame::~Scene2_inGame()
@@ -134,6 +136,7 @@ void Scene2_inGame::Update()
 	lightRoom->Update();
 	lightCeiling->Update();
 	nextMap->Update();
+	GM->monster->Update();
 	GM->player->Update();
 }
 
@@ -186,6 +189,7 @@ void Scene2_inGame::Render()
 		lightCeiling->Render();
 	}
 
+	//GM->monster->Render();
 	GM->player->Render();
 }
 

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Projectile.h"
 #include "Player.h"
 
 Player::Player()
@@ -25,7 +26,8 @@ Player::~Player()
 void Player::Init()
 {
 	Currentstate = PlayerState::IDLE;
-	dashDir = RIGHT;
+	
+	lastDir = RIGHT;
 
 	speed = 350.0f;
 	jumpSpeed = 700;
@@ -156,6 +158,8 @@ void Player::Update()
 		collider->MoveWorldPos(DOWN * gravity * DELTA);
 	}
 
+	for (auto& proj : projectiles)
+		proj->Update();
 
 	collider->Update();
 	if (Currentstate == PlayerState::IDLE)
@@ -179,6 +183,8 @@ void Player::Render()
 	if (GM->DEBUG_MODE)
 		collider->Render();
 
+
+
 	if (Currentstate == PlayerState::IDLE)
 		idle->Render();
 	else if (Currentstate == PlayerState::RUN)
@@ -193,6 +199,9 @@ void Player::Render()
 		jump->Render();
 	else if (Currentstate == PlayerState::ATTACK)
 		attack->Render();
+
+	for (auto& proj : projectiles)
+		proj->Render();
 }
 
 
@@ -358,8 +367,8 @@ void Player::Control()
 
 	}
 
-	if (dir == LEFT) dashDir = LEFT;
-	else if (dir == RIGHT) dashDir = RIGHT;
+	if (dir == LEFT) lastDir = LEFT;
+	else if (dir == RIGHT) lastDir = RIGHT;
 }
 
 void Player::Attack()
@@ -376,7 +385,7 @@ void Player::Dash()
 	
 	dashCooldown = dashDealay;
 	dash->frame.x = 0;
-	dashTargetPos.x = collider->GetWorldPos().x + (dashDir.x * 300);
+	dashTargetPos.x = collider->GetWorldPos().x + (lastDir.x * 300);
 	dashTargetPos.y = collider->GetWorldPos().y + 5;
 	
 	PrevState = Currentstate;

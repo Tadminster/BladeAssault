@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Player_kill.h"
+#include "MonsterManager.h"
 #include "Scene4_armory.h"
 
 Scene4_armory::Scene4_armory()
@@ -98,6 +99,7 @@ void Scene4_armory::Update()
 	previousMap->Update();
 	nextMap->Update();
 	stair->Update();
+	GM->monster->Update();
 	GM->player->Update();
 }
 
@@ -146,6 +148,7 @@ void Scene4_armory::Render()
 		stair->Render();
 	}
 
+	GM->monster->Render();
 	GM->player->Render();
 }
 

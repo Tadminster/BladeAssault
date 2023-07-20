@@ -25,18 +25,33 @@ protected:
 	PlayerState  Currentstate;
 	Vector2		dir;
 	Vector2		lastPos;
-	Vector2		dashDir;
+	Vector2		lastDir;
 	Vector2		dashTargetPos;
 
+
+	vector<class Projectile*>	projectiles;
+
+
+	int			HP;
+	int			MaxHP;
+	int			MP;
+	int			MaxMP;
+	int			AttackDamage;
+	int			AttackRange;
+	int			AttackSpeed;
+	int			Defence;
+
 	float		speed;
+
 	float		jumpSpeed;
 	float		jumpTime;
-
 	int			jumpCount;
 	int			jumpCountMax;
 
 	float		dashCooldown;
 	float		dashDealay;
+
+
 
 public:
 	float		gravity;
@@ -44,7 +59,7 @@ public:
 	bool		onWall;
 	bool		onWallSlide;
 	bool		isLanding;
-	
+
 public:
 	Player();
 	virtual ~Player();

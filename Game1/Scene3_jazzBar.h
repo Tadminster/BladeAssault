@@ -16,6 +16,9 @@ private:
 
 	Vector2			startPostion;
 
+	//temp
+	class redHairRat*		redRat;
+
 public:
 	Scene3_jazzBar();
 	~Scene3_jazzBar();

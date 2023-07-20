@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Player_kill.h"
+#include "Monster.h"
+#include "MonsterManager.h"
+#include "redHairRat.h"
 #include "Scene3_jazzBar.h"
 
 Scene3_jazzBar::Scene3_jazzBar()
@@ -85,8 +88,9 @@ void Scene3_jazzBar::Init()
 	isLightOn = true;
 	LightOffTime = 0.0f;
 
-	//GM->player->Init();
 	GM->player->SetPosition(startPostion);
+
+	GM->monster->AddMonster(new redHairRat(Vector2(3500, 1850)));
 }
 
 void Scene3_jazzBar::Release()
@@ -142,6 +146,8 @@ void Scene3_jazzBar::Update()
 	nextMap[1]->Update();
 	stairLeft->Update();
 	stairRight->Update();
+
+	GM->monster->Update();
 	GM->player->Update();
 }
 
@@ -197,6 +203,8 @@ void Scene3_jazzBar::Render()
 		lightCeiling->Render();
 	}
 
+
+	GM->monster->Render();
 	GM->player->Render();
 }
 
