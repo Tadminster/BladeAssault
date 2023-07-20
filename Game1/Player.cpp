@@ -93,7 +93,7 @@ void Player::Update()
 			Currentstate = PrevState;
 		}
 
-		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.01f));
+		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.004f));
 	}
 	else if (Currentstate == PlayerState::JUMP)
 	{
