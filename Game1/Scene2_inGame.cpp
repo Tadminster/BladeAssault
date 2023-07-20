@@ -188,8 +188,7 @@ void Scene2_inGame::Render()
 		lightRoom->Render();
 		lightCeiling->Render();
 	}
-
-	//GM->monster->Render();
+	GM->monster->Render();
 	GM->player->Render();
 }
 

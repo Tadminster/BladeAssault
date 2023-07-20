@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Player_kill.h"
+#include "Monster.h"
 #include "MonsterManager.h"
+#include "redHairRat.h"
 #include "Scene4_armory.h"
 
 Scene4_armory::Scene4_armory()
@@ -49,10 +51,12 @@ void Scene4_armory::Init()
 	stair->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	stair->isFilled = true;
 
-	startPostion = Vector2(600, 600);
+	startPostion = Vector2(700, 600);
 	returnPosition = Vector2(600, 600);
-	//GM->player->Init();
+
 	GM->player->SetPosition(startPostion);
+
+	//GM->monster->AddMonster(new redHairRat(Vector2(3500, 1850)));
 }
 
 void Scene4_armory::Release()

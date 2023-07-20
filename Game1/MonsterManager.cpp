@@ -13,6 +13,9 @@ void MonsterManager::Release()
 
 void MonsterManager::Update()
 {
+	for (auto& monster : enemy)
+		ImGui::Text("hp: ", monster->GetHp());
+
 	// 체력이 0 이하인 몬스터 삭제
 	enemy.erase(
 		std::remove_if

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Monster.h"
+#include "MonsterManager.h"
 #include "Projectile.h"
 
 Projectile::Projectile
@@ -58,47 +59,47 @@ void Projectile::Render()
 
 bool Projectile::hasCollideWithMonster()
 {
-    //// 모든 몬스터를 순회
-    //for (auto& enemy : GM->monster->GetEnemy())
-    //{
-    //    // 몬스터가 발사체와 충돌했으면
-    //    if (enemy->getCollider()->Intersect(this->collider))
-    //    {
-    //        // 이전에 충돌한적이 있는지 비교
-    //        for (auto& crashed : crash)
-    //            if (crashed == enemy) return false;
+    // 모든 몬스터를 순회
+    for (auto& enemy : GM->monster->GetEnemy())
+    {
+        // 몬스터가 발사체와 충돌했으면
+        if (enemy->GetCollider()->Intersect(this->collider))
+        {
+            // 이전에 충돌한적이 있는지 비교
+            for (auto& crashed : crash)
+                if (crashed == enemy) return false;
 
-    //        // 없으면 새 충돌벡터에 추가
-    //        this->crash.emplace_back(enemy);
-    //        // 남은 관통횟수 -1
-    //        this->penetration--;
+            // 없으면 새 충돌벡터에 추가
+            this->crash.emplace_back(enemy);
+            // 남은 관통횟수 -1
+            this->penetration--;
 
-    //        // 발사체가 폭발형 타입인지 확인
-    //        if (this->tag == DamageType::EXPLOSION)
-    //        {
+            // 발사체가 폭발형 타입인지 확인
+            if (this->tag == DamageType::EXPLOSION)
+            {
 
-    //            for (auto& InRangeCheck : GM->monster->GetEnemy())
-    //            {
-    //                // 몬스터가 폭발 범위 안에 들었는지 확인
-    //                if (InRangeCheck->getCollider()->Intersect(this->collider_range))
-    //                {
-    //                    if (InRangeCheck == enemy) continue;
-    //                    // 몬스터 데미지 액션
-    //                    InRangeCheck->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
-    //                }
-    //            }
-    //        }
-    //        // 충돌 이펙트
-    //        AfterEffect();
+                for (auto& InRangeCheck : GM->monster->GetEnemy())
+                {
+                    // 몬스터가 폭발 범위 안에 들었는지 확인
+                    if (InRangeCheck->GetCollider()->Intersect(this->collider_range))
+                    {
+                        if (InRangeCheck == enemy) continue;
+                        // 몬스터 데미지 액션
+                        InRangeCheck->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
+                    }
+                }
+            }
+            // 충돌 이펙트
+            AfterEffect();
 
-    //        // 몬스터 데미지 액션
-    //        enemy->actionsWhenDamaged(Vector4(-damage, shove, 0, 0));
+            // 몬스터 데미지 액션
+            enemy->actionsWhenDamaged(Vector4(-damage, shove, 0, 0));
 
-    //        // 남은 관통력 반환
-    //        if (penetration > 0) return false;
-    //        else return true;
-    //    }
-    //}
+            // 남은 관통력 반환
+            if (penetration > 0) return false;
+            else return true;
+        }
+    }
 
     return false;
 }

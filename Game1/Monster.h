@@ -7,6 +7,13 @@ enum class MonsterState
 	ATTACK
 };
 
+enum class MonsterDamageTaken
+{
+	NORMAL,
+	DAMAGED,
+	IMMUNE
+};
+
 class Monster
 {
 protected:
@@ -16,8 +23,9 @@ protected:
 	class ObImage*	jump;
 	class ObImage*	attack;
 
-	MonsterState	status;
-	Vector2			dir;
+	MonsterState		status;
+	MonsterDamageTaken	dmgTaken;
+	Vector2				dir;
 
 	int		hp;						// 체력
 	float	damage;					// 공격력
@@ -34,6 +42,11 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	// Get
+	virtual ObRect* GetCollider()	{ return collider; }
+	int				GetHp()			{ return hp;  }
+
 	bool isDead() const { return hp == 0; }
+	void actionsWhenDamaged(Vector4 value);
 };
 

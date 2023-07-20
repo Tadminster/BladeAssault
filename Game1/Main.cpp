@@ -20,10 +20,6 @@ Main::~Main()
 
 void Main::Init()
 {
-	sc1_title->Init();
-	sc2_inGame->Init();
-	sc3_jazzBar->Init();
-	sc4_armory->Init();
 	SCENE->AddScene("sc1", sc1_title);
 	SCENE->AddScene("sc2", sc2_inGame);
 	SCENE->AddScene("sc3", sc3_jazzBar);

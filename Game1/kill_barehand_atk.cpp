@@ -11,7 +11,7 @@ kill_barehand_atk::kill_barehand_atk(
 	int   penetration,
 	float explosionRange)
 {
-	tag = DamageType::EXPLOSION;
+	tag = DamageType::NORMAL;
 
 	collider = new ObRect();
 	collider->SetWorldPos(spawnPos);
@@ -57,14 +57,14 @@ void kill_barehand_atk::Render()
 
 void kill_barehand_atk::AfterEffect()
 {
-	ObImage* afterImg = new ObImage(L"fireball_explosion.png");
-	afterImg->SetWorldPos(collider->GetWorldPos());
-	afterImg->maxFrame.x = 7;
-	afterImg->maxFrame.y = 1;
-	afterImg->scale.x = collider_range->scale.x;
-	afterImg->scale.y = collider_range->scale.y;
-	afterImg->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
-	afterImg->color.w = 0.4f;
+	//ObImage* afterImg = new ObImage(L"fireball_explosion.png");
+	//afterImg->SetWorldPos(collider->GetWorldPos());
+	//afterImg->maxFrame.x = 7;
+	//afterImg->maxFrame.y = 1;
+	//afterImg->scale.x = collider_range->scale.x;
+	//afterImg->scale.y = collider_range->scale.y;
+	//afterImg->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+	//afterImg->color.w = 0.4f;
 
 	
 	//GM->afterEffectManager.emplace_back(afterImg);

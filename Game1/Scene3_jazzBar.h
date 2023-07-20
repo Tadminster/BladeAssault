@@ -3,16 +3,10 @@ class Scene3_jazzBar : public Scene
 {
 private:
 	ObTileMap*		tileMap[3];
-	ObImage*		lightCeiling;
-	ObImage*		lightRoom;
-
+	
 	ObRect*			nextMap[2];
 	ObRect*			stairLeft;
 	ObRect*			stairRight;
-
-	bool			isLightDown;
-	bool			isLightOn;
-	float			LightOffTime;
 
 	Vector2			startPostion;
 

@@ -158,6 +158,29 @@ void Player::Update()
 		collider->MoveWorldPos(DOWN * gravity * DELTA);
 	}
 
+	// 탄이 몬스터와 충돌하면
+	projectiles.erase(
+		std::remove_if
+		(
+			projectiles.begin(),
+			projectiles.end(),
+			[](Projectile* pr) { return pr->hasCollideWithMonster(); }
+		),
+		projectiles.end()
+	);
+
+	// 탄이 일정거리 이상 벗어났으면 삭제
+	projectiles.erase(
+		std::remove_if
+		(
+			projectiles.begin(),
+			projectiles.end(),
+			[](Projectile* pr) { return pr->hasTraveledTooFar(); }
+		),
+		projectiles.end()
+	);
+
+
 	for (auto& proj : projectiles)
 		proj->Update();
 

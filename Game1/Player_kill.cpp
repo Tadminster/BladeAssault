@@ -78,7 +78,7 @@ void Player_kill::Init()
 	// 능력치
 	Player::Init();
 
-	AttackSpeed = 1.0f;
+	AttackSpeed = 3.0f;
 }
 
 
@@ -107,12 +107,15 @@ void Player_kill::Attack()
 	{
 		Player::Attack();
 
+		// 발사 위치 계산
+		Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.2);
+
 		// 탄생성
 		kill_barehand_atk* proj = new kill_barehand_atk
 		(
-			collider->GetWorldPos(),						// 생성위치
+			spawnPos,										// 생성위치
 			lastDir,										// 각도
-			500,											// 발사체 속도
+			700,											// 발사체 속도
 			500,											// 사거리
 			10,												// 공격력
 			1,												// 관통력
