@@ -23,7 +23,7 @@ protected:
 	class ObImage*	jump;
 	class ObImage*	attack;
 
-	MonsterState		status;
+	MonsterState		state;
 	MonsterDamageTaken	dmgTaken;
 	Vector2				dir;
 
@@ -42,11 +42,14 @@ public:
 	virtual void Update();
 	virtual void Render();
 
+	virtual void Attack();
+
 	// Get
 	virtual ObRect* GetCollider()	{ return collider; }
 	int				GetHp()			{ return hp;  }
 
 	bool isDead() const { return hp == 0; }
 	void actionsWhenDamaged(Vector4 value);
+	void knockBack();
 };
 

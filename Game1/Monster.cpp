@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Player.h"
 #include "Monster.h"
 
 Monster::Monster()
@@ -25,6 +26,32 @@ void Monster::Init(Vector2 spawnPos)
 
 void Monster::Update()
 {
+	ImGui::Text("MonsterState: %d\n", state);
+
+	Vector2 target = GM->player->GetCollider()->GetWorldPos();
+	
+	// 방향 계산
+	if (target.x - collider->GetWorldPos().x > 0)
+		dir = RIGHT;
+	else 
+		dir = LEFT;
+
+	// 스킨 방향 설정
+	if (dir == LEFT)
+	{
+		idle->reverseLR = true;
+		run->reverseLR = true;
+		jump->reverseLR = true;
+		attack->reverseLR = true;
+	}
+	else if (dir == RIGHT)
+	{
+		idle->reverseLR = false;
+		run->reverseLR = false;
+		jump->reverseLR = false;
+		attack->reverseLR = false;
+	}
+
 	// 몬스터 상태에 따른 작동
 	if (dmgTaken == MonsterDamageTaken::NORMAL)
 	{
@@ -44,8 +71,8 @@ void Monster::Update()
 	else if (dmgTaken == MonsterDamageTaken::DAMAGED)
 	{
 		// 미니언이나 엘리트 일경우 넉백
-		/*if (type == MONSTER_TYPE::MINION || type == MONSTER_TYPE::ELITE)
-			knockBack();*/
+		//if (type == MONSTER_TYPE::MINION || type == MONSTER_TYPE::ELITE)
+		knockBack();
 
 		// 0.05초 후에 노말 상태로
 		if (timeOfDamage + 0.05f < TIMER->GetWorldTime())
@@ -55,8 +82,52 @@ void Monster::Update()
 		}
 	}
 
+	float distance = Vector2::Distance(collider->GetWorldPos(), GM->player->GetCollider()->GetWorldPos());
+	ImGui::Text("distance: %f\n", distance);
+
+
+	
+	if (state == MonsterState::IDLE)
+	{
+		// IDLE -> ATTACK
+		if (distance < 200)
+		{
+			Attack();
+		}
+		// IDLE -> RUN
+		else if (distance < app.GetHalfWidth())
+		{
+			state = MonsterState::RUN;
+		}
+	}
+	else if (state == MonsterState::RUN)
+	{
+		// IDLE -> ATTACK
+		if (distance < 100)
+		{
+			Attack();
+		}
+
+		collider->MoveWorldPos(dir * speed * DELTA);
+	}
+	else if (state == MonsterState::JUMP)
+	{
+
+	}
+	else if (state == MonsterState::ATTACK)
+	{
+		Attack();
+
+		// ATTACK -> IDLE
+		if (attack->frame.x == attack->maxFrame.x - 1)
+		{
+			cout << "ATTACK -> IDLE" << endl;
+			state = MonsterState::IDLE;
+		}
+	}
+
 	// 업데이트
-	switch (status)
+	switch (state)
 	{
 	case MonsterState::IDLE:
 		idle->Update();
@@ -79,7 +150,7 @@ void Monster::Render()
 	if (GM->DEBUG_MODE)
 		collider->Render();
 
-	switch (status)
+	switch (state)
 	{
 	case MonsterState::IDLE:
 		idle->Render();
@@ -94,6 +165,13 @@ void Monster::Render()
 		attack->Render();
 		break;
 	}
+}
+
+void Monster::Attack()
+{
+	cout << "frame초기호화" << endl;
+	attack->frame.x = 0;
+	state = MonsterState::ATTACK;
 }
 
 void Monster::actionsWhenDamaged(Vector4 value)
@@ -113,4 +191,16 @@ void Monster::actionsWhenDamaged(Vector4 value)
 	this->hp = max(hp + value.x, 0);
 	// 넉백 계수
 	knockBackFactor = value.y;
+}
+
+void Monster::knockBack()
+{
+	// 넉백 방향 계산
+	Vector2 knockBackDir; 
+	if (GM->player->GetCollider()->GetWorldPos().x < this->collider->GetWorldPos().x)
+		knockBackDir = RIGHT;
+	else
+		knockBackDir = LEFT;
+
+	this->collider->MoveWorldPos(knockBackDir * knockBackFactor * DELTA);
 }
