@@ -36,6 +36,9 @@
     <ClInclude Include="MonsterManager.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="redHairRat_atk.h">
+      <Filter>Object\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="MonsterManager.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="redHairRat_atk.cpp">
+      <Filter>Object\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

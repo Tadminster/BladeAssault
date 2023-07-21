@@ -1,5 +1,8 @@
 #include "stdafx.h"
+#include "Projectile.h"
+#include "redHairRat_atk.h"
 #include "Monster.h"
+#include "MonsterManager.h"
 #include "redHairRat.h"
 
 redHairRat::redHairRat(Vector2 spawnPos)
@@ -53,6 +56,7 @@ redHairRat::redHairRat(Vector2 spawnPos)
     damage = 10;
     speed = 100;
     attackSpeed = 0.3f;
+    attackFrame = 6;
 }
 
 redHairRat::~redHairRat()
@@ -106,6 +110,7 @@ void redHairRat::Init(Vector2 spawnPos)
     damage = 10;
     speed = 100;
     attackSpeed = 1.0f;
+    attackFrame = 6;
 
 }
 
@@ -121,37 +126,24 @@ void redHairRat::Render()
 
 void redHairRat::Attack()
 {
-    static float lastShotTime = 0;
-    static float timeSinceLastTime = 0;
+    // 발사 위치 계산
+    Vector2 spawnPos =
+        collider->GetWorldPos()
+        + dir * collider->scale.x * 0.8
+        + UP * collider->scale.y * 0.3;
 
-    float currentTime = TIMER->GetWorldTime();
-    float elapsedTime = currentTime - lastShotTime;
+    // 탄생성
+    redHairRat_atk* proj = new redHairRat_atk
+    (
+        spawnPos,										// 생성위치
+        dir,										    // 각도
+        5,   											// 발사체 속도
+        1, 											    // 사거리
+        10,												// 공격력
+        1,												// 관통력
+        1												// 폭발범위
+    );
 
-    if (elapsedTime >= timeSinceLastTime)
-    {
-        Monster::Attack();
-        cout << "redHairRat Attack" << endl;
-
-        // 발사 위치 계산
-        Vector2 spawnPos = collider->GetWorldPos();
-
-        // 탄생성
-        //kill_barehand_atk* proj = new kill_barehand_atk
-        //(
-        //	spawnPos,										// 생성위치
-        //	lastDir,										// 각도
-        //	700,											// 발사체 속도
-        //	500,											// 사거리
-        //	10,												// 공격력
-        //	1,												// 관통력
-        //	1												// 폭발범위
-        //);
-
-        //벡터에 탄 push
-        //projectiles.emplace_back(proj);
-
-        // 공속계산
-        lastShotTime = currentTime;
-        timeSinceLastTime = 1.0f / attackSpeed;
-    }
+    //벡터에 탄 push
+    GM->monster->GetProjectiles().emplace_back(proj);
 }

@@ -27,6 +27,7 @@
     <ClInclude Include="Player_kill.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="redHairRat.h" />
+    <ClInclude Include="redHairRat_atk.h" />
     <ClInclude Include="Scene2_inGame.h" />
     <ClInclude Include="Scene1_title.h" />
     <ClInclude Include="Scene3_jazzBar.h" />
@@ -42,6 +43,7 @@
     <ClCompile Include="Player_kill.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="redHairRat.cpp" />
+    <ClCompile Include="redHairRat_atk.cpp" />
     <ClCompile Include="Scene2_inGame.cpp" />
     <ClCompile Include="Scene1_title.cpp" />
     <ClCompile Include="Scene3_jazzBar.cpp" />

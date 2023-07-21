@@ -80,13 +80,19 @@ bool Projectile::hasCollideWithMonster()
 
                 for (auto& InRangeCheck : GM->monster->GetEnemy())
                 {
-                    // 몬스터가 폭발 범위 안에 들었는지 확인
-                    if (InRangeCheck->GetCollider()->Intersect(this->collider_range))
+                    // null check
+                    if (collider_range) 
                     {
-                        if (InRangeCheck == enemy) continue;
-                        // 몬스터 데미지 액션
-                        InRangeCheck->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
+                        // 몬스터가 폭발 범위 안에 들었는지 확인
+                        if (InRangeCheck->GetCollider()->Intersect(this->collider_range))
+                        {
+                            if (InRangeCheck == enemy) continue;
+                            // 몬스터 데미지 액션
+                            InRangeCheck->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
+                        }
                     }
+
+
                 }
             }
             // 충돌 이펙트

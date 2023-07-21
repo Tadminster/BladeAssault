@@ -92,7 +92,10 @@ void Monster::Update()
 		// IDLE -> ATTACK
 		if (distance < 200)
 		{
-			Attack();
+			if (isAttackCooldown())
+			{
+				state = MonsterState::ATTACK;
+			}
 		}
 		// IDLE -> RUN
 		else if (distance < app.GetHalfWidth())
@@ -102,10 +105,13 @@ void Monster::Update()
 	}
 	else if (state == MonsterState::RUN)
 	{
-		// IDLE -> ATTACK
+		// RUN -> ATTACK
 		if (distance < 100)
 		{
-			Attack();
+			if (isAttackCooldown())
+			{
+				state = MonsterState::ATTACK;
+			}
 		}
 
 		collider->MoveWorldPos(dir * speed * DELTA);
@@ -116,12 +122,16 @@ void Monster::Update()
 	}
 	else if (state == MonsterState::ATTACK)
 	{
-		Attack();
+		// 공격 프레임에 도달하면 발사
+		if (attack->frame.x == attackFrame && realAttack)
+		{
+			realAttack = false;
+			Attack();
+		}
 
 		// ATTACK -> IDLE
 		if (attack->frame.x == attack->maxFrame.x - 1)
 		{
-			cout << "ATTACK -> IDLE" << endl;
 			state = MonsterState::IDLE;
 		}
 	}
@@ -167,11 +177,34 @@ void Monster::Render()
 	}
 }
 
+bool Monster::isAttackCooldown()
+{
+	static float lastShotTime = 0;
+	static float timeSinceLastTime = 0;
+
+	float currentTime = TIMER->GetWorldTime();
+	float elapsedTime = currentTime - lastShotTime;
+
+	if (elapsedTime >= timeSinceLastTime)
+	{
+		attack->frame.x = 0;
+		realAttack = true;
+
+
+		// 공속계산
+		lastShotTime = currentTime;
+		timeSinceLastTime = 1.0f / attackSpeed;
+
+		return true;
+	}
+
+	return false;
+}
+
 void Monster::Attack()
 {
-	cout << "frame초기호화" << endl;
-	attack->frame.x = 0;
-	state = MonsterState::ATTACK;
+
+
 }
 
 void Monster::actionsWhenDamaged(Vector4 value)
