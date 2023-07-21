@@ -10,28 +10,28 @@ redHairRat::redHairRat(Vector2 spawnPos)
 	attack = new ObImage(L"redHairRat_attack.png");
 
     collider->isFilled = false;
-    collider->scale.x = 60;
-    collider->scale.y = 100;
+    collider->scale.x = 80;
+    collider->scale.y = 110;
     collider->SetWorldPos(spawnPos);
 
     idle->SetParentRT(*collider);
-    idle->SetLocalPosY(20);
-    idle->maxFrame.x = 6;
+    idle->SetLocalPosY(45);
+    idle->maxFrame.x = 9;
     idle->maxFrame.y = 1;
     idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3;
     idle->scale.y = idle->imageSize.y / idle->maxFrame.y * 3;
     idle->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     run->SetParentRT(*collider);
-    run->SetLocalPosY(20);
-    run->maxFrame.x = 8;
+    run->SetLocalPosY(45);
+    run->maxFrame.x = 7;
     run->maxFrame.y = 1;
     run->scale.x = run->imageSize.x / run->maxFrame.x * 3;
     run->scale.y = run->imageSize.y / run->maxFrame.y * 3;
     run->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     jump->SetParentRT(*collider);
-    jump->SetLocalPosY(20);
+    jump->SetLocalPosY(45);
     jump->maxFrame.x = 2;
     jump->maxFrame.y = 2;
     jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 3;
@@ -39,8 +39,8 @@ redHairRat::redHairRat(Vector2 spawnPos)
     jump->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     attack->SetParentRT(*collider);
-    attack->SetLocalPosY(20);
-    attack->maxFrame.x = 4;
+    attack->SetLocalPosY(45);
+    attack->maxFrame.x = 9;
     attack->maxFrame.y = 1;
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
     attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
@@ -52,7 +52,7 @@ redHairRat::redHairRat(Vector2 spawnPos)
     hp = 100;
     damage = 10;
     speed = 100;
-    attackSpeed = 0.5f;
+    attackSpeed = 0.3f;
 }
 
 redHairRat::~redHairRat()
