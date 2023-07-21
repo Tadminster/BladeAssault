@@ -12,7 +12,7 @@ Scene2_inGame::Scene2_inGame()
 
 	lightCeiling = new ObImage(L"hankroom_light.png");
 	lightRoom = new ObImage(L"squareGlow.png");
-
+	
 	nextMap = new ObRect();
 
 	GM->player = new Player_kill();
