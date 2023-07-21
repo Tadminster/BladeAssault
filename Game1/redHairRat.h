@@ -9,5 +9,6 @@ public:
 	void Init(Vector2 spawnPos) override;
 	void Update() override;
 	void Render() override;
+	void Attack() override;
 };
 

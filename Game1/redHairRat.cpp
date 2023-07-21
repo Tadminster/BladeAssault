@@ -44,15 +44,15 @@ redHairRat::redHairRat(Vector2 spawnPos)
     attack->maxFrame.y = 1;
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
     attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
-    attack->ChangeAnim(ANIMSTATE::ONCE, 0.085f, true);
+    attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-    status = MonsterState::IDLE;
+    state = MonsterState::IDLE;
     dir = LEFT;
 
     hp = 100;
     damage = 10;
     speed = 100;
-    attackSpeed = 1.0f;
+    attackSpeed = 0.5f;
 }
 
 redHairRat::~redHairRat()
@@ -97,9 +97,9 @@ void redHairRat::Init(Vector2 spawnPos)
     attack->maxFrame.y = 1;
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
     attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
-    attack->ChangeAnim(ANIMSTATE::ONCE, 0.085f, true);
+    attack->ChangeAnim(ANIMSTATE::ONCE, 0.3f, true);
 
-    status = MonsterState::IDLE;
+    state = MonsterState::IDLE;
     dir = LEFT;
 
     hp = 100;
@@ -117,4 +117,41 @@ void redHairRat::Update()
 void redHairRat::Render()
 {
 	Monster::Render();
+}
+
+void redHairRat::Attack()
+{
+    static float lastShotTime = 0;
+    static float timeSinceLastTime = 0;
+
+    float currentTime = TIMER->GetWorldTime();
+    float elapsedTime = currentTime - lastShotTime;
+
+    if (elapsedTime >= timeSinceLastTime)
+    {
+        Monster::Attack();
+        cout << "redHairRat Attack" << endl;
+
+        // 발사 위치 계산
+        Vector2 spawnPos = collider->GetWorldPos();
+
+        // 탄생성
+        //kill_barehand_atk* proj = new kill_barehand_atk
+        //(
+        //	spawnPos,										// 생성위치
+        //	lastDir,										// 각도
+        //	700,											// 발사체 속도
+        //	500,											// 사거리
+        //	10,												// 공격력
+        //	1,												// 관통력
+        //	1												// 폭발범위
+        //);
+
+        //벡터에 탄 push
+        //projectiles.emplace_back(proj);
+
+        // 공속계산
+        lastShotTime = currentTime;
+        timeSinceLastTime = 1.0f / attackSpeed;
+    }
 }
