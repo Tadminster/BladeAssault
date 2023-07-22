@@ -36,9 +36,9 @@ protected:
 
 
 	int			hp;
-	int			maxHP;
+	int			maxHp;
 	int			mp;
-	int			maxMP;
+	int			maxMp;
 	int			attackDamage;
 	int			attackRange;
 	int			attackSpeed;
@@ -89,6 +89,11 @@ public:
 	Vector2 GetFoot();
 	Vector2 GetHead();
 	Vector2 GetDirection() { return dir; }
+
+	int		GetHp() { return hp; }
+	int		GetMaxHp() { return maxHp; }
+	int		GetMp() { return mp; }
+	int		GetMaxMp() { return maxMp; }
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }

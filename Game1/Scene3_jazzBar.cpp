@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "HUD.h"
 #include "Player.h"
 #include "Player_kill.h"
 #include "Monster.h"
@@ -122,6 +123,7 @@ void Scene3_jazzBar::Update()
 
 	GM->monster->Update();
 	GM->player->Update();
+	GM->hud->Update();
 }
 
 void Scene3_jazzBar::LateUpdate()
@@ -172,6 +174,7 @@ void Scene3_jazzBar::Render()
 
 	GM->monster->Render();
 	GM->player->Render();
+	GM->hud->Render();
 }
 
 void Scene3_jazzBar::ResizeScreen()

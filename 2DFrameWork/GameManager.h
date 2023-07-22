@@ -4,6 +4,7 @@ class GameManager :public Singleton<GameManager>
 public:
     class Player*           player;
     class MonsterManager*   monster;
+    class HUD*              hud;
 
     bool	DEBUG_MODE = false;
 

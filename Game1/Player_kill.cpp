@@ -97,6 +97,11 @@ void Player_kill::Init()
 	// ´É·ÂÄ¡
 	Player::Init();
 
+	hp = 150;
+	maxHp = 150;
+	mp = 120;
+	maxMp = 120;
+
 	attackSpeed = 3.0f;
 }
 

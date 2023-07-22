@@ -39,6 +39,9 @@
     <ClInclude Include="redHairRat_atk.h">
       <Filter>Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -77,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="redHairRat_atk.cpp">
       <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

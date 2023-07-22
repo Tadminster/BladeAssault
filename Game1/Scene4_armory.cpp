@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "HUD.h"
 #include "Player.h"
 #include "Player_kill.h"
 #include "Monster.h"
@@ -105,6 +106,7 @@ void Scene4_armory::Update()
 	stair->Update();
 	GM->monster->Update();
 	GM->player->Update();
+	GM->hud->Update();
 }
 
 void Scene4_armory::LateUpdate()
@@ -154,6 +156,7 @@ void Scene4_armory::Render()
 
 	GM->monster->Render();
 	GM->player->Render();
+	GM->hud->Render();
 }
 
 void Scene4_armory::ResizeScreen()

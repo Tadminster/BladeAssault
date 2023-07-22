@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "HUD.h"
 #include "Player.h"
 #include "Player_kill.h"
 #include "MonsterManager.h"
@@ -15,6 +16,7 @@ Scene2_inGame::Scene2_inGame()
 	
 	nextMap = new ObRect();
 
+	GM->hud = new HUD();
 	GM->player = new Player_kill();
 	GM->monster = new MonsterManager();
 }
@@ -67,7 +69,7 @@ void Scene2_inGame::Init()
 	isLightOn		= true;
 	LightOffTime	= 0.0f;
 
-	
+	GM->hud->Init();
 
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
@@ -138,6 +140,7 @@ void Scene2_inGame::Update()
 	nextMap->Update();
 	GM->monster->Update();
 	GM->player->Update();
+	GM->hud->Update();
 }
 
 void Scene2_inGame::LateUpdate()
@@ -190,6 +193,7 @@ void Scene2_inGame::Render()
 	}
 	GM->monster->Render();
 	GM->player->Render();
+	GM->hud->Render();
 }
 
 void Scene2_inGame::ResizeScreen()
