@@ -7,7 +7,8 @@ enum class PlayerState
 	JUMP,
 	CROUCH,
 	CROUCH_DOWN,
-	ATTACK
+	ATTACK,
+	DAMAGED
 };
 
 class Player
@@ -20,26 +21,28 @@ protected:
 	ObImage* crouch;
 	ObImage* attack;
 	ObImage* dash;
+	ObImage* damaged;
+	ObImage* shadow;
 
-	PlayerState  PrevState;
-	PlayerState  Currentstate;
+	PlayerState PrevState;
+	PlayerState	CurrentState;
+
 	Vector2		dir;
 	Vector2		lastPos;
 	Vector2		lastDir;
 	Vector2		dashTargetPos;
 
-
 	vector<class Projectile*>	projectiles;
 
 
-	int			HP;
-	int			MaxHP;
-	int			MP;
-	int			MaxMP;
-	int			AttackDamage;
-	int			AttackRange;
-	int			AttackSpeed;
-	int			Defence;
+	int			hp;
+	int			maxHP;
+	int			mp;
+	int			maxMP;
+	int			attackDamage;
+	int			attackRange;
+	int			attackSpeed;
+	int			defence;
 
 	float		speed;
 
@@ -51,6 +54,7 @@ protected:
 	float		dashCooldown;
 	float		dashDealay;
 
+	float		timeOfDamaged;
 
 
 public:
@@ -71,13 +75,16 @@ public:
 	virtual void Attack();
 	virtual void Dash();
 	virtual	void Jump();
+
+	// 특정 상황에서의 액션
 	void OnFloorAction();
 	void OnWallAction();
 	void OnWallSlideAction();
 
+	void actionsWhenDamaged(int value);
 
 	// Get
-	PlayerState GetState() { return Currentstate; }
+	PlayerState GetState() { return CurrentState; }
 	ObRect* GetCollider() { return collider; };
 	Vector2 GetFoot();
 	Vector2 GetHead();

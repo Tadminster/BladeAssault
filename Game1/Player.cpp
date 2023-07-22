@@ -11,6 +11,8 @@ Player::Player()
 	jump = nullptr;
 	crouch = nullptr;
 	attack = nullptr;
+	damaged = nullptr;
+	shadow = nullptr;
 }
 
 Player::~Player()
@@ -21,11 +23,14 @@ Player::~Player()
 	delete dash;
 	delete jump;
 	delete crouch;
+	delete attack;
+	delete damaged;
+	delete shadow;
 }
 
 void Player::Init()
 {
-	Currentstate = PlayerState::IDLE;
+	CurrentState = PlayerState::IDLE;
 	
 	lastDir = RIGHT;
 
@@ -47,7 +52,7 @@ void Player::Init()
 void Player::Update()
 {
 	ImGui::Text("gravity : %f\n", GM->player->gravity);
-	ImGui::Text("playerState : %d\n", GM->player->Currentstate);
+	ImGui::Text("playerState : %d\n", GM->player->CurrentState);
 
 	lastPos = collider->GetWorldPos();
 	collider->Update();
@@ -64,6 +69,7 @@ void Player::Update()
 		jump->reverseLR = true;
 		crouch->reverseLR = true;
 		attack->reverseLR = true;
+		damaged->reverseLR = true;
 	}
 	else if (dir == RIGHT)
 	{
@@ -73,29 +79,30 @@ void Player::Update()
 		jump->reverseLR = false;
 		crouch->reverseLR = false;
 		attack->reverseLR = false;
+		damaged->reverseLR = false;
 	}
 
 	// 상태 업데이트
-	if (Currentstate == PlayerState::IDLE)
+	if (CurrentState == PlayerState::IDLE)
 	{
 	}
-	else if (Currentstate == PlayerState::RUN)
+	else if (CurrentState == PlayerState::RUN)
 	{
 		collider->MoveWorldPos(dir * speed * DELTA);
 	}
-	else if (Currentstate == PlayerState::DASH)
+	else if (CurrentState == PlayerState::DASH)
 	{
 		static float weight = 0;
 		weight += DELTA * 3;
 		if (weight >= 1.0f || onWallSlide)
 		{
 			weight = 0;
-			Currentstate = PrevState;
+			CurrentState = PrevState;
 		}
 
 		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.004f));
 	}
-	else if (Currentstate == PlayerState::JUMP)
+	else if (CurrentState == PlayerState::JUMP)
 	{
 		// 상승
 		if (gravity < 0)
@@ -114,16 +121,16 @@ void Player::Update()
 			if (onFloor || onWall)
 			{
 				jumpCount = 0;
-				Currentstate = PlayerState::IDLE;
+				CurrentState = PlayerState::IDLE;
 			}
 		}
 
 		collider->MoveWorldPos(dir * speed * DELTA);
 	}
-	else if (Currentstate == PlayerState::CROUCH)
+	else if (CurrentState == PlayerState::CROUCH)
 	{
 	}
-	else if (Currentstate == PlayerState::CROUCH_DOWN)
+	else if (CurrentState == PlayerState::CROUCH_DOWN)
 	{
 		jump->frame.y = 1;
 		jumpTime += DELTA;
@@ -133,16 +140,25 @@ void Player::Update()
 		{
 			isLanding = true;
 			jumpTime = 0.0f;
-			Currentstate = PlayerState::IDLE;
+			CurrentState = PlayerState::IDLE;
 		}
 	}
-	else if (Currentstate == PlayerState::ATTACK)
+	else if (CurrentState == PlayerState::ATTACK)
 	{
 		collider->MoveWorldPos(dir * speed * 0.5 * DELTA);
 
 		if (attack->frame.x == attack->maxFrame.x - 1)
 		{
-			Currentstate = PrevState;
+			CurrentState = PrevState;
+		}
+	}
+	else if (CurrentState == PlayerState::DAMAGED)
+	{
+		collider->MoveWorldPos(dir * speed * 0.5 * DELTA);
+
+		if (timeOfDamaged + 0.1f < TIMER->GetWorldTime())
+		{
+			CurrentState = PrevState;
 		}
 	}
 
@@ -180,25 +196,31 @@ void Player::Update()
 		projectiles.end()
 	);
 
-
+	// 플레이어의 탄 업데이트
 	for (auto& proj : projectiles)
 		proj->Update();
 
+	if (onWall || onFloor)
+		shadow->Update();
+
+	// 기타 업데이트
 	collider->Update();
-	if (Currentstate == PlayerState::IDLE)
+	if (CurrentState == PlayerState::IDLE)
 		idle->Update();
-	else if (Currentstate == PlayerState::RUN)
+	else if (CurrentState == PlayerState::RUN)
 		run->Update();
-	else if (Currentstate == PlayerState::DASH)
+	else if (CurrentState == PlayerState::DASH)
 		dash->Update();
-	else if (Currentstate == PlayerState::JUMP)
+	else if (CurrentState == PlayerState::JUMP)
 		jump->Update();
-	else if (Currentstate == PlayerState::CROUCH)
+	else if (CurrentState == PlayerState::CROUCH)
 		crouch->Update();
-	else if (Currentstate == PlayerState::CROUCH_DOWN)
+	else if (CurrentState == PlayerState::CROUCH_DOWN)
 		jump->Update();
-	else if (Currentstate == PlayerState::ATTACK)
+	else if (CurrentState == PlayerState::ATTACK)
 		attack->Update();
+	else if (CurrentState == PlayerState::DAMAGED)
+		damaged->Update();
 }
 
 void Player::Render()
@@ -207,21 +229,26 @@ void Player::Render()
 		collider->Render();
 
 
+	// 바닥에 있을 때만 그림자를 그린다
+	if (onWall || onFloor)
+		shadow->Render();
 
-	if (Currentstate == PlayerState::IDLE)
+	if (CurrentState == PlayerState::IDLE)
 		idle->Render();
-	else if (Currentstate == PlayerState::RUN)
+	else if (CurrentState == PlayerState::RUN)
 		run->Render();
-	else if (Currentstate == PlayerState::DASH)
+	else if (CurrentState == PlayerState::DASH)
 		dash->Render();
-	else if (Currentstate == PlayerState::JUMP)
+	else if (CurrentState == PlayerState::JUMP)
 		jump->Render();
-	else if (Currentstate == PlayerState::CROUCH)
+	else if (CurrentState == PlayerState::CROUCH)
 		crouch->Render();
-	else if (Currentstate == PlayerState::CROUCH_DOWN)
+	else if (CurrentState == PlayerState::CROUCH_DOWN)
 		jump->Render();
-	else if (Currentstate == PlayerState::ATTACK)
+	else if (CurrentState == PlayerState::ATTACK)
 		attack->Render();
+	else if (CurrentState == PlayerState::DAMAGED)
+		damaged->Render();
 
 	for (auto& proj : projectiles)
 		proj->Render();
@@ -234,18 +261,18 @@ void Player::Control()
 	dir = Vector2();
 
 	// 상태 업데이트
-	if (Currentstate == PlayerState::IDLE)
+	if (CurrentState == PlayerState::IDLE)
 	{
 		// idle -> walk
 		if (INPUT->KeyPress('A'))
 		{
 			dir = LEFT;
-			Currentstate = PlayerState::RUN;
+			CurrentState = PlayerState::RUN;
 		}
 		else if (INPUT->KeyPress('D'))
 		{
 			dir = RIGHT;
-			Currentstate = PlayerState::RUN;
+			CurrentState = PlayerState::RUN;
 		}
 
 		// idle -> jump
@@ -257,7 +284,7 @@ void Player::Control()
 		// idle -> crouch
 		if (INPUT->KeyPress('S'))
 		{
-			Currentstate = PlayerState::CROUCH;
+			CurrentState = PlayerState::CROUCH;
 		}
 
 		// idle -> dash
@@ -272,7 +299,7 @@ void Player::Control()
 			Attack();
 		}
 	}
-	else if (Currentstate == PlayerState::RUN)
+	else if (CurrentState == PlayerState::RUN)
 	{
 		// runing
 		if (INPUT->KeyPress('A'))
@@ -287,7 +314,7 @@ void Player::Control()
 		// run -> idle
 		if (!(INPUT->KeyPress('A') || INPUT->KeyPress('D')))
 		{
-			Currentstate = PlayerState::IDLE;
+			CurrentState = PlayerState::IDLE;
 			run->frame.x = 0;
 		}
 
@@ -309,7 +336,7 @@ void Player::Control()
 			Attack();
 		}
 	}
-	else if (Currentstate == PlayerState::JUMP)
+	else if (CurrentState == PlayerState::JUMP)
 	{
 		// jump 중 이동
 		if (INPUT->KeyPress('A'))
@@ -340,15 +367,15 @@ void Player::Control()
 			Attack();
 		}
 	}
-	else if (Currentstate == PlayerState::CROUCH)
+	else if (CurrentState == PlayerState::CROUCH)
 	{
 		// crouch -> idle
 		if (!INPUT->KeyPress('S'))
-			Currentstate = PlayerState::IDLE;
+			CurrentState = PlayerState::IDLE;
 
 		// crouch -> run
 		if (INPUT->KeyPress('A') || INPUT->KeyPress('D'))
-			Currentstate = PlayerState::RUN;
+			CurrentState = PlayerState::RUN;
 
 		// crouch -> jump
 		if (INPUT->KeyDown('W'))
@@ -361,10 +388,10 @@ void Player::Control()
 		{
 			jumpCount = 1;
 			gravity = 0;
-			Currentstate = PlayerState::CROUCH_DOWN;
+			CurrentState = PlayerState::CROUCH_DOWN;
 		}
 	}
-	else if (Currentstate == PlayerState::ATTACK)
+	else if (CurrentState == PlayerState::ATTACK)
 	{
 		// attack 중 이동
 		if (INPUT->KeyPress('A'))
@@ -389,6 +416,18 @@ void Player::Control()
 		}
 
 	}
+	else if (CurrentState == PlayerState::DAMAGED)
+	{
+		// DAMAGED 중 이동
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+		}
+	}
 
 	if (dir == LEFT) lastDir = LEFT;
 	else if (dir == RIGHT) lastDir = RIGHT;
@@ -397,8 +436,8 @@ void Player::Control()
 void Player::Attack()
 {
 	attack->frame.x = 0;
-	PrevState = Currentstate;
-	Currentstate = PlayerState::ATTACK;
+	PrevState = CurrentState;
+	CurrentState = PlayerState::ATTACK;
 }
 
 void Player::Dash()
@@ -411,18 +450,18 @@ void Player::Dash()
 	dashTargetPos.x = collider->GetWorldPos().x + (lastDir.x * 300);
 	dashTargetPos.y = collider->GetWorldPos().y + 5;
 	
-	PrevState = Currentstate;
+	PrevState = CurrentState;
 	if (PrevState == PlayerState::ATTACK)
 		if (onFloor || onWall) PrevState = PlayerState::IDLE;
 		else PrevState = PlayerState::JUMP;
-	Currentstate = PlayerState::DASH;
+	CurrentState = PlayerState::DASH;
 }
 
 void Player::Jump()
 {
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
 	gravity = -900;
-	Currentstate = PlayerState::JUMP;
+	CurrentState = PlayerState::JUMP;
 }
 
 void Player::OnFloorAction()
@@ -441,6 +480,28 @@ void Player::OnWallSlideAction()
 {
 	collider->SetWorldPosX(lastPos.x);
 	collider->Update();
+}
+
+void Player::actionsWhenDamaged(int value)
+{
+	// 대시 중에는 데미지를 받지 않음
+	if (CurrentState == PlayerState::DASH)
+		return;
+
+	// 상태를 데미지 받음으로 변경
+	if (CurrentState == PlayerState::IDLE || CurrentState == PlayerState::RUN)
+		CurrentState = PlayerState::DAMAGED;
+
+	// 스킨 컬러 변경
+	//damaged->color = Vector4(0.1, 0.1, 0.1, 0.5);
+	
+	// 데미지 받은 시간 기록
+	timeOfDamaged = TIMER->GetWorldTime();
+
+	// 데미지 차감
+	int damage = min(value + defence, 0);
+	// 체력 감소
+	hp = max(hp + damage, 0);
 }
 
 void Player::GoBack()

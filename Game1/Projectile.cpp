@@ -118,7 +118,7 @@ bool Projectile::hasCollideWithPlayer()
         AfterEffect();
 
         // 플레이어 데미지 액션
-        //GM->player->actionsWhenDamaged(-damage);
+        GM->player->actionsWhenDamaged(-damage);
 
         return true;
     }

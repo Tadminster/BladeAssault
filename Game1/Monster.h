@@ -22,6 +22,7 @@ protected:
 	class ObImage*	run;
 	class ObImage*	jump;
 	class ObImage*	attack;
+	class ObImage*	shadow;
 
 	MonsterState		state;
 	MonsterDamageTaken	dmgTaken;
@@ -41,7 +42,7 @@ protected:
 public:
 	Monster();
 	virtual ~Monster();
-	virtual void Init(Vector2 spawnPos);
+	//virtual void Init(Vector2 spawnPos);
 	virtual void Update();
 	virtual void Render();
 

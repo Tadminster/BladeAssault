@@ -65,7 +65,7 @@ void Scene3_jazzBar::Init()
 
 	GM->player->SetPosition(startPostion);
 
-	GM->monster->AddMonster(new redHairRat(Vector2(3500, 1850)));
+	GM->monster->AddMonster(new redHairRat(Vector2(3500, 1800)));
 }
 
 void Scene3_jazzBar::Release()

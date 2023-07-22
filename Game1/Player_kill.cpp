@@ -13,6 +13,8 @@ Player_kill::Player_kill()
 	jump = new ObImage(L"kill_barehand_jump.png");
 	crouch = new ObImage(L"kill_barehand_crouch.png");
 	attack = new ObImage(L"kill_barehand_sub_attack.png");
+	damaged = new ObImage(L"kill_barehand_damaged.png");
+	shadow = new ObImage(L"character_shadow.png");
 	//hasAxis = true;
 }
 
@@ -75,10 +77,27 @@ void Player_kill::Init()
 	attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
 	attack->ChangeAnim(ANIMSTATE::ONCE, 0.085f, true);
 
+	damaged->SetParentRT(*collider);
+	damaged->SetLocalPosY(20);
+	damaged->maxFrame.x = 1;
+	damaged->maxFrame.y = 1;
+	damaged->scale.x = damaged->imageSize.x / damaged->maxFrame.x * 2.6;
+	damaged->scale.y = damaged->imageSize.y / damaged->maxFrame.y * 2.6;
+	damaged->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
+
+	shadow->SetParentRT(*collider);
+	shadow->SetLocalPosY(-idle->scale.y * 0.23);
+	shadow->maxFrame.x = 1;
+	shadow->maxFrame.y = 1;
+	shadow->scale.x = shadow->imageSize.x / shadow->maxFrame.x * 2.4;
+	shadow->scale.y = shadow->imageSize.y / shadow->maxFrame.y * 2.4;
+	shadow->color.w = 0.2f;
+	shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
+
 	// 능력치
 	Player::Init();
 
-	AttackSpeed = 3.0f;
+	attackSpeed = 3.0f;
 }
 
 
@@ -127,6 +146,6 @@ void Player_kill::Attack()
 
 		// 공속계산
 		lastShotTime = currentTime;
-		timeSinceLastTime = 1.0f / AttackSpeed;
+		timeSinceLastTime = 1.0f / attackSpeed;
 	}
 }

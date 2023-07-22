@@ -20,9 +20,9 @@ Monster::~Monster()
 	delete attack;
 }
 
-void Monster::Init(Vector2 spawnPos)
-{
-}
+//void Monster::Init(Vector2 spawnPos)
+//{
+//}
 
 void Monster::Update()
 {
@@ -137,6 +137,7 @@ void Monster::Update()
 	}
 
 	// 업데이트
+	shadow->Update();
 	switch (state)
 	{
 	case MonsterState::IDLE:
@@ -160,6 +161,7 @@ void Monster::Render()
 	if (GM->DEBUG_MODE)
 		collider->Render();
 
+	shadow->Render();
 	switch (state)
 	{
 	case MonsterState::IDLE:
