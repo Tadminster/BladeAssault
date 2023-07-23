@@ -198,6 +198,7 @@ void Scene2_inGame::Render()
 
 void Scene2_inGame::ResizeScreen()
 {
+	GM->hud->Init();
 }
 
 

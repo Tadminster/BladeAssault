@@ -179,7 +179,7 @@ void Scene3_jazzBar::Render()
 
 void Scene3_jazzBar::ResizeScreen()
 {
-
+	GM->hud->Init();
 }
 
 bool Scene3_jazzBar::OnFloor()

@@ -161,7 +161,7 @@ void Scene4_armory::Render()
 
 void Scene4_armory::ResizeScreen()
 {
-
+	GM->hud->Init();
 }
 
 bool Scene4_armory::OnFloor()
