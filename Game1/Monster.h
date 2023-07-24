@@ -14,11 +14,13 @@ protected:
 	float	knockBackFactor;		// 넉백에 사용되는 계수
 	float	timeOfDamage;			// 데미지 받은 시간 기록
 
+	int		maxAttackDistance;
 	int		attackFrame;			// 공격 프레임
 	bool	realAttack;				// 실제 공격을 위한	bool
 
 public:
 	Monster();
+	Monster(Vector2 spawnPos);
 	virtual ~Monster();
 	virtual void Update();
 	virtual void Render();

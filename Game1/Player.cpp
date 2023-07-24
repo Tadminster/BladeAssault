@@ -483,13 +483,6 @@ void Player::Dash()
 	CurrentState = State::DASH;
 }
 
-void Player::Jump()
-{
-	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
-	gravity = -jumpSpeed;
-	CurrentState = State::JUMP;
-}
-
 void Player::actionsWhenDamaged(int value)
 {
 	// 대시 중에는 데미지를 받지 않음

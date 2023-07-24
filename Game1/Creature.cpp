@@ -16,6 +16,29 @@ Creature::~Creature()
 	delete shadow;
 }
 
+void Creature::Init()
+{
+}
+
+void Creature::Update()
+{
+}
+
+void Creature::Render()
+{
+}
+
+void Creature::Jump()
+{
+	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
+	gravity = -jumpSpeed;
+	CurrentState = State::JUMP;
+}
+
+void Creature::Attack()
+{
+}
+
 void Creature::OnFloorAction()
 {
 	onFloor = true;

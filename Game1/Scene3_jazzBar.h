@@ -6,8 +6,6 @@ private:
 	ObRect*			stairLeft;
 	ObRect*			stairRight;
 
-	Vector2			startPostion;
-
 	//temp
 	class redHairRat*		redRat;
 

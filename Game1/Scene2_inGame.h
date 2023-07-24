@@ -22,9 +22,4 @@ public:
 	void LateUpdate();//°»½Å
 	void Render();
 	void ResizeScreen();
-	//void HandleTerrainCollision(class Creature* creature);
-
-	//virtual bool OnFloor(class Creature* creature);
-	//virtual bool OnWall(class Creature* creature);
-	//virtual bool OnWallside(class Creature* creature);
 };

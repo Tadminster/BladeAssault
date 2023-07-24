@@ -32,7 +32,6 @@ protected:
 	int			mp;
 	int			maxMp;
 
-	float		jumpTime;
 	int			jumpCount;
 	int			jumpCountMax;
 	float		dashCooldown;
@@ -46,13 +45,13 @@ public:
 public:
 	Player();
 	virtual ~Player();
-	virtual void Init();
-	virtual void Update();
-	virtual void Render();
+	virtual void Init() override;
+	virtual void Update() override;
+	virtual void Render() override;
+
 	virtual void Control();
-	virtual void Attack();
+	virtual void Attack() override;
 	virtual void Dash();
-	virtual	void Jump();
 
 	void actionsWhenDamaged(int value);
 

@@ -9,15 +9,18 @@ Monster::Monster()
 	run = nullptr;
 	jump = nullptr;
 	attack = nullptr;
+
+	onFloor = false;
+	isLanding = true;
+}
+
+Monster::Monster(Vector2 spawnPos)
+{
 }
 
 Monster::~Monster()
 {
-	delete collider;
-	delete idle;
-	delete run;
-	delete jump;
-	delete attack;
+	Creature::~Creature();
 }
 
 //void Monster::Init(Vector2 spawnPos)
@@ -26,7 +29,7 @@ Monster::~Monster()
 
 void Monster::Update()
 {
-	ImGui::Text("MonsterState: %d\n", CurrentState);
+
 	lastPos = collider->GetWorldPos();
 
 	Vector2 target = GM->player->GetCollider()->GetWorldPos();
@@ -64,10 +67,6 @@ void Monster::Update()
 			jump->color = Vector4(0.5, 0.5, 0.5, 0.5);
 			attack->color = Vector4(0.5, 0.5, 0.5, 0.5);
 		}
-
-		// 다가가기
-		/*if (action == MONSTER_ACTION::RUN)
-			trace();*/
 	}
 	else if (dmgTaken == MonsterDamageTaken::DAMAGED)
 	{
@@ -85,26 +84,26 @@ void Monster::Update()
 
 	float distance = Vector2::Distance(collider->GetWorldPos(), GM->player->GetCollider()->GetWorldPos());
 	int distanceX = GM->player->GetCollider()->GetWorldPos().x - collider->GetWorldPos().x;
-	int distanceY = GM->player->GetCollider()->GetWorldPos().y - collider->GetWorldPos().y - 50;
+	int distanceY = GM->player->GetCollider()->GetWorldPos().y - collider->GetWorldPos().y;
 	int distanceX_abs = abs(distanceX);
 	int distanceY_abs = abs(distanceY);
+	ImGui::Text("MonsterState: %d\n", CurrentState);
 	ImGui::Text("distanceX: %d\n", distanceX);
 	ImGui::Text("distanceY: %d\n", distanceY);
-	ImGui::Text("distanceX(abs): %d\n", distanceX_abs);
-	ImGui::Text("distanceY(abs): %d\n", distanceY_abs);
-
 
 
 	if (CurrentState == State::IDLE)
 	{
-		// IDLE -> ATTACK
-		if (distanceX_abs < 200)
+		// 몬스터가 공격 가능한 거리 안에 있다면
+		if (distanceX_abs < maxAttackDistance)
 		{
-			if (distanceY_abs < 100)
+			// 몬스터와 플레이어의 높이 비교
+			if (distanceY_abs < 200)
 			{
 				// 플레이어와 비슷한 높이에 있다면 공격시도
 				if (isAttackCooldown())
 				{
+					// IDLE -> ATTACK
 					CurrentState = State::ATTACK;
 				}
 			}
@@ -113,12 +112,13 @@ void Monster::Update()
 				// 플레이어가 더 높이 있다면 점프
 				if (distanceY > 0)
 				{
-
+					Jump();
 				}
 				// 플레이어가 더 낮게 있다면 하강
 				else if (distanceY < 0)
 				{
-
+					gravity = 0;
+					CurrentState = State::CROUCH_DOWN;
 				}
 			}
 		}
@@ -143,7 +143,25 @@ void Monster::Update()
 	}
 	else if (CurrentState == State::JUMP)
 	{
+		// 상승
+		if (gravity < 0)
+		{
+			jump->frame.y = 0;
+			isLanding = false;
 
+		}
+		// 하강
+		else
+		{
+			jump->frame.y = 1;
+			isLanding = true;
+
+			// jump -> idle
+			if (onFloor || onWall)
+			{
+				CurrentState = State::IDLE;
+			}
+		}
 	}
 	else if (CurrentState == State::ATTACK)
 	{
@@ -157,6 +175,19 @@ void Monster::Update()
 		// ATTACK -> IDLE
 		if (attack->frame.x == attack->maxFrame.x - 1)
 		{
+			CurrentState = State::IDLE;
+		}
+	}
+	else if (CurrentState == State::CROUCH_DOWN)
+	{
+		jump->frame.y = 1;
+		jumpTime += DELTA;
+		isLanding = false;
+
+		if (jumpTime > 0.3f || onWall)
+		{
+			isLanding = true;
+			jumpTime = 0.0f;
 			CurrentState = State::IDLE;
 		}
 	}
@@ -181,9 +212,13 @@ void Monster::Update()
 	case State::JUMP:
 		jump->Update();
 		break;
+	case State::CROUCH_DOWN:
+		jump->Update();
+		break;
 	case State::ATTACK:
 		attack->Update();
 		break;
+
 	}
 	collider->Update();
 }
@@ -205,6 +240,9 @@ void Monster::Render()
 	case State::JUMP:
 		jump->Render();
 		break;
+	case State::CROUCH_DOWN:
+		jump->Render();
+		break;
 	case State::ATTACK:
 		attack->Render();
 		break;
@@ -213,6 +251,8 @@ void Monster::Render()
 
 bool Monster::isAttackCooldown()
 {
+
+	
 	static float lastShotTime = 0;
 	static float timeSinceLastTime = 0;
 

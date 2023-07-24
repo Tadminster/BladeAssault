@@ -10,7 +10,7 @@ public:
 	Scene_proto();
 	~Scene_proto();
 	virtual void Init();
-	virtual void Release();	//해제
+	virtual void Release();		//해제
 	virtual void Update();
 	virtual void LateUpdate();	//갱신
 	virtual void Render();

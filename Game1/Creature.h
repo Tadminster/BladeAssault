@@ -30,9 +30,11 @@ protected:
 
 	int			damage;
 	int			defence;
-	int			attackSpeed;
 	int			attackRange;
+	float		attackSpeed;
 	float		moveSpeed;
+
+	float		jumpTime;
 	float		jumpSpeed;
 
 	Vector2		dir;
@@ -48,6 +50,12 @@ public:
 public:
 	Creature();
 	~Creature();
+	virtual void Init();
+	virtual void Update();
+	virtual void Render();
+
+	virtual	void Jump();
+	virtual void Attack();
 
 	// 특정 상황에서의 액션
 	void OnFloorAction();
