@@ -26,7 +26,7 @@ redHairRat::redHairRat(Vector2 spawnPos)
     idle->maxFrame.y = 1;
     idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3;
     idle->scale.y = idle->imageSize.y / idle->maxFrame.y * 3;
-    idle->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
+    idle->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);
 
     run->pivot = OFFSET_B;
     run->SetParentRT(*collider);
