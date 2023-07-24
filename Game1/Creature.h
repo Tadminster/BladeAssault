@@ -1,4 +1,17 @@
 #pragma once
+enum class State
+{
+	IDLE,
+	RUN,
+	DASH,
+	JUMP,
+	CROUCH,
+	CROUCH_DOWN,
+	ATTACK,
+	DAMAGED,
+	DIE
+};
+
 class Creature
 {
 protected:
@@ -8,6 +21,9 @@ protected:
 	class ObImage* jump;
 	class ObImage* attack;
 	class ObImage* shadow;
+
+	State		PrevState;
+	State		CurrentState;
 
 	int			hp;			// 체력
 	int			maxHp;		// 최대체력
@@ -39,13 +55,14 @@ public:
 	void OnWallSlideAction();
 
 	// Get
-	ObRect* GetCollider() { return collider; };
+	ObRect* GetCollider()	{ return collider; };
+	State	GetState()		{ return CurrentState; }
+	Vector2 GetDirection()	{ return dir; }
 	Vector2 GetFoot();
 	Vector2 GetHead();
-	Vector2 GetDirection() { return dir; }
 
-	int		GetHp() { return hp; }
-	int		GetMaxHp() { return maxHp; }
+	int		GetHp()			{ return hp; }
+	int		GetMaxHp()		{ return maxHp; }
 
 	//
 	void GoBack();

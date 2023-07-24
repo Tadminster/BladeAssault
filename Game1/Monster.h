@@ -1,12 +1,4 @@
 #pragma once
-enum class MonsterState
-{
-	IDLE,
-	RUN,
-	JUMP,
-	ATTACK
-};
-
 enum class MonsterDamageTaken
 {
 	NORMAL,
@@ -17,7 +9,6 @@ enum class MonsterDamageTaken
 class Monster : public Creature
 {
 protected:
-	MonsterState		state;
 	MonsterDamageTaken	dmgTaken;
 
 	float	knockBackFactor;		// 넉백에 사용되는 계수
@@ -35,10 +26,7 @@ public:
 	virtual bool isAttackCooldown();
 	virtual void Attack();
 
-	// Get
-	MonsterState	GetState()		{ return state; }
-
-
+	//
 	bool isDead() const { return hp == 0; }
 	void actionsWhenDamaged(Vector4 value);
 	void knockBack();

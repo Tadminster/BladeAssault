@@ -1,33 +1,30 @@
 #pragma once
-class Scene2_inGame : public Scene
+class Scene2_inGame : public Scene_proto
 {
 private:
-	ObTileMap*		tileMap[3];
+	//ObTileMap*		tileMap[3];
 	ObImage*		lightCeiling;
 	ObImage*		lightRoom;
-
 	ObRect*			nextMap;
 
 	bool			isLightDown;
 	bool			isLightOn;
 	float			LightOffTime;
 
-
-	Vector2			startPostion;
 	float			elapsedTime;
 
 public:
 	Scene2_inGame();
 	~Scene2_inGame();
-	void Init() override;
-	void Release() override; //해제
-	void Update() override;
-	void LateUpdate() override;//갱신
-	void Render() override;
-	void ResizeScreen() override;
-	void HandleTerrainPlayerCollision();
+	void Init();
+	void Release(); //해제
+	void Update();
+	void LateUpdate();//갱신
+	void Render();
+	void ResizeScreen();
+	//void HandleTerrainCollision(class Creature* creature);
 
-	virtual bool PlayerOnFloor();
-	virtual bool PlayerOnWall();
-	virtual bool PlayerOnWallside();
+	//virtual bool OnFloor(class Creature* creature);
+	//virtual bool OnWall(class Creature* creature);
+	//virtual bool OnWallside(class Creature* creature);
 };

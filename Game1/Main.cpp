@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Scene_proto.h"
 #include "Scene1_title.h"
 #include "Scene2_inGame.h"
 #include "Scene3_jazzBar.h"

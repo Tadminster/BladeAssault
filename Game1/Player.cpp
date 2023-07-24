@@ -27,7 +27,7 @@ Player::~Player()
 
 void Player::Init()
 {
-	CurrentState = PlayerState::IDLE;
+	CurrentState = State::IDLE;
 	
 	lastDir = RIGHT;
 
@@ -84,21 +84,21 @@ void Player::Update()
 	}
 
 	// 사망 처리
-	if (hp == 0 && CurrentState != PlayerState::DIE)
+	if (hp == 0 && CurrentState != State::DIE)
 	{
-		CurrentState = PlayerState::DIE;
+		CurrentState = State::DIE;
 	}
 
 	// 상태 업데이트
-	if (CurrentState == PlayerState::IDLE)
+	if (CurrentState == State::IDLE)
 	{
 
 	}
-	else if (CurrentState == PlayerState::RUN)
+	else if (CurrentState == State::RUN)
 	{
 		collider->MoveWorldPos(dir * moveSpeed * DELTA);
 	}
-	else if (CurrentState == PlayerState::DASH)
+	else if (CurrentState == State::DASH)
 	{
 		static float weight = 0;
 		weight += DELTA * 3;
@@ -110,7 +110,7 @@ void Player::Update()
 
 		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.004f));
 	}
-	else if (CurrentState == PlayerState::JUMP)
+	else if (CurrentState == State::JUMP)
 	{
 		// 상승
 		if (gravity < 0)
@@ -129,16 +129,16 @@ void Player::Update()
 			if (onFloor || onWall)
 			{
 				jumpCount = 0;
-				CurrentState = PlayerState::IDLE;
+				CurrentState = State::IDLE;
 			}
 		}
 
-		collider->MoveWorldPos(dir * moveSpeed * DELTA);
+		collider->MoveWorldPos(dir* moveSpeed* DELTA);
 	}
-	else if (CurrentState == PlayerState::CROUCH)
+	else if (CurrentState == State::CROUCH)
 	{
 	}
-	else if (CurrentState == PlayerState::CROUCH_DOWN)
+	else if (CurrentState == State::CROUCH_DOWN)
 	{
 		jump->frame.y = 1;
 		jumpTime += DELTA;
@@ -148,10 +148,10 @@ void Player::Update()
 		{
 			isLanding = true;
 			jumpTime = 0.0f;
-			CurrentState = PlayerState::IDLE;
+			CurrentState = State::IDLE;
 		}
 	}
-	else if (CurrentState == PlayerState::ATTACK)
+	else if (CurrentState == State::ATTACK)
 	{
 		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
 
@@ -160,7 +160,7 @@ void Player::Update()
 			CurrentState = PrevState;
 		}
 	}
-	else if (CurrentState == PlayerState::DAMAGED)
+	else if (CurrentState == State::DAMAGED)
 	{
 		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
 
@@ -212,23 +212,23 @@ void Player::Update()
 
 	// 기타 업데이트
 	collider->Update();
-	if (CurrentState == PlayerState::IDLE)
+	if (CurrentState == State::IDLE)
 		idle->Update();
-	else if (CurrentState == PlayerState::RUN)
+	else if (CurrentState == State::RUN)
 		run->Update();
-	else if (CurrentState == PlayerState::DASH)
+	else if (CurrentState == State::DASH)
 		dash->Update();
-	else if (CurrentState == PlayerState::JUMP)
+	else if (CurrentState == State::JUMP)
 		jump->Update();
-	else if (CurrentState == PlayerState::CROUCH)
+	else if (CurrentState == State::CROUCH)
 		crouch->Update();
-	else if (CurrentState == PlayerState::CROUCH_DOWN)
+	else if (CurrentState == State::CROUCH_DOWN)
 		jump->Update();
-	else if (CurrentState == PlayerState::ATTACK)
+	else if (CurrentState == State::ATTACK)
 		attack->Update();
-	else if (CurrentState == PlayerState::DAMAGED)
+	else if (CurrentState == State::DAMAGED)
 		damaged->Update();
-	else if (CurrentState == PlayerState::DIE)
+	else if (CurrentState == State::DIE)
 		die->Update();
 }
 
@@ -242,23 +242,23 @@ void Player::Render()
 	if (onWall || onFloor)
 		shadow->Render();
 
-	if (CurrentState == PlayerState::IDLE)
+	if (CurrentState == State::IDLE)
 		idle->Render();
-	else if (CurrentState == PlayerState::RUN)
+	else if (CurrentState == State::RUN)
 		run->Render();
-	else if (CurrentState == PlayerState::DASH)
+	else if (CurrentState == State::DASH)
 		dash->Render();
-	else if (CurrentState == PlayerState::JUMP)
+	else if (CurrentState == State::JUMP)
 		jump->Render();
-	else if (CurrentState == PlayerState::CROUCH)
+	else if (CurrentState == State::CROUCH)
 		crouch->Render();
-	else if (CurrentState == PlayerState::CROUCH_DOWN)
+	else if (CurrentState == State::CROUCH_DOWN)
 		jump->Render();
-	else if (CurrentState == PlayerState::ATTACK)
+	else if (CurrentState == State::ATTACK)
 		attack->Render();
-	else if (CurrentState == PlayerState::DAMAGED)
+	else if (CurrentState == State::DAMAGED)
 		damaged->Render();
-	else if (CurrentState == PlayerState::DIE)
+	else if (CurrentState == State::DIE)
 		die->Render();
 
 	for (auto& proj : projectiles)
@@ -273,32 +273,32 @@ void Player::Control()
 
 	if (GM->DEBUG_MODE)
 	{
-		if (INPUT->KeyDown(VK_OEM_PLUS) && CurrentState != PlayerState::DIE)
+		if (INPUT->KeyDown(VK_OEM_PLUS) && CurrentState != State::DIE)
 		{
 			hp = min(maxHp, hp + maxHp * 0.1);
 		}
 
 		if (INPUT->KeyDown(VK_OEM_MINUS))
 		{
-			hp = max (0, hp - maxHp * 0.1);
+			hp = max(0, hp - maxHp * 0.1);
 			damageTaken = true;
 		}
 	}
 
 
 	// 상태 업데이트
-	if (CurrentState == PlayerState::IDLE)
+	if (CurrentState == State::IDLE)
 	{
 		// idle -> walk
 		if (INPUT->KeyPress('A'))
 		{
 			dir = LEFT;
-			CurrentState = PlayerState::RUN;
+			CurrentState = State::RUN;
 		}
 		else if (INPUT->KeyPress('D'))
 		{
 			dir = RIGHT;
-			CurrentState = PlayerState::RUN;
+			CurrentState = State::RUN;
 		}
 
 		// idle -> jump
@@ -310,7 +310,7 @@ void Player::Control()
 		// idle -> crouch
 		if (INPUT->KeyPress('S'))
 		{
-			CurrentState = PlayerState::CROUCH;
+			CurrentState = State::CROUCH;
 		}
 
 		// idle -> dash
@@ -325,7 +325,7 @@ void Player::Control()
 			Attack();
 		}
 	}
-	else if (CurrentState == PlayerState::RUN)
+	else if (CurrentState == State::RUN)
 	{
 		// runing
 		if (INPUT->KeyPress('A'))
@@ -340,7 +340,7 @@ void Player::Control()
 		// run -> idle
 		if (!(INPUT->KeyPress('A') || INPUT->KeyPress('D')))
 		{
-			CurrentState = PlayerState::IDLE;
+			CurrentState = State::IDLE;
 			run->frame.x = 0;
 		}
 
@@ -362,7 +362,7 @@ void Player::Control()
 			Attack();
 		}
 	}
-	else if (CurrentState == PlayerState::JUMP)
+	else if (CurrentState == State::JUMP)
 	{
 		// jump 중 이동
 		if (INPUT->KeyPress('A'))
@@ -379,7 +379,7 @@ void Player::Control()
 		{
 			Dash();
 		}
-		
+
 		// jump -> double jump
 		if (INPUT->KeyDown('W') && jumpCount < jumpCountMax)
 		{
@@ -393,15 +393,15 @@ void Player::Control()
 			Attack();
 		}
 	}
-	else if (CurrentState == PlayerState::CROUCH)
+	else if (CurrentState == State::CROUCH)
 	{
 		// crouch -> idle
 		if (!INPUT->KeyPress('S'))
-			CurrentState = PlayerState::IDLE;
+			CurrentState = State::IDLE;
 
 		// crouch -> run
 		if (INPUT->KeyPress('A') || INPUT->KeyPress('D'))
-			CurrentState = PlayerState::RUN;
+			CurrentState = State::RUN;
 
 		// crouch -> jump
 		if (INPUT->KeyDown('W'))
@@ -414,10 +414,10 @@ void Player::Control()
 		{
 			jumpCount = 1;
 			gravity = 0;
-			CurrentState = PlayerState::CROUCH_DOWN;
+			CurrentState = State::CROUCH_DOWN;
 		}
 	}
-	else if (CurrentState == PlayerState::ATTACK)
+	else if (CurrentState == State::ATTACK)
 	{
 		// attack 중 이동
 		if (INPUT->KeyPress('A'))
@@ -442,7 +442,7 @@ void Player::Control()
 		}
 
 	}
-	else if (CurrentState == PlayerState::DAMAGED)
+	else if (CurrentState == State::DAMAGED)
 	{
 		// DAMAGED 중 이동
 		if (INPUT->KeyPress('A'))
@@ -463,42 +463,42 @@ void Player::Attack()
 {
 	attack->frame.x = 0;
 	PrevState = CurrentState;
-	CurrentState = PlayerState::ATTACK;
+	CurrentState = State::ATTACK;
 }
 
 void Player::Dash()
 {
 	// 대시쿨타임이 충족되지 않았으면 리턴
 	if (dashCooldown > 0) return;
-	
+
 	dashCooldown = dashDealay;
 	dash->frame.x = 0;
 	dashTargetPos.x = collider->GetWorldPos().x + (lastDir.x * 300);
 	dashTargetPos.y = collider->GetWorldPos().y + 5;
-	
+
 	PrevState = CurrentState;
-	if (PrevState == PlayerState::ATTACK)
-		if (onFloor || onWall) PrevState = PlayerState::IDLE;
-		else PrevState = PlayerState::JUMP;
-	CurrentState = PlayerState::DASH;
+	if (PrevState == State::ATTACK)
+		if (onFloor || onWall) PrevState = State::IDLE;
+		else PrevState = State::JUMP;
+	CurrentState = State::DASH;
 }
 
 void Player::Jump()
 {
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
 	gravity = -jumpSpeed;
-	CurrentState = PlayerState::JUMP;
+	CurrentState = State::JUMP;
 }
 
 void Player::actionsWhenDamaged(int value)
 {
 	// 대시 중에는 데미지를 받지 않음
-	if (CurrentState == PlayerState::DASH)
+	if (CurrentState == State::DASH)
 		return;
 
 	// 상태를 데미지 받음으로 변경
-	if (CurrentState == PlayerState::IDLE || CurrentState == PlayerState::RUN)
-		CurrentState = PlayerState::DAMAGED;
+	if (CurrentState == State::IDLE || CurrentState == State::RUN)
+		CurrentState = State::DAMAGED;
 	
 	// 데미지 받음 FX 출력을 위한
 	damageTaken = true;

@@ -26,15 +26,15 @@ Monster::~Monster()
 
 void Monster::Update()
 {
-	ImGui::Text("MonsterState: %d\n", state);
+	ImGui::Text("MonsterState: %d\n", CurrentState);
 	lastPos = collider->GetWorldPos();
 
 	Vector2 target = GM->player->GetCollider()->GetWorldPos();
-	
+
 	// 방향 계산
 	if (target.x - collider->GetWorldPos().x > 0)
 		dir = RIGHT;
-	else 
+	else
 		dir = LEFT;
 
 	// 스킨 방향 설정
@@ -94,8 +94,8 @@ void Monster::Update()
 	ImGui::Text("distanceY(abs): %d\n", distanceY_abs);
 
 
-	
-	if (state == MonsterState::IDLE)
+
+	if (CurrentState == State::IDLE)
 	{
 		// IDLE -> ATTACK
 		if (distanceX_abs < 200)
@@ -105,7 +105,7 @@ void Monster::Update()
 				// 플레이어와 비슷한 높이에 있다면 공격시도
 				if (isAttackCooldown())
 				{
-					state = MonsterState::ATTACK;
+					CurrentState = State::ATTACK;
 				}
 			}
 			else
@@ -125,27 +125,27 @@ void Monster::Update()
 		// IDLE -> RUN
 		else if (distanceX_abs < app.GetHalfWidth())
 		{
-			state = MonsterState::RUN;
+			CurrentState = State::RUN;
 		}
 	}
-	else if (state == MonsterState::RUN)
+	else if (CurrentState == State::RUN)
 	{
 		// RUN -> ATTACK
 		if (distanceX_abs < 100)
 		{
 			if (isAttackCooldown())
 			{
-				state = MonsterState::ATTACK;
+				CurrentState = State::ATTACK;
 			}
 		}
 
 		collider->MoveWorldPos(dir * moveSpeed * DELTA);
 	}
-	else if (state == MonsterState::JUMP)
+	else if (CurrentState == State::JUMP)
 	{
 
 	}
-	else if (state == MonsterState::ATTACK)
+	else if (CurrentState == State::ATTACK)
 	{
 		// 공격 프레임에 도달하면 발사
 		if (attack->frame.x == attackFrame && realAttack)
@@ -157,7 +157,7 @@ void Monster::Update()
 		// ATTACK -> IDLE
 		if (attack->frame.x == attack->maxFrame.x - 1)
 		{
-			state = MonsterState::IDLE;
+			CurrentState = State::IDLE;
 		}
 	}
 
@@ -170,18 +170,18 @@ void Monster::Update()
 
 	// 업데이트
 	shadow->Update();
-	switch (state)
+	switch (CurrentState)
 	{
-	case MonsterState::IDLE:
+	case State::IDLE:
 		idle->Update();
 		break;
-	case MonsterState::RUN:
+	case State::RUN:
 		run->Update();
 		break;
-	case MonsterState::JUMP:
+	case State::JUMP:
 		jump->Update();
 		break;
-	case MonsterState::ATTACK:
+	case State::ATTACK:
 		attack->Update();
 		break;
 	}
@@ -194,18 +194,18 @@ void Monster::Render()
 		collider->Render();
 
 	shadow->Render();
-	switch (state)
+	switch (CurrentState)
 	{
-	case MonsterState::IDLE:
+	case State::IDLE:
 		idle->Render();
 		break;
-	case MonsterState::RUN:
+	case State::RUN:
 		run->Render();
 		break;
-	case MonsterState::JUMP:
+	case State::JUMP:
 		jump->Render();
 		break;
-	case MonsterState::ATTACK:
+	case State::ATTACK:
 		attack->Render();
 		break;
 	}

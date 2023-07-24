@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "redHairRat.h"
+#include "Scene_proto.h"
 #include "Scene3_jazzBar.h"
 
 Scene3_jazzBar::Scene3_jazzBar()
@@ -100,7 +101,7 @@ void Scene3_jazzBar::Update()
 	// 계단(왼쪽)
 	if (stairLeft->Intersect(GM->player->GetCollider()))
 	{
-		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == PlayerState::RUN)
+		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == State::RUN)
 		{
 			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
 		}
@@ -109,7 +110,7 @@ void Scene3_jazzBar::Update()
 	// 계단(오른쪽)
 	if (stairRight->Intersect(GM->player->GetCollider()))
 	{
-		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == PlayerState::RUN)
+		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == State::RUN)
 		{
 			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
 		}
@@ -129,35 +130,7 @@ void Scene3_jazzBar::Update()
 
 void Scene3_jazzBar::LateUpdate()
 {
-	// 벽(TILE_WALL)과 부딪쳤으면
-	if (OnWall())
-	{
-		// 바닥에 붙어있는 상태
-		GM->player->OnWallAction();
-	}
-	else GM->player->onWall = false;
-
-	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
-	if (OnWallside())
-	{
-		// 벽에 붙어있는 상태
-		GM->player->onWallSlide = true;
-
-		// 점프중이면
-		if (GM->player->GetState() == PlayerState::JUMP)
-			GM->player->OnWallSlideAction();
-		// 점프중이 아니면
-		else
-			GM->player->GoBack();
-	}
-	else GM->player->onWallSlide = false;
-
-	// 바닥(TILE_FLOOR)과 부딪쳤으면
-	if (OnFloor())
-	{
-		GM->player->OnFloorAction();
-	}
-	else GM->player->onFloor = false;
+	Scene_proto::LateUpdate();
 }
 
 void Scene3_jazzBar::Render()
@@ -181,67 +154,4 @@ void Scene3_jazzBar::Render()
 void Scene3_jazzBar::ResizeScreen()
 {
 	GM->hud->Init();
-}
-
-bool Scene3_jazzBar::OnFloor()
-{
-	// 하강중에만 충돌 체크
-	if (GM->player->isLanding)
-	{
-		Int2 playerlndex;
-		if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-		{
-			if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-bool Scene3_jazzBar::OnWall()
-{
-	Int2 playerlndex;
-	// TOP 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
-		{
-			GM->player->GoBack();
-			//return true;
-		}
-	}
-	// BOT 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool Scene3_jazzBar::OnWallside()
-{
-	Int2 playerlndex;
-	// TOP 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
-		{
-			return true;
-		}
-	}
-	// BOT 충돌 체크
-if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
-		{
-			return true;
-		}
-	}
-	return false;
 }

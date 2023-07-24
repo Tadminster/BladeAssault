@@ -69,7 +69,7 @@ redHairRat::redHairRat()
     shadow->color.w = 0.2f;
     shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-    state = MonsterState::IDLE;
+    CurrentState = State::IDLE;
     dir = LEFT;
 
     hp = 100;

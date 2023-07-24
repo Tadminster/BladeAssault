@@ -1,9 +1,7 @@
 #pragma once
-class Scene4_armory : public Scene
+class Scene4_armory : public Scene_proto
 {
 private:
-	ObTileMap* tileMap[3];
-
 	ObRect* nextMap;
 	ObRect* previousMap;
 	
@@ -21,8 +19,4 @@ public:
 	virtual void LateUpdate() override;//°»½Å
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
-
-	virtual bool OnFloor();
-	virtual bool OnWall();
-	virtual bool OnWallside();
 };

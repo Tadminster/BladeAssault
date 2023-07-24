@@ -5,6 +5,7 @@
 #include "Player_kill.h"
 #include "Monster.h"
 #include "MonsterManager.h"
+#include "Scene_proto.h"
 #include "Scene2_inGame.h"
 
 Scene2_inGame::Scene2_inGame()
@@ -12,12 +13,11 @@ Scene2_inGame::Scene2_inGame()
 	tileMap[0] = new ObTileMap();
 	tileMap[1] = new ObTileMap();
 	tileMap[2] = new ObTileMap();
+	nextMap = new ObRect();
 
 	lightCeiling = new ObImage(L"hankroom_light.png");
 	lightRoom = new ObImage(L"squareGlow.png");
 	
-	nextMap = new ObRect();
-
 	GM->hud = new HUD();
 	GM->player = new Player_kill();
 	GM->monster = new MonsterManager();
@@ -25,12 +25,13 @@ Scene2_inGame::Scene2_inGame()
 
 Scene2_inGame::~Scene2_inGame()
 {
+	//Scene_proto::~Scene_proto();
 	for (int i = 0; i < 3; i++)
 		delete[] tileMap[i];
+	delete nextMap;
 
 	delete lightCeiling;
 	delete lightRoom;
-	delete nextMap;
 }
 
 void Scene2_inGame::Init()
@@ -147,10 +148,10 @@ void Scene2_inGame::Update()
 
 void Scene2_inGame::LateUpdate()
 {
-	// 지형지물과 플레이어 충돌처리
-	HandleTerrainPlayerCollision();
-	// 지형지물과 몬스터 충돌처리
-	//HandleTerrainMonsterCollision();
+	// 지형지물 충돌처리
+	HandleTerrainCollision(GM->player);				// 플레이어
+	for (auto& monster : GM->monster->GetEnemy())	// 몬스터
+		HandleTerrainCollision(monster);
 }
 
 void Scene2_inGame::Render()
@@ -178,99 +179,99 @@ void Scene2_inGame::ResizeScreen()
 	GM->hud->Init();
 }
 
-void Scene2_inGame::HandleTerrainPlayerCollision()
-{
-	// 벽(TILE_WALL)과 부딪쳤으면
-	if (PlayerOnWall())
-	{
-		// 바닥에 붙어있는 상태
-		GM->player->OnWallAction();
-	}
-	else GM->player->onWall = false;
-
-	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
-	if (PlayerOnWallside())
-	{
-		// 벽에 붙어있는 상태
-		GM->player->onWallSlide = true;
-
-		// 점프중이면
-		if (GM->player->GetState() == PlayerState::JUMP)
-			GM->player->OnWallSlideAction();
-		// 점프중이 아니면
-		else
-			GM->player->GoBack();
-	}
-	else GM->player->onWallSlide = false;
-
-	// 바닥(TILE_FLOOR)과 부딪쳤으면
-	if (PlayerOnFloor())
-	{
-		GM->player->OnFloorAction();
-	}
-	else GM->player->onFloor = false;
-}
-
-
-bool Scene2_inGame::PlayerOnFloor()
-{
-	// 하강중에만 충돌 체크
-	if (GM->player->isLanding)
-	{
-		Int2 playerlndex;
-		if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-		{
-			if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-bool Scene2_inGame::PlayerOnWall()
-{
-	Int2 playerlndex;
-	// TOP 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
-		{
-			GM->player->GoBack();
-			//return true;
-		}
-	}
-	// BOT 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool Scene2_inGame::PlayerOnWallside()
-{
-	Int2 playerlndex;
-	// TOP 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
-		{
-			return true;
-		}
-	}
-	// BOT 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
-		{
-			return true;
-		}
-	}
-	return false;
-}
+//void Scene2_inGame::HandleTerrainCollision(Creature* creature)
+//{
+//	// 벽(TILE_WALL)과 부딪쳤으면
+//	if (OnWall(creature))
+//	{
+//		// 바닥에 붙어있는 상태
+//		creature->OnWallAction();
+//	}
+//	else creature->onWall = false;
+//
+//	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
+//	if (OnWallside(creature))
+//	{
+//		// 벽에 붙어있는 상태
+//		creature->onWallSlide = true;
+//
+//		// 점프중이면
+//		if (creature->GetState() == State::JUMP)
+//			creature->OnWallSlideAction();
+//		// 점프중이 아니면
+//		else
+//			creature->GoBack();
+//	}
+//	else creature->onWallSlide = false;
+//
+//	// 바닥(TILE_FLOOR)과 부딪쳤으면
+//	if (OnFloor(creature))
+//	{
+//		creature->OnFloorAction();
+//	}
+//	else creature->onFloor = false;
+//}
+//
+//
+//bool Scene2_inGame::OnFloor(Creature* creature)
+//{
+//	// 하강중에만 충돌 체크
+//	if (creature->isLanding)
+//	{
+//		Int2 playerlndex;
+//		if (tileMap[2]->WorldPosToTileIdx(creature->GetFoot(), playerlndex))
+//		{
+//			if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
+//			{
+//				return true;
+//			}
+//		}
+//	}
+//	return false;
+//}
+//
+//bool Scene2_inGame::OnWall(Creature* creature)
+//{
+//	Int2 playerlndex;
+//	// TOP 충돌 체크
+//	if (tileMap[2]->WorldPosToTileIdx(creature->GetHead(), playerlndex))
+//	{
+//		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
+//		{
+//			creature->GoBack();
+//			//return true;
+//		}
+//	}
+//	// BOT 충돌 체크
+//	if (tileMap[2]->WorldPosToTileIdx(creature->GetFoot(), playerlndex))
+//	{
+//		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
+//		{
+//			return true;
+//		}
+//	}
+//
+//	return false;
+//}
+//
+//bool Scene2_inGame::OnWallside(Creature* creature)
+//{
+//	Int2 playerlndex;
+//	// TOP 충돌 체크
+//	if (tileMap[2]->WorldPosToTileIdx(creature->GetHead(), playerlndex))
+//	{
+//		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
+//		{
+//			return true;
+//		}
+//	}
+//	// BOT 충돌 체크
+//	if (tileMap[2]->WorldPosToTileIdx(creature->GetFoot(), playerlndex))
+//	{
+//		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
+//		{
+//			return true;
+//		}
+//	}
+//	return false;
+//}

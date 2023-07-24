@@ -1,9 +1,7 @@
 #pragma once
-class Scene3_jazzBar : public Scene
+class Scene3_jazzBar : public Scene_proto
 {
 private:
-	ObTileMap*		tileMap[3];
-	
 	ObRect*			nextMap[2];
 	ObRect*			stairLeft;
 	ObRect*			stairRight;
@@ -22,8 +20,4 @@ public:
 	virtual void LateUpdate() override;//°»½Å
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
-
-	virtual bool OnFloor();
-	virtual bool OnWall();
-	virtual bool OnWallside();
 };

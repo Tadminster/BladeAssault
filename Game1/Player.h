@@ -1,16 +1,16 @@
 #pragma once
-enum class PlayerState
-{
-	IDLE,
-	RUN,
-	DASH,
-	JUMP,
-	CROUCH,
-	CROUCH_DOWN,
-	ATTACK,
-	DAMAGED,
-	DIE
-};
+//enum class PlayerState
+//{
+//	IDLE,
+//	RUN,
+//	DASH,
+//	JUMP,
+//	CROUCH,
+//	CROUCH_DOWN,
+//	ATTACK,
+//	DAMAGED,
+//	DIE
+//};
 
 class Player : public Creature
 {
@@ -21,8 +21,8 @@ protected:
 	ObImage* damaged;
 	ObImage* die;
 
-	PlayerState PrevState;
-	PlayerState	CurrentState;
+	//PlayerState PrevState;
+	//PlayerState	CurrentState;
 
 	Vector2		lastDir;
 	Vector2		dashTargetPos;
@@ -35,7 +35,6 @@ protected:
 	float		jumpTime;
 	int			jumpCount;
 	int			jumpCountMax;
-
 	float		dashCooldown;
 	float		dashDealay;
 
@@ -58,8 +57,6 @@ public:
 	void actionsWhenDamaged(int value);
 
 	// Get
-	PlayerState GetState() { return CurrentState; }
-
 	int		GetMp() { return mp; }
 	int		GetMaxMp() { return maxMp; }
 	float	GetDashCooldown() { return dashCooldown;  }

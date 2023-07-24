@@ -109,7 +109,7 @@ void Player_kill::Init()
 
 	shadow->pivot = OFFSET_B;
 	shadow->SetParentRT(*collider);
-	shadow->SetLocalPosY(-idle->scale.y * 0.23);
+	shadow->SetLocalPosY(-idle->scale.y * 0.2f);
 	shadow->maxFrame.x = 1;
 	shadow->maxFrame.y = 1;
 	shadow->scale.x = shadow->imageSize.x / shadow->maxFrame.x * 2.4;

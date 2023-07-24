@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "redHairRat.h"
+#include "Scene_proto.h"
 #include "Scene4_armory.h"
 
 Scene4_armory::Scene4_armory()
@@ -94,7 +95,7 @@ void Scene4_armory::Update()
 
 	if (stair->Intersect(GM->player->GetCollider()))
 	{
-		if (GM->player->GetDirection() == RIGHT && GM->player->GetState() == PlayerState::RUN)
+		if (GM->player->GetDirection() == RIGHT && GM->player->GetState() == State::RUN)
 		{
 			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
 		}
@@ -112,35 +113,7 @@ void Scene4_armory::Update()
 
 void Scene4_armory::LateUpdate()
 {
-	// 벽(TILE_WALL)과 부딪쳤으면
-	if (OnWall())
-	{
-		// 바닥에 붙어있는 상태
-		GM->player->OnWallAction();
-	}
-	else GM->player->onWall = false;
-
-	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
-	if (OnWallside())
-	{
-		// 벽에 붙어있는 상태
-		GM->player->onWallSlide = true;
-
-		// 점프중이면
-		if (GM->player->GetState() == PlayerState::JUMP)
-			GM->player->OnWallSlideAction();
-		// 점프중이 아니면
-		else
-			GM->player->GoBack();
-	}
-	else GM->player->onWallSlide = false;
-
-	// 바닥(TILE_FLOOR)과 부딪쳤으면
-	if (OnFloor())
-	{
-		GM->player->OnFloorAction();
-	}
-	else GM->player->onFloor = false;
+	Scene_proto::LateUpdate();
 }
 
 void Scene4_armory::Render()
@@ -164,67 +137,3 @@ void Scene4_armory::ResizeScreen()
 {
 	GM->hud->Init();
 }
-
-bool Scene4_armory::OnFloor()
-{
-	// 하강중에만 충돌 체크
-	if (GM->player->isLanding)
-	{
-		Int2 playerlndex;
-		if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-		{
-			if (tileMap[2]->GetTileState(playerlndex) == TILE_FLOOR)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-bool Scene4_armory::OnWall()
-{
-	Int2 playerlndex;
-	// TOP 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
-		{
-			GM->player->GoBack();
-			//return true;
-		}
-	}
-	// BOT 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALL)
-		{
-			return true;
-		}
-	}
-
-	return false;	
-}
-
-bool Scene4_armory::OnWallside()
-{
-	Int2 playerlndex;
-	// TOP 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetHead(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
-		{
-			return true;
-		}
-	}
-	// BOT 충돌 체크
-	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
-	{
-		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
