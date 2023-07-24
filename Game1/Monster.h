@@ -14,7 +14,7 @@ protected:
 	float	knockBackFactor;		// 넉백에 사용되는 계수
 	float	timeOfDamage;			// 데미지 받은 시간 기록
 
-	int		maxAttackDistance;
+	int		maxAttackDistance;		// 공격 가능한 최대 거리
 	int		attackFrame;			// 공격 프레임
 	bool	realAttack;				// 실제 공격을 위한	bool
 
