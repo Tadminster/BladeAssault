@@ -49,6 +49,8 @@ void Player::Init()
 
 	dashCooldown = 0.0f;
 	dashDealay = 2.0;
+
+	damageTaken = false;
 }
 
 void Player::Update()
@@ -72,7 +74,8 @@ void Player::Update()
 		crouch->reverseLR = true;
 		attack->reverseLR = true;
 		damaged->reverseLR = true;
-		die->reverseLR = true;
+		die->reverseLR = false;
+
 	}
 	else if (dir == RIGHT)
 	{
@@ -83,7 +86,7 @@ void Player::Update()
 		crouch->reverseLR = false;
 		attack->reverseLR = false;
 		damaged->reverseLR = false;
-		die->reverseLR = false;
+		die->reverseLR = true;
 	}
 
 	// 사망 처리
@@ -506,6 +509,9 @@ void Player::actionsWhenDamaged(int value)
 	// 상태를 데미지 받음으로 변경
 	if (CurrentState == PlayerState::IDLE || CurrentState == PlayerState::RUN)
 		CurrentState = PlayerState::DAMAGED;
+	
+	// 데미지 받음 FX 출력을 위한
+	damageTaken = true;
 
 	// 스킨 컬러 변경
 	//damaged->color = Vector4(0.1, 0.1, 0.1, 0.5);

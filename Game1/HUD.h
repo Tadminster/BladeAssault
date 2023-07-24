@@ -3,6 +3,7 @@ class HUD
 {
 private:
 
+	class ObImage* damageTaken;
 
 	class ObImage* box_hp;
 	class ObImage* box_mp;

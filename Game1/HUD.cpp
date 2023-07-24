@@ -7,6 +7,8 @@
 
 HUD::HUD()
 {
+	damageTaken = new ObImage(L"ui_player_damage_fx.png");
+
 	box_hp = new ObImage(L"ui_box_hp.png");
 	box_mp = new ObImage(L"ui_box_mp.png");
 
@@ -28,6 +30,7 @@ HUD::HUD()
 
 HUD::~HUD()
 {
+	delete damageTaken;
 	delete box_hp;
 	delete box_mp;
 	delete gauge_hp;
@@ -42,6 +45,7 @@ HUD::~HUD()
 	delete icon_skillWeapon;
 	delete icon_dash;
 
+	TEXTURE->DeleteTexture(L"ui_player_damage_fx.png");
 	TEXTURE->DeleteTexture(L"ui_box_hp.png");
 	TEXTURE->DeleteTexture(L"ui_box_mp.png");
 	TEXTURE->DeleteTexture(L"ui_gauge_hp.png");
@@ -54,6 +58,7 @@ HUD::~HUD()
 
 void HUD::Init()
 {
+	damageTaken->space = SPACE::SCREEN;
 	box_hp->space = SPACE::SCREEN;
 	box_mp->space = SPACE::SCREEN;
 	gauge_hp->space = SPACE::SCREEN;
@@ -67,6 +72,16 @@ void HUD::Init()
 	icon_mainWeapon->space = SPACE::SCREEN;
 	icon_skillWeapon->space = SPACE::SCREEN;
 	icon_dash->space = SPACE::SCREEN;
+
+	damageTaken->pivot = OFFSET_LB;
+	damageTaken->SetWorldPos(Vector2(-app.GetHalfWidth(), -app.GetHalfHeight()));
+	damageTaken->maxFrame.x = 1;
+	damageTaken->maxFrame.y = 5;
+	float damageTakenScaleX = app.GetWidth() / (damageTaken->imageSize.x / damageTaken->maxFrame.x);
+	float damageTakenScaleY = app.GetHeight() / (damageTaken->imageSize.y / damageTaken->maxFrame.y);
+	damageTaken->scale.x = (damageTaken->imageSize.x / damageTaken->maxFrame.x) * damageTakenScaleX;
+	damageTaken->scale.y = (damageTaken->imageSize.y / damageTaken->maxFrame.y) * damageTakenScaleY;
+	damageTaken->ChangeAnim(ANIMSTATE::ONCE, 0.1f, false);
 
 	box_hp->pivot = OFFSET_LB;
 	box_hp->SetWorldPos(Vector2(-app.GetHalfWidth() * 0.95, -app.GetHalfHeight() * 0.9));
@@ -139,7 +154,7 @@ void HUD::Init()
 	icon_SPACE->scale.x = icon_SPACE->imageSize.x / icon_LBUTTON->maxFrame.x * 1.4f;
 	icon_SPACE->scale.y = icon_SPACE->imageSize.y * 1.4f;
 
-
+	damageTaken->Update();
 	box_hp->Update();
 	box_mp->Update();
 	gauge_mp->Update();
@@ -197,14 +212,24 @@ void HUD::Release()
 
 void HUD::Update()
 {
+	// hp/mp 게이지 길이 계산
 	gauge_hp->scale.x = gauge_hp->imageSize.x * ((float)GM->player->GetHp() / (float)GM->player->GetMaxHp());
 	gauge_mp->scale.x = gauge_mp->imageSize.x * ((float)GM->player->GetMp() / (float)GM->player->GetMaxMp());
 
+	// 데미지 받음 FX 출력이 끝났으면
+	if (GM->player->damageTaken && damageTaken->frame.y == damageTaken->maxFrame.y - 1)
+	{
+		GM->player->damageTaken = false;
+		damageTaken->frame.y = 0;
+	}
+
+	// DASH 쿨다운 중에 컬러 변경
 	if (GM->player->GetDashCooldown() > 0.0f && icon_dash->color.x == 0.5f)
 		icon_dash->color = Vector4(0.35f, 0.35f, 0.35f, 0.5f);
 	else if (GM->player->GetDashCooldown() <= 0.0f && icon_dash->color.x != 0.5f)
 		icon_dash->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
 
+	damageTaken->Update();
 	box_hp->Update();
 	box_mp->Update();
 	gauge_mp->Update();
@@ -229,6 +254,9 @@ void HUD::LateUpdate()
 
 void HUD::Render()
 {
+	if (GM->player->damageTaken)
+		damageTaken->Render();
+
 	box_hp->Render();
 	box_mp->Render();
 	gauge_hp->Render();

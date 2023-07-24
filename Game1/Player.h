@@ -65,6 +65,7 @@ public:
 	bool		onWall;
 	bool		onWallSlide;
 	bool		isLanding;
+	bool		damageTaken;
 
 public:
 	Player();
