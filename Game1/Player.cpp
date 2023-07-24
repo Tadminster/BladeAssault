@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Projectile.h"
+#include "Creature.h"
 #include "Player.h"
 
 Player::Player()
 {
-	collider = new ObRect();
 	idle = nullptr;
 	run = nullptr;
 	dash = nullptr;
@@ -18,15 +18,10 @@ Player::Player()
 
 Player::~Player()
 {
-	delete collider;
-	delete idle;
-	delete run;
+	Creature::~Creature();
 	delete dash;
-	delete jump;
 	delete crouch;
-	delete attack;
 	delete damaged;
-	delete shadow;
 	delete die;
 }
 
@@ -36,8 +31,7 @@ void Player::Init()
 	
 	lastDir = RIGHT;
 
-	speed = 350.0f;
-	jumpSpeed = 700;
+	moveSpeed = 350.0f;
 	jumpTime = 0.0f;
 
 	gravity = 0.0f;
@@ -102,7 +96,7 @@ void Player::Update()
 	}
 	else if (CurrentState == PlayerState::RUN)
 	{
-		collider->MoveWorldPos(dir * speed * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * DELTA);
 	}
 	else if (CurrentState == PlayerState::DASH)
 	{
@@ -139,7 +133,7 @@ void Player::Update()
 			}
 		}
 
-		collider->MoveWorldPos(dir * speed * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * DELTA);
 	}
 	else if (CurrentState == PlayerState::CROUCH)
 	{
@@ -159,7 +153,7 @@ void Player::Update()
 	}
 	else if (CurrentState == PlayerState::ATTACK)
 	{
-		collider->MoveWorldPos(dir * speed * 0.5 * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
 
 		if (attack->frame.x == attack->maxFrame.x - 1)
 		{
@@ -168,7 +162,7 @@ void Player::Update()
 	}
 	else if (CurrentState == PlayerState::DAMAGED)
 	{
-		collider->MoveWorldPos(dir * speed * 0.5 * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
 
 		if (timeOfDamaged + 0.1f < TIMER->GetWorldTime())
 		{
@@ -492,26 +486,8 @@ void Player::Dash()
 void Player::Jump()
 {
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
-	gravity = -900;
+	gravity = -jumpSpeed;
 	CurrentState = PlayerState::JUMP;
-}
-
-void Player::OnFloorAction()
-{
-	onFloor = true;
-	gravity = 0;
-}
-
-void Player::OnWallAction()
-{
-	onWall = true;
-	gravity = 0;
-}
-
-void Player::OnWallSlideAction()
-{
-	collider->SetWorldPosX(lastPos.x);
-	collider->Update();
 }
 
 void Player::actionsWhenDamaged(int value)
@@ -537,31 +513,4 @@ void Player::actionsWhenDamaged(int value)
 	int damage = min(value + defence, 0);
 	// 체력 감소
 	hp = max(hp + damage, 0);
-}
-
-void Player::GoBack()
-{
-	gravity = 0;
-	collider->SetWorldPos(lastPos);
-	collider->Update();
-}
-
-Vector2 Player::GetFoot()
-{
-	//29 38
-	//Utility::RECT r(GetWorldPos()+ Vector2(0, 10), Vector2(15, 10));
-	//Utility::IntersectRectRect()
-
-	//                              중앙에서나갈위치    발중앙위치 보정
-	return collider->GetWorldPos() + (dir + DOWN) * Vector2(collider->scale.x * 0.5f, collider->scale.y * 0.5f);
-}
-
-Vector2 Player::GetHead()
-{
-	//29 38
-	//Utility::RECT r(GetWorldPos()+ Vector2(0, 10), Vector2(15, 10));
-	//Utility::IntersectRectRect()
-
-	//                              중앙에서나갈위치    발중앙위치 보정
-	return collider->GetWorldPos() + (dir + UP) * Vector2(collider->scale.x * 0.5f, collider->scale.y * 0.5f);
 }

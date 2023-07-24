@@ -4,7 +4,7 @@ class redHairRat : public Monster
 private:
 
 public:
-	redHairRat(Vector2 spawnPos);
+	redHairRat();
 	~redHairRat();
 	//void Init(Vector2 spawnPos) override;
 	void Update() override;

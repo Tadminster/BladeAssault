@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Creature.h"
 #include "player.h"
 #include "HUD.h"
 

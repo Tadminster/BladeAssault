@@ -1,10 +1,10 @@
 #include "stdafx.h"
+#include "Creature.h"
 #include "Player.h"
 #include "Monster.h"
 
 Monster::Monster()
 {
-	collider = new ObRect();
 	idle = nullptr;
 	run = nullptr;
 	jump = nullptr;
@@ -139,7 +139,7 @@ void Monster::Update()
 			}
 		}
 
-		collider->MoveWorldPos(dir * speed * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * DELTA);
 	}
 	else if (state == MonsterState::JUMP)
 	{
@@ -241,24 +241,6 @@ void Monster::Attack()
 
 }
 
-void Monster::OnFloorAction()
-{
-	onFloor = true;
-	gravity = 0;
-}
-
-void Monster::OnWallAction()
-{
-	onWall = true;
-	gravity = 0;
-}
-
-void Monster::OnWallSlideAction()
-{
-	collider->SetWorldPosX(lastPos.x);
-	collider->Update();
-}
-
 void Monster::actionsWhenDamaged(Vector4 value)
 {
 	// 상태를 데미지 받음으로 변경
@@ -278,13 +260,6 @@ void Monster::actionsWhenDamaged(Vector4 value)
 	knockBackFactor = value.y;
 }
 
-void Monster::GoBack()
-{
-	gravity = 0;
-	collider->SetWorldPos(lastPos);
-	collider->Update();
-}
-
 void Monster::knockBack()
 {
 	// 넉백 방향 계산
@@ -295,24 +270,4 @@ void Monster::knockBack()
 		knockBackDir = LEFT;
 
 	this->collider->MoveWorldPos(knockBackDir * knockBackFactor * DELTA);
-}
-
-Vector2 Monster::GetFoot()
-{
-	//29 38
-	//Utility::RECT r(GetWorldPos()+ Vector2(0, 10), Vector2(15, 10));
-	//Utility::IntersectRectRect()
-
-	//                              중앙에서나갈위치    발중앙위치 보정
-	return collider->GetWorldPos() + (dir + DOWN) * Vector2(collider->scale.x * 0.5f, collider->scale.y * 0.5f);
-}
-
-Vector2 Monster::GetHead()
-{
-	//29 38
-	//Utility::RECT r(GetWorldPos()+ Vector2(0, 10), Vector2(15, 10));
-	//Utility::IntersectRectRect()
-
-	//                              중앙에서나갈위치    발중앙위치 보정
-	return collider->GetWorldPos() + (dir + UP) * Vector2(collider->scale.x * 0.5f, collider->scale.y * 0.5f);
 }

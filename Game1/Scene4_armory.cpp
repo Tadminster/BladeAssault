@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "HUD.h"
+#include "Creature.h"
 #include "Player.h"
 #include "Player_kill.h"
 #include "Monster.h"

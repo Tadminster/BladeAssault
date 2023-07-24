@@ -16,16 +16,16 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Object\Monster</Filter>
+      <Filter>Object\Creature\Monster</Filter>
     </ClInclude>
     <ClInclude Include="redHairRat.h">
-      <Filter>Object\Monster</Filter>
+      <Filter>Object\Creature\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Player_kill.h">
-      <Filter>Object\Player</Filter>
+      <Filter>Object\Creature\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Object\Player</Filter>
+      <Filter>Object\Creature\Player</Filter>
     </ClInclude>
     <ClInclude Include="kill_barehand_atk.h">
       <Filter>Object\Projectile</Filter>
@@ -41,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Creature.h">
+      <Filter>Object\Creature</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -58,16 +61,16 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Object\Monster</Filter>
+      <Filter>Object\Creature\Monster</Filter>
     </ClCompile>
     <ClCompile Include="redHairRat.cpp">
-      <Filter>Object\Monster</Filter>
+      <Filter>Object\Creature\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Object\Player</Filter>
+      <Filter>Object\Creature\Player</Filter>
     </ClCompile>
     <ClCompile Include="Player_kill.cpp">
-      <Filter>Object\Player</Filter>
+      <Filter>Object\Creature\Player</Filter>
     </ClCompile>
     <ClCompile Include="kill_barehand_atk.cpp">
       <Filter>Object\Projectile</Filter>
@@ -84,6 +87,9 @@
     <ClCompile Include="HUD.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>Object\Creature</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -92,11 +98,8 @@
     <Filter Include="Object">
       <UniqueIdentifier>{355ff697-d03c-4bdd-bdae-32eee4c60bf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Monster">
-      <UniqueIdentifier>{9e9cdbe0-a186-47b6-a888-769f7303a2d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Player">
-      <UniqueIdentifier>{13679068-52f5-4c44-8320-2ceeda30fde5}</UniqueIdentifier>
+    <Filter Include="Map">
+      <UniqueIdentifier>{c87bda9f-da72-4617-a343-cc9148ae49d7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\Weapon">
       <UniqueIdentifier>{dba54104-7890-4102-a614-01cedfe87b3e}</UniqueIdentifier>
@@ -106,6 +109,15 @@
     </Filter>
     <Filter Include="System">
       <UniqueIdentifier>{8caee8ea-1843-4428-91b5-0fa73ff54988}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Creature">
+      <UniqueIdentifier>{a83514e5-089e-426c-905e-7c589ceacf57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Creature\Monster">
+      <UniqueIdentifier>{9e9cdbe0-a186-47b6-a888-769f7303a2d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Creature\Player">
+      <UniqueIdentifier>{13679068-52f5-4c44-8320-2ceeda30fde5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

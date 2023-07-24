@@ -1,11 +1,15 @@
 #include "stdafx.h"
+
 #include "Projectile.h"
 #include "redHairRat_atk.h"
-#include "Monster.h"
+
 #include "MonsterManager.h"
+
+#include "Creature.h"
+#include "Monster.h"
 #include "redHairRat.h"
 
-redHairRat::redHairRat(Vector2 spawnPos)
+redHairRat::redHairRat()
 {
 	idle = new ObImage(L"redHairRat_idle.png");
 	run = new ObImage(L"redHairRat_run.png");
@@ -17,7 +21,7 @@ redHairRat::redHairRat(Vector2 spawnPos)
     collider->isFilled = false;
     collider->scale.x = 80;
     collider->scale.y = 110;
-    collider->SetWorldPos(spawnPos);
+    //collider->SetWorldPos();
 
     idle->pivot = OFFSET_B;
     idle->SetParentRT(*collider);
@@ -70,9 +74,10 @@ redHairRat::redHairRat(Vector2 spawnPos)
 
     hp = 100;
     damage = 10;
-    speed = 100;
+    moveSpeed = 100;
     attackSpeed = 0.3f;
     attackFrame = 6;
+    attackRange = 1;
 }
 
 redHairRat::~redHairRat()
@@ -154,8 +159,8 @@ void redHairRat::Attack()
         spawnPos,										// 생성위치
         dir,										    // 각도
         5,   											// 발사체 속도
-        1, 											    // 사거리
-        10,												// 공격력
+        attackRange, 									// 사거리
+        damage,											// 공격력
         1,												// 관통력
         1												// 폭발범위
     );

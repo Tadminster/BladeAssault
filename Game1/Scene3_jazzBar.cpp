@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "HUD.h"
+#include "Creature.h"
 #include "Player.h"
 #include "Player_kill.h"
 #include "Monster.h"
@@ -66,7 +67,7 @@ void Scene3_jazzBar::Init()
 
 	GM->player->SetPosition(startPostion);
 
-	GM->monster->AddMonster(new redHairRat(Vector2(3500, 1800)));
+	GM->monster->AddMonster(new redHairRat());
 }
 
 void Scene3_jazzBar::Release()

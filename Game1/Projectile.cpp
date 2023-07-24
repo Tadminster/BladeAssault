@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Creature.h"
 #include "Player.h"
 #include "Monster.h"
 #include "MonsterManager.h"
