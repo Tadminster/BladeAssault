@@ -278,6 +278,21 @@ void Player::Control()
 {
 	dir = Vector2();
 
+	if (GM->DEBUG_MODE)
+	{
+		if (INPUT->KeyDown(VK_OEM_PLUS) && CurrentState != PlayerState::DIE)
+		{
+			hp = min(maxHp, hp + maxHp * 0.1);
+		}
+
+		if (INPUT->KeyDown(VK_OEM_MINUS))
+		{
+			hp = max (0, hp - maxHp * 0.1);
+			damageTaken = true;
+		}
+	}
+
+
 	// 상태 업데이트
 	if (CurrentState == PlayerState::IDLE)
 	{
