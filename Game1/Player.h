@@ -8,7 +8,8 @@ enum class PlayerState
 	CROUCH,
 	CROUCH_DOWN,
 	ATTACK,
-	DAMAGED
+	DAMAGED,
+	DIE
 };
 
 class Player
@@ -22,6 +23,7 @@ protected:
 	ObImage* attack;
 	ObImage* dash;
 	ObImage* damaged;
+	ObImage* die;
 	ObImage* shadow;
 
 	PlayerState PrevState;
@@ -94,6 +96,7 @@ public:
 	int		GetMaxHp() { return maxHp; }
 	int		GetMp() { return mp; }
 	int		GetMaxMp() { return maxMp; }
+	float	GetDashCooldown() { return dashCooldown;  }
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }

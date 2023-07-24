@@ -14,6 +14,7 @@ Player_kill::Player_kill()
 	crouch = new ObImage(L"kill_barehand_crouch.png");
 	attack = new ObImage(L"kill_barehand_sub_attack.png");
 	damaged = new ObImage(L"kill_barehand_damaged.png");
+	die = new ObImage(L"kill_barehand_die.png");
 	shadow = new ObImage(L"character_shadow.png");
 	//hasAxis = true;
 }
@@ -85,6 +86,14 @@ void Player_kill::Init()
 	damaged->scale.y = damaged->imageSize.y / damaged->maxFrame.y * 2.6;
 	damaged->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
+	die->SetParentRT(*collider);
+	die->SetLocalPosY(20);
+	die->maxFrame.x = 11;
+	die->maxFrame.y = 1;
+	die->scale.x = die->imageSize.x / die->maxFrame.x * 3;
+	die->scale.y = die->imageSize.y / die->maxFrame.y * 3;
+	die->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
+
 	shadow->SetParentRT(*collider);
 	shadow->SetLocalPosY(-idle->scale.y * 0.23);
 	shadow->maxFrame.x = 1;
@@ -97,7 +106,8 @@ void Player_kill::Init()
 	// ´É·ÂÄ¡
 	Player::Init();
 
-	hp = 150;
+	//hp = 150;
+	hp = 30;
 	maxHp = 150;
 	mp = 120;
 	maxMp = 120;

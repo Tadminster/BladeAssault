@@ -9,9 +9,9 @@ private:
 	class ObImage* gauge_hp;
 	class ObImage* gauge_mp;
 
-	class ObImage* core_LBUTTON;
-	class ObImage* core_RBUTTON;
-	class ObImage* core_SPACE;
+	class ObImage* frame_LBUTTON;
+	class ObImage* frame_RBUTTON;
+	class ObImage* frame_SPACE;
 	class ObImage* icon_LBUTTON;
 	class ObImage* icon_RBUTTON;
 	class ObImage* icon_SPACE;
@@ -22,6 +22,9 @@ private:
 	RECT textBox_hp;
 	RECT textBox_mp;
 	RECT textBox_time;
+	RECT textBox_colldown_skill;
+	RECT textBox_colldown_dash;
+
 
 	string fontFile;
 	int minute, second;

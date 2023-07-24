@@ -13,6 +13,7 @@ Player::Player()
 	attack = nullptr;
 	damaged = nullptr;
 	shadow = nullptr;
+	die = nullptr;
 }
 
 Player::~Player()
@@ -26,6 +27,7 @@ Player::~Player()
 	delete attack;
 	delete damaged;
 	delete shadow;
+	delete die;
 }
 
 void Player::Init()
@@ -70,6 +72,7 @@ void Player::Update()
 		crouch->reverseLR = true;
 		attack->reverseLR = true;
 		damaged->reverseLR = true;
+		die->reverseLR = true;
 	}
 	else if (dir == RIGHT)
 	{
@@ -80,11 +83,19 @@ void Player::Update()
 		crouch->reverseLR = false;
 		attack->reverseLR = false;
 		damaged->reverseLR = false;
+		die->reverseLR = false;
+	}
+
+	// 사망 처리
+	if (hp == 0 && CurrentState != PlayerState::DIE)
+	{
+		CurrentState = PlayerState::DIE;
 	}
 
 	// 상태 업데이트
 	if (CurrentState == PlayerState::IDLE)
 	{
+
 	}
 	else if (CurrentState == PlayerState::RUN)
 	{
@@ -221,6 +232,8 @@ void Player::Update()
 		attack->Update();
 	else if (CurrentState == PlayerState::DAMAGED)
 		damaged->Update();
+	else if (CurrentState == PlayerState::DIE)
+		die->Update();
 }
 
 void Player::Render()
@@ -249,6 +262,8 @@ void Player::Render()
 		attack->Render();
 	else if (CurrentState == PlayerState::DAMAGED)
 		damaged->Render();
+	else if (CurrentState == PlayerState::DIE)
+		die->Render();
 
 	for (auto& proj : projectiles)
 		proj->Render();

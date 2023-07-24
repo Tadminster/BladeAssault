@@ -3,6 +3,7 @@
 #include "HUD.h"
 
 #include <iomanip>
+#include <sstream>
 
 HUD::HUD()
 {
@@ -12,9 +13,9 @@ HUD::HUD()
 	gauge_hp = new ObImage(L"ui_gauge_hp.png");
 	gauge_mp = new ObImage(L"ui_gauge_mp.png");
 
-	core_LBUTTON = new ObImage(L"ui_core_frame_normal.png");
-	core_RBUTTON = new ObImage(L"ui_core_frame_normal.png");
-	core_SPACE = new ObImage(L"ui_core_frame_normal.png");
+	frame_LBUTTON = new ObImage(L"ui_core_frame_normal.png");
+	frame_RBUTTON = new ObImage(L"ui_core_frame_normal.png");
+	frame_SPACE = new ObImage(L"ui_core_frame_normal.png");
 
 	icon_LBUTTON = new ObImage(L"ui_keyboard_input_keys_defalut.png");
 	icon_RBUTTON = new ObImage(L"ui_keyboard_input_keys_defalut.png");
@@ -31,9 +32,9 @@ HUD::~HUD()
 	delete box_mp;
 	delete gauge_hp;
 	delete gauge_mp;
-	delete core_LBUTTON;
-	delete core_RBUTTON;
-	delete core_SPACE;
+	delete frame_LBUTTON;
+	delete frame_RBUTTON;
+	delete frame_SPACE;
 	delete icon_LBUTTON;
 	delete icon_RBUTTON;
 	delete icon_SPACE;
@@ -46,6 +47,9 @@ HUD::~HUD()
 	TEXTURE->DeleteTexture(L"ui_gauge_hp.png");
 	TEXTURE->DeleteTexture(L"ui_gauge_mp.png");
 	TEXTURE->DeleteTexture(L"ui_core_frame_normal.png");
+	TEXTURE->DeleteTexture(L"ui_keyboard_input_keys_defalut.png");
+	TEXTURE->DeleteTexture(L"playerattack_icon_kill_subweapon.png");
+	TEXTURE->DeleteTexture(L"playerattack_icon_kill_dash.png");
 }
 
 void HUD::Init()
@@ -54,9 +58,9 @@ void HUD::Init()
 	box_mp->space = SPACE::SCREEN;
 	gauge_hp->space = SPACE::SCREEN;
 	gauge_mp->space = SPACE::SCREEN;
-	core_LBUTTON->space = SPACE::SCREEN;
-	core_RBUTTON->space = SPACE::SCREEN;
-	core_SPACE->space = SPACE::SCREEN;
+	frame_LBUTTON->space = SPACE::SCREEN;
+	frame_RBUTTON->space = SPACE::SCREEN;
+	frame_SPACE->space = SPACE::SCREEN;
 	icon_LBUTTON->space = SPACE::SCREEN;
 	icon_RBUTTON->space = SPACE::SCREEN;
 	icon_SPACE->space = SPACE::SCREEN;
@@ -84,51 +88,51 @@ void HUD::Init()
 	gauge_mp->scale.x = gauge_mp->imageSize.x;
 	gauge_mp->scale.y = gauge_mp->imageSize.y;
 
-	core_LBUTTON->pivot = OFFSET_LB;
-	core_LBUTTON->SetWorldPos(Vector2(app.GetHalfWidth() * 0.55, -app.GetHalfHeight() * 0.95));
-	core_LBUTTON->scale.x = core_LBUTTON->imageSize.x * 0.5;
-	core_LBUTTON->scale.y = core_LBUTTON->imageSize.y * 0.5;
+	frame_LBUTTON->pivot = OFFSET_LB;
+	frame_LBUTTON->SetWorldPos(Vector2(app.GetHalfWidth() * 0.55, -app.GetHalfHeight() * 0.95));
+	frame_LBUTTON->scale.x = frame_LBUTTON->imageSize.x * 0.5;
+	frame_LBUTTON->scale.y = frame_LBUTTON->imageSize.y * 0.5;
 
-	core_RBUTTON->pivot = OFFSET_LB;
-	core_RBUTTON->SetWorldPos(Vector2(app.GetHalfWidth() * 0.70, -app.GetHalfHeight() * 0.95));
-	core_RBUTTON->scale.x = core_RBUTTON->imageSize.x * 0.5;
-	core_RBUTTON->scale.y = core_RBUTTON->imageSize.y * 0.5;
+	frame_RBUTTON->pivot = OFFSET_LB;
+	frame_RBUTTON->SetWorldPos(Vector2(app.GetHalfWidth() * 0.70, -app.GetHalfHeight() * 0.95));
+	frame_RBUTTON->scale.x = frame_RBUTTON->imageSize.x * 0.5;
+	frame_RBUTTON->scale.y = frame_RBUTTON->imageSize.y * 0.5;
 
-	core_SPACE->pivot = OFFSET_LB;
-	core_SPACE->SetWorldPos(Vector2(app.GetHalfWidth() * 0.85, -app.GetHalfHeight() * 0.95));
-	core_SPACE->scale.x = core_SPACE->imageSize.x * 0.5;
-	core_SPACE->scale.y = core_SPACE->imageSize.y * 0.5;
+	frame_SPACE->pivot = OFFSET_LB;
+	frame_SPACE->SetWorldPos(Vector2(app.GetHalfWidth() * 0.85, -app.GetHalfHeight() * 0.95));
+	frame_SPACE->scale.x = frame_SPACE->imageSize.x * 0.5;
+	frame_SPACE->scale.y = frame_SPACE->imageSize.y * 0.5;
 
-	icon_mainWeapon->SetParentRT(*core_LBUTTON);
+	icon_mainWeapon->SetParentRT(*frame_LBUTTON);
 	icon_mainWeapon->pivot = OFFSET_LB;
 	icon_mainWeapon->scale.x = icon_mainWeapon->imageSize.x * 0.5;
 	icon_mainWeapon->scale.y = icon_mainWeapon->imageSize.y * 0.5;
 
-	icon_skillWeapon->SetParentRT(*core_RBUTTON);
+	icon_skillWeapon->SetParentRT(*frame_RBUTTON);
 	icon_skillWeapon->pivot = OFFSET_LB;
 	icon_skillWeapon->scale.x = icon_skillWeapon->imageSize.x * 0.5;
 	icon_skillWeapon->scale.y = icon_skillWeapon->imageSize.y * 0.5;
 
-	icon_dash->SetParentRT(*core_SPACE);
+	icon_dash->SetParentRT(*frame_SPACE);
 	icon_dash->pivot = OFFSET_LB;
 	icon_dash->scale.x = icon_dash->imageSize.x * 0.5;
 	icon_dash->scale.y = icon_dash->imageSize.y * 0.5;
 
-	icon_LBUTTON->SetParentRT(*core_LBUTTON);
+	icon_LBUTTON->SetParentRT(*frame_LBUTTON);
 	icon_LBUTTON->pivot = OFFSET_LB;
 	icon_LBUTTON->maxFrame.x = 3;
 	icon_LBUTTON->frame.x = 0;
 	icon_LBUTTON->scale.x = icon_LBUTTON->imageSize.x / icon_LBUTTON->maxFrame.x * 1.4f;
 	icon_LBUTTON->scale.y = icon_LBUTTON->imageSize.y * 1.4f;
 
-	icon_RBUTTON->SetParentRT(*core_RBUTTON);
+	icon_RBUTTON->SetParentRT(*frame_RBUTTON);
 	icon_RBUTTON->pivot = OFFSET_LB;
 	icon_RBUTTON->maxFrame.x = 3;
 	icon_RBUTTON->frame.x = 1;
 	icon_RBUTTON->scale.x = icon_RBUTTON->imageSize.x / icon_LBUTTON->maxFrame.x * 1.4f;
 	icon_RBUTTON->scale.y = icon_RBUTTON->imageSize.y * 1.4f;
 
-	icon_SPACE->SetParentRT(*core_SPACE);
+	icon_SPACE->SetParentRT(*frame_SPACE);
 	icon_SPACE->pivot = OFFSET_LB;
 	icon_SPACE->maxFrame.x = 3;
 	icon_SPACE->frame.x = 2;
@@ -136,15 +140,13 @@ void HUD::Init()
 	icon_SPACE->scale.y = icon_SPACE->imageSize.y * 1.4f;
 
 
-
-
 	box_hp->Update();
 	box_mp->Update();
 	gauge_mp->Update();
 	gauge_hp->Update();
-	core_LBUTTON->Update();
-	core_RBUTTON->Update();
-	core_SPACE->Update();
+	frame_LBUTTON->Update();
+	frame_RBUTTON->Update();
+	frame_SPACE->Update();
 	icon_mainWeapon->Update();
 	icon_skillWeapon->Update();
 	icon_dash->Update();
@@ -152,25 +154,41 @@ void HUD::Init()
 	icon_RBUTTON->Update();
 	icon_SPACE->Update();
 
-
-
+	// hp
 	Vector2 textBox_hp_pos = Utility::WorldToScreen(box_hp->GetWorldPos());
 	textBox_hp.left = textBox_hp_pos.x;
 	textBox_hp.top = textBox_hp_pos.y - 70;
 	textBox_hp.right = textBox_hp.left + 1000;
 	textBox_hp.bottom = textBox_hp.top + 1000;
 
+	// mp
 	Vector2 textBox_mp_pos = Utility::WorldToScreen(box_mp->GetWorldPos());
 	textBox_mp.left = textBox_mp_pos.x + 140;
 	textBox_mp.top = textBox_mp_pos.y - 40;
 	textBox_mp.right = textBox_mp.left + 1000;
 	textBox_mp.bottom = textBox_mp.top + 1000;
 
+	// world time
 	Vector2 textBox_time_pos = Utility::WorldToScreen(Vector2(-app.GetHalfWidth(), app.GetHalfHeight()));
 	textBox_time.left = textBox_time_pos.x + 20;
 	textBox_time.top = textBox_time_pos.y + 10;
 	textBox_time.right = textBox_time.left + 1000;
 	textBox_time.bottom = textBox_time.top + 1000;
+
+	// colldown (skill)
+	Vector2 textBox_cooltime_skill_pos = Utility::WorldToScreen(frame_RBUTTON->GetWorldPos());
+	textBox_colldown_skill.left = textBox_cooltime_skill_pos.x + 20;
+	textBox_colldown_skill.top = textBox_cooltime_skill_pos.y + 10;
+	textBox_colldown_skill.right = textBox_colldown_skill.left + 1000;
+	textBox_colldown_skill.bottom = textBox_colldown_skill.top + 1000;
+
+	// colldown (dash)
+	Vector2 textBox_cooltime_dash_pos = Utility::WorldToScreen(frame_SPACE->GetWorldPos());
+	//Vector2 textBox_cooltime_dash_pos = frame_SPACE->GetWorldPos();
+	textBox_colldown_dash.left = textBox_cooltime_dash_pos.x + 15;
+	textBox_colldown_dash.top = textBox_cooltime_dash_pos.y - 55;
+	textBox_colldown_dash.right = textBox_colldown_dash.left + 1000;
+	textBox_colldown_dash.bottom = textBox_colldown_dash.top + 1000;
 }
 
 void HUD::Release()
@@ -182,13 +200,18 @@ void HUD::Update()
 	gauge_hp->scale.x = gauge_hp->imageSize.x * ((float)GM->player->GetHp() / (float)GM->player->GetMaxHp());
 	gauge_mp->scale.x = gauge_mp->imageSize.x * ((float)GM->player->GetMp() / (float)GM->player->GetMaxMp());
 
+	if (GM->player->GetDashCooldown() > 0.0f && icon_dash->color.x == 0.5f)
+		icon_dash->color = Vector4(0.35f, 0.35f, 0.35f, 0.5f);
+	else if (GM->player->GetDashCooldown() <= 0.0f && icon_dash->color.x != 0.5f)
+		icon_dash->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
+
 	box_hp->Update();
 	box_mp->Update();
 	gauge_mp->Update();
 	gauge_hp->Update();
-	core_LBUTTON->Update();
-	core_RBUTTON->Update();
-	core_SPACE->Update();
+	frame_LBUTTON->Update();
+	frame_RBUTTON->Update();
+	frame_SPACE->Update();
 	icon_mainWeapon->Update();
 	icon_skillWeapon->Update();
 	icon_dash->Update();
@@ -213,9 +236,9 @@ void HUD::Render()
 	icon_mainWeapon->Render();
 	icon_skillWeapon->Render();
 	icon_dash->Render();
-	core_LBUTTON->Render();
-	core_RBUTTON->Render();
-	core_SPACE->Render();
+	frame_LBUTTON->Render();
+	frame_RBUTTON->Render();
+	frame_SPACE->Render();
 	icon_LBUTTON->Render();
 	icon_RBUTTON->Render();
 	icon_SPACE->Render();
@@ -252,4 +275,48 @@ void HUD::Render()
 		DWRITE_FONT_WEIGHT_ULTRA_LIGHT,
 		DWRITE_FONT_STYLE_NORMAL,
 		DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
+
+	// Äð´Ù¿î(skill)
+	//if (GM->player->GetDashCooldown() > 0.0f)
+	//{
+	//	int temp = GM->player->GetDashCooldown() * 10;
+
+	//	wstring dashCooldown;
+	//	if (temp >= 10)
+	//		dashCooldown = to_wstring(temp);
+	//	else
+	//		dashCooldown = L"0" + to_wstring(temp);
+
+	//	DWRITE->RenderText(
+	//		dashCooldown.substr(0, 1) + L"." + dashCooldown.substr(1, 1),
+	//		textBox_colldown_dash,
+	//		30.0f,
+	//		L"Commando",
+	//		Color(1, 1, 1, 1),
+	//		DWRITE_FONT_WEIGHT_ULTRA_LIGHT,
+	//		DWRITE_FONT_STYLE_NORMAL,
+	//		DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
+	//}
+
+	// Äð´Ù¿î(dash)
+	if (GM->player->GetDashCooldown() > 0.0f)
+	{
+		int temp = GM->player->GetDashCooldown() * 10;
+
+		wstring dashCooldown;
+		if (temp >= 10)
+			dashCooldown = to_wstring(temp);
+		else
+			dashCooldown = L"0" + to_wstring(temp);
+
+		DWRITE->RenderText(
+			dashCooldown.substr(0,1) + L"." + dashCooldown.substr(1,1),
+			textBox_colldown_dash,
+			30.0f,
+			L"Commando",
+			Color(1, 1, 1, 1),
+			DWRITE_FONT_WEIGHT_ULTRA_LIGHT,
+			DWRITE_FONT_STYLE_NORMAL,
+			DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
+	}
 }
