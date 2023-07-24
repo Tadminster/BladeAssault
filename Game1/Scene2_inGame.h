@@ -25,8 +25,14 @@ public:
 	void LateUpdate() override;//°»½Å
 	void Render() override;
 	void ResizeScreen() override;
+	void HandleTerrainPlayerCollision();
+	void HandleTerrainMonsterCollision();
 
-	virtual bool OnFloor();
-	virtual bool OnWall();
-	virtual bool OnWallside();
+	virtual bool PlayerOnFloor();
+	virtual bool PlayerOnWall();
+	virtual bool PlayerOnWallside();
+
+	virtual bool MonsterOnFloor(class Monster* monster);
+	virtual bool MonsterOnWall(class Monster* monster);
+	virtual bool MonsterOnWallside(class Monster* monster);
 };

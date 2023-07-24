@@ -181,7 +181,6 @@ void Player::Update()
 		dashCooldown -= DELTA;
 
 	// ม฿ทย
-	//if (!onFloor)
 	if (!onWall && !onFloor)
 	{
 		gravity += 1500.0f * DELTA;

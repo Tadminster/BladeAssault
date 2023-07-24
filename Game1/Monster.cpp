@@ -27,6 +27,7 @@ Monster::~Monster()
 void Monster::Update()
 {
 	ImGui::Text("MonsterState: %d\n", state);
+	lastPos = collider->GetWorldPos();
 
 	Vector2 target = GM->player->GetCollider()->GetWorldPos();
 	
@@ -83,22 +84,46 @@ void Monster::Update()
 	}
 
 	float distance = Vector2::Distance(collider->GetWorldPos(), GM->player->GetCollider()->GetWorldPos());
-	ImGui::Text("distance: %f\n", distance);
+	int distanceX = GM->player->GetCollider()->GetWorldPos().x - collider->GetWorldPos().x;
+	int distanceY = GM->player->GetCollider()->GetWorldPos().y - collider->GetWorldPos().y - 50;
+	int distanceX_abs = abs(distanceX);
+	int distanceY_abs = abs(distanceY);
+	ImGui::Text("distanceX: %d\n", distanceX);
+	ImGui::Text("distanceY: %d\n", distanceY);
+	ImGui::Text("distanceX(abs): %d\n", distanceX_abs);
+	ImGui::Text("distanceY(abs): %d\n", distanceY_abs);
 
 
 	
 	if (state == MonsterState::IDLE)
 	{
 		// IDLE -> ATTACK
-		if (distance < 200)
+		if (distanceX_abs < 200)
 		{
-			if (isAttackCooldown())
+			if (distanceY_abs < 100)
 			{
-				state = MonsterState::ATTACK;
+				// 플레이어와 비슷한 높이에 있다면 공격시도
+				if (isAttackCooldown())
+				{
+					state = MonsterState::ATTACK;
+				}
+			}
+			else
+			{
+				// 플레이어가 더 높이 있다면 점프
+				if (distanceY > 0)
+				{
+
+				}
+				// 플레이어가 더 낮게 있다면 하강
+				else if (distanceY < 0)
+				{
+
+				}
 			}
 		}
 		// IDLE -> RUN
-		else if (distance < app.GetHalfWidth())
+		else if (distanceX_abs < app.GetHalfWidth())
 		{
 			state = MonsterState::RUN;
 		}
@@ -106,7 +131,7 @@ void Monster::Update()
 	else if (state == MonsterState::RUN)
 	{
 		// RUN -> ATTACK
-		if (distance < 100)
+		if (distanceX_abs < 100)
 		{
 			if (isAttackCooldown())
 			{
@@ -134,6 +159,13 @@ void Monster::Update()
 		{
 			state = MonsterState::IDLE;
 		}
+	}
+
+	// 중력
+	if (!onWall && !onFloor)
+	{
+		gravity += 1500.0f * DELTA;
+		collider->MoveWorldPos(DOWN * gravity * DELTA);
 	}
 
 	// 업데이트
@@ -209,6 +241,24 @@ void Monster::Attack()
 
 }
 
+void Monster::OnFloorAction()
+{
+	onFloor = true;
+	gravity = 0;
+}
+
+void Monster::OnWallAction()
+{
+	onWall = true;
+	gravity = 0;
+}
+
+void Monster::OnWallSlideAction()
+{
+	collider->SetWorldPosX(lastPos.x);
+	collider->Update();
+}
+
 void Monster::actionsWhenDamaged(Vector4 value)
 {
 	// 상태를 데미지 받음으로 변경
@@ -228,6 +278,13 @@ void Monster::actionsWhenDamaged(Vector4 value)
 	knockBackFactor = value.y;
 }
 
+void Monster::GoBack()
+{
+	gravity = 0;
+	collider->SetWorldPos(lastPos);
+	collider->Update();
+}
+
 void Monster::knockBack()
 {
 	// 넉백 방향 계산
@@ -238,4 +295,24 @@ void Monster::knockBack()
 		knockBackDir = LEFT;
 
 	this->collider->MoveWorldPos(knockBackDir * knockBackFactor * DELTA);
+}
+
+Vector2 Monster::GetFoot()
+{
+	//29 38
+	//Utility::RECT r(GetWorldPos()+ Vector2(0, 10), Vector2(15, 10));
+	//Utility::IntersectRectRect()
+
+	//                              중앙에서나갈위치    발중앙위치 보정
+	return collider->GetWorldPos() + (dir + DOWN) * Vector2(collider->scale.x * 0.5f, collider->scale.y * 0.5f);
+}
+
+Vector2 Monster::GetHead()
+{
+	//29 38
+	//Utility::RECT r(GetWorldPos()+ Vector2(0, 10), Vector2(15, 10));
+	//Utility::IntersectRectRect()
+
+	//                              중앙에서나갈위치    발중앙위치 보정
+	return collider->GetWorldPos() + (dir + UP) * Vector2(collider->scale.x * 0.5f, collider->scale.y * 0.5f);
 }

@@ -92,9 +92,6 @@
     <Filter Include="Object">
       <UniqueIdentifier>{355ff697-d03c-4bdd-bdae-32eee4c60bf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{c87bda9f-da72-4617-a343-cc9148ae49d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Monster">
       <UniqueIdentifier>{9e9cdbe0-a186-47b6-a888-769f7303a2d2}</UniqueIdentifier>
     </Filter>

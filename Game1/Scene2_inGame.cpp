@@ -2,6 +2,7 @@
 #include "HUD.h"
 #include "Player.h"
 #include "Player_kill.h"
+#include "Monster.h"
 #include "MonsterManager.h"
 #include "Scene2_inGame.h"
 
@@ -145,35 +146,10 @@ void Scene2_inGame::Update()
 
 void Scene2_inGame::LateUpdate()
 {
-	// 벽(TILE_WALL)과 부딪쳤으면
-	if (OnWall())
-	{
-		// 바닥에 붙어있는 상태
-		GM->player->OnWallAction();
-	}
-	else GM->player->onWall = false;
-
-	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
-	if (OnWallside())
-	{
-		// 벽에 붙어있는 상태
-		GM->player->onWallSlide = true;
-
-		// 점프중이면
-		if (GM->player->GetState() == PlayerState::JUMP)
-			GM->player->OnWallSlideAction();
-		// 점프중이 아니면
-		else
-			GM->player->GoBack();
-	}
-	else GM->player->onWallSlide = false;
-
-	// 바닥(TILE_FLOOR)과 부딪쳤으면
-	if (OnFloor())
-	{
-		GM->player->OnFloorAction();
-	}
-	else GM->player->onFloor = false;
+	// 지형지물과 플레이어 충돌처리
+	HandleTerrainPlayerCollision();
+	// 지형지물과 몬스터 충돌처리
+	HandleTerrainMonsterCollision();
 }
 
 void Scene2_inGame::Render()
@@ -201,8 +177,77 @@ void Scene2_inGame::ResizeScreen()
 	GM->hud->Init();
 }
 
+void Scene2_inGame::HandleTerrainPlayerCollision()
+{
+	// 벽(TILE_WALL)과 부딪쳤으면
+	if (PlayerOnWall())
+	{
+		// 바닥에 붙어있는 상태
+		GM->player->OnWallAction();
+	}
+	else GM->player->onWall = false;
 
-bool Scene2_inGame::OnFloor()
+	// 벽면(TILE_WALLSIDE)과 부딪쳤으면
+	if (PlayerOnWallside())
+	{
+		// 벽에 붙어있는 상태
+		GM->player->onWallSlide = true;
+
+		// 점프중이면
+		if (GM->player->GetState() == PlayerState::JUMP)
+			GM->player->OnWallSlideAction();
+		// 점프중이 아니면
+		else
+			GM->player->GoBack();
+	}
+	else GM->player->onWallSlide = false;
+
+	// 바닥(TILE_FLOOR)과 부딪쳤으면
+	if (PlayerOnFloor())
+	{
+		GM->player->OnFloorAction();
+	}
+	else GM->player->onFloor = false;
+}
+
+void Scene2_inGame::HandleTerrainMonsterCollision()
+{
+	for (auto& monster : GM->monster->GetEnemy())
+	{
+		// 벽(TILE_WALL)과 부딪쳤으면
+		if (MonsterOnWall(monster))
+		{
+			// 바닥에 붙어있는 상태
+			monster->OnWallAction();
+		}
+		else monster->onWall = false;
+
+		// 벽면(TILE_WALLSIDE)과 부딪쳤으면
+		if (MonsterOnWallside(monster))
+		{
+			// 벽에 붙어있는 상태
+			monster->onWallSlide = true;
+
+			// 점프중이면
+			if (monster->GetState() == MonsterState::JUMP)
+				monster->OnWallSlideAction();
+			// 점프중이 아니면
+			else
+				monster->GoBack();
+		}
+		else monster->onWallSlide = false;
+
+		// 바닥(TILE_FLOOR)과 부딪쳤으면
+		if (MonsterOnFloor(monster))
+		{
+			monster->OnFloorAction();
+		}
+		else monster->onFloor = false;
+	}
+}
+
+
+bool Scene2_inGame::PlayerOnFloor()
 {
 	// 하강중에만 충돌 체크
 	if (GM->player->isLanding)
@@ -219,7 +264,7 @@ bool Scene2_inGame::OnFloor()
 	return false;
 }
 
-bool Scene2_inGame::OnWall()
+bool Scene2_inGame::PlayerOnWall()
 {
 	Int2 playerlndex;
 	// TOP 충돌 체크
@@ -243,7 +288,7 @@ bool Scene2_inGame::OnWall()
 	return false;
 }
 
-bool Scene2_inGame::OnWallside()
+bool Scene2_inGame::PlayerOnWallside()
 {
 	Int2 playerlndex;
 	// TOP 충돌 체크
@@ -258,6 +303,68 @@ bool Scene2_inGame::OnWallside()
 	if (tileMap[2]->WorldPosToTileIdx(GM->player->GetFoot(), playerlndex))
 	{
 		if (tileMap[2]->GetTileState(playerlndex) == TILE_WALLSIDE)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Scene2_inGame::MonsterOnFloor(Monster* monster)
+{
+	// 하강중에만 충돌 체크
+	if (GM->player->isLanding)
+	{
+		Int2 Monsterlndex;
+		if (tileMap[2]->WorldPosToTileIdx(monster->GetFoot(), Monsterlndex))
+		{
+			if (tileMap[2]->GetTileState(Monsterlndex) == TILE_FLOOR)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Scene2_inGame::MonsterOnWall(Monster* monster)
+{
+	Int2 Monsterlndex;
+	// TOP 충돌 체크
+	if (tileMap[2]->WorldPosToTileIdx(monster->GetHead(), Monsterlndex))
+	{
+		if (tileMap[2]->GetTileState(Monsterlndex) == TILE_WALL)
+		{
+			monster->GoBack();
+		}
+	}
+	// BOT 충돌 체크
+	if (tileMap[2]->WorldPosToTileIdx(monster->GetFoot(), Monsterlndex))
+	{
+		if (tileMap[2]->GetTileState(Monsterlndex) == TILE_WALL)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Scene2_inGame::MonsterOnWallside(Monster* monster)
+{
+	Int2 Monsterlndex;
+	// TOP 충돌 체크
+	if (tileMap[2]->WorldPosToTileIdx(monster->GetHead(), Monsterlndex))
+	{
+		if (tileMap[2]->GetTileState(Monsterlndex) == TILE_WALLSIDE)
+		{
+			return true;
+		}
+	}
+	// BOT 충돌 체크
+	if (tileMap[2]->WorldPosToTileIdx(monster->GetFoot(), Monsterlndex))
+	{
+		if (tileMap[2]->GetTileState(Monsterlndex) == TILE_WALLSIDE)
 		{
 			return true;
 		}
