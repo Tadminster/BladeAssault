@@ -42,6 +42,13 @@ kill_barehand_atk::kill_barehand_atk(
 	shove = 350;
 }
 
+kill_barehand_atk::~kill_barehand_atk()
+{	
+	delete collider;
+	delete collider_range;
+	delete skin;
+}
+
 void kill_barehand_atk::Update()
 {
 	Projectile::Update();

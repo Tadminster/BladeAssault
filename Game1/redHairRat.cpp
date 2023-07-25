@@ -91,7 +91,6 @@ redHairRat::redHairRat(Vector2 spawnPos) : redHairRat()
 
 redHairRat::~redHairRat()
 {
-	Monster::~Monster();
 }
 
 void redHairRat::Update()

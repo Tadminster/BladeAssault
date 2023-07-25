@@ -40,7 +40,7 @@ void Scene5_undercity1::Init()
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
 
-	startPostion = Vector2(800, 3000);
+	startPostion = Vector2(800, 3200);
 
 	GM->player->SetPosition(startPostion);
 
@@ -74,7 +74,7 @@ void Scene5_undercity1::Update()
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
 		GM->monster->ClearMonster();
-		SCENE->ChangeScene("sc2");
+		SCENE->ChangeScene("sc6");
 	}
 
 	for (auto& map : tileMap)

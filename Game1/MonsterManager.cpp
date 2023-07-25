@@ -29,6 +29,7 @@ void MonsterManager::Update()
 				{
 					//GM->kill++;
 					//GM->player->exp += monster->getExp();
+					delete monster;
 					return true;
 				}
 				else false;

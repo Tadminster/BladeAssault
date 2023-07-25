@@ -27,14 +27,14 @@ public:
 public:
     Projectile() {};
     Projectile(Vector2 spawnPos, Vector2 dir, float speed, float range, float damage, int penetration);
-    //~Projectile();
+    ~Projectile();  
     virtual void        Update();
     virtual void        Render();
 
     virtual bool        hasCollideWithMonster();
     bool                hasCollideWithPlayer();
     /* 탄이 이동한 거리가 range를 넘었는지 확인 */
-    bool                hasTraveledTooFar() const { return traveledDistance >= range; }
+    bool                hasTraveledTooFar() const;
     /* 탄의 관통횟수가 전부 소모되었는지 확인 */
     bool                hasPenetration() const { return penetration <= 0; }
 

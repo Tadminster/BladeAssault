@@ -36,6 +36,13 @@ Projectile::Projectile
     //skin->SetParentRT(*collider);
 }
 
+Projectile::~Projectile()
+{
+	delete collider;
+	delete collider_range;
+	delete skin;
+}
+
 void Projectile::Update()
 {
     // 발사체 이동
@@ -104,7 +111,13 @@ bool Projectile::hasCollideWithMonster()
 
             // 남은 관통력 반환
             if (penetration > 0) return false;
-            else return true;
+            else 
+            {
+                // 관통력이 0이면 발사체 삭제
+                delete this;
+                return true;
+            }
+                
         }
     }
 
@@ -120,10 +133,20 @@ bool Projectile::hasCollideWithPlayer()
 
         // 플레이어 데미지 액션
         GM->player->actionsWhenDamaged(-damage);
-
+        delete this;
         return true;
     }
 
+    return false;
+}
+
+bool Projectile::hasTraveledTooFar() const
+{
+    if (traveledDistance >= range)
+    {
+        delete this;
+        return true;
+    }
     return false;
 }
 

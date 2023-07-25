@@ -14,6 +14,7 @@ public:
 		int penetration, 
 		float explosionRange);
 
+	~kill_barehand_atk();
 	void Update() override;
 	void Render() override;
 	void AfterEffect() override;

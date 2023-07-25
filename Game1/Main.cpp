@@ -5,6 +5,7 @@
 #include "Scene3_jazzBar.h"
 #include "Scene4_armory.h"
 #include "Scene5_undercity1.h"
+#include "Scene6_undercity2.h"
 #include "Main.h"
 
 Main::Main()
@@ -14,6 +15,7 @@ Main::Main()
 	sc3_jazzBar = new Scene3_jazzBar();
 	sc4_armory = new Scene4_armory();
 	sc5_undercity1 = new Scene5_undercity1();
+	sc6_undercity2 = new Scene6_undercity2();
 }
 
 Main::~Main()
@@ -28,6 +30,7 @@ void Main::Init()
 	SCENE->AddScene("sc3", sc3_jazzBar);
 	SCENE->AddScene("sc4", sc4_armory);
 	SCENE->AddScene("sc5", sc5_undercity1);
+	SCENE->AddScene("sc6", sc6_undercity2);
 	SCENE->ChangeScene("sc1");
 }
 

@@ -53,8 +53,9 @@ void Scene3_jazzBar::Init()
 	}
 
 	// °è´Ü(¿ÞÂÊ)
-	stairLeft->SetWorldPos(Vector2(3075, 1175));
-	stairLeft->scale = Vector2(50, 50);
+	stairLeft->pivot = OFFSET_LB;
+	stairLeft->SetWorldPos(Vector2(2970, 1150));
+	stairLeft->scale = Vector2(100, 75);
 	stairLeft->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	stairLeft->isFilled = true;
 	
@@ -107,6 +108,12 @@ void Scene3_jazzBar::Update()
 			GM->player->onWall = true;
 			GM->player->gravity = 0;
 			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
+		}
+		else if (GM->player->GetDirection() == RIGHT && GM->player->GetState() == State::RUN)
+		{
+			GM->player->onWall = true;
+			GM->player->gravity = 0;
+			GM->player->GetCollider()->MoveWorldPos(UP * 10 * DELTA);
 		}
 	}
 

@@ -20,12 +20,8 @@ Monster::Monster(Vector2 spawnPos)
 
 Monster::~Monster()
 {
-	Creature::~Creature();
 }
 
-//void Monster::Init(Vector2 spawnPos)
-//{
-//}
 
 void Monster::Update()
 {
