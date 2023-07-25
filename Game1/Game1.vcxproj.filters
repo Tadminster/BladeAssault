@@ -48,6 +48,9 @@
     <ClInclude Include="Scene_proto.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Scene5_undercity1.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -94,6 +97,9 @@
       <Filter>Object\Creature</Filter>
     </ClCompile>
     <ClCompile Include="Scene_proto.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene5_undercity1.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>

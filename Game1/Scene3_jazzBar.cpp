@@ -103,6 +103,8 @@ void Scene3_jazzBar::Update()
 	{
 		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == State::RUN)
 		{
+			GM->player->onWall = true;
+			GM->player->gravity = 0;
 			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
 		}
 	}
@@ -112,6 +114,8 @@ void Scene3_jazzBar::Update()
 	{
 		if (GM->player->GetDirection() == LEFT && GM->player->GetState() == State::RUN)
 		{
+			GM->player->onWall = true;
+			GM->player->gravity = 0;
 			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
 		}
 	}

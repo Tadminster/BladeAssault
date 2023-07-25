@@ -155,7 +155,7 @@ void Player_kill::Attack()
 		Player::Attack();
 
 		// 발사 위치 계산
-		Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.2);
+		Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.65);
 
 		// 탄생성
 		kill_barehand_atk* proj = new kill_barehand_atk

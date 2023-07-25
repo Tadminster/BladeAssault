@@ -137,6 +137,8 @@ void Player::Update()
 	}
 	else if (CurrentState == State::CROUCH)
 	{
+		if (collider->scale.y != 70)
+			collider->scale.y = 70;
 	}
 	else if (CurrentState == State::CROUCH_DOWN)
 	{
@@ -148,6 +150,7 @@ void Player::Update()
 		{
 			isLanding = true;
 			jumpTime = 0.0f;
+
 			CurrentState = State::IDLE;
 		}
 	}
@@ -397,7 +400,10 @@ void Player::Control()
 	{
 		// crouch -> idle
 		if (!INPUT->KeyPress('S'))
+		{
+			collider->scale.y = 100;
 			CurrentState = State::IDLE;
+		}
 
 		// crouch -> run
 		if (INPUT->KeyPress('A') || INPUT->KeyPress('D'))
@@ -412,6 +418,7 @@ void Player::Control()
 		// crouch -> down
 		if (INPUT->KeyDown(VK_SHIFT))
 		{
+			collider->scale.y = 100;
 			jumpCount = 1;
 			gravity = 0;
 			CurrentState = State::CROUCH_DOWN;

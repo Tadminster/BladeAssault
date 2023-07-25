@@ -79,7 +79,7 @@ redHairRat::redHairRat()
     attackRange = 1;
     moveSpeed = 100;
     jumpSpeed = 700.0f;
-    maxAttackDistance = 200;
+    maxAttackDistance = 150;
 
     timeTakenToAttackOnce = 1.0f / attackSpeed;
 }

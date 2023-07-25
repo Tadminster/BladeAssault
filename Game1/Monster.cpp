@@ -130,12 +130,20 @@ void Monster::Update()
 	}
 	else if (CurrentState == State::RUN)
 	{
-		// RUN -> ATTACK
-		if (distanceX_abs < 100)
+		// 플레이어가 공격 가능한 범위안에 들어왔을 때
+		if (distanceX_abs < maxAttackDistance)
 		{
+			// 공격 가능하다면
 			if (isAttackCooldown())
 			{
+				// RUN -> ATTACK
 				CurrentState = State::ATTACK;
+			}
+			// 공격 불가능하다면
+			else
+			{
+				// RUN -> IDLE
+				CurrentState = State::IDLE;
 			}
 		}
 
@@ -165,7 +173,7 @@ void Monster::Update()
 	}
 	else if (CurrentState == State::ATTACK)
 	{
-		// 공격 프레임에 도달하면 발사
+		// 공격 프레임에 도달하면 실제 공격이 이루어짐
 		if (attack->frame.x == attackFrame && realAttack)
 		{
 			realAttack = false;
