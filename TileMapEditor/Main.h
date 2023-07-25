@@ -6,6 +6,7 @@ private:
 
 	ObTileMap*	tileMap[3];
 	Int2		tileSize[3];
+	Int2		TilePos[3];
 	ObRect*		LineX, *LineY;
 
 	int			brushImgIdx;

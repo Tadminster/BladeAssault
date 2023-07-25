@@ -27,9 +27,9 @@ Main::Main()
 	//tileMap[1]->file = "scene5_undercity1_1.txt";
 	//tileMap[2]->file = "scene5_undercity1_2.txt";
 
-	tileMap[0]->file = "scene5_undercity2_0.txt";
-	tileMap[1]->file = "scene5_undercity2_1.txt";
-	tileMap[2]->file = "scene5_undercity2_2.txt";
+	tileMap[0]->file = "scene6_undercity2_0.txt";
+	tileMap[1]->file = "scene6_undercity2_1.txt";
+	tileMap[2]->file = "scene6_undercity2_2.txt";
 
 	tileMap[0]->Load();
 	tileMap[1]->Load();
@@ -105,23 +105,6 @@ void Main::Update()
 			tileMap[2]->Load();
 			//OpenProject(lua, assetManager, renderer, canvas, tileSize);
 		}
-
-		//if (ImGui::MenuItem("\xef\x83\x87" " Save As..", "Ctrl + Shift + S"))
-		//{
-			// Get the file path from the file dialog
-			//std::string filename = mFileDialog->SaveFile();
-
-			// Check to see if we got the filepath from the dialog
-			// The user may have cancelled the save 
-			//if (filename == "")
-				//return;
-
-			// Change the filename to the dialog path 
-			//mFileName = filename;
-			// Call the save project function 
-			//mFileLoader->SaveProject(mFileName, mLoadedTilesets, mTilesetLocations, canvas->GetWidth(), canvas->GetHeight(), tileSize);
-		//}
-
 		if (ImGui::MenuItem("Exit"))
 			exit(1);
 
@@ -132,56 +115,50 @@ void Main::Update()
 
 	if (INPUT->KeyPress('W'))
 	{
-		CAM->position += UP * 300.0f * DELTA;
+		CAM->position += UP * 400.0f * DELTA;
 	}
 	if (INPUT->KeyPress('S'))
 	{
-		CAM->position += DOWN * 300.0f * DELTA;
+		CAM->position += DOWN * 400.0f * DELTA;
 	}
 	if (INPUT->KeyPress('A'))
 	{
-		CAM->position += LEFT * 300.0f * DELTA;
+		CAM->position += LEFT * 400.0f * DELTA;
 	}
 	if (INPUT->KeyPress('D'))
 	{
-		CAM->position += RIGHT * 300.0f * DELTA;
+		CAM->position += RIGHT * 400.0f * DELTA;
 	}
 
-	//TileSize
-	if (ImGui::SliderInt2("TileSize", (int*)&tileSize[layer], 1, 100))
+
+	
+	// TileSize
+	tileSize[layer].x = tileMap[layer]->GetTileSize().x;
+	tileSize[layer].y = tileMap[layer]->GetTileSize().y;
+	if (ImGui::DragInt2("TileSize", (int*)&tileSize[layer], 1.0f, 1, 1000))
 	{
 		tileMap[layer]->ResizeTile(tileSize[layer]);
 	}
 
 	// TileScale
-	//if (ImGui::InputFloat("TileScale", (float*)&tileMap[layer]->scale.x, 1.0f, 200.0f))
-	//{
-	//	tileMap[layer]->scale.y = tileMap[layer]->scale.x;
-	//}
 	if (ImGui::InputFloat("TileScaleX", (float*)&tileMap[layer]->scale.x, 1.0f, 200.0f))
 	{
 	}
 	if (ImGui::InputFloat("TileScaleY", (float*)&tileMap[layer]->scale.y, 1.0f, 200.0f))
 	{
 	}
+ 
 
 	// TilePos
-	//Vector2 pos = tileMap[layer]->GetWorldPos();
-	//if (ImGui::SliderFloat2("TilePos", (float*)&pos, -1000.0f, 1000.0f))
-	//{
-	//	tileMap[layer]->SetWorldPos(pos);
-	//}
-
-	static int pos_x[3], pos_y[3];
 	for (int i = 0; i < 3; i++)
 	{
-		pos_x[layer] = tileMap[layer]->GetWorldPos().x;
-		pos_y[layer] = tileMap[layer]->GetWorldPos().y;
+		TilePos[layer].x = tileMap[layer]->GetWorldPos().x;
+		TilePos[layer].y = tileMap[layer]->GetWorldPos().y;
 	}
 
-	if (ImGui::DragIntRange2("TilePos", &pos_x[layer], &pos_y[layer], 5, 0, 0, "X: %d", "Y: %d"))
+	if (ImGui::DragInt2("TilePos", (int*)&TilePos[layer], 1.0f, -1000, 1000))
 	{
-		tileMap[layer]->SetWorldPos(Vector2(pos_x[layer], pos_y[layer]));
+		tileMap[layer]->SetWorldPos(Vector2(TilePos[layer].x, TilePos[layer].y));
 	}
 
 	for (int i = 0; i < 4; i++)
@@ -206,8 +183,6 @@ void Main::Update()
 		}
 	}
 
-	//"감바스";
-	//L"감바스";
 	//ImgIdx
 	if (ImGui::InputInt("ImgIdx", &brushImgIdx))
 	{
@@ -285,7 +260,7 @@ void Main::Update()
 
 
 
-	if (INPUT->KeyPress(VK_LBUTTON))
+	if (INPUT->KeyPress(VK_RBUTTON))
 	{
 		Int2 Idx;
 		//?
