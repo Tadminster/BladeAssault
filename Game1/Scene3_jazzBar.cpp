@@ -54,13 +54,14 @@ void Scene3_jazzBar::Init()
 
 	// 계단(왼쪽)
 	stairLeft->pivot = OFFSET_LB;
-	stairLeft->SetWorldPos(Vector2(2970, 1150));
-	stairLeft->scale = Vector2(100, 75);
+	stairLeft->SetWorldPos(Vector2(3000, 1150));
+	stairLeft->scale = Vector2(50, 50);
 	stairLeft->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	stairLeft->isFilled = true;
 	
 	// 계단(오른쪽)
-	stairRight->SetWorldPos(Vector2(4025, 1125));
+	stairRight->pivot = OFFSET_LB;
+	stairRight->SetWorldPos(Vector2(3975, 1100));
 	stairRight->scale = Vector2(50, 50);
 	stairRight->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	stairRight->isFilled = true;
@@ -108,12 +109,6 @@ void Scene3_jazzBar::Update()
 			GM->player->onWall = true;
 			GM->player->gravity = 0;
 			GM->player->GetCollider()->MoveWorldPos(UP * 200 * DELTA);
-		}
-		else if (GM->player->GetDirection() == RIGHT && GM->player->GetState() == State::RUN)
-		{
-			GM->player->onWall = true;
-			GM->player->gravity = 0;
-			GM->player->GetCollider()->MoveWorldPos(UP * 10 * DELTA);
 		}
 	}
 
