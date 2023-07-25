@@ -251,23 +251,17 @@ void Monster::Render()
 
 bool Monster::isAttackCooldown()
 {
+	float currentTime = TIMER->GetWorldTime();			// 현재시간
+	float elapsedTime = currentTime - lastAttackTime;	// 경과시간
 
-	
-	static float lastShotTime = 0;
-	static float timeSinceLastTime = 0;
-
-	float currentTime = TIMER->GetWorldTime();
-	float elapsedTime = currentTime - lastShotTime;
-
-	if (elapsedTime >= timeSinceLastTime)
+	if (elapsedTime >= timeTakenToAttackOnce)
 	{
 		attack->frame.x = 0;
 		realAttack = true;
 
-
 		// 공속계산
-		lastShotTime = currentTime;
-		timeSinceLastTime = 1.0f / attackSpeed;
+		lastAttackTime = currentTime;
+		timeTakenToAttackOnce = 1.0f / attackSpeed;
 
 		return true;
 	}

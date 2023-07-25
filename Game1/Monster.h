@@ -18,6 +18,9 @@ protected:
 	int		attackFrame;			// 공격 프레임
 	bool	realAttack;				// 실제 공격을 위한	bool
 
+	float	lastAttackTime{0};		// 마지막 공격 시간
+	float	timeTakenToAttackOnce;  // 한번 공격하는데 걸리는 시간
+
 public:
 	Monster();
 	Monster(Vector2 spawnPos);

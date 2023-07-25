@@ -80,6 +80,8 @@ redHairRat::redHairRat()
     moveSpeed = 100;
     jumpSpeed = 700.0f;
     maxAttackDistance = 200;
+
+    timeTakenToAttackOnce = 1.0f / attackSpeed;
 }
 
 redHairRat::redHairRat(Vector2 spawnPos) : redHairRat()
