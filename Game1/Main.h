@@ -7,6 +7,7 @@ private:
 	class Scene2_inGame* sc2_inGame;
 	class Scene3_jazzBar* sc3_jazzBar;
 	class Scene4_armory* sc4_armory;
+	class Scene5_undercity1* sc5_undercity1;
 
 public:
 	Main();

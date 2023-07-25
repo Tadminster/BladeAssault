@@ -89,7 +89,8 @@ void Scene4_armory::Update()
 	// ´ÙÀ½ ¸Ê ÀÌµ¿
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
-		SCENE->ChangeScene("sc2");
+		GM->monster->ClearMonster();
+		SCENE->ChangeScene("sc5");
 	}
 
 

@@ -115,7 +115,7 @@ void Monster::Update()
 					Jump();
 				}
 				// 플레이어가 더 낮게 있다면 하강
-				else if (distanceY < 0)
+				else if (distanceY < 0 && onFloor )
 				{
 					gravity = 0;
 					CurrentState = State::CROUCH_DOWN;

@@ -100,7 +100,7 @@ void Player_kill::Init()
 
 	die->pivot = OFFSET_B;
 	die->SetParentRT(*collider);
-	idle->SetLocalPosY(-collider->scale.y * 0.3f);
+	die->SetLocalPosY(-collider->scale.y * 0.3f);
 	die->maxFrame.x = 11;
 	die->maxFrame.y = 1;
 	die->scale.x = die->imageSize.x / die->maxFrame.x * 3;

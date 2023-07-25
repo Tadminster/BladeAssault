@@ -21,5 +21,6 @@ public:
 	int							getEnemyCount()		{ return enemy.size(); }
 
 	void	AddMonster(Monster* monster);
+	void	ClearMonster() { enemy.clear(); }
 };
 

@@ -94,6 +94,7 @@ void Scene3_jazzBar::Update()
 	{
 		if (next->Intersect(GM->player->GetCollider()))
 		{
+			GM->monster->ClearMonster();
 			SCENE->ChangeScene("sc4");
 		}
 	}

@@ -11,9 +11,9 @@ Main::Main()
 	tileMap[1] = new ObTileMap();
 	tileMap[2] = new ObTileMap();
 
-	tileMap[0]->file = "scene2_hankroom_0.txt";
-	tileMap[1]->file = "scene2_hankroom_1.txt";
-	tileMap[2]->file = "scene2_hankroom_2.txt";
+	//tileMap[0]->file = "scene2_hankroom_0.txt";
+	//tileMap[1]->file = "scene2_hankroom_1.txt";
+	//tileMap[2]->file = "scene2_hankroom_2.txt";
 	
 	//tileMap[0]->file = "scene3_jazzbar_0.txt";
 	//tileMap[1]->file = "scene3_jazzbar_1.txt";
@@ -22,6 +22,10 @@ Main::Main()
 	//tileMap[0]->file = "scene4_armory_0.txt";
 	//tileMap[1]->file = "scene4_armory_1.txt";
 	//tileMap[2]->file = "scene4_armory_2.txt";
+
+	tileMap[0]->file = "scene5_undercity1_0.txt";
+	tileMap[1]->file = "scene5_undercity1_1.txt";
+	tileMap[2]->file = "scene5_undercity1_2.txt";
 
 	tileMap[0]->Load();
 	tileMap[1]->Load();
