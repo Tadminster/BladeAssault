@@ -51,6 +51,9 @@
     <ClInclude Include="Scene5_undercity1.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Scene5_undercity2.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -100,6 +103,9 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Scene5_undercity1.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene5_undercity2.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>

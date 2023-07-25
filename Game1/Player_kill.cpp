@@ -91,7 +91,7 @@ void Player_kill::Init()
 
 	damaged->pivot = OFFSET_B;
 	damaged->SetParentRT(*collider);
-	damaged->SetLocalPosY(-collider->scale.y * 0.3f);
+	damaged->SetLocalPosY(-collider->scale.y);
 	damaged->maxFrame.x = 1;
 	damaged->maxFrame.y = 1;
 	damaged->scale.x = damaged->imageSize.x / damaged->maxFrame.x * 2.6;

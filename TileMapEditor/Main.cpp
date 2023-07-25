@@ -23,9 +23,13 @@ Main::Main()
 	//tileMap[1]->file = "scene4_armory_1.txt";
 	//tileMap[2]->file = "scene4_armory_2.txt";
 
-	tileMap[0]->file = "scene5_undercity1_0.txt";
-	tileMap[1]->file = "scene5_undercity1_1.txt";
-	tileMap[2]->file = "scene5_undercity1_2.txt";
+	//tileMap[0]->file = "scene5_undercity1_0.txt";
+	//tileMap[1]->file = "scene5_undercity1_1.txt";
+	//tileMap[2]->file = "scene5_undercity1_2.txt";
+
+	tileMap[0]->file = "scene5_undercity2_0.txt";
+	tileMap[1]->file = "scene5_undercity2_1.txt";
+	tileMap[2]->file = "scene5_undercity2_2.txt";
 
 	tileMap[0]->Load();
 	tileMap[1]->Load();

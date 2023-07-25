@@ -92,7 +92,11 @@ void Player::Update()
 	// 상태 업데이트
 	if (CurrentState == State::IDLE)
 	{
-
+		if (!onFloor && !onWall)
+		{
+			jump->frame.y = 1;
+			CurrentState = State::JUMP;
+		}
 	}
 	else if (CurrentState == State::RUN)
 	{
@@ -407,11 +411,15 @@ void Player::Control()
 
 		// crouch -> run
 		if (INPUT->KeyPress('A') || INPUT->KeyPress('D'))
+		{
+			collider->scale.y = 100;
 			CurrentState = State::RUN;
+		}
 
 		// crouch -> jump
 		if (INPUT->KeyDown('W'))
 		{
+			collider->scale.y = 100;
 			Jump();
 		}
 

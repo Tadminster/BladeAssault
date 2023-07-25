@@ -35,6 +35,7 @@
     <ClInclude Include="Scene3_jazzBar.h" />
     <ClInclude Include="Scene4_armory.h" />
     <ClInclude Include="Scene5_undercity1.h" />
+    <ClInclude Include="Scene5_undercity2.h" />
     <ClInclude Include="Scene_proto.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -55,6 +56,7 @@
     <ClCompile Include="Scene3_jazzBar.cpp" />
     <ClCompile Include="Scene4_armory.cpp" />
     <ClCompile Include="Scene5_undercity1.cpp" />
+    <ClCompile Include="Scene5_undercity2.cpp" />
     <ClCompile Include="Scene_proto.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
