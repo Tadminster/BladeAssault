@@ -4,5 +4,5 @@
 3 N
 TileSize 1 1
 TileScale 1500 1500
-TilePosition 750 407
+TilePosition 750 420
 0 0 0 0 1 1 0.5 0.5 0.5 0.5 0 0
