@@ -22,15 +22,7 @@ Player_kill::Player_kill()
 	die = new ObImage(L"kill_barehand_die.png");
 	shadow = new ObImage(L"character_shadow.png");
 	//hasAxis = true;
-}
 
-Player_kill::~Player_kill()
-{
-	Player::~Player();
-}
-
-void Player_kill::Init()
-{
 	collider->pivot = OFFSET_B;
 	collider->isFilled = false;
 	collider->scale.x = 60;
@@ -99,10 +91,9 @@ void Player_kill::Init()
 	damaged->scale.y = damaged->imageSize.y / damaged->maxFrame.y * 2.6;
 	damaged->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-
 	spawn->pivot = OFFSET_B;
 	spawn->SetParentRT(*collider);
-	spawn->SetLocalPosY(-collider->scale.y * 0.3f);
+	spawn->SetLocalPosY(-collider->scale.y * 0.7f);
 	spawn->maxFrame.x = 13;
 	spawn->maxFrame.y = 1;
 	spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x * 3;
@@ -128,8 +119,9 @@ void Player_kill::Init()
 	shadow->color.w = 0.2f;
 	shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-	// ´É·ÂÄ¡
-	Player::Init();
+	charingTime = 0.0f;
+	charingTime = 3.0f;
+
 
 	hp = 150;
 	maxHp = 150;
@@ -142,16 +134,26 @@ void Player_kill::Init()
 	jumpSpeed = 900.0f;
 }
 
-
-void Player_kill::Update()
-{
-	Player::Update();
-}
-
-void Player_kill::Render()
-{
-	Player::Render();
-}
+//Player_kill::~Player_kill()
+//{
+//	Player::~Player();
+//}
+//
+//void Player_kill::Init()
+//{
+//	Player::Init();
+//}
+//
+//
+//void Player_kill::Update()
+//{
+//	Player::Update();
+//}
+//
+//void Player_kill::Render()
+//{
+//	Player::Render();
+//}
 
 void Player_kill::Attack()
 {

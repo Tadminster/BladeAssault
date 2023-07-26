@@ -2,6 +2,7 @@
 enum class State
 {
 	SPAWN,
+	STANDBY,
 	IDLE,
 	RUN,
 	DASH,
@@ -9,6 +10,7 @@ enum class State
 	CROUCH,
 	CROUCH_DOWN,
 	ATTACK,
+	CHARGING,
 	DAMAGED,
 	DIE
 };

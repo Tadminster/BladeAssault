@@ -16,6 +16,22 @@ Scene5_undercity1::Scene5_undercity1()
 	tileMap[2] = new ObTileMap();
 
 	nextMap = new ObRect();
+
+	tileMap[0]->file = "scene5_undercity1_0.txt";
+	tileMap[1]->file = "scene5_undercity1_1.txt";
+	tileMap[2]->file = "scene5_undercity1_2.txt";
+
+	tileMap[0]->Load();
+	tileMap[1]->Load();
+	tileMap[2]->Load();
+
+	nextMap->pivot = OFFSET_LB;
+	nextMap->SetWorldPos(Vector2(2175, 700));
+	nextMap->scale = Vector2(100, 100);
+	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	nextMap->isFilled = true;
+
+	startPostion = Vector2(850, 2950);
 }
 
 Scene5_undercity1::~Scene5_undercity1()
@@ -27,21 +43,7 @@ Scene5_undercity1::~Scene5_undercity1()
 
 void Scene5_undercity1::Init()
 {
-	tileMap[0]->file = "scene5_undercity1_0.txt";
-	tileMap[1]->file = "scene5_undercity1_1.txt";
-	tileMap[2]->file = "scene5_undercity1_2.txt";
-
-	tileMap[0]->Load();
-	tileMap[1]->Load();
-	tileMap[2]->Load();
-
-	nextMap->SetWorldPos(Vector2(800, 4000));
-	nextMap->scale = Vector2(100, 100);
-	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	nextMap->isFilled = true;
-
-	startPostion = Vector2(800, 3200);
-
+	GM->player->Init();
 	GM->player->SetPosition(startPostion);
 
 	GM->monster->AddMonster(new redHairRat(Vector2(750, 900)));
@@ -65,6 +67,8 @@ void Scene5_undercity1::Update()
 	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
 	ImGui::Text("onWall : %d\n", GM->player->onWall);
 	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
+
+	//Scene_proto::Update();
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;

@@ -7,9 +7,9 @@ private:
 
 public:
 	Player_kill();
-	~Player_kill() override;
-	void Init() override;
-	void Update() override;
-	void Render() override;
+	//~Player_kill() override;
+	//void Init() override;
+	//void Update() override;
+	//void Render() override;
 	void Attack() override;
 };

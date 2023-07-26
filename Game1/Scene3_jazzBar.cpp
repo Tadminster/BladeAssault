@@ -19,6 +19,41 @@ Scene3_jazzBar::Scene3_jazzBar()
 		nextMap[i] = new ObRect();
 	stairLeft = new ObRect();
 	stairRight = new ObRect();
+
+	tileMap[0]->file = "scene3_jazzbar_0.txt";
+	tileMap[1]->file = "scene3_jazzbar_1.txt";
+	tileMap[2]->file = "scene3_jazzbar_2.txt";
+
+	tileMap[0]->Load();
+	tileMap[1]->Load();
+	tileMap[2]->Load();
+
+	nextMap[0]->pivot = OFFSET_LB;
+	nextMap[1]->pivot = OFFSET_LB;
+	nextMap[0]->SetWorldPos(Vector2(4225, 1800));
+	nextMap[1]->SetWorldPos(Vector2(4225, 1100));
+	for (int i = 0; i < 2; i++)
+	{
+		nextMap[i]->scale = Vector2(75, 425);
+		nextMap[i]->color = Vector4(0.5, 0.5, 0.5, 0.3);
+		nextMap[i]->isFilled = true;
+	}
+
+	// 계단(왼쪽)
+	stairLeft->pivot = OFFSET_LB;
+	stairLeft->SetWorldPos(Vector2(3000, 1150));
+	stairLeft->scale = Vector2(50, 50);
+	stairLeft->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stairLeft->isFilled = true;
+
+	// 계단(오른쪽)
+	stairRight->pivot = OFFSET_LB;
+	stairRight->SetWorldPos(Vector2(3975, 1100));
+	stairRight->scale = Vector2(50, 50);
+	stairRight->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stairRight->isFilled = true;
+
+	startPostion = Vector2(2820, 1800);
 }
 
 Scene3_jazzBar::~Scene3_jazzBar()
@@ -34,40 +69,6 @@ Scene3_jazzBar::~Scene3_jazzBar()
 
 void Scene3_jazzBar::Init()
 {
-
-	tileMap[0]->file = "scene3_jazzbar_0.txt";
-	tileMap[1]->file = "scene3_jazzbar_1.txt";
-	tileMap[2]->file = "scene3_jazzbar_2.txt";
-
-	tileMap[0]->Load();
-	tileMap[1]->Load();
-	tileMap[2]->Load();
-
-	nextMap[0]->SetWorldPos(Vector2(4300, 1850));
-	nextMap[1]->SetWorldPos(Vector2(4300, 1150));
-	for (int i = 0; i < 2; i++)
-	{
-		nextMap[i]->scale = Vector2(100, 100);
-		nextMap[i]->color = Vector4(0.5, 0.5, 0.5, 0.3);
-		nextMap[i]->isFilled = true;
-	}
-
-	// 계단(왼쪽)
-	stairLeft->pivot = OFFSET_LB;
-	stairLeft->SetWorldPos(Vector2(3000, 1150));
-	stairLeft->scale = Vector2(50, 50);
-	stairLeft->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	stairLeft->isFilled = true;
-	
-	// 계단(오른쪽)
-	stairRight->pivot = OFFSET_LB;
-	stairRight->SetWorldPos(Vector2(3975, 1100));
-	stairRight->scale = Vector2(50, 50);
-	stairRight->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	stairRight->isFilled = true;
-
-	startPostion = Vector2(2820, 1850);
-
 	GM->player->SetPosition(startPostion);
 	GM->monster->AddMonster(new redHairRat(Vector2(3500, 2000)));
 	GM->monster->AddMonster(new redHairRat(Vector2(3600, 2000)));
@@ -86,6 +87,8 @@ void Scene3_jazzBar::Update()
 	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
 	ImGui::Text("onWall : %d\n", GM->player->onWall);
 	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
+
+	//Scene_proto::Update();
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;

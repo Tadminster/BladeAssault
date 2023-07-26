@@ -18,6 +18,34 @@ Scene4_armory::Scene4_armory()
 	nextMap = new ObRect();
 	previousMap = new ObRect();
 	stair = new ObRect();
+
+	tileMap[0]->file = "scene4_armory_0.txt";
+	tileMap[1]->file = "scene4_armory_1.txt";
+	tileMap[2]->file = "scene4_armory_2.txt";
+
+	tileMap[0]->Load();
+	tileMap[1]->Load();
+	tileMap[2]->Load();
+
+	previousMap->pivot = OFFSET_LB;
+	previousMap->SetWorldPos(Vector2(500, 550));
+	previousMap->scale = Vector2(75, 425);
+	previousMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	previousMap->isFilled = true;
+
+	nextMap->pivot = OFFSET_LB;
+	nextMap->SetWorldPos(Vector2(3300, 600));
+	nextMap->scale = Vector2(75, 100);
+	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	nextMap->isFilled = true;
+
+	stair->SetWorldPos(Vector2(3225, 575));
+	stair->scale = Vector2(50, 50);
+	stair->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stair->isFilled = true;
+
+	startPostion = Vector2(700, 600);
+	returnPosition = Vector2(600, 600);
 }
 
 Scene4_armory::~Scene4_armory()
@@ -31,35 +59,8 @@ Scene4_armory::~Scene4_armory()
 
 void Scene4_armory::Init()
 {
-	tileMap[0]->file = "scene4_armory_0.txt";
-	tileMap[1]->file = "scene4_armory_1.txt";
-	tileMap[2]->file = "scene4_armory_2.txt";
-
-	tileMap[0]->Load();
-	tileMap[1]->Load();
-	tileMap[2]->Load();
-
-	previousMap->SetWorldPos(Vector2(550, 600));
-	previousMap->scale = Vector2(100, 100);
-	previousMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	previousMap->isFilled = true;
-
-	nextMap->SetWorldPos(Vector2(3350, 650));
-	nextMap->scale = Vector2(100, 100);
-	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	nextMap->isFilled = true;
-
-	stair->SetWorldPos(Vector2(3225, 575));
-	stair->scale = Vector2(50, 50);
-	stair->color = Vector4(0.5, 0.5, 0.5, 0.3);
-	stair->isFilled = true;
-
-	startPostion = Vector2(700, 600);
-	returnPosition = Vector2(600, 600);
-
+	GM->player->Init();
 	GM->player->SetPosition(startPostion);
-
-	//GM->monster->AddMonster(new redHairRat(Vector2(3500, 1850)));
 }
 
 void Scene4_armory::Release()
@@ -75,6 +76,8 @@ void Scene4_armory::Update()
 	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
 	ImGui::Text("onWall : %d\n", GM->player->onWall);
 	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
+
+	//Scene_proto::Update();
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;

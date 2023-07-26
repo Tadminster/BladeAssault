@@ -21,21 +21,6 @@ Scene2_inGame::Scene2_inGame()
 	GM->hud = new HUD();
 	GM->player = new Player_kill();
 	GM->monster = new MonsterManager();
-}
-
-Scene2_inGame::~Scene2_inGame()
-{
-	//Scene_proto::~Scene_proto();
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
-	delete nextMap;
-
-	delete lightCeiling;
-	delete lightRoom;
-}
-
-void Scene2_inGame::Init()
-{
 
 	tileMap[0]->file = "scene2_hankroom_0.txt";
 	tileMap[1]->file = "scene2_hankroom_1.txt";
@@ -61,23 +46,34 @@ void Scene2_inGame::Init()
 	tileMap[1]->Load();
 	tileMap[2]->Load();
 
-	nextMap->SetWorldPos(Vector2(1300, 600));
-	nextMap->scale = Vector2(100, 100);
+	nextMap->pivot = OFFSET_LB;
+	nextMap->SetWorldPos(Vector2(1275, 550));
+	nextMap->scale = Vector2(50, 150);
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
 
-	startPostion = Vector2(850, 610);
+	startPostion = Vector2(850, 550);
 
-	isLightDown		= true;
-	isLightOn		= true;
-	LightOffTime	= 0.0f;
+	isLightDown = true;
+	isLightOn = true;
+	LightOffTime = 0.0f;
+}
 
-	GM->hud->Init();
+Scene2_inGame::~Scene2_inGame()
+{
+	//Scene_proto::~Scene_proto();
+	for (int i = 0; i < 3; i++)
+		delete[] tileMap[i];
+	delete nextMap;
 
+	delete lightCeiling;
+	delete lightRoom;
+}
+
+void Scene2_inGame::Init()
+{
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
-
-	elapsedTime = 0.0f;
 }
 
 void Scene2_inGame::Release()
@@ -86,14 +82,11 @@ void Scene2_inGame::Release()
 
 void Scene2_inGame::Update()
 {
-	elapsedTime += DELTA;
+	Scene_proto::Update();
 
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
 	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
 	ImGui::Text("player_posY : %f\n", GM->player->GetCollider()->GetWorldPos().y);
-
-	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
-	ImGui::Text("onWall : %d\n", GM->player->onWall);
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -131,7 +124,7 @@ void Scene2_inGame::Update()
 
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
-		if (elapsedTime > 1.0f)
+		if (localtime > 1.0f)
 			SCENE->ChangeScene("sc3");
 	}
 

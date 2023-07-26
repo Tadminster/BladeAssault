@@ -16,6 +16,7 @@ redHairRat::redHairRat()
 	jump = new ObImage(L"redHairRat_jump.png");
 	attack = new ObImage(L"redHairRat_attack.png");
     shadow = new ObImage(L"character_shadow.png");
+    spawn = new ObImage(L"redHairRat_spawn.png");
 
     collider->pivot = OFFSET_B;
     collider->isFilled = false;
@@ -59,6 +60,16 @@ redHairRat::redHairRat()
     attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
     attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
+    spawn->pivot = OFFSET_B;
+    spawn->SetParentRT(*collider);
+    spawn->SetLocalPosY(-collider->scale.y * 0.7f);
+    spawn->maxFrame.x = 13;
+    spawn->maxFrame.y = 1;
+    spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x * 3;
+    spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 3;
+    spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
+
+
     shadow->pivot = OFFSET_B;
     shadow->SetParentRT(*collider);
     shadow->SetLocalPosY(-collider->scale.y * 0.4);
@@ -69,7 +80,7 @@ redHairRat::redHairRat()
     shadow->color.w = 0.2f;
     shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-    CurrentState = State::IDLE;
+    CurrentState = State::SPAWN;
     dir = LEFT;
 
     hp = 100;

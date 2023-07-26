@@ -111,7 +111,7 @@ void Monster::Update()
 					Jump();
 				}
 				// 플레이어가 더 낮게 있다면 하강
-				else if (distanceY < 0 && onFloor )
+				else if (distanceY < 0 && onFloor)
 				{
 					gravity = 0;
 					CurrentState = State::CROUCH_DOWN;
@@ -195,9 +195,17 @@ void Monster::Update()
 			CurrentState = State::IDLE;
 		}
 	}
+	else if (CurrentState == State::SPAWN)
+	{
+		// SPAWN 대기
+		if (spawn->frame.x == spawn->maxFrame.x - 1)
+		{
+			CurrentState = State::IDLE;
+		}
+	}
 
-	// 중력
-	if (!onWall && !onFloor)
+	// 중력 (바닥과 떨어져 있거나 스폰중이 아닐 때)
+	if (!onWall && !onFloor && CurrentState != State::SPAWN)
 	{
 		gravity += 1500.0f * DELTA;
 		collider->MoveWorldPos(DOWN * gravity * DELTA);
@@ -221,6 +229,9 @@ void Monster::Update()
 		break;
 	case State::ATTACK:
 		attack->Update();
+		break;
+	case State::SPAWN:
+		spawn->Update();
 		break;
 
 	}
@@ -249,6 +260,9 @@ void Monster::Render()
 		break;
 	case State::ATTACK:
 		attack->Render();
+		break;
+	case State::SPAWN:
+		spawn->Render();
 		break;
 	}
 }
@@ -301,7 +315,7 @@ void Monster::actionsWhenDamaged(Vector4 value)
 void Monster::knockBack()
 {
 	// 넉백 방향 계산
-	Vector2 knockBackDir; 
+	Vector2 knockBackDir;
 	if (GM->player->GetCollider()->GetWorldPos().x < this->collider->GetWorldPos().x)
 		knockBackDir = RIGHT;
 	else

@@ -14,6 +14,15 @@ Player::Player()
 	damaged = nullptr;
 	shadow = nullptr;
 	die = nullptr;
+
+	jumpTime = 0.0f;
+	moveSpeed = 350.0f;
+
+	jumpCount = 0;
+	jumpCountMax = 2;
+
+	dashCooldown = 0.0f;
+	dashDealay = 2.0;
 }
 
 Player::~Player()
@@ -27,23 +36,13 @@ Player::~Player()
 
 void Player::Init()
 {
-	CurrentState = State::IDLE;
-	
+	CurrentState = State::STANDBY;
 	lastDir = RIGHT;
 
-	moveSpeed = 350.0f;
-	jumpTime = 0.0f;
-
 	gravity = 0.0f;
+
 	onFloor = false;
 	isLanding = true;
-
-	jumpCount = 0;
-	jumpCountMax = 2;
-
-	dashCooldown = 0.0f;
-	dashDealay = 2.0;
-
 	damageTaken = false;
 }
 
@@ -112,7 +111,7 @@ void Player::Update()
 			CurrentState = PrevState;
 		}
 
-		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.004f));
+		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.015f));
 	}
 	else if (CurrentState == State::JUMP)
 	{
@@ -167,6 +166,11 @@ void Player::Update()
 			CurrentState = PrevState;
 		}
 	}
+	else if (CurrentState == State::CHARGING)
+	{
+		chargingTime = min(chargingTimeMax, chargingTime + DELTA);
+
+	}
 	else if (CurrentState == State::DAMAGED)
 	{
 		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
@@ -189,8 +193,12 @@ void Player::Update()
 	if (dashCooldown > 0.0f)
 		dashCooldown -= DELTA;
 
-	// 중력
-	if (!onWall && !onFloor)
+	// 1. 바닥과 떨어져 있을 때
+	// 2. SPAWN 이나 STANDBY 상태가 아닐 때
+	// 중력적용
+	if (!onWall && !onFloor 
+		&& CurrentState != State::SPAWN
+		&& CurrentState != State::STANDBY)
 	{
 		gravity += 1500.0f * DELTA;
 		collider->MoveWorldPos(DOWN * gravity * DELTA);
@@ -218,6 +226,7 @@ void Player::Update()
 		projectiles.end()
 	);
 
+
 	// 플레이어의 탄 업데이트
 	for (auto& proj : projectiles)
 		proj->Update();
@@ -241,12 +250,16 @@ void Player::Update()
 		jump->Update();
 	else if (CurrentState == State::ATTACK)
 		attack->Update();
+	else if (CurrentState == State::CHARGING)
+		attack->Update();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Update();
 	else if (CurrentState == State::SPAWN)
 		spawn->Update();
 	else if (CurrentState == State::DIE)
 		die->Update();
+	else if (CurrentState == State::STANDBY)
+		idle->Update();
 }
 
 void Player::Render()
@@ -273,12 +286,16 @@ void Player::Render()
 		jump->Render();
 	else if (CurrentState == State::ATTACK)
 		attack->Render();
+	else if (CurrentState == State::CHARGING)
+		attack->Render();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Render();
 	else if (CurrentState == State::SPAWN)
 		spawn->Render();
 	else if (CurrentState == State::DIE)
 		die->Render();
+	else if (CurrentState == State::STANDBY)
+		idle->Render();
 
 	for (auto& proj : projectiles)
 		proj->Render();
@@ -308,7 +325,17 @@ void Player::Control()
 	// 상태 업데이트
 	if (CurrentState == State::IDLE)
 	{
-		// idle -> walk
+		// charging attack
+		if (INPUT->KeyPress(VK_LBUTTON))
+		{
+			chargingTime += DELTA;
+			if (chargingTime > 0.5f)
+			{
+				ChargingAttack();
+			}
+		}
+
+		// idle -> run
 		if (INPUT->KeyPress('A'))
 		{
 			dir = LEFT;
@@ -446,6 +473,8 @@ void Player::Control()
 	}
 	else if (CurrentState == State::ATTACK)
 	{
+
+
 		// attack 중 이동
 		if (INPUT->KeyPress('A'))
 		{
@@ -469,6 +498,33 @@ void Player::Control()
 		}
 
 	}
+	else if (CurrentState == State::CHARGING)
+	{
+		// charing -> idle
+		if (INPUT->KeyUp(VK_LBUTTON))
+		{
+			attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+		}
+
+		// charing -> run
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+			CurrentState = State::RUN;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+			CurrentState = State::RUN;
+		}
+
+		// charing -> jump
+		if (INPUT->KeyDown('W'))
+		{
+			Jump();
+		}
+
+	}
 	else if (CurrentState == State::DAMAGED)
 	{
 		// DAMAGED 중 이동
@@ -481,6 +537,32 @@ void Player::Control()
 			dir = RIGHT;
 		}
 	}
+	else if (CurrentState == State::STANDBY)
+	{
+		// stnadby -> walk
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+			CurrentState = State::RUN;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+			CurrentState = State::RUN;
+		}
+
+		// stnadby -> jump
+		if (INPUT->KeyDown('W'))
+		{
+			Jump();
+		}
+
+		// stnadby -> crouch
+		if (INPUT->KeyPress('S'))
+		{
+			CurrentState = State::CROUCH;
+		}
+	}
 
 	if (dir == LEFT) lastDir = LEFT;
 	else if (dir == RIGHT) lastDir = RIGHT;
@@ -489,8 +571,16 @@ void Player::Control()
 void Player::Attack()
 {
 	attack->frame.x = 0;
+	chargingTime = 0;
 	PrevState = CurrentState;
 	CurrentState = State::ATTACK;
+}
+
+void Player::ChargingAttack()
+{
+	attack->frame.x = 0;
+	attack->ChangeAnim(ANIMSTATE::STOP, 0.1f);
+	CurrentState = State::CHARGING;
 }
 
 void Player::Dash()

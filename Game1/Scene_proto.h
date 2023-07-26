@@ -5,6 +5,7 @@ protected:
 	ObTileMap*		tileMap[3];
 
 	Vector2			startPostion;
+	float			localtime = 0;
 
 public:
 	Scene_proto();

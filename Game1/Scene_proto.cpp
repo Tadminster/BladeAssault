@@ -30,6 +30,7 @@ void Scene_proto::Release()
 
 void Scene_proto::Update()
 {
+	localtime += DELTA;
 }
 
 void Scene_proto::LateUpdate()

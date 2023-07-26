@@ -1,17 +1,4 @@
 #pragma once
-//enum class PlayerState
-//{
-//	IDLE,
-//	RUN,
-//	DASH,
-//	JUMP,
-//	CROUCH,
-//	CROUCH_DOWN,
-//	ATTACK,
-//	DAMAGED,
-//	DIE
-//};
-
 class Player : public Creature
 {
 protected:
@@ -32,6 +19,8 @@ protected:
 	int			mp;
 	int			maxMp;
 
+	float		chargingTime;
+	float		chargingTimeMax;
 	int			jumpCount;
 	int			jumpCountMax;
 	float		dashCooldown;
@@ -51,6 +40,7 @@ public:
 
 	virtual void Control();
 	virtual void Attack() override;
+	virtual void ChargingAttack();
 	virtual void Dash();
 
 	void actionsWhenDamaged(int value);
