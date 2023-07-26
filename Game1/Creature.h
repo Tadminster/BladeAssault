@@ -1,6 +1,7 @@
 #pragma once
 enum class State
 {
+	SPAWN,
 	IDLE,
 	RUN,
 	DASH,
@@ -21,6 +22,7 @@ protected:
 	class ObImage* jump;
 	class ObImage* attack;
 	class ObImage* shadow;
+	class ObImage* spawn;
 
 	State		PrevState;
 	State		CurrentState;

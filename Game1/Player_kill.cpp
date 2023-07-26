@@ -18,6 +18,7 @@ Player_kill::Player_kill()
 	crouch = new ObImage(L"kill_barehand_crouch.png");
 	attack = new ObImage(L"kill_barehand_sub_attack.png");
 	damaged = new ObImage(L"kill_barehand_damaged.png");
+	spawn = new ObImage(L"kill_barehand_spawn.png");
 	die = new ObImage(L"kill_barehand_die.png");
 	shadow = new ObImage(L"character_shadow.png");
 	//hasAxis = true;
@@ -97,6 +98,16 @@ void Player_kill::Init()
 	damaged->scale.x = damaged->imageSize.x / damaged->maxFrame.x * 2.6;
 	damaged->scale.y = damaged->imageSize.y / damaged->maxFrame.y * 2.6;
 	damaged->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
+
+
+	spawn->pivot = OFFSET_B;
+	spawn->SetParentRT(*collider);
+	spawn->SetLocalPosY(-collider->scale.y * 0.3f);
+	spawn->maxFrame.x = 13;
+	spawn->maxFrame.y = 1;
+	spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x * 3;
+	spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 3;
+	spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
 	die->pivot = OFFSET_B;
 	die->SetParentRT(*collider);
