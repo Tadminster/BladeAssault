@@ -176,6 +176,14 @@ void Player::Update()
 			CurrentState = PrevState;
 		}
 	}
+	else if (CurrentState == State::SPAWN)
+	{
+		// SPAWN 대기
+		if (spawn->frame.x == spawn->maxFrame.x - 1)
+		{
+			CurrentState = State::IDLE;
+		}
+	}
 
 	// 대쉬 쿨타임
 	if (dashCooldown > 0.0f)
@@ -235,6 +243,8 @@ void Player::Update()
 		attack->Update();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Update();
+	else if (CurrentState == State::SPAWN)
+		spawn->Update();
 	else if (CurrentState == State::DIE)
 		die->Update();
 }
@@ -265,6 +275,8 @@ void Player::Render()
 		attack->Render();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Render();
+	else if (CurrentState == State::SPAWN)
+		spawn->Render();
 	else if (CurrentState == State::DIE)
 		die->Render();
 
