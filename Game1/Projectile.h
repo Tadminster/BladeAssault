@@ -2,7 +2,8 @@
 enum class DamageType
 {
     NORMAL,
-    EXPLOSION
+    EXPLOSION,
+    PENETRATION
 };
 
 class Projectile

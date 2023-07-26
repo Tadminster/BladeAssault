@@ -32,6 +32,7 @@ Player::~Player()
 	delete crouch;
 	delete damaged;
 	delete die;
+	delete charging;
 }
 
 void Player::Init()
@@ -43,6 +44,7 @@ void Player::Init()
 
 	onFloor = false;
 	isLanding = true;
+	isCharging = false;
 	damageTaken = false;
 }
 
@@ -50,6 +52,7 @@ void Player::Update()
 {
 	ImGui::Text("gravity : %f\n", GM->player->gravity);
 	ImGui::Text("playerState : %d\n", GM->player->CurrentState);
+	ImGui::Text("chargingTime : %f\n", chargingTime);
 
 	lastPos = collider->GetWorldPos();
 	collider->Update();
@@ -170,6 +173,17 @@ void Player::Update()
 	{
 		chargingTime = min(chargingTimeMax, chargingTime + DELTA);
 
+		// 차징 중 프레임 변경
+		if (isCharging && charging->frame.x == chargingEndFrame)
+		{
+			charging->frame.x = chargingStartFrame;
+		}
+
+		// 프레임이 끝나면 charging -> idle
+		if (charging->frame.x == charging->maxFrame.x - 1)
+		{
+			CurrentState = State::IDLE;
+		}
 	}
 	else if (CurrentState == State::DAMAGED)
 	{
@@ -251,7 +265,7 @@ void Player::Update()
 	else if (CurrentState == State::ATTACK)
 		attack->Update();
 	else if (CurrentState == State::CHARGING)
-		attack->Update();
+		charging->Update();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Update();
 	else if (CurrentState == State::SPAWN)
@@ -287,7 +301,7 @@ void Player::Render()
 	else if (CurrentState == State::ATTACK)
 		attack->Render();
 	else if (CurrentState == State::CHARGING)
-		attack->Render();
+		charging->Render();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Render();
 	else if (CurrentState == State::SPAWN)
@@ -369,7 +383,7 @@ void Player::Control()
 			chargingTime += DELTA;
 			if (chargingTime > 0.5f)
 			{
-				ChargingAttack();
+				Charging();
 			}
 		}
 	}
@@ -505,7 +519,8 @@ void Player::Control()
 		// charging -> idle
 		if (INPUT->KeyUp(VK_LBUTTON))
 		{
-			//attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+
+			ChargingAttack();
 		}
 
 		// charging -> run
@@ -572,15 +587,22 @@ void Player::Control()
 void Player::Attack()
 {
 	attack->frame.x = 0;
-	chargingTime = 0;
+	chargingTime = 0.0f;
 	PrevState = CurrentState;
 	CurrentState = State::ATTACK;
 }
 
+void Player::Charging()
+{
+	charging->frame.x = 0;
+	isCharging = true;
+	CurrentState = State::CHARGING;
+}
+
 void Player::ChargingAttack()
 {
-	//attack->frame.x = 0;
-	CurrentState = State::CHARGING;
+	isCharging = false;
+	chargingTime = 0.0f;
 }
 
 void Player::Dash()

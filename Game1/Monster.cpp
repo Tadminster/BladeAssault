@@ -83,10 +83,6 @@ void Monster::Update()
 	int distanceY = GM->player->GetCollider()->GetWorldPos().y - collider->GetWorldPos().y;
 	int distanceX_abs = abs(distanceX);
 	int distanceY_abs = abs(distanceY);
-	ImGui::Text("MonsterState: %d\n", CurrentState);
-	ImGui::Text("distanceX: %d\n", distanceX);
-	ImGui::Text("distanceY: %d\n", distanceY);
-
 
 	if (CurrentState == State::IDLE)
 	{

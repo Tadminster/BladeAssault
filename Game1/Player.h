@@ -3,6 +3,7 @@ class Player : public Creature
 {
 protected:
 
+	ObImage* charging;
 	ObImage* crouch;
 	ObImage* dash;
 	ObImage* damaged;
@@ -21,6 +22,9 @@ protected:
 
 	float		chargingTime;
 	float		chargingTimeMax;
+	int			chargingStartFrame;
+	int			chargingEndFrame;
+
 	int			jumpCount;
 	int			jumpCountMax;
 	float		dashCooldown;
@@ -29,6 +33,7 @@ protected:
 	float		timeOfDamaged;
 
 public:
+	bool		isCharging;
 	bool		damageTaken;
 
 public:
@@ -40,6 +45,7 @@ public:
 
 	virtual void Control();
 	virtual void Attack() override;
+	virtual void Charging();
 	virtual void ChargingAttack();
 	virtual void Dash();
 

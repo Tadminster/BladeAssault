@@ -67,57 +67,92 @@ void Projectile::Render()
 
 bool Projectile::hasCollideWithMonster()
 {
-    // 모든 몬스터를 순회
-    for (auto& enemy : GM->monster->GetEnemy())
+    // 발사체가 관통 타입이면
+    if (this->tag == DamageType::PENETRATION)
     {
-        // 몬스터가 발사체와 충돌했으면
-        if (enemy->GetCollider()->Intersect(this->collider))
+        // 모든 몬스터를 순회
+        for (auto& monster : GM->monster->GetEnemy())
         {
-            // 이전에 충돌한적이 있는지 비교
-            for (auto& crashed : crash)
-                if (crashed == enemy) return false;
-
-            // 없으면 새 충돌벡터에 추가
-            this->crash.emplace_back(enemy);
-            // 남은 관통횟수 -1
-            this->penetration--;
-
-            // 발사체가 폭발형 타입인지 확인
-            if (this->tag == DamageType::EXPLOSION)
+            // 몬스터가 공격 범위 안에 들었는지 확인
+            if (monster->GetCollider()->Intersect(this->collider))
             {
+                // 이전에 충돌한적이 있는지 비교
+                for (auto& crashedMonster : crash)
+                    if (crashedMonster == monster) return false;
 
-                for (auto& InRangeCheck : GM->monster->GetEnemy())
+                // 충돌한 적이 없으면
                 {
-                    // null check
-                    if (collider_range) 
+                    // 충돌 벡터에 추가
+                    this->crash.emplace_back(monster);
+
+                    // 몬스터 데미지 액션
+                    monster->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
+                }
+            }
+        }
+    }
+    // 그외의 타입이면
+    else
+    {
+        // 모든 몬스터를 순회
+        for (auto& monster : GM->monster->GetEnemy())
+        {
+            // 몬스터가 발사체와 충돌했으면
+            if (monster->GetCollider()->Intersect(this->collider))
+            {
+                // 이전에 충돌한적이 있는지 비교
+                for (auto& crashedMonster : crash)
+                    if (crashedMonster == monster) return false;
+
+                // 충돌한 적이 없으면
+                {
+                    // 충돌 벡터에 추가
+                    this->crash.emplace_back(monster);
+
+                    // 남은 관통횟수 -1
+                    this->penetration--;
+
+                    // 발사체가 노말 타입이면
+                    if (this->tag == DamageType::NORMAL)
                     {
-                        // 몬스터가 폭발 범위 안에 들었는지 확인
-                        if (InRangeCheck->GetCollider()->Intersect(this->collider_range))
-                        {
-                            if (InRangeCheck == enemy) continue;
-                            // 몬스터 데미지 액션
-                            InRangeCheck->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
-                        }
+                        // 몬스터 데미지 액션
+                        monster->actionsWhenDamaged(Vector4(-damage, shove, 0, 0));
                     }
 
 
+                    // 발사체가 폭발 타입이면 범위에 추가 폭발데미지
+                    else if (this->tag == DamageType::EXPLOSION)
+                    {
+                        for (auto& InRangeCheck : GM->monster->GetEnemy())
+                        {
+                            // null check
+                            if (collider_range)
+                            {
+                                // 몬스터가 폭발 범위 안에 들었는지 확인
+                                if (InRangeCheck->GetCollider()->Intersect(this->collider_range))
+                                {
+                                    if (InRangeCheck == monster) continue;
+                                    // 몬스터 데미지 액션
+                                    InRangeCheck->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
+                                }
+                            }
+                        }
+                    }
+
+                    // 충돌 이펙트
+                    AfterEffect();
+
+                    // 관통력이 남았으면
+                    if (penetration > 0)
+                        return false;
+                    // 관통력이 0이면 발사체 삭제
+                    else
+                    {
+                        delete this;
+                        return true;
+                    }
                 }
             }
-            // 충돌 이펙트
-            AfterEffect();
-
-            // 몬스터 데미지 액션
-            enemy->actionsWhenDamaged(Vector4(-damage, shove, 0, 0));
-
-            // 남은 관통력 반환
-            if (penetration > 0) return false;
-            else 
-            {
-                // 관통력이 0이면 발사체 삭제
-                delete this;
-                return true;
-            }
-                
         }
     }
 
