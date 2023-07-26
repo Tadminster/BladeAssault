@@ -325,15 +325,7 @@ void Player::Control()
 	// 상태 업데이트
 	if (CurrentState == State::IDLE)
 	{
-		// charging attack
-		if (INPUT->KeyPress(VK_LBUTTON))
-		{
-			chargingTime += DELTA;
-			if (chargingTime > 0.5f)
-			{
-				ChargingAttack();
-			}
-		}
+
 
 		// idle -> run
 		if (INPUT->KeyPress('A'))
@@ -369,6 +361,16 @@ void Player::Control()
 		if (INPUT->KeyDown(VK_LBUTTON))
 		{
 			Attack();
+		}
+
+		// charging attack
+		if (INPUT->KeyPress(VK_LBUTTON))
+		{
+			chargingTime += DELTA;
+			if (chargingTime > 0.5f)
+			{
+				ChargingAttack();
+			}
 		}
 	}
 	else if (CurrentState == State::RUN)
@@ -500,13 +502,13 @@ void Player::Control()
 	}
 	else if (CurrentState == State::CHARGING)
 	{
-		// charing -> idle
+		// charging -> idle
 		if (INPUT->KeyUp(VK_LBUTTON))
 		{
-			attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+			//attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
 		}
 
-		// charing -> run
+		// charging -> run
 		if (INPUT->KeyPress('A'))
 		{
 			dir = LEFT;
@@ -518,12 +520,11 @@ void Player::Control()
 			CurrentState = State::RUN;
 		}
 
-		// charing -> jump
+		// charging -> jump
 		if (INPUT->KeyDown('W'))
 		{
 			Jump();
 		}
-
 	}
 	else if (CurrentState == State::DAMAGED)
 	{
@@ -578,8 +579,7 @@ void Player::Attack()
 
 void Player::ChargingAttack()
 {
-	attack->frame.x = 0;
-	attack->ChangeAnim(ANIMSTATE::STOP, 0.1f);
+	//attack->frame.x = 0;
 	CurrentState = State::CHARGING;
 }
 

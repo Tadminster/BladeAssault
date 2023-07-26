@@ -119,8 +119,8 @@ Player_kill::Player_kill()
 	shadow->color.w = 0.2f;
 	shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-	charingTime = 0.0f;
-	charingTime = 3.0f;
+	chargingTime = 0.0f;
+	chargingTime = 3.0f;
 
 
 	hp = 150;
@@ -134,26 +134,6 @@ Player_kill::Player_kill()
 	jumpSpeed = 900.0f;
 }
 
-//Player_kill::~Player_kill()
-//{
-//	Player::~Player();
-//}
-//
-//void Player_kill::Init()
-//{
-//	Player::Init();
-//}
-//
-//
-//void Player_kill::Update()
-//{
-//	Player::Update();
-//}
-//
-//void Player_kill::Render()
-//{
-//	Player::Render();
-//}
 
 void Player_kill::Attack()
 {
@@ -189,4 +169,27 @@ void Player_kill::Attack()
 		lastShotTime = currentTime;
 		timeSinceLastTime = 1.0f / attackSpeed;
 	}
+}
+
+void Player_kill::ChargingAttack()
+{
+	Player::ChargingAttack();
+
+	// 발사 위치 계산
+	Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.65);
+
+	// 탄생성
+	kill_barehand_atk* proj = new kill_barehand_atk
+	(
+		spawnPos,										// 생성위치
+		lastDir,										// 각도
+		700,											// 발사체 속도
+		attackRange,									// 사거리
+		damage,											// 공격력
+		1,												// 관통력
+		1												// 폭발범위
+	);
+
+	//벡터에 탄 push
+	projectiles.emplace_back(proj);
 }

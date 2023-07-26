@@ -12,4 +12,5 @@ public:
 	//void Update() override;
 	//void Render() override;
 	void Attack() override;
+	void ChargingAttack() override;
 };

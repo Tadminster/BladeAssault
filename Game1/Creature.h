@@ -1,18 +1,18 @@
 #pragma once
 enum class State
 {
-	SPAWN,
-	STANDBY,
-	IDLE,
-	RUN,
-	DASH,
-	JUMP,
-	CROUCH,
-	CROUCH_DOWN,
-	ATTACK,
-	CHARGING,
-	DAMAGED,
-	DIE
+	SPAWN,			// 0
+	STANDBY,		// 1
+	IDLE,			// 2
+	RUN,			// 3
+	DASH,			// 4
+	JUMP,			// 5
+	CROUCH,			// 6
+	CROUCH_DOWN,	// 7
+	ATTACK,			// 8
+	CHARGING,		// 9
+	DAMAGED,		// 10
+	DIE,			// 11
 };
 
 class Creature
