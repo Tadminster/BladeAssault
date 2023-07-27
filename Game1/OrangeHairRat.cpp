@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "Projectile.h"
-#include "RedHairRat_atk.h"
+//#include "RedHairRat_atk.h"
 
 #include "MonsterManager.h"
 
@@ -123,17 +123,17 @@ void orangeHairRat::Attack()
         + UP * collider->scale.y * 0.8;
 
     // 탄생성
-    orangeHairRat_atk* proj = new orangeHairRat_atk
-    (
-        spawnPos,										// 생성위치
-        dir,										    // 각도
-        5,   											// 발사체 속도
-        attackRange, 									// 사거리
-        damage,											// 공격력
-        1,												// 관통력
-        1												// 폭발범위
-    );
+    //RedHairRat_atk* proj = new RedHairRat_atk
+    //(
+    //    spawnPos,										// 생성위치
+    //    dir,										    // 각도
+    //    5,   											// 발사체 속도
+    //    attackRange, 									// 사거리
+    //    damage,											// 공격력
+    //    1,												// 관통력
+    //    1												// 폭발범위
+    //);
 
     //벡터에 탄 push
-    GM->monster->GetProjectiles().emplace_back(proj);
+    //GM->monster->GetProjectiles().emplace_back(proj);
 }
