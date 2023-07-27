@@ -90,7 +90,7 @@ orangeHairRat::orangeHairRat()
     attackRange = 1;
     moveSpeed = 100;
     jumpSpeed = 700.0f;
-    maxAttackDistance = 150;
+    maxAttackDistance = 450;
 
     timeTakenToAttackOnce = 1.0f / attackSpeed;
 }
