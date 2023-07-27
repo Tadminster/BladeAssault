@@ -1,13 +1,17 @@
 #pragma once
+
+// @brief		모든 플레이어 캐릭터의 부모 클래스
 class Player : public Creature
 {
 protected:
 
 	ObImage* charging;
+	ObImage* skill;
 	ObImage* crouch;
 	ObImage* dash;
 	ObImage* damaged;
 	ObImage* die;
+
 
 	//PlayerState PrevState;
 	//PlayerState	CurrentState;
@@ -45,6 +49,7 @@ public:
 
 	virtual void Control();
 	virtual void Attack() override;
+	virtual void Skill();
 	virtual void Charging();
 	virtual void ChargingAttack();
 	virtual void Dash();

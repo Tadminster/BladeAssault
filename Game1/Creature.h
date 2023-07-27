@@ -11,10 +11,12 @@ enum class State
 	CROUCH_DOWN,	// 7
 	ATTACK,			// 8
 	CHARGING,		// 9
-	DAMAGED,		// 10
-	DIE,			// 11
+	SKILL,			// 10
+	DAMAGED,		// 11
+	DIE				// 12
 };
 
+// @brief		모든 생물의 부모 클래스
 class Creature
 {
 protected:

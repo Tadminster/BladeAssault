@@ -6,6 +6,8 @@ enum class MonsterDamageTaken
 	IMMUNE
 };
 
+// @brief		모든 몬스터의 부모 클래스
+//				몬스터의 공통된 행동을 정의
 class Monster : public Creature
 {
 protected:

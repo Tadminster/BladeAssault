@@ -19,6 +19,7 @@ Player_kill::Player_kill()
 	crouch = new ObImage(L"kill_barehand_crouch.png");
 	attack = new ObImage(L"kill_barehand_sub_attack.png");
 	charging = new ObImage(L"kill_barehand_charging.png");
+	skill = new ObImage(L"kill_core_ignition_flare_blitz.png");
 	damaged = new ObImage(L"kill_barehand_damaged.png");
 	spawn = new ObImage(L"kill_barehand_spawn.png");
 	die = new ObImage(L"kill_barehand_die.png");
@@ -103,6 +104,15 @@ Player_kill::Player_kill()
 	chargingFx->color.w = 0.35f;
 	chargingFx->SetLocalPosY(-collider->scale.y * 0.62f);
 	chargingFx->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
+
+	skill->pivot = OFFSET_B;
+	skill->SetParentRT(*collider);
+	skill->maxFrame.x = 31;
+	skill->maxFrame.y = 1;
+	skill->scale.x = skill->imageSize.x / skill->maxFrame.x * 3;
+	skill->scale.y = skill->imageSize.y / skill->maxFrame.y * 3;
+	skill->SetLocalPosY(-collider->scale.y * 0.3f);
+	skill->ChangeAnim(ANIMSTATE::ONCE, 0.085f, true);
 
 	damaged->pivot = OFFSET_B;
 	damaged->SetParentRT(*collider);

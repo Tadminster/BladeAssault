@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "redHairRat.h"
+#include "OrangeHairRat.h"
 #include "Scene_proto.h"
 #include "Scene3_jazzBar.h"
 
@@ -71,7 +72,7 @@ void Scene3_jazzBar::Init()
 {
 	GM->player->SetPosition(startPostion);
 	GM->monster->AddMonster(new redHairRat(Vector2(3500, 2000)));
-	GM->monster->AddMonster(new redHairRat(Vector2(3600, 2000)));
+	GM->monster->AddMonster(new orangeHairRat(Vector2(3600, 2000)));
 }
 
 void Scene3_jazzBar::Release()

@@ -85,7 +85,7 @@ redHairRat::redHairRat()
 
     hp = 100;
     damage = 10;
-    attackSpeed = 0.3f;
+    attackSpeed = 0.4f;
     attackFrame = 6;
     attackRange = 1;
     moveSpeed = 100;

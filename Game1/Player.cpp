@@ -195,6 +195,10 @@ void Player::Update()
 			CurrentState = State::IDLE;
 		}
 	}
+	else if (CurrentState == State::SKILL)
+	{
+
+	}
 	else if (CurrentState == State::DAMAGED)
 	{
 		// 데미지를 입고 있는 상태일 때 감속
@@ -278,6 +282,8 @@ void Player::Update()
 		attack->Update();
 	else if (CurrentState == State::CHARGING)
 		charging->Update();
+	else if (CurrentState == State::SKILL)
+		skill->Update();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Update();
 	else if (CurrentState == State::SPAWN)
@@ -314,6 +320,8 @@ void Player::Render()
 		attack->Render();
 	else if (CurrentState == State::CHARGING)
 		charging->Render();
+	else if (CurrentState == State::SKILL)
+		skill->Render();
 	else if (CurrentState == State::DAMAGED)
 		damaged->Render();
 	else if (CurrentState == State::SPAWN)
@@ -398,6 +406,12 @@ void Player::Control()
 				Charging();
 			}
 		}
+
+		// idle -> skill
+		if (INPUT->KeyDown(VK_RBUTTON))
+		{
+			Skill();
+		}
 	}
 	else if (CurrentState == State::RUN)
 	{
@@ -435,6 +449,12 @@ void Player::Control()
 		{
 			Attack();
 		}
+
+		// run -> skill
+		if (INPUT->KeyDown(VK_RBUTTON))
+		{
+			Skill();
+		}
 	}
 	else if (CurrentState == State::JUMP)
 	{
@@ -465,6 +485,12 @@ void Player::Control()
 		if (INPUT->KeyDown(VK_LBUTTON))
 		{
 			Attack();
+		}
+
+		// jump -> skill
+		if (INPUT->KeyDown(VK_RBUTTON))
+		{
+			Skill();
 		}
 	}
 	else if (CurrentState == State::CROUCH)
@@ -553,9 +579,21 @@ void Player::Control()
 			Jump();
 		}
 	}
+	else if (CurrentState == State::SKILL)
+	{
+		// skill 중 이동
+		if (INPUT->KeyPress('A'))
+		{
+			dir = LEFT;
+		}
+		else if (INPUT->KeyPress('D'))
+		{
+			dir = RIGHT;
+		}
+	}
 	else if (CurrentState == State::DAMAGED)
 	{
-		// DAMAGED 중 이동
+		// damaged 중 이동
 		if (INPUT->KeyPress('A'))
 		{
 			dir = LEFT;
@@ -600,6 +638,13 @@ void Player::Attack()
 {
 	attack->frame.x = 0;
 	chargingTime = 0.0f;
+	PrevState = CurrentState;
+	CurrentState = State::ATTACK;
+}
+
+void Player::Skill()
+{
+	skill->frame.x = 0;
 	PrevState = CurrentState;
 	CurrentState = State::ATTACK;
 }

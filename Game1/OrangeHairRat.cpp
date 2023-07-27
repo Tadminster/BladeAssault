@@ -27,7 +27,7 @@ orangeHairRat::orangeHairRat()
     idle->pivot = OFFSET_B;
     idle->SetParentRT(*collider);
     idle->SetLocalPosY(-collider->scale.y * 0.5);
-    idle->maxFrame.x = 9;
+    idle->maxFrame.x = 7;
     idle->maxFrame.y = 1;
     idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3;
     idle->scale.y = idle->imageSize.y / idle->maxFrame.y * 3;
@@ -36,7 +36,7 @@ orangeHairRat::orangeHairRat()
     run->pivot = OFFSET_B;
     run->SetParentRT(*collider);
     run->SetLocalPosY(-collider->scale.y * 0.5);
-    run->maxFrame.x = 7;
+    run->maxFrame.x = 6;
     run->maxFrame.y = 1;
     run->scale.x = run->imageSize.x / run->maxFrame.x * 3;
     run->scale.y = run->imageSize.y / run->maxFrame.y * 3;
@@ -54,7 +54,7 @@ orangeHairRat::orangeHairRat()
     attack->pivot = OFFSET_B;
     attack->SetParentRT(*collider);
     attack->SetLocalPosY(-collider->scale.y * 0.5);
-    attack->maxFrame.x = 9;
+    attack->maxFrame.x = 12;
     attack->maxFrame.y = 1;
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
     attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
@@ -86,7 +86,7 @@ orangeHairRat::orangeHairRat()
     hp = 100;
     damage = 10;
     attackSpeed = 0.3f;
-    attackFrame = 6;
+    attackFrame = 4;
     attackRange = 1;
     moveSpeed = 100;
     jumpSpeed = 700.0f;
