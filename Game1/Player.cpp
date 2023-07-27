@@ -94,8 +94,10 @@ void Player::Update()
 	// 상태 업데이트
 	if (CurrentState == State::IDLE)
 	{
+		// 상태가 IDLE인데, 바닥에 있지 않으면
 		if (!onFloor && !onWall)
 		{
+			// jump 상태로 변경
 			jump->frame.y = 1;
 			CurrentState = State::JUMP;
 		}
@@ -106,6 +108,7 @@ void Player::Update()
 	}
 	else if (CurrentState == State::DASH)
 	{
+		// dash 가중치, 시간 계산용
 		static float weight = 0;
 		weight += DELTA * 3;
 		if (weight >= 1.0f || onWallSlide)
@@ -114,6 +117,7 @@ void Player::Update()
 			CurrentState = PrevState;
 		}
 
+		// dash
 		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.015f));
 	}
 	else if (CurrentState == State::JUMP)
@@ -143,6 +147,7 @@ void Player::Update()
 	}
 	else if (CurrentState == State::CROUCH)
 	{
+		// 웅크리고 있을 땐 충돌체 크기 줄이기
 		if (collider->scale.y != 70)
 			collider->scale.y = 70;
 	}
@@ -151,19 +156,24 @@ void Player::Update()
 		jump->frame.y = 1;
 		jumpTime += DELTA;
 		isLanding = false;
-
+			
+		// 하강 후 0.3s 이상 경과 && 바닥에 닿았으면 
 		if (jumpTime > 0.3f || onWall)
 		{
+			// 착지
 			isLanding = true;
 			jumpTime = 0.0f;
 
+			// crouch down -> idle
 			CurrentState = State::IDLE;
 		}
 	}
 	else if (CurrentState == State::ATTACK)
 	{
+		// 공격 중 이동은 감속 (0.5배)
 		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
 
+		// 프레임이 끝나면 attack -> PrevState
 		if (attack->frame.x == attack->maxFrame.x - 1)
 		{
 			CurrentState = PrevState;
@@ -187,8 +197,10 @@ void Player::Update()
 	}
 	else if (CurrentState == State::DAMAGED)
 	{
+		// 데미지를 입고 있는 상태일 때 감속
 		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
 
+		// 데미지 입은 후 0.1초 후에 damaged -> PrevState
 		if (timeOfDamaged + 0.1f < TIMER->GetWorldTime())
 		{
 			CurrentState = PrevState;

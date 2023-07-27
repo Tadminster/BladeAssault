@@ -86,7 +86,7 @@ bool Projectile::hasCollideWithMonster()
                     this->crash.emplace_back(monster);
 
                     // 몬스터 데미지 액션
-                    monster->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
+                    monster->actionsWhenDamaged(Vector4(-damage, shove, 0, 0));
                 }
             }
         }

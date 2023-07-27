@@ -226,8 +226,6 @@ void Player_kill::Attack()
 
 void Player_kill::ChargingAttack()
 {
-	Player::ChargingAttack();
-
 	// 발사 위치 계산
 	Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.65);
 
@@ -238,10 +236,13 @@ void Player_kill::ChargingAttack()
 		lastDir,										// 각도
 		3,												// 발사체 속도
 		1,												// 사거리
-		damage,											// 공격력
+		damage * (chargingTime + 1),					// 공격력
 		99,												// 관통력
 		1												// 폭발범위
 	);
+
+	// chargingTime = 0.0f;
+	Player::ChargingAttack();
 
 	//벡터에 탄 push
 	projectiles.emplace_back(proj);
