@@ -66,6 +66,9 @@
     <ClInclude Include="kill_barehand_skill.h">
       <Filter>Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="Scene7_undercity3.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -131,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="kill_barehand_skill.cpp">
       <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene7_undercity3.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
