@@ -16,7 +16,7 @@ orangeHairRat::orangeHairRat()
     jump = new ObImage(L"orangeHairRat_jump.png");
     attack = new ObImage(L"orangeHairRat_attack.png");
     shadow = new ObImage(L"character_shadow.png");
-    spawn = new ObImage(L"orangeHairRat_spawn.png");
+    spawn = new ObImage(L"monster_spawn.png");
 
     collider->pivot = OFFSET_B;
     collider->isFilled = false;
