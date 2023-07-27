@@ -57,6 +57,9 @@
     <ClInclude Include="kill_barehand_ChargingAtk.h">
       <Filter>Object\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="orangeHairRat.h">
+      <Filter>Object\Creature\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -113,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="kill_barehand_ChargingAtk.cpp">
       <Filter>Object\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="orangeHairRat.cpp">
+      <Filter>Object\Creature\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

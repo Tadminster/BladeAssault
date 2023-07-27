@@ -26,6 +26,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
+    <ClInclude Include="orangeHairRat.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player_kill.h" />
     <ClInclude Include="Projectile.h" />
@@ -48,6 +49,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterManager.cpp" />
+    <ClCompile Include="orangeHairRat.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player_kill.cpp" />
     <ClCompile Include="Projectile.cpp" />
