@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "redHairRat.h"
+#include "orangeHairRat.h"
 #include "Scene_proto.h"
 #include "Scene5_undercity1.h"
 
@@ -46,12 +47,12 @@ void Scene5_undercity1::Init()
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
 
-	GM->monster->AddMonster(new redHairRat(Vector2(750, 900)));
+	GM->monster->AddMonster(new orangeHairRat(Vector2(750, 900)));
 	GM->monster->AddMonster(new redHairRat(Vector2(1000, 900)));
 	GM->monster->AddMonster(new redHairRat(Vector2(1200, 900)));
 	GM->monster->AddMonster(new redHairRat(Vector2(1500, 900)));
 	GM->monster->AddMonster(new redHairRat(Vector2(1750, 900)));
-	GM->monster->AddMonster(new redHairRat(Vector2(2000, 900)));
+	GM->monster->AddMonster(new orangeHairRat(Vector2(2000, 900)));
 }
 
 void Scene5_undercity1::Release()

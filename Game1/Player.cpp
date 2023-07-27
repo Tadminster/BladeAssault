@@ -33,6 +33,7 @@ Player::~Player()
 	delete damaged;
 	delete die;
 	delete charging;
+	delete skill;
 }
 
 void Player::Init()
@@ -71,6 +72,7 @@ void Player::Update()
 		attack->reverseLR = true;
 		damaged->reverseLR = true;
 		die->reverseLR = false;
+		skill->reverseLR = true;
 
 	}
 	else if (dir == RIGHT)
@@ -83,6 +85,7 @@ void Player::Update()
 		attack->reverseLR = false;
 		damaged->reverseLR = false;
 		die->reverseLR = true;
+		skill->reverseLR = false;
 	}
 
 	// 사망 처리
@@ -198,6 +201,11 @@ void Player::Update()
 	else if (CurrentState == State::SKILL)
 	{
 
+		// 프레임이 끝나면 charging -> idle
+		if (skill->frame.x == skill->maxFrame.x - 1)
+		{
+			CurrentState = State::IDLE;
+		}
 	}
 	else if (CurrentState == State::DAMAGED)
 	{
@@ -642,12 +650,7 @@ void Player::Attack()
 	CurrentState = State::ATTACK;
 }
 
-void Player::Skill()
-{
-	skill->frame.x = 0;
-	PrevState = CurrentState;
-	CurrentState = State::ATTACK;
-}
+
 
 void Player::Charging()
 {
@@ -660,6 +663,17 @@ void Player::ChargingAttack()
 {
 	isCharging = false;
 	chargingTime = 0.0f;
+}
+
+void Player::Skill()
+{
+	skill->frame.x = 0;
+	PrevState = CurrentState;
+	CurrentState = State::SKILL;
+}
+
+void Player::SkillAttack()
+{
 }
 
 void Player::Dash()

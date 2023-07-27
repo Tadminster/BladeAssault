@@ -29,12 +29,14 @@ public:
 
     Projectile() = default;
     // @brief 발사체 생성자
+    // @param spawnPos 발사체 스케일
     // @param spawnPos 발사체 생성 위치
     // @param dir 발사체 방향
     // @param speed 발사체 속도
     // @param range 발사체 사정거리
     // @param damage 발사체 데미지
     // @param penetration 관통력
+    Projectile(float scale, Vector2 spawnPos, Vector2 dir, float speed, float range, float damage, int penetration);
     Projectile(Vector2 spawnPos, Vector2 dir, float speed, float range, float damage, int penetration);
     ~Projectile();  
     virtual void        Update();

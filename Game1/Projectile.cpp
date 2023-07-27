@@ -7,6 +7,7 @@
 
 Projectile::Projectile
 (
+    float scale,
     Vector2 spawnPos,
     Vector2 dir,
     float speed,
@@ -25,11 +26,42 @@ Projectile::Projectile
     traveledDistance(0.f),
     shove(300)
 {
-    collider->rotation.z = atanf(dir.y / dir.x);
-    collider->scale.x = 10;
-    collider->scale.y = 10;
-    collider->isFilled = false;
-    collider->SetWorldPos(spawnPos);
+    //collider->rotation.z = atanf(dir.y / dir.x);
+    //collider->scale.x = 10;
+    //collider->scale.y = 10;
+    //collider->isFilled = false;
+    //collider->SetWorldPos(spawnPos);
+
+    //collider_range->SetParentRT(*collider);
+
+    //skin->SetParentRT(*collider);
+}
+
+Projectile::Projectile
+(
+    Vector2 spawnPos,
+    Vector2 dir,
+    float speed,
+    float range,
+    float damage,
+    int   penetration
+) :
+    collider(new ObRect()),
+    collider_range(new ObCircle()),
+    skin(nullptr),
+    dir(dir),
+    speed(speed),
+    range(range),
+    damage(damage),
+    penetration(penetration),
+    traveledDistance(0.f),
+    shove(300)
+{
+    //collider->rotation.z = atanf(dir.y / dir.x);
+    //collider->scale.x = 10;
+    //collider->scale.y = 10;
+    //collider->isFilled = false;
+    //collider->SetWorldPos(spawnPos);
 
     //collider_range->SetParentRT(*collider);
 
@@ -86,7 +118,7 @@ bool Projectile::hasCollideWithMonster()
                     this->crash.emplace_back(monster);
 
                     // 몬스터 데미지 액션
-                    monster->actionsWhenDamaged(Vector4(-damage, shove, 0, 0));
+                    monster->actionsWhenDamaged(Vector4(damage, shove, 0, 0));
                 }
             }
         }
@@ -116,7 +148,7 @@ bool Projectile::hasCollideWithMonster()
                     if (this->tag == DamageType::NORMAL)
                     {
                         // 몬스터 데미지 액션
-                        monster->actionsWhenDamaged(Vector4(-damage, shove, 0, 0));
+                        monster->actionsWhenDamaged(Vector4(damage, shove, 0, 0));
                     }
 
 
@@ -133,7 +165,7 @@ bool Projectile::hasCollideWithMonster()
                                 {
                                     if (InRangeCheck == monster) continue;
                                     // 몬스터 데미지 액션
-                                    InRangeCheck->actionsWhenDamaged(Vector4(-damage * 0.5, shove, 0, 0));
+                                    InRangeCheck->actionsWhenDamaged(Vector4(damage * 0.5, shove, 0, 0));
                                 }
                             }
                         }

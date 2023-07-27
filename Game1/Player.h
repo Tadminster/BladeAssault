@@ -52,6 +52,7 @@ public:
 	virtual void Skill();
 	virtual void Charging();
 	virtual void ChargingAttack();
+	virtual void SkillAttack();
 	virtual void Dash();
 
 	void actionsWhenDamaged(int value);

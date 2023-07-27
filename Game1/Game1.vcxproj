@@ -23,10 +23,12 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="kill_barehand_atk.h" />
     <ClInclude Include="kill_barehand_ChargingAtk.h" />
+    <ClInclude Include="kill_barehand_skill.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
     <ClInclude Include="orangeHairRat.h" />
+    <ClInclude Include="orangeHairRat_atk.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player_kill.h" />
     <ClInclude Include="Projectile.h" />
@@ -46,10 +48,12 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="kill_barehand_atk.cpp" />
     <ClCompile Include="kill_barehand_ChargingAtk.cpp" />
+    <ClCompile Include="kill_barehand_skill.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterManager.cpp" />
     <ClCompile Include="orangeHairRat.cpp" />
+    <ClCompile Include="orangeHairRat_atk.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player_kill.cpp" />
     <ClCompile Include="Projectile.cpp" />

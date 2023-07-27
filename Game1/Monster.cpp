@@ -303,7 +303,7 @@ void Monster::actionsWhenDamaged(Vector4 value)
 		attack->color = Vector4(1, 1, 1, 0.5);
 	}
 	// 체력 감소
-	this->hp = max(hp + value.x, 0);
+	this->hp = max(0, hp - value.x);
 	// 넉백 계수
 	knockBackFactor = value.y;
 }

@@ -6,6 +6,10 @@ class Player_kill : public Player
 private:
 	class ObImage* chargingFx;
 
+	bool			isSkill1;
+	bool			isSkill2;
+	bool			isSkill3;
+
 public:
 	Player_kill();
 	//~Player_kill() override;
@@ -14,4 +18,6 @@ public:
 	void Render() override;
 	void Attack() override;
 	void ChargingAttack() override;
+	void Skill() override;
+	void SkillAttack() override;
 };

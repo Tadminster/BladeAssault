@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "kill_barehand_atk.h"
 #include "kill_barehand_ChargingAtk.h"
+#include "kill_barehand_skill.h"
 
 #include "Creature.h"
 #include "Player.h"
@@ -109,10 +110,10 @@ Player_kill::Player_kill()
 	skill->SetParentRT(*collider);
 	skill->maxFrame.x = 31;
 	skill->maxFrame.y = 1;
-	skill->scale.x = skill->imageSize.x / skill->maxFrame.x * 3;
-	skill->scale.y = skill->imageSize.y / skill->maxFrame.y * 3;
-	skill->SetLocalPosY(-collider->scale.y * 0.3f);
-	skill->ChangeAnim(ANIMSTATE::ONCE, 0.085f, true);
+	skill->scale.x = skill->imageSize.x / skill->maxFrame.x * 3.2;
+	skill->scale.y = skill->imageSize.y / skill->maxFrame.y * 3.2;
+	skill->SetLocalPosY(-collider->scale.y * 0.5f);
+	skill->ChangeAnim(ANIMSTATE::ONCE, 0.065f, true);
 
 	damaged->pivot = OFFSET_B;
 	damaged->SetParentRT(*collider);
@@ -166,6 +167,9 @@ Player_kill::Player_kill()
 	attackSpeed = 3.0f;
 	jumpSpeed = 900.0f;
 
+	isSkill1 = false;
+	isSkill2 = false;
+	isSkill3 = false;
 }
 
 
@@ -184,6 +188,30 @@ void Player_kill::Update()
 	{
 		charging->reverseLR = false;
 		chargingFx->SetLocalPosX(collider->scale.x);
+	}
+
+	if (CurrentState == State::SKILL)
+	{
+		if (skill->frame.x == 6 && isSkill1)
+		{
+			isSkill1 = false;
+			SkillAttack();
+		}
+		else if (skill->frame.x == 11 && isSkill2)
+		{
+			isSkill2 = false;
+			SkillAttack();
+		}
+		else if (skill->frame.x == 16 && isSkill3)
+		{
+			isSkill3 = false;
+			SkillAttack();
+		}
+
+		if (skill->frame.x == skill->maxFrame.x - 1)
+		{
+			CurrentState = State::IDLE;
+		}
 	}
 
 	if (CurrentState == State::CHARGING)
@@ -247,6 +275,46 @@ void Player_kill::ChargingAttack()
 		3,												// 발사체 속도
 		1,												// 사거리
 		damage * (chargingTime + 1),					// 공격력
+		99,												// 관통력
+		1												// 폭발범위
+	);
+
+	// chargingTime = 0.0f;
+	Player::ChargingAttack();
+
+	//벡터에 탄 push
+	projectiles.emplace_back(proj);
+}
+
+void Player_kill::Skill()
+{
+	if (mp < 30) return;
+
+	mp -= 30;
+	isSkill1 = true;
+	isSkill2 = true;
+	isSkill3 = true;
+	Player::Skill();
+}
+
+void Player_kill::SkillAttack()
+{
+	// 발사 위치 계산
+	Vector2 spawnPos = collider->GetWorldPos() + (lastDir * collider->scale.x * 0.5);
+	cout << spawnPos.x << endl;
+	cout << spawnPos.y << endl;
+	// Scale 계산
+	float scale = skill->frame.x / 11.0f;
+
+	// 탄생성
+	kill_barehand_skill* proj = new kill_barehand_skill
+	(
+		scale,											// 스킬 크기
+		spawnPos,										// 생성위치
+		lastDir,										// 각도
+		1.5f,											// 발사체 속도
+		1,												// 사거리
+		damage * 3.5f,									// 공격력
 		99,												// 관통력
 		1												// 폭발범위
 	);

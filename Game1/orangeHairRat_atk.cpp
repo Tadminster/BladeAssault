@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Projectile.h"
-#include "redHairRat_atk.h"
+#include "orangeHairRat_atk.h"
 
-redHairRat_atk::redHairRat_atk(
+orangeHairRat_atk::orangeHairRat_atk(
 	Vector2 spawnPos,
 	Vector2 dir,
 	float speed,
@@ -15,18 +15,18 @@ redHairRat_atk::redHairRat_atk(
 
 	collider = new ObRect();
 	collider->SetWorldPos(spawnPos);
-	collider->scale = Vector2(160, 200);
+	collider->scale = Vector2(32, 32);
 	collider->isFilled = false;
 
 	collider_range = nullptr;
 
-	skin = new ObImage(L"alpa.png");
+	skin = new ObImage(L"projectile_orageHairRat.png");
 	skin->SetParentRT(*collider);
-	skin->maxFrame.x = 1;
+	skin->maxFrame.x = 6;
 	skin->maxFrame.y = 1;
 	skin->scale.x = skin->imageSize.x / skin->maxFrame.x * 2;
 	skin->scale.y = skin->imageSize.y / skin->maxFrame.y * 2;
-	skin->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+	skin->ChangeAnim(ANIMSTATE::LOOP, 0.1f);
 	if (dir == LEFT) skin->reverseLR = true;
 
 	this->dir = dir;
@@ -38,19 +38,17 @@ redHairRat_atk::redHairRat_atk(
 	shove = 350;
 }
 
-void redHairRat_atk::Update()
+void orangeHairRat_atk::Update()
 {
 	Projectile::Update();
-	//collider_range->Update();
 }
 
-void redHairRat_atk::Render()
+void orangeHairRat_atk::Render()
 {
-	if (GM->DEBUG_MODE)
-		collider->Render();
+	Projectile::Render();
 }
 
-void redHairRat_atk::AfterEffect()
+void orangeHairRat_atk::AfterEffect()
 {
 	//ObImage* afterImg = new ObImage(L"fireball_explosion.png");
 	//afterImg->SetWorldPos(collider->GetWorldPos());
