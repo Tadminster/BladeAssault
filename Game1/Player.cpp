@@ -21,8 +21,8 @@ Player::Player()
 	jumpCount = 0;
 	jumpCountMax = 2;
 
-	dashCooldown = 0.0f;
-	dashDealay = 2.0;
+	dashRemainingCooldown = 0.0f;
+	dashCooldown = 2.0;
 }
 
 Player::~Player()
@@ -227,9 +227,13 @@ void Player::Update()
 		}
 	}
 
-	// 대쉬 쿨타임
-	if (dashCooldown > 0.0f)
-		dashCooldown -= DELTA;
+	// 대쉬 남은 재사용 대기시간 감소
+	if (dashRemainingCooldown > 0.0f)
+		dashRemainingCooldown -= DELTA;
+
+	// 스킬 남은 재사용 대기시간 감소	
+	if (skillRemainingCooldown > 0.0f)
+		skillRemainingCooldown -= DELTA;
 
 	// 1. 바닥과 떨어져 있을 때
 	// 2. SPAWN 이나 STANDBY 상태가 아닐 때
@@ -679,9 +683,9 @@ void Player::SkillAttack()
 void Player::Dash()
 {
 	// 대시쿨타임이 충족되지 않았으면 리턴
-	if (dashCooldown > 0) return;
+	if (dashRemainingCooldown > 0) return;
 
-	dashCooldown = dashDealay;
+	dashRemainingCooldown = dashCooldown;
 	dash->frame.x = 0;
 	dashTargetPos.x = collider->GetWorldPos().x + (lastDir.x * 300);
 	dashTargetPos.y = collider->GetWorldPos().y + 5;

@@ -24,21 +24,30 @@ protected:
 	int			mp;
 	int			maxMp;
 
-	float		chargingTime;
-	float		chargingTimeMax;
-	int			chargingStartFrame;
-	int			chargingEndFrame;
+	//CHARGING
+	float		chargingTime;				// 충전 시간
+	float		chargingTimeMax;			// 충전 최대 시간
+	int			chargingStartFrame;			// 충전 시작 프레임
+	int			chargingEndFrame;			// 충전 종료 프레임
 
-	int			jumpCount;
-	int			jumpCountMax;
-	float		dashCooldown;
-	float		dashDealay;
+	//SKILL
+	float		skillRemainingCooldown;		// 남은 재사용 대기시간
+	float		skillCooldown;				// 스킬 사용 직후의 재사용 대기시간
 
-	float		timeOfDamaged;
+	//JUMP
+	int			jumpCount;					// 점프 횟수
+	int			jumpCountMax;				// 점프 최대 횟수
+
+	//DASH
+	float		dashRemainingCooldown;		// 남은 재사용 대기시간
+	float		dashCooldown;				// 대쉬 사용 직후의 재사용 대기시간
+
+	//ETC
+	float		timeOfDamaged;				// 피격당한 시간 기록용
 
 public:
-	bool		isCharging;
-	bool		damageTaken;
+	bool		isCharging;					// 차징 중인지 여부
+	bool		damageTaken;				// 피격당했는지 여부(피격FX 출력용)
 
 public:
 	Player();
@@ -60,7 +69,8 @@ public:
 	// Get
 	int		GetMp() { return mp; }
 	int		GetMaxMp() { return maxMp; }
-	float	GetDashCooldown() { return dashCooldown;  }
+	float	GetDashCooldown() { return dashRemainingCooldown;  }
+	float	GetSkillCooldown() { return skillRemainingCooldown; }
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }

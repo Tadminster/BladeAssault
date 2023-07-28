@@ -152,19 +152,23 @@ Player_kill::Player_kill()
 	shadow->color.w = 0.2f;
 	shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-	chargingTime = 0.0f;
-	chargingTimeMax = 3.0f;
-	chargingStartFrame = 1;
+	chargingTime = 0.0f;			// 차징
+	chargingTimeMax = 3.0f;			// 차징 최대 시간
+	chargingStartFrame = 1;		
 	chargingEndFrame = 4;
+
+	skillCooldown = 4.0f;			// 스킬 쿨타임
+	skillRemainingCooldown = 0.0f;	// 스킬 남은 쿨타임
 
 	hp = 150;
 	maxHp = 150;
 	mp = 120;
 	maxMp = 120;
 
-	damage = 10;
-	attackRange = 500;
-	attackSpeed = 3.0f;
+	damage = 10;					// 캐릭터의 기준 공격력
+	defence = 0;					// 캐릭터의 기준 방어력
+	attackRange = 500;				// 기본 공격 사거리
+	attackSpeed = 3.0f;				// 기본 공격 속도
 	jumpSpeed = 900.0f;
 
 	isSkill1 = false;
@@ -175,8 +179,7 @@ Player_kill::Player_kill()
 
 void Player_kill::Update()
 {
-	Player::Update();
-	
+
 	// 스킨 방향 설정
 	if (dir == LEFT)
 	{
@@ -216,6 +219,8 @@ void Player_kill::Update()
 
 	if (CurrentState == State::CHARGING)
 		chargingFx->Update();
+
+	Player::Update();
 }
 
 void Player_kill::Render()
@@ -288,9 +293,11 @@ void Player_kill::ChargingAttack()
 
 void Player_kill::Skill()
 {
-	if (mp < 30) return;
+	// 마나가 없거나 스킬 재사용 대기시간이 남았으면 스킬 사용 불가
+	if (mp < 30 || skillRemainingCooldown > 0.0f) return;
 
 	mp -= 30;
+	skillRemainingCooldown = skillCooldown;
 	isSkill1 = true;
 	isSkill2 = true;
 	isSkill3 = true;
