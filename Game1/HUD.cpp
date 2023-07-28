@@ -25,7 +25,7 @@ HUD::HUD()
 	icon_SPACE = new ObImage(L"ui_keyboard_input_keys_defalut.png");
 
 	icon_mainWeapon = new ObImage(L"playerattack_icon_kill_subweapon.png");
-	icon_skillWeapon = new ObImage(L"playerattack_icon_kill_subweapon.png");
+	icon_skillWeapon = new ObImage(L"playerattack_icon_kill_skill.png");
 	icon_dash = new ObImage(L"playerattack_icon_kill_dash.png");
 
 	damageTaken->space = SPACE::SCREEN;
@@ -201,6 +201,7 @@ HUD::~HUD()
 	TEXTURE->DeleteTexture(L"ui_core_frame_normal.png");
 	TEXTURE->DeleteTexture(L"ui_keyboard_input_keys_defalut.png");
 	TEXTURE->DeleteTexture(L"playerattack_icon_kill_subweapon.png");
+	TEXTURE->DeleteTexture(L"playerattack_icon_kill_skill.png");
 	TEXTURE->DeleteTexture(L"playerattack_icon_kill_dash.png");
 }
 
