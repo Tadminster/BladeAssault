@@ -9,6 +9,7 @@ private:
 	class Scene4_armory* sc4_armory;
 	class Scene5_undercity1* sc5_undercity1;
 	class Scene6_undercity2* sc6_undercity2;
+	class Scene7_undercity3* sc7_undercity3;
 
 public:
 	Main();

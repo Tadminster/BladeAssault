@@ -159,6 +159,7 @@ Player_kill::Player_kill()
 
 	skillCooldown = 4.0f;			// 스킬 쿨타임
 	skillRemainingCooldown = 0.0f;	// 스킬 남은 쿨타임
+	skillManaCost = 30;				// 스킬 마나 소모량
 
 	hp = 150;
 	maxHp = 150;
@@ -195,22 +196,33 @@ void Player_kill::Update()
 
 	if (CurrentState == State::SKILL)
 	{
+		// 카메라 흔들림 효과
+		if (skill->frame.x > 5 && skill->frame.x < 24)
+		{
+			CAM->position.x += (RANDOM->Int(0, 1) ? 2 : -2);
+			CAM->position.y += (RANDOM->Int(0, 1) ? 2 : -2);
+		}
+
+		// 첫번째 공격
 		if (skill->frame.x == 6 && isSkill1)
 		{
 			isSkill1 = false;
 			SkillAttack();
 		}
+		// 두번째 공격
 		else if (skill->frame.x == 11 && isSkill2)
 		{
 			isSkill2 = false;
 			SkillAttack();
 		}
+		// 세번째 공격
 		else if (skill->frame.x == 16 && isSkill3)
 		{
 			isSkill3 = false;
 			SkillAttack();
 		}
 
+		// 마지막 프레임에 도달하면 skill -> idle
 		if (skill->frame.x == skill->maxFrame.x - 1)
 		{
 			CurrentState = State::IDLE;
@@ -294,9 +306,9 @@ void Player_kill::ChargingAttack()
 void Player_kill::Skill()
 {
 	// 마나가 없거나 스킬 재사용 대기시간이 남았으면 스킬 사용 불가
-	if (mp < 30 || skillRemainingCooldown > 0.0f) return;
+	if (mp < skillManaCost || skillRemainingCooldown > 0.0f) return;
 
-	mp -= 30;
+	mp -= skillManaCost;
 	skillRemainingCooldown = skillCooldown;
 	isSkill1 = true;
 	isSkill2 = true;

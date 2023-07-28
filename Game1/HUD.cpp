@@ -231,11 +231,21 @@ void HUD::Update()
 	else if (GM->player->GetDashCooldown() <= 0.0f && icon_dash->color.x != 0.5f)
 		icon_dash->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
 
-	// SKILL 쿨다운 중에 컬러 변경
-	if (GM->player->GetSkillCooldown() > 0.0f && icon_skillWeapon->color.x == 0.5f)
+	// SKILL 컬러 변경
+	if ((GM->player->GetSkillCooldown() > 0.0f		// 스킬 쿨다운 중이거나
+		|| !GM->player->hasEnoughManaForSkill())	// 마나가 부족하면
+		&& icon_skillWeapon->color.x == 0.5f)
+	{
+		// 스킬 아이콘 어두워짐
 		icon_skillWeapon->color = Vector4(0.3f, 0.3f, 0.3f, 0.5f);
-	else if (GM->player->GetSkillCooldown() <= 0.0f && icon_skillWeapon->color.x != 0.5f)
+	}
+	else if (GM->player->GetSkillCooldown() <= 0.0f	// 스킬 쿨다운이 끝났고
+		&& GM->player->hasEnoughManaForSkill()		// 마나가 충분하면
+		&& icon_skillWeapon->color.x != 0.5f)
+	{
+		// 스킬 아이콘 밝아짐
 		icon_skillWeapon->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
+	}
 
 	damageTaken->Update();
 	box_hp->Update();

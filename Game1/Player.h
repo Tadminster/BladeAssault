@@ -33,6 +33,7 @@ protected:
 	//SKILL
 	float		skillRemainingCooldown;		// 남은 재사용 대기시간
 	float		skillCooldown;				// 스킬 사용 직후의 재사용 대기시간
+	int			skillManaCost;					// 스킬 사용시 소모되는 마나
 
 	//JUMP
 	int			jumpCount;					// 점프 횟수
@@ -71,6 +72,7 @@ public:
 	int		GetMaxMp() { return maxMp; }
 	float	GetDashCooldown() { return dashRemainingCooldown;  }
 	float	GetSkillCooldown() { return skillRemainingCooldown; }
+	bool	hasEnoughManaForSkill() { return mp >= skillManaCost; }
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }
