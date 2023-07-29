@@ -16,7 +16,7 @@ public:
 	// @param value 데미지 표시할 값
 	// @param value 0~9: 해당 숫자, 10: ,(콤마)
 	// @param color 데미지 표시할 색상
-	// @param color 0: 빨강, 1: 주황, 2: 노랑, 3: 초록, 4: 파랑, 5: 보라
+	// @param color 0: white, 1: solid red, 2: red, 3: sky, 4: puple, 5: green
 	DamageText(Vector2 spawnPos, int value, int color);
 	~DamageText();
 	void	Init();
