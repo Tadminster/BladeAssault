@@ -11,6 +11,9 @@ enum class MonsterDamageTaken
 class Monster : public Creature
 {
 protected:
+	ObImage*			ui_frame_hp;
+	ObImage*			ui_gauge_hp;
+
 	MonsterDamageTaken	dmgTaken;
 
 	float	knockBackFactor;		// 넉백에 사용되는 계수
@@ -35,7 +38,7 @@ public:
 
 	//
 	bool isDead() const { return hp == 0; }
-	void actionsWhenDamaged(Vector4 value);
+	void actionsWhenDamaged(int damage, int knockBackFactor);
 	void knockBack();
 
 };

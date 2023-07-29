@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Player_kill.h"
 #include "Monster.h"
+#include "DamageDisplayManager.h"
 #include "MonsterManager.h"
 #include "redHairRat.h"
 #include "Scene_proto.h"
@@ -113,6 +114,7 @@ void Scene4_armory::Update()
 	GM->monster->Update();
 	GM->player->Update();
 	GM->hud->Update();
+	Scene_proto::Update();
 }
 
 void Scene4_armory::LateUpdate()
@@ -135,6 +137,8 @@ void Scene4_armory::Render()
 	GM->monster->Render();
 	GM->player->Render();
 	GM->hud->Render();
+	Scene_proto::Render();
+
 }
 
 void Scene4_armory::ResizeScreen()

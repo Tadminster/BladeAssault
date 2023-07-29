@@ -69,7 +69,6 @@ orangeHairRat::orangeHairRat()
     spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 3;
     spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-
     shadow->pivot = OFFSET_B;
     shadow->SetParentRT(*collider);
     shadow->SetLocalPosY(-collider->scale.y * 0.4);
@@ -80,11 +79,17 @@ orangeHairRat::orangeHairRat()
     shadow->color.w = 0.2f;
     shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
+    ui_frame_hp->SetLocalPosX(-collider->scale.x * 0.7f);
+    ui_frame_hp->SetLocalPosY(collider->scale.y * 1.1f);
+    ui_gauge_hp->SetLocalPosX(-collider->scale.x * 0.7f);
+    ui_gauge_hp->SetLocalPosY(collider->scale.y * 1.1f);
+
     CurrentState = State::SPAWN;
     dir = LEFT;
 
-    hp = 100;
-    damage = 10;
+    hp = 80;
+    maxHp = 80;
+    damage = 12;
     attackSpeed = 0.3f;
     attackFrame = 4;
     attackRange = 1000;
@@ -102,6 +107,7 @@ orangeHairRat::orangeHairRat(Vector2 spawnPos) : orangeHairRat()
 
 orangeHairRat::~orangeHairRat()
 {
+
 }
 
 void orangeHairRat::Update()

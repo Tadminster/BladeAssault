@@ -5,6 +5,7 @@
 #include "Player_kill.h"
 #include "Monster.h"
 #include "MonsterManager.h"
+#include "DamageDisplayManager.h"
 #include "redHairRat.h"
 #include "OrangeHairRat.h"
 #include "Scene_proto.h"
@@ -127,6 +128,7 @@ void Scene3_jazzBar::Update()
 		}
 	}
 
+
 	for (auto& map : tileMap)
 		map->Update();
 	nextMap[0]->Update();
@@ -137,6 +139,8 @@ void Scene3_jazzBar::Update()
 	GM->monster->Update();
 	GM->player->Update();
 	GM->hud->Update();
+	GM->damageDP->Update();
+	Scene_proto::Update();
 }
 
 void Scene3_jazzBar::LateUpdate()
@@ -160,6 +164,8 @@ void Scene3_jazzBar::Render()
 	GM->monster->Render();
 	GM->player->Render();
 	GM->hud->Render();
+	GM->damageDP->Render();
+	Scene_proto::Render();
 }
 
 void Scene3_jazzBar::ResizeScreen()

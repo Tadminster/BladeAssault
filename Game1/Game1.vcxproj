@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Creature.h" />
+    <ClInclude Include="DamageText.h" />
+    <ClInclude Include="DamageDisplayManager.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="kill_barehand_atk.h" />
     <ClInclude Include="kill_barehand_ChargingAtk.h" />
@@ -46,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="DamageText.cpp" />
+    <ClCompile Include="DamageDisplayManager.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="kill_barehand_atk.cpp" />
     <ClCompile Include="kill_barehand_ChargingAtk.cpp" />

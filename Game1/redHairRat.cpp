@@ -26,7 +26,7 @@ redHairRat::redHairRat()
 
     idle->pivot = OFFSET_B;
     idle->SetParentRT(*collider);
-    idle->SetLocalPosY(-collider->scale.y * 0.5);
+    idle->SetLocalPosY(-collider->scale.y * 0.5f);
     idle->maxFrame.x = 9;
     idle->maxFrame.y = 1;
     idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3;
@@ -35,7 +35,7 @@ redHairRat::redHairRat()
 
     run->pivot = OFFSET_B;
     run->SetParentRT(*collider);
-    run->SetLocalPosY(-collider->scale.y * 0.5);
+    run->SetLocalPosY(-collider->scale.y * 0.5f);
     run->maxFrame.x = 7;
     run->maxFrame.y = 1;
     run->scale.x = run->imageSize.x / run->maxFrame.x * 3;
@@ -44,16 +44,16 @@ redHairRat::redHairRat()
 
     jump->pivot = OFFSET_B;
     jump->SetParentRT(*collider);
-    jump->SetLocalPosY(-collider->scale.y * 0.5);
+    jump->SetLocalPosY(-collider->scale.y * 0.5f);
     jump->maxFrame.x = 2;
     jump->maxFrame.y = 2;
-    jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 3;
-    jump->scale.y = jump->imageSize.y / jump->maxFrame.y * 3;
+    jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 2.8;
+    jump->scale.y = jump->imageSize.y / jump->maxFrame.y * 2.8;
     jump->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     attack->pivot = OFFSET_B;
     attack->SetParentRT(*collider);
-    attack->SetLocalPosY(-collider->scale.y * 0.5);
+    attack->SetLocalPosY(-collider->scale.y * 0.5f);
     attack->maxFrame.x = 9;
     attack->maxFrame.y = 1;
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
@@ -69,10 +69,9 @@ redHairRat::redHairRat()
     spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 3;
     spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-
     shadow->pivot = OFFSET_B;
     shadow->SetParentRT(*collider);
-    shadow->SetLocalPosY(-collider->scale.y * 0.4);
+    shadow->SetLocalPosY(-collider->scale.y * 0.4f);
     shadow->maxFrame.x = 1;
     shadow->maxFrame.y = 1;
     shadow->scale.x = shadow->imageSize.x / shadow->maxFrame.x * 3;
@@ -80,10 +79,16 @@ redHairRat::redHairRat()
     shadow->color.w = 0.2f;
     shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
+    ui_frame_hp->SetLocalPosX(-collider->scale.x * 0.7f);
+    ui_frame_hp->SetLocalPosY(collider->scale.y * 1.1f);
+    ui_gauge_hp->SetLocalPosX(-collider->scale.x * 0.7f);
+    ui_gauge_hp->SetLocalPosY(collider->scale.y * 1.1f);
+
     CurrentState = State::SPAWN;
     dir = LEFT;
 
     hp = 100;
+    maxHp = 100;
     damage = 10;
     attackSpeed = 0.4f;
     attackFrame = 6;

@@ -1,14 +1,27 @@
 #include "stdafx.h"
 #include "Creature.h"
 #include "Player.h"
+#include "DamageDisplayManager.h"
 #include "Monster.h"
 
 Monster::Monster()
 {
-	idle = nullptr;
-	run = nullptr;
-	jump = nullptr;
-	attack = nullptr;
+	ui_frame_hp = new ObImage(L"ui_frame_mosterHp.png");
+	ui_gauge_hp = new ObImage(L"ui_gauge_monsterHp.png");
+
+	ui_frame_hp->pivot = OFFSET_L;
+	ui_frame_hp->SetParentRT(*collider);
+	//ui_frame_hp->SetLocalPosX(-collider->scale.x);
+	//ui_frame_hp->SetLocalPosY(-collider->scale.y);
+	ui_frame_hp->scale.x = ui_frame_hp->imageSize.x * 0.2;
+	ui_frame_hp->scale.y = ui_frame_hp->imageSize.y * 0.3;
+
+	ui_gauge_hp->pivot = OFFSET_L;
+	ui_gauge_hp->SetParentRT(*collider);
+	//ui_gauge_hp->SetLocalPosX(-collider->scale.x);
+	//ui_gauge_hp->SetLocalPosY(-collider->scale.y);
+	ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2;
+	ui_gauge_hp->scale.y = ui_gauge_hp->imageSize.y * 0.3;
 
 	onFloor = false;
 	isLanding = true;
@@ -20,6 +33,8 @@ Monster::Monster(Vector2 spawnPos)
 
 Monster::~Monster()
 {
+	delete ui_frame_hp;
+	delete ui_gauge_hp;
 }
 
 
@@ -232,12 +247,25 @@ void Monster::Update()
 
 	}
 	collider->Update();
+
+	if (hp != maxHp)
+	{
+		ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2 * ((float)hp / (float)maxHp);
+		ui_gauge_hp->Update();
+		ui_frame_hp->Update();
+	}
 }
 
 void Monster::Render()
 {
 	if (GM->DEBUG_MODE)
 		collider->Render();
+
+	if (hp != maxHp)
+	{
+		ui_frame_hp->Render();
+		ui_gauge_hp->Render();
+	}
 
 	shadow->Render();
 	switch (CurrentState)
@@ -261,6 +289,8 @@ void Monster::Render()
 		spawn->Render();
 		break;
 	}
+
+
 }
 
 bool Monster::isAttackCooldown()
@@ -289,7 +319,7 @@ void Monster::Attack()
 
 }
 
-void Monster::actionsWhenDamaged(Vector4 value)
+void Monster::actionsWhenDamaged(int damage, int knockBackFactor)
 {
 	// 상태를 데미지 받음으로 변경
 	dmgTaken = MonsterDamageTaken::DAMAGED;
@@ -303,9 +333,12 @@ void Monster::actionsWhenDamaged(Vector4 value)
 		attack->color = Vector4(1, 1, 1, 0.5);
 	}
 	// 체력 감소
-	this->hp = max(0, hp - value.x);
+	this->hp = max(0, hp - damage);
 	// 넉백 계수
-	knockBackFactor = value.y;
+	knockBackFactor = knockBackFactor;
+
+	Vector2 tempPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.75f);
+	GM->damageDP->AddText(tempPos, damage);
 }
 
 void Monster::knockBack()
