@@ -5,6 +5,7 @@
 #include "Player_kill.h"
 #include "Monster.h"
 #include "MonsterManager.h"
+#include "DamageDisplayManager.h"
 #include "Scene_proto.h"
 
 Scene_proto::Scene_proto()
@@ -31,6 +32,7 @@ void Scene_proto::Release()
 void Scene_proto::Update()
 {
 	localtime += DELTA;
+	GM->damageDP->Update();
 }
 
 void Scene_proto::LateUpdate()
@@ -39,10 +41,13 @@ void Scene_proto::LateUpdate()
 	HandleTerrainCollision(GM->player);				// 플레이어
 	for (auto& monster : GM->monster->GetEnemy())	// 몬스터
 		HandleTerrainCollision(monster);
+
+	GM->damageDP->LateUpdate();
 }
 
 void Scene_proto::Render()
 {
+	GM->damageDP->Render();
 }
 
 void Scene_proto::ResizeScreen()

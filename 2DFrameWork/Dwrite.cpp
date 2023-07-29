@@ -125,6 +125,8 @@ void Dwrite::RenderText(wstring text, RECT rect, float size, wstring font, Color
     //벡터안에 해당 브러시가 없다면
     if (findBrush == NULL)
     {
+        //알파값 설정할 때 여기 건들여
+        //D2D1::ColorF colorF = D2D1::ColorF(color.x, color.y, color.z, color.w);
         D2D1::ColorF colorF = D2D1::ColorF(color.x, color.y, color.z);
         deviceContext->CreateSolidColorBrush(colorF, &brushDesc.brush);
 

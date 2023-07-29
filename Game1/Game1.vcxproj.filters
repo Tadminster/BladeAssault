@@ -72,6 +72,9 @@
     <ClInclude Include="DamageDisplayManager.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="DamageText.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -142,6 +145,9 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="DamageDisplayManager.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageText.cpp">
       <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>

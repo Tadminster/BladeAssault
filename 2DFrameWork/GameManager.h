@@ -2,9 +2,10 @@
 class GameManager : public Singleton<GameManager>
 {
 public:
-    class Player*           player;
-    class MonsterManager*   monster;
-    class HUD*              hud;
+    class Player*               player;
+    class MonsterManager*       monster;
+    class DamageDisplayManager* damageDP;
+    class HUD*                  hud;
 
     bool	DEBUG_MODE = false;
 

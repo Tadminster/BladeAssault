@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Creature.h"
 #include "Player.h"
+#include "DamageDisplayManager.h"
 #include "Monster.h"
 
 Monster::Monster()
@@ -318,7 +319,7 @@ void Monster::Attack()
 
 }
 
-void Monster::actionsWhenDamaged(Vector4 value)
+void Monster::actionsWhenDamaged(int damage, int knockBackFactor)
 {
 	// 상태를 데미지 받음으로 변경
 	dmgTaken = MonsterDamageTaken::DAMAGED;
@@ -332,9 +333,12 @@ void Monster::actionsWhenDamaged(Vector4 value)
 		attack->color = Vector4(1, 1, 1, 0.5);
 	}
 	// 체력 감소
-	this->hp = max(0, hp - value.x);
+	this->hp = max(0, hp - damage);
 	// 넉백 계수
-	knockBackFactor = value.y;
+	knockBackFactor = knockBackFactor;
+
+	Vector2 tempPos = collider->GetWorldPos() + Vector2(collider->scale.x * dir.x * 0.3f, collider->scale.y * 1.2f);
+	GM->damageDP->AddText(tempPos, damage);
 }
 
 void Monster::knockBack()

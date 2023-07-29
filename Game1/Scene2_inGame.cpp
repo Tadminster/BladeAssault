@@ -5,6 +5,7 @@
 #include "Player_kill.h"
 #include "Monster.h"
 #include "MonsterManager.h"
+#include "DamageDisplayManager.h"
 #include "Scene_proto.h"
 #include "Scene2_inGame.h"
 
@@ -21,6 +22,7 @@ Scene2_inGame::Scene2_inGame()
 	GM->hud = new HUD();
 	GM->player = new Player_kill();
 	GM->monster = new MonsterManager();
+	GM->damageDP = new DamageDisplayManager();
 
 	tileMap[0]->file = "scene2_hankroom_0.txt";
 	tileMap[1]->file = "scene2_hankroom_1.txt";
@@ -82,7 +84,6 @@ void Scene2_inGame::Release()
 
 void Scene2_inGame::Update()
 {
-	Scene_proto::Update();
 
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
 	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
@@ -137,6 +138,8 @@ void Scene2_inGame::Update()
 	GM->monster->Update();
 	GM->player->Update();
 	GM->hud->Update();
+
+	Scene_proto::Update();
 }
 
 void Scene2_inGame::LateUpdate()
@@ -162,6 +165,8 @@ void Scene2_inGame::Render()
 	GM->monster->Render();
 	GM->player->Render();
 	GM->hud->Render();
+
+	Scene_proto::Render();
 }
 
 void Scene2_inGame::ResizeScreen()

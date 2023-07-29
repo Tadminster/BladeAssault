@@ -5,6 +5,7 @@
 #include "Player_kill.h"
 #include "Monster.h"
 #include "MonsterManager.h"
+#include "DamageDisplayManager.h"
 #include "redHairRat.h"
 #include "orangeHairRat.h"
 #include "Scene_proto.h"
@@ -88,6 +89,7 @@ void Scene5_undercity1::Update()
 	GM->monster->Update();
 	GM->player->Update();
 	GM->hud->Update();
+	Scene_proto::Update();
 }
 
 void Scene5_undercity1::LateUpdate()
@@ -108,6 +110,7 @@ void Scene5_undercity1::Render()
 	GM->monster->Render();
 	GM->player->Render();
 	GM->hud->Render();
+	Scene_proto::Render();
 }
 
 void Scene5_undercity1::ResizeScreen()
