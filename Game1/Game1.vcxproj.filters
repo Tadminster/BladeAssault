@@ -69,6 +69,9 @@
     <ClInclude Include="Scene7_undercity3.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="DamageDisplayManager.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Scene7_undercity3.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageDisplayManager.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

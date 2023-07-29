@@ -5,10 +5,22 @@
 
 Monster::Monster()
 {
-	idle = nullptr;
-	run = nullptr;
-	jump = nullptr;
-	attack = nullptr;
+	ui_frame_hp = new ObImage(L"ui_frame_mosterHp.png");
+	ui_gauge_hp = new ObImage(L"ui_gauge_monsterHp.png");
+
+	ui_frame_hp->pivot = OFFSET_L;
+	ui_frame_hp->SetParentRT(*collider);
+	//ui_frame_hp->SetLocalPosX(-collider->scale.x);
+	//ui_frame_hp->SetLocalPosY(-collider->scale.y);
+	ui_frame_hp->scale.x = ui_frame_hp->imageSize.x * 0.2;
+	ui_frame_hp->scale.y = ui_frame_hp->imageSize.y * 0.3;
+
+	ui_gauge_hp->pivot = OFFSET_L;
+	ui_gauge_hp->SetParentRT(*collider);
+	//ui_gauge_hp->SetLocalPosX(-collider->scale.x);
+	//ui_gauge_hp->SetLocalPosY(-collider->scale.y);
+	ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2;
+	ui_gauge_hp->scale.y = ui_gauge_hp->imageSize.y * 0.3;
 
 	onFloor = false;
 	isLanding = true;
@@ -20,6 +32,8 @@ Monster::Monster(Vector2 spawnPos)
 
 Monster::~Monster()
 {
+	delete ui_frame_hp;
+	delete ui_gauge_hp;
 }
 
 
@@ -232,12 +246,25 @@ void Monster::Update()
 
 	}
 	collider->Update();
+
+	if (hp != maxHp)
+	{
+		ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2 * ((float)hp / (float)maxHp);
+		ui_gauge_hp->Update();
+		ui_frame_hp->Update();
+	}
 }
 
 void Monster::Render()
 {
 	if (GM->DEBUG_MODE)
 		collider->Render();
+
+	if (hp != maxHp)
+	{
+		ui_frame_hp->Render();
+		ui_gauge_hp->Render();
+	}
 
 	shadow->Render();
 	switch (CurrentState)
@@ -261,6 +288,8 @@ void Monster::Render()
 		spawn->Render();
 		break;
 	}
+
+
 }
 
 bool Monster::isAttackCooldown()
