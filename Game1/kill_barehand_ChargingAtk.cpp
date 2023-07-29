@@ -9,7 +9,8 @@ kill_barehand_ChargingAtk::kill_barehand_ChargingAtk(
 	float range,
 	float damage,
 	int   penetration,
-	float explosionRange)
+	float explosionRange,
+	int   critical)
 {
 	tag = DamageType::PENETRATION;
 	
@@ -49,6 +50,7 @@ kill_barehand_ChargingAtk::kill_barehand_ChargingAtk(
 	this->speed = speed;
 	this->range = range;
 	this->damage = damage;
+	this->criticalChance = critical;
 	this->penetration = penetration;
 	traveledDistance = 0.f;
 	shove = 350;

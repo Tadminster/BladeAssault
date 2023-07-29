@@ -33,7 +33,7 @@ protected:
 	//SKILL
 	float		skillRemainingCooldown;		// 남은 재사용 대기시간
 	float		skillCooldown;				// 스킬 사용 직후의 재사용 대기시간
-	int			skillManaCost;					// 스킬 사용시 소모되는 마나
+	int			skillManaCost;				// 스킬 사용시 소모되는 마나
 
 	//JUMP
 	int			jumpCount;					// 점프 횟수
@@ -45,6 +45,7 @@ protected:
 
 	//ETC
 	float		timeOfDamaged;				// 피격당한 시간 기록용
+    int			criticalChance;				// 크리티컬 확률
 
 public:
 	bool		isCharging;					// 차징 중인지 여부
@@ -65,7 +66,7 @@ public:
 	virtual void SkillAttack();
 	virtual void Dash();
 
-	void actionsWhenDamaged(int value);
+	void actionsWhenDamaged(int damage);
 
 	// Get
 	int		GetMp() { return mp; }

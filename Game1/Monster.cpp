@@ -319,7 +319,7 @@ void Monster::Attack()
 
 }
 
-void Monster::actionsWhenDamaged(int damage, int knockBackFactor)
+void Monster::actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance)
 {
 	// 상태를 데미지 받음으로 변경
 	dmgTaken = MonsterDamageTaken::DAMAGED;
@@ -332,13 +332,31 @@ void Monster::actionsWhenDamaged(int damage, int knockBackFactor)
 		jump->color = Vector4(1, 1, 1, 0.5);
 		attack->color = Vector4(1, 1, 1, 0.5);
 	}
+
+	// 데미지 텍스트가 출력될 위치 계산
+	Vector2 tempPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.75f);
+	
+	// 크리티컬 계산
+	if (RANDOM->Int(1, 100) <= criticalChance)
+	{
+		damage *= 2;
+
+		// 데미지 텍스트 출력
+		GM->damageDP->AddText(tempPos, damage, 6);
+	}
+	else
+	{
+		GM->damageDP->AddText(tempPos, damage);
+	}
+
+
+	// 넉백 계수
+	this->knockBackFactor = knockBackFactor;
+
 	// 체력 감소
 	this->hp = max(0, hp - damage);
-	// 넉백 계수
-	knockBackFactor = knockBackFactor;
 
-	Vector2 tempPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.75f);
-	GM->damageDP->AddText(tempPos, damage);
+
 }
 
 void Monster::knockBack()

@@ -267,7 +267,8 @@ void Player_kill::Attack()
 			attackRange,									// 사거리
 			damage,											// 공격력
 			1,												// 관통력
-			1												// 폭발범위
+			1,												// 폭발범위
+			criticalChance									// 치명타 확률
 		);
 
 		//벡터에 탄 push
@@ -293,7 +294,8 @@ void Player_kill::ChargingAttack()
 		1,												// 사거리
 		damage * (chargingTime + 1),					// 공격력
 		99,												// 관통력
-		1												// 폭발범위
+		1,												// 폭발범위
+		criticalChance									// 치명타 확률
 	);
 
 	// chargingTime = 0.0f;
@@ -335,7 +337,8 @@ void Player_kill::SkillAttack()
 		1,												// 사거리
 		damage * 3.0f * scale,							// 공격력
 		99,												// 관통력
-		1												// 폭발범위
+		1,												// 폭발범위
+		criticalChance									// 치명타 확률
 	);
 
 	// chargingTime = 0.0f;

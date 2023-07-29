@@ -38,7 +38,7 @@ public:
 
 	//
 	bool isDead() const { return hp == 0; }
-	void actionsWhenDamaged(int damage, int knockBackFactor);
+	void actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance);
 	void knockBack();
 
 };

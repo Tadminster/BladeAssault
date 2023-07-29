@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "DamageDisplayManager.h"
 #include "Projectile.h"
 #include "Creature.h"
 #include "Player.h"
@@ -23,6 +24,8 @@ Player::Player()
 
 	dashRemainingCooldown = 0.0f;
 	dashCooldown = 2.0;
+
+	criticalChance = 10;
 }
 
 Player::~Player()
@@ -697,7 +700,7 @@ void Player::Dash()
 	CurrentState = State::DASH;
 }
 
-void Player::actionsWhenDamaged(int value)
+void Player::actionsWhenDamaged(int damage)
 {
 	// 대시 중에는 데미지를 받지 않음
 	if (CurrentState == State::DASH)
@@ -716,8 +719,13 @@ void Player::actionsWhenDamaged(int value)
 	// 데미지 받은 시간 기록
 	timeOfDamaged = TIMER->GetWorldTime();
 
-	// 데미지 차감
-	int damage = min(value + defence, 0);
+	// 방어력 만큼 데미지 차감
+	damage = max(0, damage - defence);
+
 	// 체력 감소
-	hp = max(hp + damage, 0);
+	hp = max(hp - damage, 0);
+	
+	// 데미지 텍스트 출력
+	Vector2 tempSpawnPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.5f);
+	GM->damageDP->AddText(tempSpawnPos, damage, 2);
 }

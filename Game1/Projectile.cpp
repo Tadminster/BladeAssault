@@ -13,28 +13,20 @@ Projectile::Projectile
     float speed,
     float range,
     float damage,
-    int   penetration
+    int   penetration,
+    int   critical
 ) :
     collider(new ObRect()),
     collider_range(new ObCircle()),
-    skin(nullptr),
     dir(dir),
     speed(speed),
     range(range),
     damage(damage),
     penetration(penetration),
     traveledDistance(0.f),
-    shove(300)
+    shove(300),
+    criticalChance(critical)
 {
-    //collider->rotation.z = atanf(dir.y / dir.x);
-    //collider->scale.x = 10;
-    //collider->scale.y = 10;
-    //collider->isFilled = false;
-    //collider->SetWorldPos(spawnPos);
-
-    //collider_range->SetParentRT(*collider);
-
-    //skin->SetParentRT(*collider);
 }
 
 Projectile::Projectile
@@ -44,7 +36,8 @@ Projectile::Projectile
     float speed,
     float range,
     float damage,
-    int   penetration
+    int   penetration,
+    int   critical
 ) :
     collider(new ObRect()),
     collider_range(new ObCircle()),
@@ -55,17 +48,9 @@ Projectile::Projectile
     damage(damage),
     penetration(penetration),
     traveledDistance(0.f),
-    shove(300)
+    shove(300),
+    criticalChance(critical)
 {
-    //collider->rotation.z = atanf(dir.y / dir.x);
-    //collider->scale.x = 10;
-    //collider->scale.y = 10;
-    //collider->isFilled = false;
-    //collider->SetWorldPos(spawnPos);
-
-    //collider_range->SetParentRT(*collider);
-
-    //skin->SetParentRT(*collider);
 }
 
 Projectile::~Projectile()
@@ -118,7 +103,7 @@ bool Projectile::hasCollideWithMonster()
                     this->crash.emplace_back(monster);
 
                     // 몬스터 데미지 액션
-                    monster->actionsWhenDamaged(damage, shove);
+                    monster->actionsWhenDamaged(damage, shove, criticalChance);
                 }
             }
         }
@@ -148,7 +133,7 @@ bool Projectile::hasCollideWithMonster()
                     if (this->tag == DamageType::NORMAL)
                     {
                         // 몬스터 데미지 액션
-                        monster->actionsWhenDamaged(damage, shove);
+                        monster->actionsWhenDamaged(damage, shove, criticalChance);
                     }
 
 
@@ -165,7 +150,7 @@ bool Projectile::hasCollideWithMonster()
                                 {
                                     if (InRangeCheck == monster) continue;
                                     // 몬스터 데미지 액션
-                                    InRangeCheck->actionsWhenDamaged(damage, shove);
+                                    InRangeCheck->actionsWhenDamaged(damage, shove, criticalChance);
                                 }
                             }
                         }
@@ -199,7 +184,7 @@ bool Projectile::hasCollideWithPlayer()
         AfterEffect();
 
         // 플레이어 데미지 액션
-        GM->player->actionsWhenDamaged(-damage);
+        GM->player->actionsWhenDamaged(damage);
         delete this;
         return true;
     }

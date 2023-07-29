@@ -9,10 +9,11 @@ DamageText::DamageText(Vector2 spawnPos, int value, int color)
 
 	text->SetWorldPos(this->spawnPos);
 	text->maxFrame.x = 11;
-	text->maxFrame.y = 6;
+	text->maxFrame.y = 7;
 	text->scale.x = text->imageSize.x / text->maxFrame.x * 2.0f;
 	text->scale.y = text->imageSize.y / text->maxFrame.y * 2.0f;
 
+	// value
 	if (value == 0)
 		text->frame.x = 0;
 	else if (value == 1)
@@ -38,6 +39,7 @@ DamageText::DamageText(Vector2 spawnPos, int value, int color)
 	else 
 		text->frame.x = 0;
 
+	// color
 	if (color == 0)
 		text->frame.y = 0;
 	else if (color == 1)
@@ -50,6 +52,8 @@ DamageText::DamageText(Vector2 spawnPos, int value, int color)
 		text->frame.y = 4;
 	else if (color == 5)
 		text->frame.y = 5;
+	else if (color == 6)
+		text->frame.y = 6;
 	else 
 		text->frame.y = 0;
 

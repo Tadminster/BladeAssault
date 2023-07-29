@@ -12,7 +12,8 @@ public:
 		float range, 
 		float damage, 
 		int penetration, 
-		float explosionRange);
+		float explosionRange, 
+		int critical = 0);
 
 	~kill_barehand_atk();
 	void Update() override;
