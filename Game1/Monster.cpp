@@ -15,22 +15,22 @@ Monster::Monster()
 	ui_frame_hp->SetParentRT(*collider);
 	//ui_frame_hp->SetLocalPosX(-collider->scale.x);
 	//ui_frame_hp->SetLocalPosY(-collider->scale.y);
-	ui_frame_hp->scale.x = ui_frame_hp->imageSize.x * 0.2;
-	ui_frame_hp->scale.y = ui_frame_hp->imageSize.y * 0.3;
+	ui_frame_hp->scale.x = ui_frame_hp->imageSize.x * 0.2f;
+	ui_frame_hp->scale.y = ui_frame_hp->imageSize.y * 0.3f;
 
 	ui_gauge_hp->pivot = OFFSET_L;
 	ui_gauge_hp->SetParentRT(*collider);
 	//ui_gauge_hp->SetLocalPosX(-collider->scale.x);
 	//ui_gauge_hp->SetLocalPosY(-collider->scale.y);
-	ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2;
-	ui_gauge_hp->scale.y = ui_gauge_hp->imageSize.y * 0.3;
+	ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2f;
+	ui_gauge_hp->scale.y = ui_gauge_hp->imageSize.y * 0.3f;
 
 	spawn->pivot = OFFSET_B;
 	spawn->SetParentRT(*collider);
 	spawn->maxFrame.x = 14;
 	spawn->maxFrame.y = 1;
-	spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x;
-	spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y;
+	spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x * 1.2f;
+	spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 1.2f;
 
 	spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
 
@@ -85,10 +85,10 @@ void Monster::Update()
 		// 컬러 정상화
 		if (idle->color.x != 0.5)
 		{
-			idle->color = Vector4(0.5, 0.5, 0.5, 0.5);
-			run->color = Vector4(0.5, 0.5, 0.5, 0.5);
-			jump->color = Vector4(0.5, 0.5, 0.5, 0.5);
-			attack->color = Vector4(0.5, 0.5, 0.5, 0.5);
+			idle->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
+			run->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
+			jump->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
+			attack->color = Vector4(0.5f, 0.5f, 0.5f, 0.5f);
 		}
 	}
 	else if (dmgTaken == MonsterDamageTaken::DAMAGED)
@@ -220,7 +220,7 @@ void Monster::Update()
 	}
 	else if (CurrentState == State::SPAWN)
 	{
-		spawn->color.w -= 0.2 * DELTA;
+		spawn->color.w -= 0.2f * DELTA;
 		
 		if (spawn->frame.x > 5)
 			idle->color.w = min(0.5f, idle->color.w + 0.5f * DELTA);
@@ -260,9 +260,9 @@ void Monster::Update()
 		attack->Update();
 		break;
 	case State::SPAWN:
-		spawn->Update();
 		if (spawn->frame.x > 5)
 			idle->Update();
+		spawn->Update();
 		break;
 
 	}
@@ -270,7 +270,7 @@ void Monster::Update()
 
 	if (hp != maxHp)
 	{
-		ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2 * ((float)hp / (float)maxHp);
+		ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2f * ((float)hp / (float)maxHp);
 		ui_gauge_hp->Update();
 		ui_frame_hp->Update();
 	}
@@ -306,9 +306,9 @@ void Monster::Render()
 		attack->Render();
 		break;
 	case State::SPAWN:
-		spawn->Render();
 		if (spawn->frame.x > 5)
 			idle->Render();
+		spawn->Render();
 		break;
 	}
 

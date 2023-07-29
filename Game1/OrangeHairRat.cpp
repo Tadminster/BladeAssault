@@ -23,8 +23,8 @@ orangeHairRat::orangeHairRat()
     collider->scale.y = 110;
     //collider->SetWorldPos();
 
-    spawn->SetLocalPosX(collider->scale.x * 0.1f);
-    spawn->SetLocalPosY(-collider->scale.y * 0.1f);
+    //spawn->SetLocalPosX(-collider->scale.x * 0.1f);
+    spawn->SetLocalPosY(-collider->scale.y * 0.5f);
 
     idle->pivot = OFFSET_B;
     idle->SetParentRT(*collider);
