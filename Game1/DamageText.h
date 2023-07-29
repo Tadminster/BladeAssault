@@ -13,10 +13,10 @@ private:
 public:
 	// @brief 데미지 표시 생성자
 	// @param spawnPos 데미지 표시 생성 위치
-	// @param value 데미지 표시할 값
-	// @param value 0~9: 해당 숫자, 10: ,(콤마)
-	// @param color 데미지 표시할 색상
-	// @param color 0: white, 1: solid red, 2: red, 3: sky, 4: puple, 5: green
+	// @param value 데미지 표시할 값 0~9: number, 10: comma
+	// @param color 데미지 표시할 색상 0: white, 1: solid red, 2: red, 3: sky, 4: puple, 5: green
+	// @exception param value가 0~10이 아닐 경우 0으로 초기화
+	// @exception param color가 0~5이 아닐 경우 0으로 초기화
 	DamageText(Vector2 spawnPos, int value, int color);
 	~DamageText();
 	void	Init();
