@@ -337,7 +337,7 @@ void Monster::actionsWhenDamaged(int damage, int knockBackFactor)
 	// ³Ë¹é °è¼ö
 	knockBackFactor = knockBackFactor;
 
-	Vector2 tempPos = collider->GetWorldPos() + Vector2(collider->scale.x * dir.x * 0.3f, collider->scale.y * 1.2f);
+	Vector2 tempPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.75f);
 	GM->damageDP->AddText(tempPos, damage);
 }
 
