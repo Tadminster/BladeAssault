@@ -333,7 +333,7 @@ void Player_kill::SkillAttack()
 		lastDir,										// 각도
 		1.5f,											// 발사체 속도
 		1,												// 사거리
-		damage * 3.5f,									// 공격력
+		damage * 3.0f * scale,							// 공격력
 		99,												// 관통력
 		1												// 폭발범위
 	);

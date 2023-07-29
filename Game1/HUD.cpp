@@ -10,8 +10,8 @@ HUD::HUD()
 {
 	damageTaken = new ObImage(L"ui_player_damage_fx.png");
 
-	box_hp = new ObImage(L"ui_box_hp.png");
-	box_mp = new ObImage(L"ui_box_mp.png");
+	box_hp = new ObImage(L"ui_frame_hp.png");
+	box_mp = new ObImage(L"ui_frame_mp.png");
 
 	gauge_hp = new ObImage(L"ui_gauge_hp.png");
 	gauge_mp = new ObImage(L"ui_gauge_mp.png");
@@ -194,8 +194,8 @@ HUD::~HUD()
 	delete icon_dash;
 
 	TEXTURE->DeleteTexture(L"ui_player_damage_fx.png");
-	TEXTURE->DeleteTexture(L"ui_box_hp.png");
-	TEXTURE->DeleteTexture(L"ui_box_mp.png");
+	TEXTURE->DeleteTexture(L"ui_frame_hp.png");
+	TEXTURE->DeleteTexture(L"ui_frame_mp.png");
 	TEXTURE->DeleteTexture(L"ui_gauge_hp.png");
 	TEXTURE->DeleteTexture(L"ui_gauge_mp.png");
 	TEXTURE->DeleteTexture(L"ui_core_frame_normal.png");
@@ -238,7 +238,7 @@ void HUD::Update()
 		&& icon_skillWeapon->color.x == 0.5f)
 	{
 		// 스킬 아이콘 어두워짐
-		icon_skillWeapon->color = Vector4(0.3f, 0.3f, 0.3f, 0.5f);
+		icon_skillWeapon->color = Vector4(0.25f, 0.25f, 0.25f, 0.5f);
 	}
 	else if (GM->player->GetSkillCooldown() <= 0.0f	// 스킬 쿨다운이 끝났고
 		&& GM->player->hasEnoughManaForSkill()		// 마나가 충분하면
