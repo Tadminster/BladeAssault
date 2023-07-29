@@ -40,7 +40,7 @@ kill_barehand_atk::kill_barehand_atk(
 	this->damage = damage;
 	this->criticalChance = critical;
 	this->penetration = penetration;
-	traveledDistance = 0.f;
+	traveledDistance = 0.0f;
 	shove = 350;
 }
 

@@ -40,6 +40,7 @@ protected:
 	int			jumpCountMax;				// 점프 최대 횟수
 
 	//DASH
+	float		dashWeight;					// 대쉬 가중치
 	float		dashRemainingCooldown;		// 남은 재사용 대기시간
 	float		dashCooldown;				// 대쉬 사용 직후의 재사용 대기시간
 

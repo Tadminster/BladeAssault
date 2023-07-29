@@ -37,7 +37,7 @@ Scene3_jazzBar::Scene3_jazzBar()
 	for (int i = 0; i < 2; i++)
 	{
 		nextMap[i]->scale = Vector2(75, 425);
-		nextMap[i]->color = Vector4(0.5, 0.5, 0.5, 0.3);
+		nextMap[i]->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
 		nextMap[i]->isFilled = true;
 	}
 
@@ -45,14 +45,14 @@ Scene3_jazzBar::Scene3_jazzBar()
 	stairLeft->pivot = OFFSET_LB;
 	stairLeft->SetWorldPos(Vector2(3000, 1150));
 	stairLeft->scale = Vector2(50, 50);
-	stairLeft->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stairLeft->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
 	stairLeft->isFilled = true;
 
 	// 계단(오른쪽)
 	stairRight->pivot = OFFSET_LB;
 	stairRight->SetWorldPos(Vector2(3975, 1100));
 	stairRight->scale = Vector2(50, 50);
-	stairRight->color = Vector4(0.5, 0.5, 0.5, 0.3);
+	stairRight->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
 	stairRight->isFilled = true;
 
 	startPostion = Vector2(2820, 1800);

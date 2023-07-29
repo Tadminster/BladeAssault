@@ -22,8 +22,9 @@ Player::Player()
 	jumpCount = 0;
 	jumpCountMax = 2;
 
+	dashWeight = 0.0f;
 	dashRemainingCooldown = 0.0f;
-	dashCooldown = 2.0;
+	dashCooldown = 2.0f;
 
 	criticalChance = 10;
 }
@@ -41,6 +42,7 @@ Player::~Player()
 
 void Player::Init()
 {
+	PrevState = State::IDLE;
 	CurrentState = State::STANDBY;
 	lastDir = RIGHT;
 
@@ -115,16 +117,21 @@ void Player::Update()
 	else if (CurrentState == State::DASH)
 	{
 		// dash 가중치, 시간 계산용
-		static float weight = 0;
-		weight += DELTA * 3;
-		if (weight >= 1.0f || onWallSlide)
+		dashWeight += DELTA * 3.0f;
+
+		// dash 가중치가 1.0f 이상이거나 벽에 붙어있으면
+		// dash -> PrevState
+		if (dashWeight >= 1.0f || onWallSlide)
 		{
-			weight = 0;
 			CurrentState = PrevState;
 		}
 
+
 		// dash
-		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, 0.015f));
+		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, DELTA * 10.0f));
+
+		// 선형보간으로 이동
+
 	}
 	else if (CurrentState == State::JUMP)
 	{
@@ -177,7 +184,7 @@ void Player::Update()
 	else if (CurrentState == State::ATTACK)
 	{
 		// 공격 중 이동은 감속 (0.5배)
-		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * 0.5f * DELTA);
 
 		// 프레임이 끝나면 attack -> PrevState
 		if (attack->frame.x == attack->maxFrame.x - 1)
@@ -213,7 +220,7 @@ void Player::Update()
 	else if (CurrentState == State::DAMAGED)
 	{
 		// 데미지를 입고 있는 상태일 때 감속
-		collider->MoveWorldPos(dir * moveSpeed * 0.5 * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * 0.5f * DELTA);
 
 		// 데미지 입은 후 0.1초 후에 damaged -> PrevState
 		if (timeOfDamaged + 0.1f < TIMER->GetWorldTime())
@@ -690,7 +697,8 @@ void Player::Dash()
 
 	dashRemainingCooldown = dashCooldown;
 	dash->frame.x = 0;
-	dashTargetPos.x = collider->GetWorldPos().x + (lastDir.x * 300);
+	dashWeight = 0.0f;
+	dashTargetPos.x = collider->GetWorldPos().x + lastDir.x * 300;
 	dashTargetPos.y = collider->GetWorldPos().y + 5;
 
 	PrevState = CurrentState;
