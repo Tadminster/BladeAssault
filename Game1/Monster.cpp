@@ -9,6 +9,8 @@ Monster::Monster()
 	ui_frame_hp = new ObImage(L"ui_frame_mosterHp.png");
 	ui_gauge_hp = new ObImage(L"ui_gauge_monsterHp.png");
 
+	spawn = new ObImage(L"monster_spawn.png");
+
 	ui_frame_hp->pivot = OFFSET_L;
 	ui_frame_hp->SetParentRT(*collider);
 	//ui_frame_hp->SetLocalPosX(-collider->scale.x);
@@ -22,6 +24,16 @@ Monster::Monster()
 	//ui_gauge_hp->SetLocalPosY(-collider->scale.y);
 	ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2;
 	ui_gauge_hp->scale.y = ui_gauge_hp->imageSize.y * 0.3;
+
+	spawn->pivot = OFFSET_B;
+	spawn->SetParentRT(*collider);
+	spawn->maxFrame.x = 14;
+	spawn->maxFrame.y = 1;
+	spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x;
+	spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y;
+
+	spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+
 
 	onFloor = false;
 	isLanding = true;
@@ -208,9 +220,15 @@ void Monster::Update()
 	}
 	else if (CurrentState == State::SPAWN)
 	{
+		spawn->color.w -= 0.2 * DELTA;
+		
+		if (spawn->frame.x > 5)
+			idle->color.w = min(0.5f, idle->color.w + 0.5f * DELTA);
+
 		// SPAWN ´ë±â
 		if (spawn->frame.x == spawn->maxFrame.x - 1)
 		{
+			idle->color.w = 0.5f;
 			CurrentState = State::IDLE;
 		}
 	}
@@ -243,6 +261,8 @@ void Monster::Update()
 		break;
 	case State::SPAWN:
 		spawn->Update();
+		if (spawn->frame.x > 5)
+			idle->Update();
 		break;
 
 	}
@@ -287,6 +307,8 @@ void Monster::Render()
 		break;
 	case State::SPAWN:
 		spawn->Render();
+		if (spawn->frame.x > 5)
+			idle->Render();
 		break;
 	}
 

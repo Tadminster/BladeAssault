@@ -10,8 +10,13 @@ DamageText::DamageText(Vector2 spawnPos, int value, int color)
 	text->SetWorldPos(this->spawnPos);
 	text->maxFrame.x = 11;
 	text->maxFrame.y = 7;
-	text->scale.x = text->imageSize.x / text->maxFrame.x * 2.0f;
-	text->scale.y = text->imageSize.y / text->maxFrame.y * 2.0f;
+	
+	// 크리티컬 데미지는 글자크기를 1.2배로 키움
+	float scale = 1.0f;
+	if (color == 6) scale = 1.2f;
+
+	text->scale.x = text->imageSize.x / text->maxFrame.x * 2.0f * scale;
+	text->scale.y = text->imageSize.y / text->maxFrame.y * 2.0f * scale;
 
 	// value
 	if (value == 0)

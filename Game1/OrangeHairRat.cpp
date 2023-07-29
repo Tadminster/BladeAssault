@@ -16,13 +16,15 @@ orangeHairRat::orangeHairRat()
     jump = new ObImage(L"orangeHairRat_jump.png");
     attack = new ObImage(L"orangeHairRat_attack.png");
     shadow = new ObImage(L"character_shadow.png");
-    spawn = new ObImage(L"monster_spawn.png");
 
     collider->pivot = OFFSET_B;
     collider->isFilled = false;
     collider->scale.x = 80;
     collider->scale.y = 110;
     //collider->SetWorldPos();
+
+    spawn->SetLocalPosX(collider->scale.x * 0.1f);
+    spawn->SetLocalPosY(-collider->scale.y * 0.1f);
 
     idle->pivot = OFFSET_B;
     idle->SetParentRT(*collider);
@@ -31,7 +33,9 @@ orangeHairRat::orangeHairRat()
     idle->maxFrame.y = 1;
     idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3;
     idle->scale.y = idle->imageSize.y / idle->maxFrame.y * 3;
+    idle->color.w = 0.0f;
     idle->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);
+
 
     run->pivot = OFFSET_B;
     run->SetParentRT(*collider);
@@ -59,15 +63,6 @@ orangeHairRat::orangeHairRat()
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
     attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
     attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
-
-    spawn->pivot = OFFSET_B;
-    spawn->SetParentRT(*collider);
-    spawn->SetLocalPosY(-collider->scale.y * 0.7f);
-    spawn->maxFrame.x = 13;
-    spawn->maxFrame.y = 1;
-    spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x * 3;
-    spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 3;
-    spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
     shadow->pivot = OFFSET_B;
     shadow->SetParentRT(*collider);
