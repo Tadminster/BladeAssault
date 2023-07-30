@@ -367,13 +367,17 @@ void Player::Control()
 	{
 		if (INPUT->KeyDown(VK_OEM_PLUS) && CurrentState != State::DIE)
 		{
-			hp = min(maxHp, hp + maxHp * 0.1);
+			float heal = maxHp * 0.1f;
+			hp = min(maxHp, hp + heal);
+			GM->damageDP->AddText(collider->GetWorldPos() + UP * collider->scale.y * 0.75f, heal, 5);
 		}
 
 		if (INPUT->KeyDown(VK_OEM_MINUS))
 		{
-			hp = max(0, hp - maxHp * 0.1);
+			float damage = maxHp * 0.1;
+			hp = max(0, hp - damage);
 			damageTaken = true;
+			GM->damageDP->AddText(collider->GetWorldPos() + UP * collider->scale.y * 0.75f, damage, 1);
 		}
 	}
 
