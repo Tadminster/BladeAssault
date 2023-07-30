@@ -37,7 +37,7 @@ public:
 	virtual void Attack();
 
 	//
-	bool isDead() const { return hp == 0; }
+	bool isDead() const; 
 	void actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance);
 	void knockBack();
 

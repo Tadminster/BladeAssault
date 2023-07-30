@@ -19,7 +19,7 @@ void EffectManager::Update()
 			effects.end(),
 			[](ObImage* effect) 
 				{ 
-					if (effect->frame.x == effect->maxFrame.x)
+					if (effect->frame.x == effect->maxFrame.x - 1)
 					{
 						delete effect;
 						return true; 

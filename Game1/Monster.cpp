@@ -2,6 +2,7 @@
 #include "Creature.h"
 #include "Player.h"
 #include "DamageDisplayManager.h"
+#include "EffectManager.h"
 #include "Monster.h"
 
 Monster::Monster()
@@ -31,8 +32,8 @@ Monster::Monster()
 	spawn->maxFrame.y = 1;
 	spawn->scale.x = spawn->imageSize.x / spawn->maxFrame.x * 1.2f;
 	spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 1.2f;
-
 	spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+
 
 
 	onFloor = false;
@@ -56,6 +57,12 @@ void Monster::Update()
 	lastPos = collider->GetWorldPos();
 
 	Vector2 target = GM->player->GetCollider()->GetWorldPos();
+
+	// 사망 처리
+	if (hp == 0 && CurrentState != State::DIE)
+	{
+		CurrentState = State::DIE;
+	}
 
 	// 방향 계산
 	if (target.x - collider->GetWorldPos().x > 0)
@@ -232,6 +239,10 @@ void Monster::Update()
 			CurrentState = State::IDLE;
 		}
 	}
+	else if (CurrentState == State::DIE)
+	{
+
+	}
 
 	// 중력 (바닥과 떨어져 있거나 스폰중이 아닐 때)
 	if (!onWall && !onFloor && CurrentState != State::SPAWN)
@@ -264,7 +275,6 @@ void Monster::Update()
 			idle->Update();
 		spawn->Update();
 		break;
-
 	}
 	collider->Update();
 
@@ -310,6 +320,7 @@ void Monster::Render()
 			idle->Render();
 		spawn->Render();
 		break;
+		break;
 	}
 
 
@@ -339,6 +350,27 @@ void Monster::Attack()
 {
 
 
+}
+
+bool Monster::isDead() const
+{
+	if (CurrentState == State::DIE)
+	{
+		ObImage* dieEffect = new ObImage(L"monster_die.png");
+		dieEffect->pivot = OFFSET_B;
+		dieEffect->SetWorldPos(collider->GetWorldPos());
+		dieEffect->maxFrame.x = 13;
+		dieEffect->maxFrame.y = 1;
+		dieEffect->scale.x = dieEffect->imageSize.x / dieEffect->maxFrame.x * 0.8f;
+		dieEffect->scale.y = dieEffect->imageSize.y / dieEffect->maxFrame.y * 0.8f;
+		dieEffect->color.w = 0.4f;
+		dieEffect->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
+
+		GM->fx->AddEffects(dieEffect);
+
+		return true;
+	}
+	else return false;
 }
 
 void Monster::actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance)

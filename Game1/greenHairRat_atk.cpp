@@ -65,7 +65,7 @@ void greenHairRat_atk::Render()
 
 void greenHairRat_atk::AfterEffect()
 {
-	ObImage* effect = new ObImage(L"fx_greenRat_proj.png");
+	ObImage* effect = new ObImage(L"fx_greenHairRat_proj.png");
 
 	effect->SetWorldPos(collider->GetWorldPos());
 	effect->maxFrame.x = 10;

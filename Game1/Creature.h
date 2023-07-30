@@ -28,6 +28,7 @@ protected:
 	class ObImage* shadow;
 	class ObImage* spawn;
 
+
 	State		PrevState;
 	State		CurrentState;
 

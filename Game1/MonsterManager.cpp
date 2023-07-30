@@ -27,8 +27,6 @@ void MonsterManager::Update()
 			{ 
 				if (monster->isDead())
 				{
-					//GM->kill++;
-					//GM->player->exp += monster->getExp();
 					delete monster;
 					return true;
 				}

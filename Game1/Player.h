@@ -4,7 +4,6 @@
 class Player : public Creature
 {
 protected:
-
 	ObImage* charging;
 	ObImage* skill;
 	ObImage* crouch;
@@ -75,6 +74,7 @@ public:
 	float	GetDashCooldown() { return dashRemainingCooldown;  }
 	float	GetSkillCooldown() { return skillRemainingCooldown; }
 	bool	hasEnoughManaForSkill() { return mp >= skillManaCost; }
+	Vector2 GetPosition() { return collider->GetWorldPos(); }
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }

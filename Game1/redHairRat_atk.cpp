@@ -1,4 +1,7 @@
 #include "stdafx.h"
+#include "Creature.h"
+#include "player.h"
+#include "EffectManager.h"
 #include "Projectile.h"
 #include "redHairRat_atk.h"
 
@@ -52,15 +55,24 @@ void redHairRat_atk::Render()
 
 void redHairRat_atk::AfterEffect()
 {
-	//ObImage* afterImg = new ObImage(L"fireball_explosion.png");
-	//afterImg->SetWorldPos(collider->GetWorldPos());
-	//afterImg->maxFrame.x = 7;
-	//afterImg->maxFrame.y = 1;
-	//afterImg->scale.x = collider_range->scale.x;
-	//afterImg->scale.y = collider_range->scale.y;
-	//afterImg->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
-	//afterImg->color.w = 0.4f;
+	ObImage* effect = new ObImage(L"fx_redHairRat_proj.png");
 
+	effect->SetWorldPos(GM->player->GetPosition() + UP * 60.0f);
+	effect->maxFrame.x = 9;
+	effect->maxFrame.y = 1;
+	effect->scale.x = effect->imageSize.x / effect->maxFrame.x * 2.0f;
+	effect->scale.y = effect->imageSize.y / effect->maxFrame.y * 2.0f;
+	effect->ChangeAnim(ANIMSTATE::ONCE, 0.07f);
+	effect->color.w = 0.35f;
+	if (dir == LEFT)
+	{
+		effect->reverseLR = true;
+		effect->pivot = OFFSET_L;
+	}
+	else if (dir == RIGHT)
+	{
+		effect->pivot = OFFSET_R;
+	}
 
-	//GM->afterEffectManager.emplace_back(afterImg);
+	GM->fx->AddEffects(effect);
 }

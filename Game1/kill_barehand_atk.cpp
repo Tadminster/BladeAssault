@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Projectile.h"
+#include "EffectManager.h"
 #include "kill_barehand_atk.h"
 
 kill_barehand_atk::kill_barehand_atk(
@@ -27,10 +28,10 @@ kill_barehand_atk::kill_barehand_atk(
 
 	skin = new ObImage(L"projectile_kill_gun_ignition_fire.png");
 	skin->SetParentRT(*collider);
-	skin->maxFrame.x = 8;
+	skin->maxFrame.x = 4;
 	skin->maxFrame.y = 1;
-	skin->scale.x = skin->imageSize.x / skin->maxFrame.x * 2;
-	skin->scale.y = skin->imageSize.y / skin->maxFrame.y * 2;
+	skin->scale.x = skin->imageSize.x / skin->maxFrame.x * 3;
+	skin->scale.y = skin->imageSize.y / skin->maxFrame.y * 3;
 	skin->ChangeAnim(ANIMSTATE::LOOP, 0.05f);
 	if (dir == LEFT) skin->reverseLR = true;
 
@@ -66,15 +67,17 @@ void kill_barehand_atk::Render()
 
 void kill_barehand_atk::AfterEffect()
 {
-	//ObImage* afterImg = new ObImage(L"fireball_explosion.png");
-	//afterImg->SetWorldPos(collider->GetWorldPos());
-	//afterImg->maxFrame.x = 7;
-	//afterImg->maxFrame.y = 1;
-	//afterImg->scale.x = collider_range->scale.x;
-	//afterImg->scale.y = collider_range->scale.y;
-	//afterImg->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
-	//afterImg->color.w = 0.4f;
+	ObImage* effect = new ObImage(L"fx_kill_gun_ignition_fire.png");
 
-	
-	//GM->afterEffectManager.emplace_back(afterImg);
+	effect->SetWorldPos(collider->GetWorldPos());
+	effect->maxFrame.x = 6;
+	effect->maxFrame.y = 1;
+	effect->scale.x = effect->imageSize.x / effect->maxFrame.x * 4.0f;
+	effect->scale.y = effect->imageSize.y / effect->maxFrame.y * 4.0f;
+	effect->ChangeAnim(ANIMSTATE::ONCE, 0.07f);
+	effect->color.w = 0.4f;
+
+	if (dir == LEFT) effect->reverseLR = true;
+
+	GM->fx->AddEffects(effect);
 }
