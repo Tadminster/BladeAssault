@@ -27,17 +27,11 @@
     <ClInclude Include="Player.h">
       <Filter>Object\Creature\Player</Filter>
     </ClInclude>
-    <ClInclude Include="kill_barehand_atk.h">
-      <Filter>Object\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Object\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="MonsterManager.h">
       <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="redHairRat_atk.h">
-      <Filter>Object\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>System</Filter>
@@ -54,17 +48,8 @@
     <ClInclude Include="Scene6_undercity2.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="kill_barehand_ChargingAtk.h">
-      <Filter>Object\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="orangeHairRat.h">
       <Filter>Object\Creature\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="orangeHairRat_atk.h">
-      <Filter>Object\Projectile</Filter>
-    </ClInclude>
-    <ClInclude Include="kill_barehand_skill.h">
-      <Filter>Object\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="Scene7_undercity3.h">
       <Filter>Scene</Filter>
@@ -73,6 +58,30 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="DamageText.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="greenHairRat.h">
+      <Filter>Object\Creature\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="greenHairRat_atk.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="orangeHairRat_atk.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="redHairRat_atk.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="kill_barehand_atk.h">
+      <Filter>Object\Projectile\playerProj</Filter>
+    </ClInclude>
+    <ClInclude Include="kill_barehand_ChargingAtk.h">
+      <Filter>Object\Projectile\playerProj</Filter>
+    </ClInclude>
+    <ClInclude Include="kill_barehand_skill.h">
+      <Filter>Object\Projectile\playerProj</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
@@ -102,17 +111,11 @@
     <ClCompile Include="Player_kill.cpp">
       <Filter>Object\Creature\Player</Filter>
     </ClCompile>
-    <ClCompile Include="kill_barehand_atk.cpp">
-      <Filter>Object\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>Object\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="MonsterManager.cpp">
       <Filter>System</Filter>
-    </ClCompile>
-    <ClCompile Include="redHairRat_atk.cpp">
-      <Filter>Object\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>System</Filter>
@@ -129,17 +132,8 @@
     <ClCompile Include="Scene6_undercity2.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="kill_barehand_ChargingAtk.cpp">
-      <Filter>Object\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="orangeHairRat.cpp">
       <Filter>Object\Creature\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="orangeHairRat_atk.cpp">
-      <Filter>Object\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="kill_barehand_skill.cpp">
-      <Filter>Object\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="Scene7_undercity3.cpp">
       <Filter>Scene</Filter>
@@ -148,6 +142,30 @@
       <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="DamageText.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="greenHairRat.cpp">
+      <Filter>Object\Creature\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="greenHairRat_atk.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="orangeHairRat_atk.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="redHairRat_atk.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="kill_barehand_atk.cpp">
+      <Filter>Object\Projectile\playerProj</Filter>
+    </ClCompile>
+    <ClCompile Include="kill_barehand_ChargingAtk.cpp">
+      <Filter>Object\Projectile\playerProj</Filter>
+    </ClCompile>
+    <ClCompile Include="kill_barehand_skill.cpp">
+      <Filter>Object\Projectile\playerProj</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -178,6 +196,12 @@
     </Filter>
     <Filter Include="Object\Creature\Player">
       <UniqueIdentifier>{13679068-52f5-4c44-8320-2ceeda30fde5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Projectile\monsterProj">
+      <UniqueIdentifier>{9fbc373a-50bf-43ae-8270-9e51c03b1e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Projectile\playerProj">
+      <UniqueIdentifier>{ba6f2f20-275f-4fee-899f-1e568213133f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

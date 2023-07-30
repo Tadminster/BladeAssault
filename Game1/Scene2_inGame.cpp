@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
+#include "EffectManager.h"
 #include "Scene_proto.h"
 #include "Scene2_inGame.h"
 
@@ -23,6 +24,7 @@ Scene2_inGame::Scene2_inGame()
 	GM->player = new Player_kill();
 	GM->monster = new MonsterManager();
 	GM->damageDP = new DamageDisplayManager();
+	GM->fx = new EffectManager();
 
 	tileMap[0]->file = "scene2_hankroom_0.txt";
 	tileMap[1]->file = "scene2_hankroom_1.txt";

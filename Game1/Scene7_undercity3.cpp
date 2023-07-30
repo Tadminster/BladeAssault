@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
+#include "EffectManager.h"
 #include "redHairRat.h"
 #include "orangeHairRat.h"
 #include "Scene_proto.h"

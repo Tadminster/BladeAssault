@@ -94,7 +94,6 @@ void DamageText::LateUpdate()
 	//ImGui::Text("traveledDistance %f\n", traveledDistance);
 	//traveledDistance = Vector2(spawnPos - text->GetWorldPos()).Length();
 	traveledDistance = Vector2::Distance(spawnPos, text->GetWorldPos());
-	cout << "traveledDistance " << traveledDistance << endl;
 }
 
 void DamageText::Render()

@@ -5,6 +5,7 @@
 #include "Player_kill.h"
 #include "Monster.h"
 #include "DamageDisplayManager.h"
+#include "EffectManager.h"
 #include "MonsterManager.h"
 #include "redHairRat.h"
 #include "Scene_proto.h"

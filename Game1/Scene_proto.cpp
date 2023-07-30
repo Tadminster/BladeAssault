@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
+#include "EffectManager.h"
 #include "Scene_proto.h"
 
 Scene_proto::Scene_proto()
@@ -32,6 +33,7 @@ void Scene_proto::Release()
 void Scene_proto::Update()
 {
 	localtime += DELTA;
+	GM->fx->Update();
 	GM->damageDP->Update();
 }
 
@@ -47,6 +49,7 @@ void Scene_proto::LateUpdate()
 
 void Scene_proto::Render()
 {
+	GM->fx->Render();
 	GM->damageDP->Render();
 }
 
