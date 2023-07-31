@@ -3,6 +3,7 @@
 class MonsterManager
 {
 private:
+	map<string, Monster*> monsterList;
 	vector<class Monster*> enemy;
 	vector<class Projectile*> projectiles;
 
@@ -20,7 +21,7 @@ public:
 	vector<class Projectile*>&	GetProjectiles()	{ return projectiles; }
 	int							getEnemyCount()		{ return enemy.size(); }
 
-	void	AddMonster(Monster* monster);
+	void	SpawnMonster(class Monster* monster, Vector2 pos);
 	void	ClearMonster() { enemy.clear(); }
 };
 

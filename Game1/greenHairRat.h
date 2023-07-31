@@ -5,7 +5,7 @@ private:
 
 public:
 	greenHairRat();
-	greenHairRat(Vector2 spawnPos);
+	//greenHairRat(Vector2 spawnPos);
 	~greenHairRat();
 	void Update() override;
 	void Render() override;

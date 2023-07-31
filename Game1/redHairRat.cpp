@@ -94,10 +94,10 @@ redHairRat::redHairRat()
     timeTakenToAttackOnce = 1.0f / attackSpeed;
 }
 
-redHairRat::redHairRat(Vector2 spawnPos) : redHairRat()
-{
-    collider->SetWorldPos(spawnPos);
-}
+//redHairRat::redHairRat(Vector2 spawnPos) : redHairRat()
+//{
+//    collider->SetWorldPos(spawnPos);
+//}
 
 redHairRat::~redHairRat()
 {

@@ -19,6 +19,7 @@ Scene5_undercity1::Scene5_undercity1()
 	tileMap[2] = new ObTileMap();
 
 	nextMap = new ObRect();
+	//spawnTrigger = new ObRect();
 
 	tileMap[0]->file = "scene5_undercity1_0.txt";
 	tileMap[1]->file = "scene5_undercity1_1.txt";
@@ -33,6 +34,13 @@ Scene5_undercity1::Scene5_undercity1()
 	nextMap->scale = Vector2(100, 100);
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
+
+	// 몬스터소환 트리거
+	spawnTrigger->pivot = OFFSET_LB;
+	spawnTrigger->SetWorldPos(Vector2(1150, 1200));
+	spawnTrigger->scale = Vector2(125, 100);
+	spawnTrigger->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
+	spawnTrigger->isFilled = true;
 
 	startPostion = Vector2(850, 2950);
 }
@@ -49,12 +57,7 @@ void Scene5_undercity1::Init()
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
 
-	GM->monster->AddMonster(new orangeHairRat(Vector2(750, 900)));
-	GM->monster->AddMonster(new redHairRat(Vector2(1000, 900)));
-	GM->monster->AddMonster(new redHairRat(Vector2(1200, 900)));
-	GM->monster->AddMonster(new redHairRat(Vector2(1500, 900)));
-	GM->monster->AddMonster(new redHairRat(Vector2(1750, 900)));
-	GM->monster->AddMonster(new orangeHairRat(Vector2(2000, 900)));
+
 }
 
 void Scene5_undercity1::Release()
@@ -82,6 +85,17 @@ void Scene5_undercity1::Update()
 	{
 		GM->monster->ClearMonster();
 		SCENE->ChangeScene("sc6");
+	}
+
+	// 몬스터 소환
+	if (spawnTrigger->Intersect(GM->player->GetCollider()))
+	{
+		// 몬스터가 소환된 적이 없다면
+		if (!isSummoned)
+		{
+			isSummoned = true;
+			SummonMonster();
+		}
 	}
 
 	for (auto& map : tileMap)
@@ -117,4 +131,14 @@ void Scene5_undercity1::Render()
 void Scene5_undercity1::ResizeScreen()
 {
 	GM->hud->Init();
+}
+
+void Scene5_undercity1::SummonMonster()
+{
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(750, 900));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1000, 900));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1200, 900));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1500, 900));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1750, 900));
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2000, 900));
 }

@@ -119,6 +119,7 @@ void Window::Create()
 	SetForegroundWindow(app.handle);
 	SetFocus(app.handle);
 
+	// 기본 커서 보이게 하려면 여기를 다시 true
 	ShowCursor(true);
 	Load(app.fullScreen);
 

@@ -28,7 +28,10 @@ protected:
 
 public:
 	Monster();
-	Monster(Vector2 spawnPos);
+
+	// deep copy
+	void operator=(Monster* monster);
+
 	virtual ~Monster();
 	virtual void Update();
 	virtual void Render();
@@ -40,6 +43,8 @@ public:
 	bool isDead() const; 
 	void actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance);
 	void knockBack();
+
+
 
 };
 

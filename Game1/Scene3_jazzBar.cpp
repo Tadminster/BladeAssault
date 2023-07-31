@@ -21,6 +21,7 @@ Scene3_jazzBar::Scene3_jazzBar()
 
 	for (int i = 0; i < 2; i++)
 		nextMap[i] = new ObRect();
+	//spawnTrigger = new ObRect();
 	stairLeft = new ObRect();
 	stairRight = new ObRect();
 
@@ -42,6 +43,13 @@ Scene3_jazzBar::Scene3_jazzBar()
 		nextMap[i]->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
 		nextMap[i]->isFilled = true;
 	}
+
+	// 몬스터소환 트리거
+	spawnTrigger->pivot = OFFSET_LB;
+	spawnTrigger->SetWorldPos(Vector2(3000, 1800));
+	spawnTrigger->scale = Vector2(100, 100);
+	spawnTrigger->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
+	spawnTrigger->isFilled = true;
 
 	// 계단(왼쪽)
 	stairLeft->pivot = OFFSET_LB;
@@ -67,16 +75,14 @@ Scene3_jazzBar::~Scene3_jazzBar()
 
 	for (int i = 0; i < 2; i++)
 		delete nextMap[i];
-
+	delete spawnTrigger;
 	delete stairLeft;
 }
 
 void Scene3_jazzBar::Init()
 {
 	GM->player->SetPosition(startPostion);
-	GM->monster->AddMonster(new redHairRat(Vector2(3500, 2000)));
-	GM->monster->AddMonster(new orangeHairRat(Vector2(3600, 2000)));
-	GM->monster->AddMonster(new greenHairRat(Vector2(3700, 2000)));
+
 }
 
 void Scene3_jazzBar::Release()
@@ -106,6 +112,17 @@ void Scene3_jazzBar::Update()
 		{
 			GM->monster->ClearMonster();
 			SCENE->ChangeScene("sc4");
+		}
+	}
+
+	// 몬스터 소환
+	if (spawnTrigger->Intersect(GM->player->GetCollider()))
+	{
+		// 몬스터가 소환된 적이 없다면
+		if (!isSummoned)
+		{
+			isSummoned = true;
+			SummonMonster();
 		}
 	}
 
@@ -174,4 +191,11 @@ void Scene3_jazzBar::Render()
 void Scene3_jazzBar::ResizeScreen()
 {
 	GM->hud->Init();
+}
+
+void Scene3_jazzBar::SummonMonster()
+{
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(3500, 2000));
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(3600, 2000));
+	GM->monster->SpawnMonster(new greenHairRat(), Vector2(3700, 2000));
 }

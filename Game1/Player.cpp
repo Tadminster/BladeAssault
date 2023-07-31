@@ -278,7 +278,6 @@ void Player::Update()
 		projectiles.end()
 	);
 
-
 	// 플레이어의 탄 업데이트
 	for (auto& proj : projectiles)
 		proj->Update();

@@ -95,10 +95,10 @@ orangeHairRat::orangeHairRat()
     timeTakenToAttackOnce = 1.0f / attackSpeed;
 }
 
-orangeHairRat::orangeHairRat(Vector2 spawnPos) : orangeHairRat()
-{
-    collider->SetWorldPos(spawnPos);
-}
+//orangeHairRat::orangeHairRat(Vector2 spawnPos) : orangeHairRat()
+//{
+//    collider->SetWorldPos(spawnPos);
+//}
 
 orangeHairRat::~orangeHairRat()
 {

@@ -6,9 +6,6 @@ private:
 	ObRect*			stairLeft;
 	ObRect*			stairRight;
 
-	//temp
-	class redHairRat*		redRat;
-
 public:
 	Scene3_jazzBar();
 	~Scene3_jazzBar();
@@ -18,4 +15,6 @@ public:
 	virtual void LateUpdate() override;//°»½Å
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
+
+	void SummonMonster() override;
 };

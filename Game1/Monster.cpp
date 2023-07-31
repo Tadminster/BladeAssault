@@ -40,9 +40,9 @@ Monster::Monster()
 	isLanding = true;
 }
 
-Monster::Monster(Vector2 spawnPos)
-{
-}
+//Monster::Monster(Vector2 spawnPos)
+//{
+//}
 
 Monster::~Monster()
 {

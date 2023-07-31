@@ -1,11 +1,18 @@
 #include "stdafx.h"
 #include "Creature.h"
 #include "Monster.h"
+#include "redHairRat.h"
+#include "orangeHairRat.h"
+#include "greenHairRat.h"
 #include "Projectile.h"
 #include "MonsterManager.h"
 
 void MonsterManager::Init()
 {
+	// 모든 몬스터를 추가
+	monsterList.emplace("redHairRat", new redHairRat());
+	monsterList.emplace("orangeHairRat", new orangeHairRat());
+	monsterList.emplace("greenHairRat", new greenHairRat());
 }
 
 void MonsterManager::Release()
@@ -79,7 +86,11 @@ void MonsterManager::Render()
 		projectiles->Render();
 }
 
-void MonsterManager::AddMonster(class Monster* monster)
+void MonsterManager::SpawnMonster(class Monster* monster, Vector2 pos)
 {
+	// 몬스터 위치 설정
+	monster->GetCollider()->SetWorldPos(pos);
+	monster->Init();
+	// 몬스터를 벡터에 추가
 	this->enemy.emplace_back(monster);
 }

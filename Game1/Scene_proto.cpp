@@ -11,9 +11,7 @@
 
 Scene_proto::Scene_proto()
 {
-	tileMap[0] = nullptr;
-	tileMap[1] = nullptr;
-	tileMap[2] = nullptr;
+	spawnTrigger = new ObRect();
 }
 
 Scene_proto::~Scene_proto()
@@ -33,6 +31,7 @@ void Scene_proto::Release()
 void Scene_proto::Update()
 {
 	localtime += DELTA;
+	spawnTrigger->Update();
 	GM->fx->Update();
 	GM->damageDP->Update();
 }
@@ -49,6 +48,9 @@ void Scene_proto::LateUpdate()
 
 void Scene_proto::Render()
 {
+	if (GM->DEBUG_MODE)
+		spawnTrigger->Render();
+	
 	GM->fx->Render();
 	GM->damageDP->Render();
 }
@@ -152,6 +154,10 @@ bool Scene_proto::OnWallside(Creature* creature)
 		}
 	}
 	return false;
+}
+
+void Scene_proto::SummonMonster()
+{
 }
 
 
