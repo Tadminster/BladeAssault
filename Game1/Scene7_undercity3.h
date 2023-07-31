@@ -15,4 +15,6 @@ public:
 	virtual void LateUpdate() override;//°»½Å
 	virtual void Render() override;
 	virtual void ResizeScreen() override;
+
+	void SummonMonster() override;
 };

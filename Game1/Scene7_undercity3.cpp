@@ -20,20 +20,21 @@ Scene7_undercity3::Scene7_undercity3()
 
 	nextMap = new ObRect();
 
-	//tileMap[0]->file = "scene6_undercity2_0.txt";
-	//tileMap[1]->file = "scene6_undercity2_1.txt";
-	//tileMap[2]->file = "scene6_undercity2_2.txt";
+	tileMap[0]->file = "scene7_undercity3_0.txt";
+	tileMap[1]->file = "scene7_undercity3_1.txt";
+	tileMap[2]->file = "scene7_undercity3_2.txt";
 
 	tileMap[0]->Load();
 	tileMap[1]->Load();
 	tileMap[2]->Load();
 
-	nextMap->SetWorldPos(Vector2(800, 4000));
+	nextMap->pivot = OFFSET_LB;
+	nextMap->SetWorldPos(Vector2(4375, 825));
 	nextMap->scale = Vector2(100, 100);
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
 
-	startPostion = Vector2(1000, 1250);
+	startPostion = Vector2(925, 825);
 }
 
 Scene7_undercity3::~Scene7_undercity3()
@@ -70,8 +71,6 @@ void Scene7_undercity3::Update()
 	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
 	ImGui::Text("onWall : %d\n", GM->player->onWall);
 	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
-
-	//Scene_proto::Update();
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -117,4 +116,15 @@ void Scene7_undercity3::Render()
 void Scene7_undercity3::ResizeScreen()
 {
 	GM->hud->Init();
+}
+
+void Scene7_undercity3::SummonMonster()
+{
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1525));
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2000, 1250));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1075));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1850, 975));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1200, 725));
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1500, 725));
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1800, 725));
 }

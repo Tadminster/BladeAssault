@@ -28,7 +28,8 @@ Scene6_undercity2::Scene6_undercity2()
 	tileMap[1]->Load();
 	tileMap[2]->Load();
 
-	nextMap->SetWorldPos(Vector2(800, 4000));
+	nextMap->pivot = OFFSET_LB;
+	nextMap->SetWorldPos(Vector2(2150, 725));
 	nextMap->scale = Vector2(100, 100);
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
@@ -73,8 +74,6 @@ void Scene6_undercity2::Update()
 	ImGui::Text("onWall : %d\n", GM->player->onWall);
 	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
 
-	//Scene_proto::Update();
-
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
 	CAM->position.y = GM->player->GetCollider()->GetWorldPos().y + 200;
@@ -83,7 +82,7 @@ void Scene6_undercity2::Update()
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
 		GM->monster->ClearMonster();
-		SCENE->ChangeScene("sc2");
+		SCENE->ChangeScene("sc7");
 	}
 
 	// 몬스터 소환
