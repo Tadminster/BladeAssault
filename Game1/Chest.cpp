@@ -98,7 +98,6 @@ void Chest::Render()
 
 void Chest::Open()
 {
-	cout << "Open" << endl;
 }
 
 void Chest::Spawn()

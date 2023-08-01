@@ -28,6 +28,7 @@
     <ClInclude Include="greenHairRat.h" />
     <ClInclude Include="greenHairRat_atk.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="kill_barehand_atk.h" />
     <ClInclude Include="kill_barehand_ChargingAtk.h" />
     <ClInclude Include="kill_barehand_skill.h" />
@@ -61,6 +62,7 @@
     <ClCompile Include="greenHairRat.cpp" />
     <ClCompile Include="greenHairRat_atk.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="kill_barehand_atk.cpp" />
     <ClCompile Include="kill_barehand_ChargingAtk.cpp" />
     <ClCompile Include="kill_barehand_skill.cpp" />

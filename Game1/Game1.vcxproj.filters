@@ -90,6 +90,9 @@
     <ClInclude Include="commonChest.h">
       <Filter>Object\Chest</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -180,6 +183,9 @@
     <ClCompile Include="commonChest.cpp">
       <Filter>Object\Chest</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -217,6 +223,9 @@
     </Filter>
     <Filter Include="Object\Chest">
       <UniqueIdentifier>{7f13a9c3-0dde-430d-b2e2-19fca4a48e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{c3503532-0af8-414a-b699-2a8452326ef9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
