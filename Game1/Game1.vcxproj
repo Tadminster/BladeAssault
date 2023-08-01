@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chest.h" />
+    <ClInclude Include="commonChest.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="DamageText.h" />
     <ClInclude Include="DamageDisplayManager.h" />
@@ -50,6 +52,8 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Chest.cpp" />
+    <ClCompile Include="commonChest.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="DamageText.cpp" />
     <ClCompile Include="DamageDisplayManager.cpp" />

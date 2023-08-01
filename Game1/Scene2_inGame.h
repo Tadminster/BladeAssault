@@ -7,6 +7,8 @@ private:
 	ObImage*		lightRoom;
 	ObRect*			nextMap;
 
+	class Chest*			chest;
+
 	bool			isLightDown;
 	bool			isLightOn;
 	float			LightOffTime;

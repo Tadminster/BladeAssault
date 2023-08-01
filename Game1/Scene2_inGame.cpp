@@ -6,12 +6,15 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
+#include "Chest.h"
+#include "commonChest.h"
 #include "EffectManager.h"
 #include "Scene_proto.h"
 #include "Scene2_inGame.h"
 
 Scene2_inGame::Scene2_inGame()
 {
+	;
 	tileMap[0] = new ObTileMap();
 	tileMap[1] = new ObTileMap();
 	tileMap[2] = new ObTileMap();
@@ -25,6 +28,8 @@ Scene2_inGame::Scene2_inGame()
 	GM->monster = new MonsterManager();
 	GM->damageDP = new DamageDisplayManager();
 	GM->fx = new EffectManager();
+
+	chest = new commonChest();
 
 	tileMap[0]->file = "scene2_hankroom_0.txt";
 	tileMap[1]->file = "scene2_hankroom_1.txt";
@@ -78,6 +83,9 @@ void Scene2_inGame::Init()
 {
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
+
+	
+	chest->SetPosition(startPostion);
 }
 
 void Scene2_inGame::Release()
@@ -140,6 +148,7 @@ void Scene2_inGame::Update()
 	GM->monster->Update();
 	GM->player->Update();
 	GM->hud->Update();
+	chest->Update();
 
 	Scene_proto::Update();
 }
@@ -164,6 +173,7 @@ void Scene2_inGame::Render()
 		lightRoom->Render();
 		lightCeiling->Render();
 	}
+	chest->Render();
 	GM->monster->Render();
 	GM->player->Render();
 	GM->hud->Render();

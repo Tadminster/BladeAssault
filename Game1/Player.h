@@ -75,6 +75,7 @@ public:
 	float	GetSkillCooldown() { return skillRemainingCooldown; }
 	bool	hasEnoughManaForSkill() { return mp >= skillManaCost; }
 	Vector2 GetPosition() { return collider->GetWorldPos(); }
+	ObRect* GetCollider() { return collider; }
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }

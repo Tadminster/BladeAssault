@@ -84,6 +84,12 @@
     <ClInclude Include="EffectManager.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="Chest.h">
+      <Filter>Object\Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="commonChest.h">
+      <Filter>Object\Chest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -168,6 +174,12 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Chest.cpp">
+      <Filter>Object\Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="commonChest.cpp">
+      <Filter>Object\Chest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -202,6 +214,9 @@
     </Filter>
     <Filter Include="Object\Projectile\playerProj">
       <UniqueIdentifier>{ba6f2f20-275f-4fee-899f-1e568213133f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Chest">
+      <UniqueIdentifier>{7f13a9c3-0dde-430d-b2e2-19fca4a48e98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

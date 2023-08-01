@@ -29,49 +29,49 @@ greenHairRat::greenHairRat()
 
     idle->pivot = OFFSET_B;
     idle->SetParentRT(*collider);
-    idle->SetLocalPosY(-collider->scale.y * 0.5);
+    idle->SetLocalPosY(-collider->scale.y * 0.5f);
     idle->maxFrame.x = 6;
     idle->maxFrame.y = 1;
-    idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3;
-    idle->scale.y = idle->imageSize.y / idle->maxFrame.y * 3;
+    idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3.0f;
+    idle->scale.y = idle->imageSize.y / idle->maxFrame.y * 3.0f;
     idle->color.w = 0.0f;
     idle->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);
 
 
     run->pivot = OFFSET_B;
     run->SetParentRT(*collider);
-    run->SetLocalPosY(-collider->scale.y * 0.5);
+    run->SetLocalPosY(-collider->scale.y * 0.5f);
     run->maxFrame.x = 9;
     run->maxFrame.y = 1;
-    run->scale.x = run->imageSize.x / run->maxFrame.x * 3;
-    run->scale.y = run->imageSize.y / run->maxFrame.y * 3;
+    run->scale.x = run->imageSize.x / run->maxFrame.x * 3.0f;
+    run->scale.y = run->imageSize.y / run->maxFrame.y * 3.0f;
     run->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     jump->pivot = OFFSET_B;
     jump->SetParentRT(*collider);
-    jump->SetLocalPosY(-collider->scale.y * 0.5);
+    jump->SetLocalPosY(-collider->scale.y * 0.5f);
     jump->maxFrame.x = 2;
     jump->maxFrame.y = 2;
-    jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 3;
-    jump->scale.y = jump->imageSize.y / jump->maxFrame.y * 3;
+    jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 3.0f;
+    jump->scale.y = jump->imageSize.y / jump->maxFrame.y * 3.0f;
     jump->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     attack->pivot = OFFSET_B;
     attack->SetParentRT(*collider);
-    attack->SetLocalPosY(-collider->scale.y * 0.5);
+    attack->SetLocalPosY(-collider->scale.y * 0.5f);
     attack->maxFrame.x = 16;
     attack->maxFrame.y = 1;
-    attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
-    attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
+    attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3.0f;
+    attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3.0f;
     attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
     shadow->pivot = OFFSET_B;
     shadow->SetParentRT(*collider);
-    shadow->SetLocalPosY(-collider->scale.y * 0.4);
+    shadow->SetLocalPosY(-collider->scale.y * 0.4f);
     shadow->maxFrame.x = 1;
     shadow->maxFrame.y = 1;
-    shadow->scale.x = shadow->imageSize.x / shadow->maxFrame.x * 3;
-    shadow->scale.y = shadow->imageSize.y / shadow->maxFrame.y * 3;
+    shadow->scale.x = shadow->imageSize.x / shadow->maxFrame.x * 3.0f;
+    shadow->scale.y = shadow->imageSize.y / shadow->maxFrame.y * 3.0f;
     shadow->color.w = 0.2f;
     shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
