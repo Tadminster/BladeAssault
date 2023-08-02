@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "leatherBelt.h"
+#include "candle.h"
 
-leatherBelt::leatherBelt(Vector2 dropPos) : Item(dropPos)
+candle::candle(Vector2 dropPos) : Item(dropPos)
 {
-	grade = ItemGrade::NORMAL;
+	grade = ItemGrade::EPIC;
 
-	icon = new ObImage(L"gear_icon_leatherbelt.png");
+	icon = new ObImage(L"gear_icon_candle.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -43,9 +43,9 @@ leatherBelt::leatherBelt(Vector2 dropPos) : Item(dropPos)
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"가죽벨트";
-	text_explanation = L"최대 체력이 5 증가합니다.";
+	text_name = L"양초";
+	text_explanation = L"HP 20% 이하에서 MP가 감소하지 않습니다.";
 
 	// 아이템의 능력치
-	maxHp = 5;
+	// 차후에 추가 예정
 }

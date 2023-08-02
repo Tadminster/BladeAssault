@@ -11,10 +11,10 @@ Chest::Chest()
 	collider->isFilled		= false;
 	collider->SetWorldPos(Vector2());
 
-	presskey				= new ObImage(L"chest_PressE.png");
+	presskey				= new ObImage(L"chest_Press.png");
 	presskey->pivot			= OFFSET_B;
 	presskey->SetParentRT(*GM->player->GetCollider());
-	presskey->SetLocalPosY(-collider->scale.y * 0.3f);
+	presskey->SetLocalPosY(-collider->scale.y * 0.45f);
 	presskey->scale.x		= presskey->imageSize.x;
 	presskey->scale.y		= presskey->imageSize.y;
 	//presskey->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);

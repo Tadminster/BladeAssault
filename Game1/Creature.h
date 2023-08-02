@@ -56,7 +56,7 @@ public:
 
 public:
 	Creature();
-	~Creature();
+	virtual ~Creature();
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();

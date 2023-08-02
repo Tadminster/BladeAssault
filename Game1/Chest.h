@@ -31,7 +31,7 @@ public:
 	ObRect* GetCollider() { return collider; };
 	ChestState GetState() { return state; }
 	bool GetIsOpen() { return isOpen; }
-	bool GetIsSpawn() { return isSpawn; }
+	//bool GetIsSpawn() { return isSpawn; }
 
 	// Set
 	void SetPosition(Vector2 pos) { collider->SetWorldPos(pos); }

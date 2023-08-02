@@ -34,6 +34,9 @@ public:
 	int maxMp;
 	int mp;
 	int damage;
+	float damageScale;
+	int criticalChance;
+	int criticalDamage;
 	int defence;
 	float attackSpeed;
 	float moveSpeed;

@@ -48,11 +48,4 @@ championBelt::championBelt(Vector2 dropPos) : Item(dropPos)
 
 	// 아이템의 능력치
 	maxHp = 10;
-	maxMp = 0;
-	hp = 0;
-	mp = 0;
-	damage = 0;
-	defence = 0;
-	attackSpeed = 0;
-	moveSpeed = 0;
 }

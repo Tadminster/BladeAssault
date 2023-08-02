@@ -6,18 +6,16 @@
 
 Item::Item(Vector2 dropPos)
 {
-	cout << "Item()" << endl;
-
 	collider = new ObRect();
 	collider->pivot = OFFSET_B;
 	collider->scale = Vector2(100, 150);
 	collider->SetWorldPos(dropPos);
 	collider->isFilled = false;
 
-	presskey = new ObImage(L"chest_PressE.png");
+	presskey = new ObImage(L"chest_Selection.png");
 	presskey->pivot = OFFSET_B;
 	presskey->SetParentRT(*GM->player->GetCollider());
-	presskey->SetLocalPosY(-collider->scale.y * 0.3f);
+	presskey->SetLocalPosY(-collider->scale.y * 0.35f);
 	presskey->scale.x = presskey->imageSize.x;
 	presskey->scale.y = presskey->imageSize.y;
 
@@ -39,12 +37,23 @@ Item::Item(Vector2 dropPos)
 	rect_itemExplanation.top = Utility::WorldToScreen(itemExplanation_pos).y;
 	rect_itemExplanation.right = rect_itemExplanation.left + 1000;
 	rect_itemExplanation.bottom = rect_itemExplanation.top + 1000;
+
+	maxHp = 0;
+	maxMp = 0;
+	hp = 0;
+	mp = 0;
+	damage = 0;
+	damageScale = 0.0f;
+	criticalChance = 0;
+	defence = 0;
+	attackSpeed = 0.0f;
+	moveSpeed = 0.0f;
+
+	cout << "¹ßµ¿1";
 }
 
 Item::~Item()
 {
-	cout << "Item Destroyed" << endl;
-
 	delete collider;
 	delete icon;
 	delete options;
@@ -143,7 +152,7 @@ void Item::Render()
 			20.0f,
 			L"Commando",
 			Color(1, 1, 1, 1),
-			DWRITE_FONT_WEIGHT_ULTRA_LIGHT,
+			DWRITE_FONT_WEIGHT_EXTRA_BOLD,
 			DWRITE_FONT_STYLE_NORMAL,
 			DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
 	}

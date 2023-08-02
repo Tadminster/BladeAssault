@@ -93,17 +93,32 @@
     <ClInclude Include="Item.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
-    <ClInclude Include="championBelt.h">
-      <Filter>Object\Item</Filter>
-    </ClInclude>
     <ClInclude Include="ItemManager.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="leatherBelt.h">
-      <Filter>Object\Item</Filter>
+    <ClInclude Include="candle.h">
+      <Filter>Object\Item\EPIC</Filter>
     </ClInclude>
     <ClInclude Include="reinforcedChampionBelt.h">
-      <Filter>Object\Item</Filter>
+      <Filter>Object\Item\EPIC</Filter>
+    </ClInclude>
+    <ClInclude Include="leatherBelt.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
+    <ClInclude Include="grip.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
+    <ClInclude Include="magicSword.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
+    <ClInclude Include="reinforcedGrip.h">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClInclude>
+    <ClInclude Include="championBelt.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
+    <ClInclude Include="icepick.h">
+      <Filter>Object\Item\RARE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -198,17 +213,32 @@
     <ClCompile Include="Item.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
-    <ClCompile Include="championBelt.cpp">
-      <Filter>Object\Item</Filter>
-    </ClCompile>
     <ClCompile Include="ItemManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="leatherBelt.cpp">
-      <Filter>Object\Item</Filter>
+    <ClCompile Include="candle.cpp">
+      <Filter>Object\Item\EPIC</Filter>
     </ClCompile>
     <ClCompile Include="reinforcedChampionBelt.cpp">
-      <Filter>Object\Item</Filter>
+      <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="leatherBelt.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="grip.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="magicSword.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="reinforcedGrip.cpp">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="championBelt.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="icepick.cpp">
+      <Filter>Object\Item\RARE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +280,18 @@
     </Filter>
     <Filter Include="Object\Item">
       <UniqueIdentifier>{c3503532-0af8-414a-b699-2a8452326ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item\NORMAL">
+      <UniqueIdentifier>{b2da47e0-bc4f-4cc6-803a-24441fff0bf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item\RARE">
+      <UniqueIdentifier>{55ed0c9a-da44-4648-a4cc-e183eced1876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item\EPIC">
+      <UniqueIdentifier>{e0d681ac-fecc-481e-84b5-2d6876c830ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item\LEGENDARY">
+      <UniqueIdentifier>{c62d915d-30cd-447e-8f5b-dae128eaa34d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

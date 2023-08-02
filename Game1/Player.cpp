@@ -6,16 +6,6 @@
 
 Player::Player()
 {
-	idle = nullptr;
-	run = nullptr;
-	dash = nullptr;
-	jump = nullptr;
-	crouch = nullptr;
-	attack = nullptr;
-	damaged = nullptr;
-	shadow = nullptr;
-	die = nullptr;
-
 	jumpTime = 0.0f;
 	moveSpeed = 350.0f;
 
@@ -26,7 +16,9 @@ Player::Player()
 	dashRemainingCooldown = 0.0f;
 	dashCooldown = 2.0f;
 
+	damageScale = 1.0f;
 	criticalChance = 10;
+	criticalDamage = 1.5f;
 }
 
 Player::~Player()
@@ -720,9 +712,16 @@ void Player::activateItem(Item* item)
 	
 	this->damage += item->damage;
 	this->defence += item->defence;
+	
+	this->damageScale += item->damageScale;
+
+	this->criticalChance += item->criticalChance;
+	this->criticalDamage += item->criticalDamage;
 
 	this->attackSpeed += item->attackSpeed;
 	this->moveSpeed += item->moveSpeed;
+
+
 }
 
 void Player::actionsWhenDamaged(int damage)

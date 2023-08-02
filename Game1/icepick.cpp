@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "leatherBelt.h"
+#include "icepick.h"
 
-leatherBelt::leatherBelt(Vector2 dropPos) : Item(dropPos)
+icepick::icepick(Vector2 dropPos) : Item(dropPos)
 {
 	grade = ItemGrade::NORMAL;
 
-	icon = new ObImage(L"gear_icon_leatherbelt.png");
+	icon = new ObImage(L"gear_icon_icepick.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -43,9 +43,9 @@ leatherBelt::leatherBelt(Vector2 dropPos) : Item(dropPos)
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"가죽벨트";
-	text_explanation = L"최대 체력이 5 증가합니다.";
+	text_name = L"송곳";
+	text_explanation = L"모든 공격의 치명타피해량이 20% 증가합니다..";
 
 	// 아이템의 능력치
-	maxHp = 5;
+	criticalDamage = 0.2f;
 }

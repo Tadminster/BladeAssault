@@ -24,6 +24,8 @@ protected:
 	int			mp;
 	int			maxMp;
 
+	float damageScale;
+
 	//CHARGING
 	float		chargingTime;				// 충전 시간
 	float		chargingTimeMax;			// 충전 최대 시간
@@ -47,6 +49,7 @@ protected:
 	//ETC
 	float		timeOfDamaged;				// 피격당한 시간 기록용
     int			criticalChance;				// 크리티컬 확률
+	float		criticalDamage;				// 크리티컬 데미지 배율
 
 public:
 	bool		isCharging;					// 차징 중인지 여부
