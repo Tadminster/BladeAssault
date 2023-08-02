@@ -711,6 +711,20 @@ void Player::Dash()
 	CurrentState = State::DASH;
 }
 
+void Player::activateItem(Item* item)
+{
+	hp = min(this->maxHp, this->hp + item->hp);
+	mp = min(this->maxMp, this->mp + item->mp);
+	this->maxHp += item->maxHp;
+	this->maxMp += item->maxMp;
+	
+	this->damage += item->damage;
+	this->defence += item->defence;
+
+	this->attackSpeed += item->attackSpeed;
+	this->moveSpeed += item->moveSpeed;
+}
+
 void Player::actionsWhenDamaged(int damage)
 {
 	// 대시 중에는 데미지를 받지 않음

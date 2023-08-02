@@ -1,14 +1,18 @@
 #include "stdafx.h"
-#include "HUD.h"
+
 #include "Creature.h"
 #include "Player.h"
 #include "Player_kill.h"
 #include "Monster.h"
-#include "MonsterManager.h"
-#include "DamageDisplayManager.h"
+
 #include "Chest.h"
 #include "commonChest.h"
+
+#include "HUD.h"
+#include "MonsterManager.h"
+#include "DamageDisplayManager.h"
 #include "EffectManager.h"
+#include "ItemManager.h"
 #include "Scene_proto.h"
 #include "Scene2_inGame.h"
 
@@ -28,6 +32,7 @@ Scene2_inGame::Scene2_inGame()
 	GM->monster = new MonsterManager();
 	GM->damageDP = new DamageDisplayManager();
 	GM->fx = new EffectManager();
+	GM->item = new ItemManager();
 
 	chest = new commonChest();
 

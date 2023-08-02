@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="commonChest.h" />
     <ClInclude Include="Creature.h" />
@@ -29,9 +30,11 @@
     <ClInclude Include="greenHairRat_atk.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="kill_barehand_atk.h" />
     <ClInclude Include="kill_barehand_ChargingAtk.h" />
     <ClInclude Include="kill_barehand_skill.h" />
+    <ClInclude Include="leatherBelt.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MonsterManager.h" />
@@ -51,8 +54,10 @@
     <ClInclude Include="Scene7_undercity3.h" />
     <ClInclude Include="Scene_proto.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="championBelt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="commonChest.cpp" />
     <ClCompile Include="Creature.cpp" />
@@ -63,9 +68,11 @@
     <ClCompile Include="greenHairRat_atk.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="kill_barehand_atk.cpp" />
     <ClCompile Include="kill_barehand_ChargingAtk.cpp" />
     <ClCompile Include="kill_barehand_skill.cpp" />
+    <ClCompile Include="leatherBelt.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MonsterManager.cpp" />
@@ -84,6 +91,7 @@
     <ClCompile Include="Scene6_undercity2.cpp" />
     <ClCompile Include="Scene7_undercity3.cpp" />
     <ClCompile Include="Scene_proto.cpp" />
+    <ClCompile Include="championBelt.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

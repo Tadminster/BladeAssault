@@ -93,6 +93,18 @@
     <ClInclude Include="Item.h">
       <Filter>Object\Item</Filter>
     </ClInclude>
+    <ClInclude Include="championBelt.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="leatherBelt.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="reinforcedChampionBelt.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -184,6 +196,18 @@
       <Filter>Object\Chest</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="championBelt.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="leatherBelt.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="reinforcedChampionBelt.cpp">
       <Filter>Object\Item</Filter>
     </ClCompile>
   </ItemGroup>

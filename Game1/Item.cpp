@@ -1,36 +1,55 @@
 #include "stdafx.h"
+#include "Creature.h"
+#include "Player.h"
+#include "ItemManager.h"
 #include "Item.h"
 
-Item::Item()
+Item::Item(Vector2 dropPos)
 {
+	cout << "Item()" << endl;
+
 	collider = new ObRect();
 	collider->pivot = OFFSET_B;
-	collider->scale = Vector2(100, 100);
+	collider->scale = Vector2(100, 150);
+	collider->SetWorldPos(dropPos);
 	collider->isFilled = false;
-	collider->SetWorldPos(Vector2());
 
 	presskey = new ObImage(L"chest_PressE.png");
 	presskey->pivot = OFFSET_B;
-	presskey->SetParentRT(*collider);
-	presskey->SetLocalPosY(collider->scale.y * 1.2f);
-	presskey->maxFrame.x = 1;
-	presskey->maxFrame.y = 1;
-	presskey->scale.x = presskey->imageSize.x / presskey->maxFrame.x;
-	presskey->scale.y = presskey->imageSize.y / presskey->maxFrame.y;
-	presskey->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);
+	presskey->SetParentRT(*GM->player->GetCollider());
+	presskey->SetLocalPosY(-collider->scale.y * 0.3f);
+	presskey->scale.x = presskey->imageSize.x;
+	presskey->scale.y = presskey->imageSize.y;
+
+	collider->Update();
 
 
-	state = ItemState::LOCKED;
-	isOpen = false;
-	isSpawn = false;
+
+	// 아이템이름 rect
+	Vector2 itemName_pos = Vector2(collider->GetWorldPos().x, collider->GetWorldPos().y + collider->scale.y * 3.0f);
+	rect_itemName.left = Utility::WorldToScreen(itemName_pos).x;
+	rect_itemName.left = Utility::WorldToScreen(itemName_pos).y;
+	rect_itemName.top = itemName_pos.y;
+	rect_itemName.right = rect_itemName.left + 1000;
+	rect_itemName.bottom = rect_itemName.top + 1000;
+
+	// 아이템설명 rect
+	Vector2 itemExplanation_pos = Vector2(collider->GetWorldPos().x - collider->scale.x, collider->GetWorldPos().y + collider->scale.y * 2.5f);
+	rect_itemExplanation.left = Utility::WorldToScreen(itemExplanation_pos).x;
+	rect_itemExplanation.top = Utility::WorldToScreen(itemExplanation_pos).y;
+	rect_itemExplanation.right = rect_itemExplanation.left + 1000;
+	rect_itemExplanation.bottom = rect_itemExplanation.top + 1000;
 }
 
 Item::~Item()
 {
+	cout << "Item Destroyed" << endl;
+
 	delete collider;
-	delete locked;
-	delete unlocking;
-	delete unlocked;
+	delete icon;
+	delete options;
+
+	TEXTURE->DeleteTexture(L"chest_PressE.png");
 }
 
 void Item::Init()
@@ -39,65 +58,94 @@ void Item::Init()
 
 void Item::Update()
 {
-
 	collider->Update();
-	if (state == ItemState::LOCKED)
-	{
-		if (collider->Intersect(GM->player->GetCollider()))
-		{
+	icon->Update();
 
-			presskey->Update();
-			if (INPUT->KeyDown('F'))
-			{
-				state = ItemState::UNlOCKING;
-				Open();
-			}
-		}
-		locked->Update();
-	}
-	else if (state == ItemState::UNlOCKING)
-	{
-		unlocking->Update();
+	// 아이템이름 rect
+	Vector2 itemName_pos = Vector2(collider->GetWorldPos().x - collider->scale.x, collider->GetWorldPos().y + collider->scale.y * 3.0f);
+	rect_itemName.left = Utility::WorldToScreen(itemName_pos).x;
+	rect_itemName.top = Utility::WorldToScreen(itemName_pos).y;
+	rect_itemName.right = rect_itemName.left + 1000;
+	rect_itemName.bottom = rect_itemName.top + 1000;
 
-		if (unlocking->frame.x == unlocking->maxFrame.x - 1)
+	// 아이템설명 rect
+	Vector2 itemExplanation_pos = Vector2(collider->GetWorldPos().x - collider->scale.x, collider->GetWorldPos().y + collider->scale.y * 2.5f);
+	rect_itemExplanation.left = Utility::WorldToScreen(itemExplanation_pos).x;
+	rect_itemExplanation.top = Utility::WorldToScreen(itemExplanation_pos).y;
+	rect_itemExplanation.right = rect_itemExplanation.left + options->imageSize.x * 0.6f;
+	rect_itemExplanation.bottom = rect_itemExplanation.top + 1000;
+	
+	// collider에 player가 닿으면
+	if (collider->Intersect(GM->player->GetCollider()))
+	{
+		// icon의 color를 원래색으로
+		if (icon->color.x != 0.5f)
 		{
-			state = ItemState::UNLOCKED;
-			Spawn();
+			icon->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
+		}
+
+		if (INPUT->KeyDown('F'))
+		{
+			// 아이템의 능력치를 적용
+			GM->player->activateItem(this);
+
+			// 모든 아이템을 활성화(파괴하기 위해)시킴
+			GM->item->ActivateAllItem();
+			return;
+		}
+
+		// options를 update
+		options->Update();
+		presskey->Update();
+	}
+	// 닿지 않았으면
+	else
+	{
+		// icon의 color를 어두운색으로
+		if (icon->color.x == 0.5f)
+		{
+			icon->color = Color(0.3f, 0.3f, 0.3f, 0.5f);
 		}
 	}
-	else if (state == ItemState::UNLOCKED)
-	{
-		unlocked->Update();
-	}
+
+
 }
 
 void Item::Render()
 {
+	// 디버그 모드일 때 collider를 render
 	if (GM->DEBUG_MODE)
 		collider->Render();
-
-	if (state == ItemState::LOCKED)
+	
+	// collider에 player가 닿으면 options를 render
+	if (collider->Intersect(GM->player->GetCollider()))
 	{
-		if (collider->Intersect(GM->player->GetCollider()))
-		{
-			presskey->Render();
-		}
-		locked->Render();
-	}
-	else if (state == ItemState::UNlOCKING)
-	{
-		unlocking->Render();
-	}
-	else if (state == ItemState::UNLOCKED)
-	{
-		unlocked->Render();
-	}
-}
+		options->Render();
+		presskey->Render();
 
-void Item::Open()
-{
-}
 
-void Item::Spawn()
-{
+
+		// name
+		DWRITE->RenderText(
+			text_name,
+			rect_itemName,
+			25.0f,
+			L"Commando",
+			itemNameColor,
+			DWRITE_FONT_WEIGHT_EXTRA_BOLD,
+			DWRITE_FONT_STYLE_NORMAL,
+			DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
+
+		// name
+		DWRITE->RenderText(
+			text_explanation,
+			rect_itemExplanation,
+			20.0f,
+			L"Commando",
+			Color(1, 1, 1, 1),
+			DWRITE_FONT_WEIGHT_ULTRA_LIGHT,
+			DWRITE_FONT_STYLE_NORMAL,
+			DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
+	}
+	icon->Render();
 }

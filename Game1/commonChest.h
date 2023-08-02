@@ -5,12 +5,11 @@ private:
 
 public:
 	commonChest();
-	~commonChest();
+	//~commonChest() override;
 
 	void Init() override;
 	//void Update() override;
 	//void Render() override;
-	void Open() override;
-	void Spawn() override;
+	void CreateItem() override;
 };
 

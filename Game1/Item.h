@@ -4,34 +4,50 @@ enum class ItemGrade
 {
 	NORMAL,
 	RARE,
-	LEGENDARY,
-	EPIC
+	EPIC,
+	LEGENDARY
 };
 
 class Item
 {
 protected:
-	class ObRect* Item;
-	class ObImage* locked;
-	class ObImage* unlocking;
-	class ObImage* unlocked;
+	class ObRect* collider;
+	class ObImage* icon;
+	class ObImage* options;
 	class ObImage* presskey;
 
+	Color itemNameColor;
+
+	RECT rect_itemName;
+	RECT rect_itemExplanation;
+	wstring  text_name;
+	wstring  text_explanation;
+
 	ItemGrade grade;
-	bool isOpen;
-	bool isSpawn;
 
 public:
-	Item();
-	~Item();
+	bool isActive = false;
+
+	// 아이템의 능력치
+	int maxHp;
+	int hp;
+	int maxMp;
+	int mp;
+	int damage;
+	int defence;
+	float attackSpeed;
+	float moveSpeed;
+
+public:
+	Item() = default;
+	explicit Item(Vector2 dropPos);
+	virtual ~Item();
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
-	virtual void Open();
-	virtual void Spawn();
 
 	// Get
 	ObRect* GetCollider() { return collider; };
-	ItemGrade GetState() { return grade; }
+	ItemGrade GetGrade() { return grade; }
 };
 

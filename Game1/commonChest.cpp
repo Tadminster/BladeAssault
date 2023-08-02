@@ -1,5 +1,10 @@
 #include "stdafx.h"
+#include "Item.h"
+#include "leatherBelt.h"
+#include "championBelt.h"
+#include "reinforcedChampionBelt.h"
 #include "Chest.h"
+#include "ItemManager.h"
 #include "commonChest.h"
 
 commonChest::commonChest()
@@ -32,18 +37,19 @@ commonChest::commonChest()
     unlocked->scale.y = unlocked->imageSize.y / unlocked->maxFrame.y * 2.0f;
 }
 
-commonChest::~commonChest()
-{
-}
-
 void commonChest::Init()
 {
 }
 
-void commonChest::Open()
+void commonChest::CreateItem()
 {
-}
+    // item 생성
+    championBelt* item1 = new championBelt(collider->GetWorldPos());
+    leatherBelt* item2 = new leatherBelt(collider->GetWorldPos() + LEFT * 175.0f);
+    reinforcedChampionBelt* item3 = new reinforcedChampionBelt(collider->GetWorldPos() + RIGHT * 175.0f);
 
-void commonChest::Spawn()
-{
+    // item manager에 추가
+    GM->item->AddItem(item1);
+    GM->item->AddItem(item2);
+    GM->item->AddItem(item3);
 }

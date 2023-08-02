@@ -1,4 +1,5 @@
 #pragma once
+#include "Item.h"
 
 // @brief		모든 플레이어 캐릭터의 부모 클래스
 class Player : public Creature
@@ -65,6 +66,7 @@ public:
 	virtual void ChargingAttack();
 	virtual void SkillAttack();
 	virtual void Dash();
+	virtual void activateItem(Item* item);
 
 	void actionsWhenDamaged(int damage);
 

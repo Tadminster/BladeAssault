@@ -7,6 +7,7 @@ public:
     class MonsterManager*       monster;
     class DamageDisplayManager* damageDP;
     class EffectManager*        fx;
+    class ItemManager*          item;
 
     bool	DEBUG_MODE = false;
 

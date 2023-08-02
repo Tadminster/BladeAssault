@@ -1,12 +1,18 @@
 #include "stdafx.h"
-#include "HUD.h"
+
 #include "Creature.h"
 #include "Player.h"
 #include "Player_kill.h"
 #include "Monster.h"
+
+#include "Chest.h"
+#include "commonChest.h"
+
+#include "HUD.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
 #include "EffectManager.h"
+#include "ItemManager.h"
 #include "Scene_proto.h"
 
 Scene_proto::Scene_proto()
@@ -32,6 +38,7 @@ void Scene_proto::Update()
 {
 	localtime += DELTA;
 	spawnTrigger->Update();
+	GM->item->Update();
 	GM->fx->Update();
 	GM->damageDP->Update();
 }
@@ -51,6 +58,7 @@ void Scene_proto::Render()
 	if (GM->DEBUG_MODE)
 		spawnTrigger->Render();
 	
+	GM->item->Render();
 	GM->fx->Render();
 	GM->damageDP->Render();
 }

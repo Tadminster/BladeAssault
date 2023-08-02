@@ -21,12 +21,11 @@ protected:
 
 public:
 	Chest();
-	~Chest();
+	virtual ~Chest();
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
-	virtual void Open();
-	virtual void Spawn();
+	virtual void CreateItem();
 
 	// Get
 	ObRect* GetCollider() { return collider; };

@@ -143,17 +143,17 @@ float4 PS(PixelInput input) : SV_TARGET //SV_TARGET Àº Å¸°ÙÀÌµÉ »ö±ò
     
     if (input.tileState == 1.0f) // wall
     {
-        return TextureColor + float4(0.6, 0, 0, 0.4);
+        return TextureColor + float4(0.6f, 0.0f, 0.0f, 0.4f);
     }
     
     if (input.tileState == 2.0f) // wallside
     {
-        return TextureColor + float4(0.5, 0.5, 0.0, 0.4);
+        return TextureColor + float4(0.5f, 0.5f, 0.0f, 0.4f);
     }
     
     if (input.tileState == 3.0f) // floor
     {
-        return TextureColor + float4(0.0, 0.5, 0, 0.4);
+        return TextureColor + float4(0.0f, 0.5f, 0.0f, 0.4f);
     }
     
     

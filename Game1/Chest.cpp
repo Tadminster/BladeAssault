@@ -13,13 +13,11 @@ Chest::Chest()
 
 	presskey				= new ObImage(L"chest_PressE.png");
 	presskey->pivot			= OFFSET_B;
-	presskey->SetParentRT(*collider);
-	presskey->SetLocalPosY(collider->scale.y * 1.2f);
-	presskey->maxFrame.x	= 1;
-	presskey->maxFrame.y	= 1;
-	presskey->scale.x		= presskey->imageSize.x / presskey->maxFrame.x;
-	presskey->scale.y		= presskey->imageSize.y / presskey->maxFrame.y;
-	presskey->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);
+	presskey->SetParentRT(*GM->player->GetCollider());
+	presskey->SetLocalPosY(-collider->scale.y * 0.3f);
+	presskey->scale.x		= presskey->imageSize.x;
+	presskey->scale.y		= presskey->imageSize.y;
+	//presskey->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);
 
 
 	state = ChestState::LOCKED;
@@ -52,7 +50,6 @@ void Chest::Update()
 			if (INPUT->KeyDown('F'))
 			{
 				state = ChestState::UNlOCKING;
-				Open();
 			}
 		}
 		locked->Update();
@@ -64,7 +61,7 @@ void Chest::Update()
 		if (unlocking->frame.x == unlocking->maxFrame.x - 1)
 		{
 			state = ChestState::UNLOCKED;
-			Spawn();
+			CreateItem();
 		}
 	}
 	else if (state == ChestState::UNLOCKED)
@@ -96,10 +93,6 @@ void Chest::Render()
 	}
 }
 
-void Chest::Open()
-{
-}
-
-void Chest::Spawn()
+void Chest::CreateItem()
 {
 }
