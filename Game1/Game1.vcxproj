@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="candle.h" />
+    <ClInclude Include="cottonGloves.h" />
     <ClInclude Include="grip.h" />
     <ClInclude Include="icepick.h" />
     <ClInclude Include="magicSword.h" />
+    <ClInclude Include="oldSneakers.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="commonChest.h" />
@@ -63,9 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="candle.cpp" />
+    <ClCompile Include="cottonGloves.cpp" />
     <ClCompile Include="grip.cpp" />
     <ClCompile Include="icepick.cpp" />
     <ClCompile Include="magicSword.cpp" />
+    <ClCompile Include="oldSneakers.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="commonChest.cpp" />

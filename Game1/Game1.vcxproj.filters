@@ -120,6 +120,12 @@
     <ClInclude Include="icepick.h">
       <Filter>Object\Item\RARE</Filter>
     </ClInclude>
+    <ClInclude Include="oldSneakers.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
+    <ClInclude Include="cottonGloves.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -239,6 +245,12 @@
     </ClCompile>
     <ClCompile Include="icepick.cpp">
       <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="oldSneakers.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="cottonGloves.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
