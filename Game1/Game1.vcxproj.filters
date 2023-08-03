@@ -162,6 +162,9 @@
     <ClInclude Include="duracell.h">
       <Filter>Object\Item\NORMAL</Filter>
     </ClInclude>
+    <ClInclude Include="woodenShield.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -322,6 +325,9 @@
       <Filter>Object\Item\NORMAL</Filter>
     </ClCompile>
     <ClCompile Include="duracell.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="woodenShield.cpp">
       <Filter>Object\Item\NORMAL</Filter>
     </ClCompile>
   </ItemGroup>

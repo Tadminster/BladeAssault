@@ -300,7 +300,7 @@ void Player_kill::ChargingAttack()
 		lastDir,										// 각도
 		3,												// 발사체 속도
 		1,												// 사거리
-		totalDamage,					// 공격력
+		totalDamage,									// 공격력
 		99,												// 관통력
 		1,												// 폭발범위
 		criticalChance									// 치명타 확률

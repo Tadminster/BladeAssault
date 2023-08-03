@@ -42,6 +42,7 @@ public:
 	float	chargingTimeScale;		// 차징 시간 스케일
 	float	fullLifeDamageScale;	// 체력이 100%일 때 공격력 스케일
 
+	float 	damageRedution;			// 피해 감소
 
 	int		criticalChance;			// 치명타 확률
 	int		criticalDamage;			// 치명타 피해량

@@ -74,6 +74,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="championBelt.h" />
     <ClInclude Include="uncommonChest.h" />
+    <ClInclude Include="woodenShield.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bearhat.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="championBelt.cpp" />
     <ClCompile Include="starBadge.cpp" />
     <ClCompile Include="uncommonChest.cpp" />
+    <ClCompile Include="woodenShield.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

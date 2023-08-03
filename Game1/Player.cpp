@@ -23,6 +23,8 @@ Player::Player()
 	fullLifeDamageScale = 1.0f;
 	chargingTimeScale = 1.0f;
 
+	damageRedution = 1.0f;
+
 	criticalChance = 10;
 	criticalDamage = 1.5f;
 
@@ -749,6 +751,8 @@ void Player::activateItem(Item* item)
 	this->chargingTimeScale += item->chargingTimeScale;
 	this->fullLifeDamageScale += item->fullLifeDamageScale;
 
+	this->damageRedution -= item->damageRedution;
+
 	this->criticalChance += item->criticalChance;
 	this->criticalDamage += item->criticalDamage;
 
@@ -761,7 +765,7 @@ void Player::activateItem(Item* item)
 	this->isLowLifeNoManaCost = item->isLowLifeNoManaCost;
 }
 
-void Player::actionsWhenDamaged(int damage)
+void Player::actionsWhenDamaged(float damage)
 {
 	// 대시 중에는 데미지를 받지 않음
 	if (CurrentState == State::DASH)
@@ -782,6 +786,8 @@ void Player::actionsWhenDamaged(int damage)
 
 	// 방어력 만큼 데미지 차감
 	damage = max(0, damage - defence);
+	// 방어효율 만큼 데미지 차감
+	damage *= damageRedution;
 
 	// 체력 감소
 	hp = max(hp - damage, 0);

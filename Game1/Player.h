@@ -25,12 +25,15 @@ protected:
 	int			maxMp;
 
 	//ATTACK
-	float damageScale;			// 모든 공격력 스케일
-	float normalDamageScale;	// 일반 공격력 스케일
-	float skillDamageScale;		// 스킬 공격력 스케일
-	float chargingDamageScale;	// 차징 공격력 스케일
-	float chargingTimeScale;	// 차징 시간 스케일
-	float fullLifeDamageScale;	// 체력이 100%일 때 공격력 스케일
+	float		damageScale;				// 모든 공격력 스케일
+	float		normalDamageScale;			// 일반 공격력 스케일
+	float		skillDamageScale;			// 스킬 공격력 스케일
+	float		chargingDamageScale;		// 차징 공격력 스케일
+	float		chargingTimeScale;			// 차징 시간 스케일
+	float		fullLifeDamageScale;		// 체력이 100%일 때 공격력 스케일
+
+	//DEFENCE
+	float 		damageRedution;				// 피해 감소
 
 	//CHARGING
 	float		chargingTime;				// 충전 시간
@@ -82,7 +85,7 @@ public:
 	virtual void Dash();
 	virtual void activateItem(Item* item);
 
-	void actionsWhenDamaged(int damage);
+	void actionsWhenDamaged(float damage);
 
 	// Get
 	int		GetMp() { return mp; }

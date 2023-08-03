@@ -11,6 +11,8 @@
 #include "normalGear.h"
 #include "oldSneakers.h"
 #include "starBadge.h"
+#include "woodenShield.h"
+
 
 // RARE
 #include "championBelt.h"
@@ -44,6 +46,7 @@ void ItemManager::Init()
 	itemData.emplace(7, new normalGear());
 	itemData.emplace(8, new oldSneakers());
 	itemData.emplace(9, new starBadge());
+	itemData.emplace(10, new woodenShield());
 
 	// rare
 	itemData.emplace(101, new championBelt());
