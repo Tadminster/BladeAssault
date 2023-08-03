@@ -13,6 +13,8 @@
 #include "DamageDisplayManager.h"
 #include "EffectManager.h"
 #include "ItemManager.h"
+#include "ObjectManager.h"
+
 #include "Scene_proto.h"
 
 Scene_proto::Scene_proto()
@@ -41,6 +43,7 @@ void Scene_proto::Update()
 	GM->item->Update();
 	GM->fx->Update();
 	GM->damageDP->Update();
+	GM->obj->Update();
 }
 
 void Scene_proto::LateUpdate()
@@ -58,6 +61,7 @@ void Scene_proto::Render()
 	if (GM->DEBUG_MODE)
 		spawnTrigger->Render();
 	
+	GM->obj->Render();
 	GM->item->Render();
 	GM->fx->Render();
 	GM->damageDP->Render();
@@ -167,6 +171,22 @@ bool Scene_proto::OnWallside(Creature* creature)
 void Scene_proto::SummonMonster()
 {
 }
+
+void Scene_proto::CreateChest(int type, Vector2 pos)
+{
+	Chest* chest = nullptr;
+	if (type == 0)
+	{
+
+	}
+	else if (type == 1)
+		chest = new commonChest();
+
+	chest->SetPosition(pos);
+	GM->obj->AddChest(chest);
+}
+
+
 
 
 

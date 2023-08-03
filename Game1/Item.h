@@ -1,6 +1,6 @@
 #pragma once
 
-enum class ItemGrade
+enum ItemGrade
 {
 	NORMAL,
 	RARE,
@@ -42,8 +42,7 @@ public:
 	float moveSpeed;
 
 public:
-	Item() = default;
-	explicit Item(Vector2 dropPos);
+	Item();
 	virtual ~Item();
 	virtual void Init();
 	virtual void Update();
@@ -52,5 +51,8 @@ public:
 	// Get
 	ObRect* GetCollider() { return collider; };
 	ItemGrade GetGrade() { return grade; }
+
+	// Set
+	void SetPosition(Vector2 pos) { collider->SetWorldPos(pos); }
 };
 

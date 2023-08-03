@@ -2,7 +2,11 @@
 class ItemManager
 {
 private:
+	map<int, Item*> itemData;
 	vector<class Item*>	dropItems;
+	
+	int gradeCriteria[4];
+	int itemSize[4];
 
 public:
 	~ItemManager() {};
@@ -13,6 +17,7 @@ public:
 	void	LateUpdate();
 	void	Render();
 
+	void	CreateItem(int itemGrade[3], Vector2 spawnPos);
 	// 아이템 추가
 	void	AddItem(class Item* item);
 

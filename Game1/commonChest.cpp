@@ -35,21 +35,9 @@ commonChest::commonChest()
     unlocked->maxFrame.y = 1;
     unlocked->scale.x = unlocked->imageSize.x / unlocked->maxFrame.x * 2.0f;
     unlocked->scale.y = unlocked->imageSize.y / unlocked->maxFrame.y * 2.0f;
-}
 
-void commonChest::Init()
-{
-}
-
-void commonChest::CreateItem()
-{
-    // item 생성
-    championBelt* item1 = new championBelt(collider->GetWorldPos());
-    leatherBelt* item2 = new leatherBelt(collider->GetWorldPos() + LEFT * 175.0f);
-    reinforcedChampionBelt* item3 = new reinforcedChampionBelt(collider->GetWorldPos() + RIGHT * 175.0f);
-
-    // item manager에 추가
-    GM->item->AddItem(item1);
-    GM->item->AddItem(item2);
-    GM->item->AddItem(item3);
+    gradeRate[ItemGrade::NORMAL] = 70;
+    gradeRate[ItemGrade::RARE] = 20;
+    gradeRate[ItemGrade::EPIC] = 10;
+    gradeRate[ItemGrade::LEGENDARY] = 0;
 }

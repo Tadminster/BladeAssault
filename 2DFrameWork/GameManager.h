@@ -8,6 +8,7 @@ public:
     class DamageDisplayManager* damageDP;
     class EffectManager*        fx;
     class ItemManager*          item;
+    class ObjectManager*        obj;
 
     bool	DEBUG_MODE = false;
 

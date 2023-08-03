@@ -2,9 +2,9 @@
 #include "Item.h"
 #include "magicSword.h"
 
-magicSword::magicSword(Vector2 dropPos) : Item(dropPos)
+magicSword::magicSword() : Item()
 {
-	grade = ItemGrade::NORMAL;
+	grade = ItemGrade::RARE;
 
 	icon = new ObImage(L"gear_icon_magicsword.png");
 	icon->pivot = OFFSET_B;
@@ -23,7 +23,6 @@ magicSword::magicSword(Vector2 dropPos) : Item(dropPos)
 	{
 		options = new ObImage(L"grade_outline_rare_330_430.png");
 		itemNameColor = Color(0.0f, 1.0f, 1.0f, 0.5f);
-
 	}
 	else if (grade == ItemGrade::EPIC)
 	{
@@ -34,7 +33,6 @@ magicSword::magicSword(Vector2 dropPos) : Item(dropPos)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
 		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
-
 	}
 
 	options->pivot = OFFSET_B;

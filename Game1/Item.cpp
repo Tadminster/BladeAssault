@@ -4,12 +4,11 @@
 #include "ItemManager.h"
 #include "Item.h"
 
-Item::Item(Vector2 dropPos)
+Item::Item()
 {
 	collider = new ObRect();
 	collider->pivot = OFFSET_B;
 	collider->scale = Vector2(100, 150);
-	collider->SetWorldPos(dropPos);
 	collider->isFilled = false;
 
 	presskey = new ObImage(L"chest_Selection.png");
@@ -20,8 +19,6 @@ Item::Item(Vector2 dropPos)
 	presskey->scale.y = presskey->imageSize.y;
 
 	collider->Update();
-
-
 
 	// 아이템이름 rect
 	Vector2 itemName_pos = Vector2(collider->GetWorldPos().x, collider->GetWorldPos().y + collider->scale.y * 3.0f);
@@ -48,8 +45,6 @@ Item::Item(Vector2 dropPos)
 	defence = 0;
 	attackSpeed = 0.0f;
 	moveSpeed = 0.0f;
-
-	cout << "발동1";
 }
 
 Item::~Item()

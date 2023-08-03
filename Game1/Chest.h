@@ -19,6 +19,9 @@ protected:
 	bool isOpen;
 	bool isSpawn;
 
+	// µî±Þ È®·ü (normal, rare, epic, lengendary)
+	int gradeRate[4];
+
 public:
 	Chest();
 	virtual ~Chest();

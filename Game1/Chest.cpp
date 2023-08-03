@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Creature.h"
 #include "Player.h"
+#include "ItemManager.h"
 #include "Chest.h"
 
 Chest::Chest()
@@ -95,4 +96,26 @@ void Chest::Render()
 
 void Chest::CreateItem()
 {
+	int itemGrade[3];
+
+	// 1~100 사이의 랜덤값을 3개 생성
+	itemGrade[0] = RANDOM->Int(1, 100);
+	itemGrade[1] = RANDOM->Int(1, 100);
+	itemGrade[2] = RANDOM->Int(1, 100);
+
+	// 아이템의 등급을 정함
+	for (int i = 0; i < 3; i++)
+	{
+		if (itemGrade[i] <= gradeRate[ItemGrade::NORMAL])
+			itemGrade[i] = ItemGrade::NORMAL;
+		else if (itemGrade[i] <= gradeRate[ItemGrade::NORMAL] + gradeRate[ItemGrade::RARE])
+			itemGrade[i] = ItemGrade::RARE;
+		else if (itemGrade[i] <= gradeRate[ItemGrade::NORMAL] + gradeRate[ItemGrade::RARE] + gradeRate[ItemGrade::EPIC])
+			itemGrade[i] = ItemGrade::EPIC;
+		else
+			itemGrade[i] = ItemGrade::LEGENDARY;
+	}
+
+	// 아이템을 생성함수 호출
+	GM->item->CreateItem(itemGrade, collider->GetWorldPos());
 }

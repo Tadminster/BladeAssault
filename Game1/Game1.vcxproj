@@ -24,6 +24,7 @@
     <ClInclude Include="grip.h" />
     <ClInclude Include="icepick.h" />
     <ClInclude Include="magicSword.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="oldSneakers.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
@@ -69,6 +70,7 @@
     <ClCompile Include="grip.cpp" />
     <ClCompile Include="icepick.cpp" />
     <ClCompile Include="magicSword.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="oldSneakers.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />

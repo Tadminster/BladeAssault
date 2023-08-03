@@ -2,7 +2,7 @@
 #include "Item.h"
 #include "oldSneakers.h"
 
-oldSneakers::oldSneakers(Vector2 dropPos) : Item(dropPos)
+oldSneakers::oldSneakers() : Item()
 {
 	grade = ItemGrade::NORMAL;
 
@@ -23,7 +23,6 @@ oldSneakers::oldSneakers(Vector2 dropPos) : Item(dropPos)
 	{
 		options = new ObImage(L"grade_outline_rare_330_430.png");
 		itemNameColor = Color(0.0f, 1.0f, 1.0f, 0.5f);
-
 	}
 	else if (grade == ItemGrade::EPIC)
 	{
@@ -34,7 +33,6 @@ oldSneakers::oldSneakers(Vector2 dropPos) : Item(dropPos)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
 		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
-
 	}
 
 	options->pivot = OFFSET_B;

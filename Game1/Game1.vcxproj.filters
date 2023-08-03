@@ -126,6 +126,9 @@
     <ClInclude Include="cottonGloves.h">
       <Filter>Object\Item\NORMAL</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -251,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="cottonGloves.cpp">
       <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
