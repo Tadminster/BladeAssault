@@ -42,8 +42,8 @@ candle::candle() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"양초";
-	text_explanation = L"HP 20% 이하에서 MP가 감소하지 않습니다.";
+	text_explanation = L"HP 30% 이하에서 MP가 감소하지 않습니다.";
 
 	// 아이템의 능력치
-	// 차후에 추가 예정
+	isLowLifeNoManaCost = true;
 }

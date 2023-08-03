@@ -135,6 +135,27 @@
     <ClInclude Include="rareChest.h">
       <Filter>Object\Chest</Filter>
     </ClInclude>
+    <ClInclude Include="dart.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
+    <ClInclude Include="ironBullet.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
+    <ClInclude Include="starBadge.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
+    <ClInclude Include="normalGear.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
+    <ClInclude Include="rareGear.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
+    <ClInclude Include="legendaryGear.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="epicGear.h">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -269,6 +290,27 @@
     </ClCompile>
     <ClCompile Include="rareChest.cpp">
       <Filter>Object\Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="dart.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="ironBullet.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="starBadge.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="normalGear.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="rareGear.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="legendaryGear.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="epicGear.cpp">
+      <Filter>Object\Item\EPIC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

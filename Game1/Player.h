@@ -24,7 +24,12 @@ protected:
 	int			mp;
 	int			maxMp;
 
-	float damageScale;
+	//ATTACK
+	float damageScale;			// 모든 공격력 스케일
+	float normalDamageScale;	// 일반 공격력 스케일
+	float skillDamageScale;		// 스킬 공격력 스케일
+	float chargingDamageScale;	// 차징 공격력 스케일
+	float fullLifeDamageScale;	// 체력이 100%일 때 공격력 스케일
 
 	//CHARGING
 	float		chargingTime;				// 충전 시간
@@ -35,6 +40,7 @@ protected:
 	//SKILL
 	float		skillRemainingCooldown;		// 남은 재사용 대기시간
 	float		skillCooldown;				// 스킬 사용 직후의 재사용 대기시간
+	float		skillCooldownScale;			// 스킬 재사용 대기시간 감소량
 	int			skillManaCost;				// 스킬 사용시 소모되는 마나
 
 	//JUMP
@@ -45,6 +51,7 @@ protected:
 	float		dashWeight;					// 대쉬 가중치
 	float		dashRemainingCooldown;		// 남은 재사용 대기시간
 	float		dashCooldown;				// 대쉬 사용 직후의 재사용 대기시간
+	float		dashCooldownScale;			// 대쉬 재사용 대기시간 감소량
 
 	//ETC
 	float		timeOfDamaged;				// 피격당한 시간 기록용
@@ -52,6 +59,9 @@ protected:
 	float		criticalDamage;				// 크리티컬 데미지 배율
 
 public:
+	bool		isFullLife;					// 최대 체력일 때인지 여부
+	bool		isLowLife;					// 낮은 체력일 때인지 여부
+	bool		isLowLifeNoManaCost;		// 낮은 체력일 때 스킬 사용시 마나 소모가 없는지 여부
 	bool		isCharging;					// 차징 중인지 여부
 	bool		damageTaken;				// 피격당했는지 여부(피격FX 출력용)
 

@@ -258,6 +258,10 @@ void Player_kill::Attack()
 		// 발사 위치 계산
 		Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.65);
 
+		// 공격력 계산
+		float totalDamage = damage * (damageScale + normalDamageScale);
+		if (isFullLife) totalDamage* fullLifeDamageScale;
+
 		// 탄생성
 		kill_barehand_atk* proj = new kill_barehand_atk
 		(
@@ -265,7 +269,7 @@ void Player_kill::Attack()
 			lastDir,										// 각도
 			700,											// 발사체 속도
 			attackRange,									// 사거리
-			damage,											// 공격력
+			totalDamage,											// 공격력
 			1,												// 관통력
 			1,												// 폭발범위
 			criticalChance									// 치명타 확률
@@ -285,6 +289,10 @@ void Player_kill::ChargingAttack()
 	// 발사 위치 계산
 	Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.65);
 
+	// 공격력 계산
+	float totalDamage = damage * (damageScale + chargingDamageScale) * chargingTime;
+	if (isFullLife) totalDamage* fullLifeDamageScale;
+
 	// 탄생성
 	kill_barehand_ChargingAtk* proj = new kill_barehand_ChargingAtk
 	(
@@ -292,7 +300,7 @@ void Player_kill::ChargingAttack()
 		lastDir,										// 각도
 		3,												// 발사체 속도
 		1,												// 사거리
-		damage * (chargingTime + 1),					// 공격력
+		totalDamage,					// 공격력
 		99,												// 관통력
 		1,												// 폭발범위
 		criticalChance									// 치명타 확률
@@ -307,11 +315,29 @@ void Player_kill::ChargingAttack()
 
 void Player_kill::Skill()
 {
-	// 마나가 없거나 스킬 재사용 대기시간이 남았으면 스킬 사용 불가
-	if (mp < skillManaCost || skillRemainingCooldown > 0.0f) return;
+	
+	// 스킬 재사용 대기시간이 남았으면 스킬 사용 불가
+	if (skillRemainingCooldown > 0.0f) return;
 
-	mp -= skillManaCost;
-	skillRemainingCooldown = skillCooldown;
+	// 양초가 있고, 낮은 상명력 상태
+	if (isLowLife && isLowLifeNoManaCost)
+	{
+		// 마나 소모없음
+	}
+	// 양초가 없으면 잔여 마나 체크
+	else
+	{
+		// 마나가 없으면 스킬 사용 불가
+		if (mp < skillManaCost)
+		{
+			return;
+		}
+
+		// 있으면 마나 감소
+		mp -= skillManaCost;
+	}
+
+	skillRemainingCooldown = skillCooldown * skillCooldownScale;
 	isSkill1 = true;
 	isSkill2 = true;
 	isSkill3 = true;
@@ -324,18 +350,23 @@ void Player_kill::SkillAttack()
 	Vector2 spawnPos = collider->GetWorldPos() + (lastDir * collider->scale.x * 0.5);
 	cout << spawnPos.x << endl;
 	cout << spawnPos.y << endl;
+
 	// Scale 계산
-	float scale = skill->frame.x / 11.0f;
+	float skillScale = skill->frame.x / 11.0f;
+
+	// 공격력 계산
+	float totalDamage = damage * (damageScale + skillDamageScale) * 3.0f * skillScale;
+	if (isFullLife) totalDamage * fullLifeDamageScale;
 
 	// 탄생성
 	kill_barehand_skill* proj = new kill_barehand_skill
 	(
-		scale,											// 스킬 크기
+		skillScale,										// 스킬 크기
 		spawnPos,										// 생성위치
 		lastDir,										// 각도
 		1.5f,											// 발사체 속도
 		1,												// 사거리
-		damage * 3.0f * scale,							// 공격력
+		totalDamage,									// 공격력
 		99,												// 관통력
 		1,												// 폭발범위
 		criticalChance									// 치명타 확률

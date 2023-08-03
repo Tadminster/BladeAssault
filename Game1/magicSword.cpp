@@ -27,12 +27,12 @@ magicSword::magicSword() : Item()
 	else if (grade == ItemGrade::EPIC)
 	{
 		options = new ObImage(L"grade_outline_epic_330_430.png");
-		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
 	}
 	else if (grade == ItemGrade::LEGENDARY)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
-		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
+		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
 	}
 
 	options->pivot = OFFSET_B;
@@ -42,7 +42,7 @@ magicSword::magicSword() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"마력의 검";
-	text_explanation = L"모든 공격의 치명타확률이 3% 증가합니다.";
+	text_explanation = L"모든 공격의 치명타 확률이 3% 증가합니다.";
 
 	// 아이템의 능력치
 	criticalChance = 3;

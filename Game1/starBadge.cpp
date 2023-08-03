@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "icepick.h"
+#include "starBadge.h"
 
-icepick::icepick() : Item()
+starBadge::starBadge() : Item()
 {
-	grade = ItemGrade::RARE;
+	grade = ItemGrade::NORMAL;
 
-	icon = new ObImage(L"gear_icon_icepick.png");
+	icon = new ObImage(L"gear_icon_starbadge.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -27,12 +27,12 @@ icepick::icepick() : Item()
 	else if (grade == ItemGrade::EPIC)
 	{
 		options = new ObImage(L"grade_outline_epic_330_430.png");
-		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
+		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
 	}
 	else if (grade == ItemGrade::LEGENDARY)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
-		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
 	}
 
 	options->pivot = OFFSET_B;
@@ -41,9 +41,9 @@ icepick::icepick() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"송곳";
-	text_explanation = L"모든 공격의 치명타 피해량이 20% 증가합니다.";
+	text_name = L"별 배지";
+	text_explanation = L"체력이 최대치일 때 모든 공격력이 20% 증가합니다.";
 
 	// 아이템의 능력치
-	criticalDamage = 0.2f;
+	fullLifeDamageScale = 0.2f;
 }

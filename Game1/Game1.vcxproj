@@ -21,12 +21,18 @@
   <ItemGroup>
     <ClInclude Include="candle.h" />
     <ClInclude Include="cottonGloves.h" />
+    <ClInclude Include="dart.h" />
+    <ClInclude Include="epicGear.h" />
     <ClInclude Include="grip.h" />
     <ClInclude Include="icepick.h" />
+    <ClInclude Include="ironBullet.h" />
+    <ClInclude Include="legendaryGear.h" />
     <ClInclude Include="magicSword.h" />
+    <ClInclude Include="normalGear.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="oldSneakers.h" />
     <ClInclude Include="rareChest.h" />
+    <ClInclude Include="rareGear.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="commonChest.h" />
@@ -62,6 +68,7 @@
     <ClInclude Include="Scene6_undercity2.h" />
     <ClInclude Include="Scene7_undercity3.h" />
     <ClInclude Include="Scene_proto.h" />
+    <ClInclude Include="starBadge.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="championBelt.h" />
     <ClInclude Include="uncommonChest.h" />
@@ -69,12 +76,18 @@
   <ItemGroup>
     <ClCompile Include="candle.cpp" />
     <ClCompile Include="cottonGloves.cpp" />
+    <ClCompile Include="dart.cpp" />
+    <ClCompile Include="epicGear.cpp" />
     <ClCompile Include="grip.cpp" />
     <ClCompile Include="icepick.cpp" />
+    <ClCompile Include="ironBullet.cpp" />
+    <ClCompile Include="legendaryGear.cpp" />
     <ClCompile Include="magicSword.cpp" />
+    <ClCompile Include="normalGear.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="oldSneakers.cpp" />
     <ClCompile Include="rareChest.cpp" />
+    <ClCompile Include="rareGear.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="commonChest.cpp" />
@@ -111,6 +124,7 @@
     <ClCompile Include="Scene7_undercity3.cpp" />
     <ClCompile Include="Scene_proto.cpp" />
     <ClCompile Include="championBelt.cpp" />
+    <ClCompile Include="starBadge.cpp" />
     <ClCompile Include="uncommonChest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

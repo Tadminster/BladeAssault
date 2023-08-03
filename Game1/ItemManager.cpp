@@ -3,21 +3,29 @@
 
 // NORMAL
 #include "cottonGloves.h"
+#include "dart.h"
+#include "ironBullet.h"
 #include "leatherBelt.h"
+#include "normalGear.h"
 #include "oldSneakers.h"
+#include "starBadge.h"
 
 // RARE
-#include "magicSword.h"
-#include "icepick.h"
-#include "grip.h"
 #include "championBelt.h"
+#include "grip.h"
+#include "icepick.h"
+#include "magicSword.h"
+#include "rareGear.h"
 
 // EPIC
 #include "candle.h"
-#include "reinforcedGrip.h"
+#include "epicGear.h"
 #include "reinforcedChampionBelt.h"
+#include "reinforcedGrip.h"
 
 // LEGENDARY
+#include "legendaryGear.h"
+
 
 #include "ItemManager.h"
 
@@ -26,21 +34,28 @@ void ItemManager::Init()
 	// 아이템 데이터 초기화
 	// normal
 	itemData.emplace(1, new cottonGloves());
-	itemData.emplace(2, new leatherBelt());
-	itemData.emplace(3, new oldSneakers());
+	itemData.emplace(2, new dart());
+	itemData.emplace(3, new ironBullet());
+	itemData.emplace(4, new leatherBelt());
+	itemData.emplace(5, new normalGear());
+	itemData.emplace(6, new oldSneakers());
+	itemData.emplace(7, new starBadge());
 
 	// rare
-	itemData.emplace(101, new magicSword());
-	itemData.emplace(102, new icepick());
-	itemData.emplace(103, new grip());
-	itemData.emplace(104, new championBelt());
+	itemData.emplace(101, new championBelt());
+	itemData.emplace(102, new magicSword());
+	itemData.emplace(103, new icepick());
+	itemData.emplace(104, new grip());
+	itemData.emplace(105, new rareGear());
 
 	// epic
 	itemData.emplace(201, new candle());
-	itemData.emplace(202, new reinforcedGrip());
+	itemData.emplace(202, new epicGear());
 	itemData.emplace(203, new reinforcedChampionBelt());
+	itemData.emplace(204, new reinforcedGrip());
 
 	// legendary
+	itemData.emplace(301, new legendaryGear());
 
 	// 기준
 	gradeCriteria[ItemGrade::NORMAL] = 0;

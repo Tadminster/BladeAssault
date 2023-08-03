@@ -17,8 +17,16 @@ Player::Player()
 	dashCooldown = 2.0f;
 
 	damageScale = 1.0f;
+	normalDamageScale = 1.0f;
+	skillDamageScale = 1.0f;
+	chargingDamageScale = 1.0f;
+	fullLifeDamageScale = 1.0f;
+
 	criticalChance = 10;
 	criticalDamage = 1.5f;
+
+	skillCooldownScale = 1.0f;
+	dashCooldownScale = 1.0f;
 }
 
 Player::~Player()
@@ -54,6 +62,26 @@ void Player::Update()
 
 	lastPos = collider->GetWorldPos();
 	collider->Update();
+
+	// 체력에 따른 상태값 설정을 위한
+	if (hp == maxHp)
+	{
+		isFullLife = true;
+	}
+	else
+	{
+		isFullLife = false;
+		
+		// 체력이 30% 이하인지	
+		if (hp <= maxHp * 0.3f)
+		{
+			isLowLife = true;
+		}
+		else
+		{
+			isLowLife = false;
+		}
+	}
 
 	// 컨트롤
 	Control();
@@ -690,7 +718,7 @@ void Player::Dash()
 	// 대시쿨타임이 충족되지 않았으면 리턴
 	if (dashRemainingCooldown > 0) return;
 
-	dashRemainingCooldown = dashCooldown;
+	dashRemainingCooldown = dashCooldown * dashCooldownScale;
 	dash->frame.x = 0;
 	dashWeight = 0.0f;
 	dashTargetPos.x = collider->GetWorldPos().x + lastDir.x * 300;
@@ -714,6 +742,10 @@ void Player::activateItem(Item* item)
 	this->defence += item->defence;
 	
 	this->damageScale += item->damageScale;
+	this->normalDamageScale += item->normalDamageScale;
+	this->skillDamageScale += item->skillDamageScale;
+	this->chargingDamageScale += item->chargingDamageScale;
+	this->fullLifeDamageScale += item->fullLifeDamageScale;
 
 	this->criticalChance += item->criticalChance;
 	this->criticalDamage += item->criticalDamage;
@@ -721,7 +753,10 @@ void Player::activateItem(Item* item)
 	this->attackSpeed += item->attackSpeed;
 	this->moveSpeed += item->moveSpeed;
 
+	this->skillCooldownScale = max(0.0f, this->skillCooldownScale - item->skillCooldownScale);
+	this->dashCooldownScale = max(0.0f, this->skillCooldownScale - item->dashCooldownScale);
 
+	this->isLowLifeNoManaCost = item->isLowLifeNoManaCost;
 }
 
 void Player::actionsWhenDamaged(int damage)
