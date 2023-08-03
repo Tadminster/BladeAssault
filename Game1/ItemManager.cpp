@@ -2,8 +2,10 @@
 #include "Item.h"
 
 // NORMAL
+#include "bearhat.h"
 #include "cottonGloves.h"
 #include "dart.h"
+#include "duracell.h"
 #include "ironBullet.h"
 #include "leatherBelt.h"
 #include "normalGear.h"
@@ -33,13 +35,15 @@ void ItemManager::Init()
 {
 	// 아이템 데이터 초기화
 	// normal
-	itemData.emplace(1, new cottonGloves());
-	itemData.emplace(2, new dart());
-	itemData.emplace(3, new ironBullet());
-	itemData.emplace(4, new leatherBelt());
-	itemData.emplace(5, new normalGear());
-	itemData.emplace(6, new oldSneakers());
-	itemData.emplace(7, new starBadge());
+	itemData.emplace(1, new bearhat());
+	itemData.emplace(2, new cottonGloves());
+	itemData.emplace(3, new dart());
+	itemData.emplace(4, new duracell());
+	itemData.emplace(5, new ironBullet());
+	itemData.emplace(6, new leatherBelt());
+	itemData.emplace(7, new normalGear());
+	itemData.emplace(8, new oldSneakers());
+	itemData.emplace(9, new starBadge());
 
 	// rare
 	itemData.emplace(101, new championBelt());

@@ -21,6 +21,7 @@ Player::Player()
 	skillDamageScale = 1.0f;
 	chargingDamageScale = 1.0f;
 	fullLifeDamageScale = 1.0f;
+	chargingTimeScale = 1.0f;
 
 	criticalChance = 10;
 	criticalDamage = 1.5f;
@@ -214,7 +215,7 @@ void Player::Update()
 	}
 	else if (CurrentState == State::CHARGING)
 	{
-		chargingTime = min(chargingTimeMax, chargingTime + DELTA);
+		chargingTime = min(chargingTimeMax, chargingTime + DELTA * chargingTimeScale);
 
 		// 차징 중 프레임 변경
 		if (isCharging && charging->frame.x == chargingEndFrame)
@@ -745,6 +746,7 @@ void Player::activateItem(Item* item)
 	this->normalDamageScale += item->normalDamageScale;
 	this->skillDamageScale += item->skillDamageScale;
 	this->chargingDamageScale += item->chargingDamageScale;
+	this->chargingTimeScale += item->chargingTimeScale;
 	this->fullLifeDamageScale += item->fullLifeDamageScale;
 
 	this->criticalChance += item->criticalChance;

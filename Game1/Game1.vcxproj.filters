@@ -156,6 +156,12 @@
     <ClInclude Include="epicGear.h">
       <Filter>Object\Item\EPIC</Filter>
     </ClInclude>
+    <ClInclude Include="bearhat.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
+    <ClInclude Include="duracell.h">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -311,6 +317,12 @@
     </ClCompile>
     <ClCompile Include="epicGear.cpp">
       <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="bearhat.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
+    </ClCompile>
+    <ClCompile Include="duracell.cpp">
+      <Filter>Object\Item\NORMAL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

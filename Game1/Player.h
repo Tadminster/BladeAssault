@@ -29,6 +29,7 @@ protected:
 	float normalDamageScale;	// 일반 공격력 스케일
 	float skillDamageScale;		// 스킬 공격력 스케일
 	float chargingDamageScale;	// 차징 공격력 스케일
+	float chargingTimeScale;	// 차징 시간 스케일
 	float fullLifeDamageScale;	// 체력이 100%일 때 공격력 스케일
 
 	//CHARGING

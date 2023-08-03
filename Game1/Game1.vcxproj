@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bearhat.h" />
     <ClInclude Include="candle.h" />
     <ClInclude Include="cottonGloves.h" />
     <ClInclude Include="dart.h" />
+    <ClInclude Include="duracell.h" />
     <ClInclude Include="epicGear.h" />
     <ClInclude Include="grip.h" />
     <ClInclude Include="icepick.h" />
@@ -74,9 +76,11 @@
     <ClInclude Include="uncommonChest.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bearhat.cpp" />
     <ClCompile Include="candle.cpp" />
     <ClCompile Include="cottonGloves.cpp" />
     <ClCompile Include="dart.cpp" />
+    <ClCompile Include="duracell.cpp" />
     <ClCompile Include="epicGear.cpp" />
     <ClCompile Include="grip.cpp" />
     <ClCompile Include="icepick.cpp" />
