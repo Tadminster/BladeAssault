@@ -26,6 +26,7 @@
     <ClInclude Include="magicSword.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="oldSneakers.h" />
+    <ClInclude Include="rareChest.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="commonChest.h" />
@@ -63,6 +64,7 @@
     <ClInclude Include="Scene_proto.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="championBelt.h" />
+    <ClInclude Include="uncommonChest.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="candle.cpp" />
@@ -72,6 +74,7 @@
     <ClCompile Include="magicSword.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="oldSneakers.cpp" />
+    <ClCompile Include="rareChest.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="commonChest.cpp" />
@@ -108,6 +111,7 @@
     <ClCompile Include="Scene7_undercity3.cpp" />
     <ClCompile Include="Scene_proto.cpp" />
     <ClCompile Include="championBelt.cpp" />
+    <ClCompile Include="uncommonChest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

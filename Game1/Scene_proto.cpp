@@ -7,6 +7,8 @@
 
 #include "Chest.h"
 #include "commonChest.h"
+#include "uncommonChest.h"
+#include "rareChest.h"
 
 #include "HUD.h"
 #include "MonsterManager.h"
@@ -175,12 +177,19 @@ void Scene_proto::SummonMonster()
 void Scene_proto::CreateChest(int type, Vector2 pos)
 {
 	Chest* chest = nullptr;
+
+	// 랜덤으로 상자 생성을 위한 초기화
 	if (type == 0)
 	{
-
+		type = RANDOM->Int(1, 3);
 	}
-	else if (type == 1)
+	
+	if (type == 1)
 		chest = new commonChest();
+	else if (type == 2)
+		chest = new uncommonChest();
+	else if (type == 3)
+		chest = new rareChest();
 
 	chest->SetPosition(pos);
 	GM->obj->AddChest(chest);

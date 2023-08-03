@@ -129,6 +129,12 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="uncommonChest.h">
+      <Filter>Object\Chest</Filter>
+    </ClInclude>
+    <ClInclude Include="rareChest.h">
+      <Filter>Object\Chest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -257,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="uncommonChest.cpp">
+      <Filter>Object\Chest</Filter>
+    </ClCompile>
+    <ClCompile Include="rareChest.cpp">
+      <Filter>Object\Chest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

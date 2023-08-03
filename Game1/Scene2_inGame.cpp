@@ -91,7 +91,7 @@ void Scene2_inGame::Init()
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
 
-	CreateChest(1, startPostion);
+	CreateChest(0, startPostion);
 }
 
 void Scene2_inGame::Release()
