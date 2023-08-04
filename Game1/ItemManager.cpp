@@ -28,7 +28,9 @@
 #include "reinforcedGrip.h"
 
 // LEGENDARY
+#include "legendaryChampionBelt.h"
 #include "legendaryGear.h"
+#include "lv3helmet.h"
 
 
 #include "ItemManager.h"
@@ -62,7 +64,9 @@ void ItemManager::Init()
 	itemData.emplace(204, new reinforcedGrip());
 
 	// legendary
-	itemData.emplace(301, new legendaryGear());
+	itemData.emplace(301, new legendaryChampionBelt());
+	itemData.emplace(302, new legendaryGear());
+	itemData.emplace(303, new lv3helmet());
 
 	// ±‚¡ÿ
 	gradeCriteria[ItemGrade::NORMAL] = 0;

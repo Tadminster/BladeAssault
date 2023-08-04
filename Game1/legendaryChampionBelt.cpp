@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "leatherBelt.h"
+#include "legendaryChampionBelt.h"
 
-leatherBelt::leatherBelt() : Item()
+legendaryChampionBelt::legendaryChampionBelt() : Item()
 {
-	grade = ItemGrade::NORMAL;
+	grade = ItemGrade::LEGENDARY;
 
-	icon = new ObImage(L"gear_icon_leatherbelt.png");
+	icon = new ObImage(L"gear_icon_legendaryChampionBelt.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -27,12 +27,12 @@ leatherBelt::leatherBelt() : Item()
 	else if (grade == ItemGrade::EPIC)
 	{
 		options = new ObImage(L"grade_outline_epic_330_430.png");
-		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
 	}
 	else if (grade == ItemGrade::LEGENDARY)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
-		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
+		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
 	}
 
 	options->pivot = OFFSET_B;
@@ -41,10 +41,11 @@ leatherBelt::leatherBelt() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"가죽벨트";
-	text_explanation = L"최대 체력이 15 증가합니다.";
+	text_name = L"전설의 챔피언밸트";
+	text_explanation = L"최대 체력이 50 증가하고, 추가로 방어력이 1 증가합니다.";
 
 	// 아이템의 능력치
-	hp = 15;
-	maxHp = 15;
+	hp = 50;
+	maxHp = 50;
+	defence = 1;
 }

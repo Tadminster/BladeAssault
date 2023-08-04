@@ -42,7 +42,7 @@ woodenShield::woodenShield() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"나무 방패";
-	text_explanation = L"적의 공격으로 입는 피해를 5% 감소합니다..";
+	text_explanation = L"적의 공격으로 입는 피해를 5% 감소합니다.";
 
 	// 아이템의 능력치
 	damageRedution = 0.05f;

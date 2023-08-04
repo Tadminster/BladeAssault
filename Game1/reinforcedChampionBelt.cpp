@@ -42,8 +42,9 @@ reinforcedChampionBelt::reinforcedChampionBelt() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"보강된 챔피언밸트";
-	text_explanation = L"최대 체력이 20 증가합니다.";
+	text_explanation = L"최대 체력이 35 증가합니다.";
 
 	// 아이템의 능력치
-	maxHp = 20;
+	hp = 35;
+	maxHp = 35;
 }

@@ -28,7 +28,9 @@
     <ClInclude Include="grip.h" />
     <ClInclude Include="icepick.h" />
     <ClInclude Include="ironBullet.h" />
+    <ClInclude Include="legendaryChampionBelt.h" />
     <ClInclude Include="legendaryGear.h" />
+    <ClInclude Include="lv3helmet.h" />
     <ClInclude Include="magicSword.h" />
     <ClInclude Include="normalGear.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -86,7 +88,9 @@
     <ClCompile Include="grip.cpp" />
     <ClCompile Include="icepick.cpp" />
     <ClCompile Include="ironBullet.cpp" />
+    <ClCompile Include="legendaryChampionBelt.cpp" />
     <ClCompile Include="legendaryGear.cpp" />
+    <ClCompile Include="lv3helmet.cpp" />
     <ClCompile Include="magicSword.cpp" />
     <ClCompile Include="normalGear.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
