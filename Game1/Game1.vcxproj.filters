@@ -171,6 +171,28 @@
     <ClInclude Include="legendaryChampionBelt.h">
       <Filter>Object\Item\LEGENDARY</Filter>
     </ClInclude>
+    <ClInclude Include="goldGrip.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="ringOfGiant.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="firstAidKit.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="runeStone.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="trinity.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="hourGlass.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="heroSword.h">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClInclude>
+    <ClInclude Include="rogueMask.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -342,6 +364,28 @@
     <ClCompile Include="legendaryChampionBelt.cpp">
       <Filter>Object\Item\LEGENDARY</Filter>
     </ClCompile>
+    <ClCompile Include="goldGrip.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="ringOfGiant.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="firstAidKit.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="runeStone.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="trinity.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="hourGlass.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="heroSword.cpp">
+      <Filter>Object\Item\LEGENDARY</Filter>
+    </ClCompile>
+    <ClCompile Include="rogueMask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">

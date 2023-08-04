@@ -6,7 +6,7 @@ reinforcedChampionBelt::reinforcedChampionBelt() : Item()
 {
 	grade = ItemGrade::EPIC;
 
-	icon = new ObImage(L"gear_icon_reinforcedchampionbelt.png");
+	icon = new ObImage(L"gear_icon_reinforcedChampionBelt.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -32,7 +32,7 @@ reinforcedChampionBelt::reinforcedChampionBelt() : Item()
 	else if (grade == ItemGrade::LEGENDARY)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
-		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.8f, 0.0f, 0.5f);
 	}
 
 	options->pivot = OFFSET_B;

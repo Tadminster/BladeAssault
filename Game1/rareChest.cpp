@@ -38,7 +38,7 @@ rareChest::rareChest()
     unlocked->scale.y = unlocked->imageSize.y / unlocked->maxFrame.y * 2.0f;
 
     gradeRate[ItemGrade::NORMAL] = 0;
-    gradeRate[ItemGrade::RARE] = 40;
-    gradeRate[ItemGrade::EPIC] = 60;
-    gradeRate[ItemGrade::LEGENDARY] = 0;
+    gradeRate[ItemGrade::RARE] = 30;
+    gradeRate[ItemGrade::EPIC] = 50;
+    gradeRate[ItemGrade::LEGENDARY] = 20;
 }

@@ -17,7 +17,7 @@ legendaryGear::legendaryGear() : Item()
 	if (grade == ItemGrade::NORMAL)
 	{
 		options = new ObImage(L"grade_outline_normal_330_430.png");
-		itemNameColor = Color(0.5f, 0.5f, 0.5f, 0.5f);
+		itemNameColor = Color(0.6f, 0.6f, 0.6f, 0.5f);
 	}
 	else if (grade == ItemGrade::RARE)
 	{
@@ -32,7 +32,7 @@ legendaryGear::legendaryGear() : Item()
 	else if (grade == ItemGrade::LEGENDARY)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
-		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.8f, 0.0f, 0.5f);
 	}
 
 	options->pivot = OFFSET_B;
@@ -42,8 +42,9 @@ legendaryGear::legendaryGear() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"기어 V4";
-	text_explanation = L"스킬의 재사용 대기시간이 15% 감소합니다.";
+	text_explanation = L"스킬의 재사용 대기시간이 15% 감소하고, 추가적으로 스킬 공격력이 15% 증가합니다.";
 
 	// 아이템의 능력치
 	skillCooldownScale = 0.15f;
+	skillDamageScale = 0.15f;
 }

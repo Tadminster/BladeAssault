@@ -8,28 +8,6 @@ Player::Player()
 {
 	jumpTime = 0.0f;
 	moveSpeed = 350.0f;
-
-	jumpCount = 0;
-	jumpCountMax = 2;
-
-	dashWeight = 0.0f;
-	dashRemainingCooldown = 0.0f;
-	dashCooldown = 2.0f;
-
-	damageScale = 1.0f;
-	normalDamageScale = 1.0f;
-	skillDamageScale = 1.0f;
-	chargingDamageScale = 1.0f;
-	fullLifeDamageScale = 1.0f;
-	chargingTimeScale = 1.0f;
-
-	damageRedution = 1.0f;
-
-	criticalChance = 10;
-	criticalDamage = 1.5f;
-
-	skillCooldownScale = 1.0f;
-	dashCooldownScale = 1.0f;
 }
 
 Player::~Player()
@@ -122,6 +100,23 @@ void Player::Update()
 		CurrentState = State::DIE;
 	}
 
+	// 체력 재생
+	if (secTimer > 1.0f)
+	{
+		secTimer = 0.0f;
+
+		// 낮은 생명력 && 응급처치키트를 가지고 있으면
+		if (isLowLife && hasFirstAidKit)
+		{
+			hp += 2;
+			GM->damageDP->AddText(collider->GetWorldPos() + UP * collider->scale.y * 0.75f, 2, 5);
+		}
+	}
+	else 
+	{
+		secTimer += DELTA;
+	}
+
 	// 상태 업데이트
 	if (CurrentState == State::IDLE)
 	{
@@ -135,7 +130,7 @@ void Player::Update()
 	}
 	else if (CurrentState == State::RUN)
 	{
-		collider->MoveWorldPos(dir * moveSpeed * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * moveSpeedScale * DELTA);
 	}
 	else if (CurrentState == State::DASH)
 	{
@@ -207,7 +202,7 @@ void Player::Update()
 	else if (CurrentState == State::ATTACK)
 	{
 		// 공격 중 이동은 감속 (0.5배)
-		collider->MoveWorldPos(dir * moveSpeed * 0.5f * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * moveSpeedScale * 0.5f * DELTA);
 
 		// 프레임이 끝나면 attack -> PrevState
 		if (attack->frame.x == attack->maxFrame.x - 1)
@@ -243,7 +238,7 @@ void Player::Update()
 	else if (CurrentState == State::DAMAGED)
 	{
 		// 데미지를 입고 있는 상태일 때 감속
-		collider->MoveWorldPos(dir * moveSpeed * 0.5f * DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * moveSpeedScale * 0.5f * DELTA);
 
 		// 데미지 입은 후 0.1초 후에 damaged -> PrevState
 		if (timeOfDamaged + 0.1f < TIMER->GetWorldTime())
@@ -752,6 +747,7 @@ void Player::activateItem(Item* item)
 	this->fullLifeDamageScale += item->fullLifeDamageScale;
 
 	this->damageRedution -= item->damageRedution;
+	this->dodgeChance += item->dodgeChance;
 
 	this->criticalChance += item->criticalChance;
 	this->criticalDamage += item->criticalDamage;
@@ -762,11 +758,20 @@ void Player::activateItem(Item* item)
 	this->skillCooldownScale = max(0.0f, this->skillCooldownScale - item->skillCooldownScale);
 	this->dashCooldownScale = max(0.0f, this->skillCooldownScale - item->dashCooldownScale);
 
-	this->isLowLifeNoManaCost = item->isLowLifeNoManaCost;
+	this->hasCandle = item->hasCandle;
+	this->hasFirstAidKit = item->hasFirstAidKit;
 }
 
 void Player::actionsWhenDamaged(float damage)
 {
+	// 회피 확률
+	if ( RANDOM->Int(1, 100) <= dodgeChance)
+	{
+		// 회피 성공
+		// 회피 FX 출력을 위한
+		return;
+	}
+
 	// 대시 중에는 데미지를 받지 않음
 	if (CurrentState == State::DASH)
 		return;

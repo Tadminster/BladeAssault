@@ -29,31 +29,37 @@ public:
 	bool isActive = false;
 
 	// 아이템의 능력치
-	int		maxHp;					// 최대 체력
-	int		hp;						// 체력
-	int		maxMp;					// 최대 마나
-	int		mp;						// 마나
+	int		maxHp				= 0;		// 최대 체력
+	int		hp					= 0;		// 체력
+	int		maxMp				= 0;		// 최대 마나
+	int		mp					= 0;		// 마나
 
-	int		damage;					// 모든 기본 공격력
-	float	damageScale;			// 모든 공격력 스케일
-	float	normalDamageScale;		// 일반 공격력 스케일
-	float	skillDamageScale;		// 스킬 공격력 스케일
-	float	chargingDamageScale;	// 차징 공격력 스케일
-	float	chargingTimeScale;		// 차징 시간 스케일
-	float	fullLifeDamageScale;	// 체력이 100%일 때 공격력 스케일
+	int		damage				= 0;		// 모든 기본 공격력
+	float	damageScale			= 0.0f;		// 모든 공격력 스케일
+	float	normalDamageScale	= 0.0f;		// 일반 공격력 스케일
+	float	skillDamageScale	= 0.0f;		// 스킬 공격력 스케일
+	float	chargingDamageScale = 0.0f;		// 차징 공격력 스케일
+	float	chargingTimeScale	= 0.0f;		// 차징 시간 스케일
+	float	fullLifeDamageScale = 0.0f;		// 체력이 100%일 때 공격력 스케일
 
-	float 	damageRedution;			// 피해 감소
+	float 	damageRedution		= 0.0f;		// 피해 감소
+	int		dodgeChance			= 0;		// 회피율
 
-	int		criticalChance;			// 치명타 확률
-	int		criticalDamage;			// 치명타 피해량
-	int		defence;				// 방어력
-	float	attackSpeed;			// 공격 속도
-	float	moveSpeed;				// 이동 속도
+	int		criticalChance		= 0;		// 치명타 확률
+	int		criticalDamage		= 0;		// 치명타 피해량
+	int		defence				= 0;		// 방어력
+	float	attackSpeed			= 0.0f;		// 공격 속도
 
-	float skillCooldownScale;		// 스킬 쿨타임 스케일
-	float dashCooldownScale;		// 대쉬 쿨타임 스케일
+	float	moveSpeed			= 0.0f;		// 이동 속도
+	float   moveSpeedScale		= 0.0f;		// 이동 속도 스케일
 
-	bool	isLowLifeNoManaCost;	// 낮은 생명력일 때 마나 소모 없음
+	float	skillCooldownScale	= 0.0f;		// 스킬 쿨타임 스케일
+	float	dashCooldownScale	= 0.0f;		// 대쉬 쿨타임 스케일
+
+	bool	hasCandle			= 0;		// 캔들 보유 여부
+	bool    hasFirstAidKit		= 0;		// 응급 처치 키트 보유 여부
+
+
 
 public:
 	Item();

@@ -36,8 +36,8 @@ commonChest::commonChest()
     unlocked->scale.x = unlocked->imageSize.x / unlocked->maxFrame.x * 2.0f;
     unlocked->scale.y = unlocked->imageSize.y / unlocked->maxFrame.y * 2.0f;
 
-    gradeRate[ItemGrade::NORMAL] = 70;
-    gradeRate[ItemGrade::RARE] = 20;
-    gradeRate[ItemGrade::EPIC] = 10;
-    gradeRate[ItemGrade::LEGENDARY] = 0;
+    gradeRate[ItemGrade::NORMAL] = 60;
+    gradeRate[ItemGrade::RARE] = 30;
+    gradeRate[ItemGrade::EPIC] = 8;
+    gradeRate[ItemGrade::LEGENDARY] = 2;
 }

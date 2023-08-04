@@ -37,8 +37,8 @@ uncommonChest::uncommonChest()
     unlocked->scale.x = unlocked->imageSize.x / unlocked->maxFrame.x * 2.0f;
     unlocked->scale.y = unlocked->imageSize.y / unlocked->maxFrame.y * 2.0f;
 
-    gradeRate[ItemGrade::NORMAL] = 50;
-    gradeRate[ItemGrade::RARE] = 40;
-    gradeRate[ItemGrade::EPIC] = 10;
-    gradeRate[ItemGrade::LEGENDARY] = 0;
+    gradeRate[ItemGrade::NORMAL] = 20;
+    gradeRate[ItemGrade::RARE] = 60;
+    gradeRate[ItemGrade::EPIC] = 15;
+    gradeRate[ItemGrade::LEGENDARY] = 5;
 }

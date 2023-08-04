@@ -28,9 +28,16 @@
 #include "reinforcedGrip.h"
 
 // LEGENDARY
+#include "firstAidKit.h"
+#include "goldGrip.h"
+#include "heroSword.h"
 #include "legendaryChampionBelt.h"
 #include "legendaryGear.h"
 #include "lv3helmet.h"
+#include "ringOfGiant.h"
+#include "runeStone.h"
+#include "trinity.h"
+#include "hourGlass.h"
 
 
 #include "ItemManager.h"
@@ -64,9 +71,16 @@ void ItemManager::Init()
 	itemData.emplace(204, new reinforcedGrip());
 
 	// legendary
-	itemData.emplace(301, new legendaryChampionBelt());
-	itemData.emplace(302, new legendaryGear());
-	itemData.emplace(303, new lv3helmet());
+	itemData.emplace(301, new firstAidKit());
+	itemData.emplace(302, new goldGrip());
+	itemData.emplace(303, new heroSword());
+	itemData.emplace(304, new legendaryChampionBelt());
+	itemData.emplace(305, new legendaryGear());
+	itemData.emplace(306, new lv3helmet());
+	itemData.emplace(307, new ringOfGiant());
+	itemData.emplace(308, new runeStone());
+	itemData.emplace(309, new trinity());
+	itemData.emplace(310, new hourGlass());
 
 	// 기준
 	gradeCriteria[ItemGrade::NORMAL] = 0;
@@ -75,10 +89,10 @@ void ItemManager::Init()
 	gradeCriteria[ItemGrade::LEGENDARY] = 300;
 
 	// 사이즈
-	itemSize[ItemGrade::NORMAL] = 3;
-	itemSize[ItemGrade::RARE] = 4;
-	itemSize[ItemGrade::EPIC] = 3;
-	itemSize[ItemGrade::LEGENDARY] = 0;
+	itemSize[ItemGrade::NORMAL] = 10;
+	itemSize[ItemGrade::RARE] = 5;
+	itemSize[ItemGrade::EPIC] = 4;
+	itemSize[ItemGrade::LEGENDARY] = 10;
 }
 
 void ItemManager::Release()
@@ -145,7 +159,7 @@ void ItemManager::CreateItem(int itemGrade[3], Vector2 spawnPos)
 					gradeCriteria[ItemGrade::EPIC] + itemSize[ItemGrade::EPIC]);
 			else if (itemGrade[i] == ItemGrade::LEGENDARY)
 				itemNum[i] = RANDOM->Int(
-					gradeCriteria[ItemGrade::LEGENDARY], 
+					gradeCriteria[ItemGrade::LEGENDARY] + 1, 
 					gradeCriteria[ItemGrade::LEGENDARY] + itemSize[ItemGrade::LEGENDARY]);
 		}
 

@@ -17,7 +17,7 @@ reinforcedGrip::reinforcedGrip() : Item()
 	if (grade == ItemGrade::NORMAL)
 	{
 		options = new ObImage(L"grade_outline_normal_330_430.png");
-		itemNameColor = Color(0.5f, 0.5f, 0.5f, 0.5f);
+		itemNameColor = Color(0.6f, 0.6f, 0.6f, 0.5f);
 	}
 	else if (grade == ItemGrade::RARE)
 	{
@@ -32,7 +32,7 @@ reinforcedGrip::reinforcedGrip() : Item()
 	else if (grade == ItemGrade::LEGENDARY)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
-		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.8f, 0.0f, 0.5f);
 	}
 
 	options->pivot = OFFSET_B;
@@ -41,7 +41,7 @@ reinforcedGrip::reinforcedGrip() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"무기손잡이";
+	text_name = L"보강된 무기손잡이";
 	text_explanation = L"모든 공격력이 20% 증가합니다.";
 
 	// 아이템의 능력치

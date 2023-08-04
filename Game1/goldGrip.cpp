@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "icepick.h"
+#include "goldGrip.h"
 
-icepick::icepick() : Item()
+goldGrip::goldGrip() : Item()
 {
-	grade = ItemGrade::RARE;
+	grade = ItemGrade::LEGENDARY;
 
-	icon = new ObImage(L"gear_icon_icepick.png");
+	icon = new ObImage(L"gear_icon_goldGrip.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -41,9 +41,10 @@ icepick::icepick() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"송곳";
-	text_explanation = L"모든 공격의 치명타 피해량이 20% 증가합니다.";
+	text_name = L"황금 무기손잡이";
+	text_explanation = L"모든 공격력이 30% 증가하고, 추가로 기본 공격력이 5 증가합니다. ";
 
 	// 아이템의 능력치
-	criticalDamage = 0.2f;
+	damageScale = 0.3f;
+	damage = 5;
 }

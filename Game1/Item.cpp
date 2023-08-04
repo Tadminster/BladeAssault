@@ -34,17 +34,6 @@ Item::Item()
 	rect_itemExplanation.top = Utility::WorldToScreen(itemExplanation_pos).y;
 	rect_itemExplanation.right = rect_itemExplanation.left + 1000;
 	rect_itemExplanation.bottom = rect_itemExplanation.top + 1000;
-
-	maxHp = 0;
-	maxMp = 0;
-	hp = 0;
-	mp = 0;
-	damage = 0;
-	damageScale = 0.0f;
-	criticalChance = 0;
-	defence = 0;
-	attackSpeed = 0.0f;
-	moveSpeed = 0.0f;
 }
 
 Item::~Item()

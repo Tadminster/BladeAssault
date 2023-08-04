@@ -25,7 +25,10 @@
     <ClInclude Include="dart.h" />
     <ClInclude Include="duracell.h" />
     <ClInclude Include="epicGear.h" />
+    <ClInclude Include="firstAidKit.h" />
+    <ClInclude Include="goldGrip.h" />
     <ClInclude Include="grip.h" />
+    <ClInclude Include="heroSword.h" />
     <ClInclude Include="icepick.h" />
     <ClInclude Include="ironBullet.h" />
     <ClInclude Include="legendaryChampionBelt.h" />
@@ -64,6 +67,9 @@
     <ClInclude Include="redHairRat.h" />
     <ClInclude Include="redHairRat_atk.h" />
     <ClInclude Include="reinforcedGrip.h" />
+    <ClInclude Include="ringOfGiant.h" />
+    <ClInclude Include="rogueMask.h" />
+    <ClInclude Include="runeStone.h" />
     <ClInclude Include="Scene2_inGame.h" />
     <ClInclude Include="Scene1_title.h" />
     <ClInclude Include="Scene3_jazzBar.h" />
@@ -75,8 +81,10 @@
     <ClInclude Include="starBadge.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="championBelt.h" />
+    <ClInclude Include="trinity.h" />
     <ClInclude Include="uncommonChest.h" />
     <ClInclude Include="woodenShield.h" />
+    <ClInclude Include="hourGlass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bearhat.cpp" />
@@ -85,7 +93,10 @@
     <ClCompile Include="dart.cpp" />
     <ClCompile Include="duracell.cpp" />
     <ClCompile Include="epicGear.cpp" />
+    <ClCompile Include="firstAidKit.cpp" />
+    <ClCompile Include="goldGrip.cpp" />
     <ClCompile Include="grip.cpp" />
+    <ClCompile Include="heroSword.cpp" />
     <ClCompile Include="icepick.cpp" />
     <ClCompile Include="ironBullet.cpp" />
     <ClCompile Include="legendaryChampionBelt.cpp" />
@@ -124,6 +135,9 @@
     <ClCompile Include="redHairRat.cpp" />
     <ClCompile Include="redHairRat_atk.cpp" />
     <ClCompile Include="reinforcedGrip.cpp" />
+    <ClCompile Include="ringOfGiant.cpp" />
+    <ClCompile Include="rogueMask.cpp" />
+    <ClCompile Include="runeStone.cpp" />
     <ClCompile Include="Scene2_inGame.cpp" />
     <ClCompile Include="Scene1_title.cpp" />
     <ClCompile Include="Scene3_jazzBar.cpp" />
@@ -134,8 +148,10 @@
     <ClCompile Include="Scene_proto.cpp" />
     <ClCompile Include="championBelt.cpp" />
     <ClCompile Include="starBadge.cpp" />
+    <ClCompile Include="trinity.cpp" />
     <ClCompile Include="uncommonChest.cpp" />
     <ClCompile Include="woodenShield.cpp" />
+    <ClCompile Include="hourGlass.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

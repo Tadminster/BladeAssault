@@ -17,7 +17,7 @@ leatherBelt::leatherBelt() : Item()
 	if (grade == ItemGrade::NORMAL)
 	{
 		options = new ObImage(L"grade_outline_normal_330_430.png");
-		itemNameColor = Color(0.5f, 0.5f, 0.5f, 0.5f);
+		itemNameColor = Color(0.6f, 0.6f, 0.6f, 0.5f);
 	}
 	else if (grade == ItemGrade::RARE)
 	{
@@ -27,12 +27,12 @@ leatherBelt::leatherBelt() : Item()
 	else if (grade == ItemGrade::EPIC)
 	{
 		options = new ObImage(L"grade_outline_epic_330_430.png");
-		itemNameColor = Color(1.0f, 1.0f, 0.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
 	}
 	else if (grade == ItemGrade::LEGENDARY)
 	{
 		options = new ObImage(L"grade_outline_legendary_330_430.png");
-		itemNameColor = Color(1.0f, 0.0f, 1.0f, 0.5f);
+		itemNameColor = Color(1.0f, 0.8f, 0.0f, 0.5f);
 	}
 
 	options->pivot = OFFSET_B;

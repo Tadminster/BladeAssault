@@ -320,7 +320,7 @@ void Player_kill::Skill()
 	if (skillRemainingCooldown > 0.0f) return;
 
 	// 양초가 있고, 낮은 상명력 상태
-	if (isLowLife && isLowLifeNoManaCost)
+	if (isLowLife && hasCandle)
 	{
 		// 마나 소모없음
 	}

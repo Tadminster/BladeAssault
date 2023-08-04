@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "icepick.h"
+#include "hourGlass.h"
 
-icepick::icepick() : Item()
+hourGlass::hourGlass() : Item()
 {
-	grade = ItemGrade::RARE;
+	grade = ItemGrade::LEGENDARY;
 
-	icon = new ObImage(L"gear_icon_icepick.png");
+	icon = new ObImage(L"gear_icon_hourGlass.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -41,9 +41,10 @@ icepick::icepick() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"송곳";
-	text_explanation = L"모든 공격의 치명타 피해량이 20% 증가합니다.";
+	text_name = L"모래시계";
+	text_explanation = L"모든 재사용 대기시간이 20% 감소합니다.";
 
 	// 아이템의 능력치
-	criticalDamage = 0.2f;
+	dashCooldownScale = 0.2f;
+	skillCooldownScale = 0.2f;
 }
