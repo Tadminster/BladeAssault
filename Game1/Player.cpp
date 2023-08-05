@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DamageDisplayManager.h"
 #include "Projectile.h"
+#include "player_damageReflection.h"
 #include "Creature.h"
 #include "Player.h"
 
@@ -731,10 +732,10 @@ void Player::Dash()
 
 void Player::activateItem(Item* item)
 {
-	hp = min(this->maxHp, this->hp + item->hp);
-	mp = min(this->maxMp, this->mp + item->mp);
 	this->maxHp += item->maxHp;
 	this->maxMp += item->maxMp;
+	hp = min(this->maxHp, this->hp + item->hp);
+	mp = min(this->maxMp, this->mp + item->mp);
 	
 	this->damage += item->damage;
 	this->defence += item->defence;
@@ -760,6 +761,7 @@ void Player::activateItem(Item* item)
 
 	this->hasCandle = item->hasCandle;
 	this->hasFirstAidKit = item->hasFirstAidKit;
+	this->hasCactus = item->hasCactus;
 }
 
 void Player::actionsWhenDamaged(float damage)
@@ -789,8 +791,16 @@ void Player::actionsWhenDamaged(float damage)
 	// 데미지 받은 시간 기록
 	timeOfDamaged = TIMER->GetWorldTime();
 
+	// 선인장 아이템 보유시
+	if (hasCactus)
+	{
+		// 주변에 데미지 반사
+		DamageReflection(damage);
+	}
+
 	// 방어력 만큼 데미지 차감
 	damage = max(0, damage - defence);
+
 	// 방어효율 만큼 데미지 차감
 	damage *= damageRedution;
 
@@ -800,4 +810,42 @@ void Player::actionsWhenDamaged(float damage)
 	// 데미지 텍스트 출력
 	Vector2 tempSpawnPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.5f);
 	GM->damageDP->AddText(tempSpawnPos, damage, 2);
+}
+
+void Player::DamageReflection(float reflectDamage)
+{
+	// 데미지 반사
+	static float lastReflectTime = 0;
+	static float timeSinceLastReflectTime = 0;
+
+	float currentTime = TIMER->GetWorldTime();
+	float elapsedTime = currentTime - lastReflectTime;
+
+	if (elapsedTime >= timeSinceLastReflectTime)
+	{
+		// 발사 위치 계산
+		Vector2 spawnPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.5f);
+
+		// 공격력 계산
+		float totalDamage = ((reflectDamage * 2.0f) + this->damage) * damageScale;
+
+		// 탄생성
+		player_damageReflection* proj = new player_damageReflection
+		(
+			spawnPos,										// 생성위치
+			dir,										    // 각도
+			5,   											// 발사체 속도
+			1, 												// 사거리
+			totalDamage,									// 공격력
+			1,												// 관통력
+			1												// 폭발범위
+		);
+
+		//벡터에 탄 push
+		projectiles.emplace_back(proj);
+
+		// 공속계산
+		lastReflectTime = currentTime;
+		timeSinceLastReflectTime = 1.0f / attackSpeed;
+	}
 }

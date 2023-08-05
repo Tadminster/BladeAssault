@@ -56,10 +56,9 @@ public:
 	float	skillCooldownScale	= 0.0f;		// 스킬 쿨타임 스케일
 	float	dashCooldownScale	= 0.0f;		// 대쉬 쿨타임 스케일
 
-	bool	hasCandle			= 0;		// 캔들 보유 여부
-	bool    hasFirstAidKit		= 0;		// 응급 처치 키트 보유 여부
-
-
+	bool	hasCandle			= false;	// 캔들 보유 여부
+	bool    hasFirstAidKit		= false;	// 응급 처치 키트 보유 여부
+	bool	hasCactus			= false;	// 선인장 보유 여부
 
 public:
 	Item();

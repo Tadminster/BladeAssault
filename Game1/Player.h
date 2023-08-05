@@ -31,6 +31,9 @@ protected:
 	float		chargingTimeScale		= 1.0f;		// 차징 시간 스케일
 	float		fullLifeDamageScale		= 1.0f;		// 체력이 100%일 때 공격력 스케일
 
+    int			criticalChance			= 0.1f;		// 크리티컬 확률
+	float		criticalDamage			= 1.5f;		// 크리티컬 데미지 배율
+
 	//DEFENCE
 	float 		damageRedution			= 1.0f;		// 피해 감소
 	int			dodgeChance				= 5;		// 회피율
@@ -62,8 +65,6 @@ protected:
 
 	//ETC
 	float		timeOfDamaged			= 0.0f;		// 피격당한 시간 기록용
-    int			criticalChance			= 0.1f;		// 크리티컬 확률
-	float		criticalDamage			= 1.5f;		// 크리티컬 데미지 배율
 
 public:
 	bool		isFullLife				= true;		// 최대 체력일 때인지 여부
@@ -74,6 +75,7 @@ public:
 	// ITEM
 	bool		hasCandle				= false;	// 캔들 소유 여부 (낮은 체력일 때 스킬 사용시 마나 소모가 없음)
 	bool		hasFirstAidKit			= false;	// 구급상자 소유 여부 (낮은 체력일 때 HP 재생)
+	bool		hasCactus				= false;	// 선인장 소유 여부 (피격시 데미지 반사)
 
 public:
 	Player();
@@ -92,6 +94,7 @@ public:
 	virtual void activateItem(Item* item);
 
 	void actionsWhenDamaged(float damage);
+	void DamageReflection(float damage);
 
 	// Get
 	int		GetMp()					{ return mp; }

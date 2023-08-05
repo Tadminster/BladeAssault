@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="bearhat.h" />
     <ClInclude Include="boxingGloves.h" />
+    <ClInclude Include="cactus.h" />
     <ClInclude Include="candle.h" />
     <ClInclude Include="cottonGloves.h" />
     <ClInclude Include="dart.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="normalGear.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="oldSneakers.h" />
+    <ClInclude Include="player_damageReflection.h" />
     <ClInclude Include="rareChest.h" />
     <ClInclude Include="rareGear.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
@@ -91,6 +93,7 @@
   <ItemGroup>
     <ClCompile Include="bearhat.cpp" />
     <ClCompile Include="boxingGloves.cpp" />
+    <ClCompile Include="cactus.cpp" />
     <ClCompile Include="candle.cpp" />
     <ClCompile Include="cottonGloves.cpp" />
     <ClCompile Include="dart.cpp" />
@@ -109,6 +112,7 @@
     <ClCompile Include="normalGear.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="oldSneakers.cpp" />
+    <ClCompile Include="player_damageReflection.cpp" />
     <ClCompile Include="rareChest.cpp" />
     <ClCompile Include="rareGear.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />

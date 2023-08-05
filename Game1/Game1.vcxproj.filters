@@ -201,6 +201,12 @@
     <ClInclude Include="boxingGloves.h">
       <Filter>Object\Item\EPIC</Filter>
     </ClInclude>
+    <ClInclude Include="cactus.h">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClInclude>
+    <ClInclude Include="player_damageReflection.h">
+      <Filter>Object\Projectile\playerProj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -401,6 +407,12 @@
     </ClCompile>
     <ClCompile Include="boxingGloves.cpp">
       <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="cactus.cpp">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="player_damageReflection.cpp">
+      <Filter>Object\Projectile\playerProj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
