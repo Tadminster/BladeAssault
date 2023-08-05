@@ -41,7 +41,8 @@ public:
 	float	chargingDamageScale = 0.0f;		// 차징 공격력 스케일
 	float	chargingTimeScale	= 0.0f;		// 차징 시간 스케일
 	float	fullLifeDamageScale = 0.0f;		// 체력이 100%일 때 공격력 스케일
-	float	lowLifeDamageScale	= 1.0f;		// 체력이 30% 이하일 때 공격력 스케일
+	float	lowLifeDamageScale	= 0.0f;		// 체력이 30% 이하일 때 공격력 스케일
+	float   attackRangeScale	= 0.0f;		// 공격 범위 스케일
 
 	float 	damageRedution		= 0.0f;		// 피해 감소
 	int		dodgeChance			= 0;		// 회피율

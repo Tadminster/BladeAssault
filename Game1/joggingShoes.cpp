@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "duracell.h"
+#include "joggingShoes.h"
 
-duracell::duracell() : Item()
+joggingShoes::joggingShoes() : Item()
 {
-	grade = ItemGrade::NORMAL;
+	grade = ItemGrade::RARE;
 
-	icon = new ObImage(L"gear_icon_duracell.png");
+	icon = new ObImage(L"gear_icon_joggingShoes.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -41,10 +41,9 @@ duracell::duracell() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"듀라셀";
-	text_explanation = L"차징 효율과 차징 공격력이 10% 증가합니다.";
+	text_name = L"조깅 신발";
+	text_explanation = L"이동 속도가 15% 증가합니다";
 
 	// 아이템의 능력치
-	chargingTimeScale = 0.1f;
-	chargingDamageScale = 0.1f;
+	moveSpeedScale = 0.15f;
 }

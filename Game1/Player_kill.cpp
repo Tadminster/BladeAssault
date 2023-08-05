@@ -269,8 +269,8 @@ void Player_kill::Attack()
 			spawnPos,										// 생성위치
 			lastDir,										// 각도
 			700,											// 발사체 속도
-			attackRange,									// 사거리
-			totalDamage,											// 공격력
+			attackRange * attackRangeScale,					// 사거리
+			totalDamage,									// 공격력
 			1,												// 관통력
 			1,												// 폭발범위
 			criticalChance									// 치명타 확률

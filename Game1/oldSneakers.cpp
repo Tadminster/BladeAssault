@@ -42,8 +42,8 @@ oldSneakers::oldSneakers() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"오래된 스니커즈";
-	text_explanation = L"이동 속도가 5 증가합니다.";
+	text_explanation = L"기본 이동 속도가 10 증가합니다.";
 
 	// 아이템의 능력치
-	moveSpeed = 5;
+	moveSpeed = 10;
 }

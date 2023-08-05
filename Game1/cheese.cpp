@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "duracell.h"
+#include "cheese.h"
 
-duracell::duracell() : Item()
+cheese::cheese() : Item()
 {
-	grade = ItemGrade::NORMAL;
+	grade = ItemGrade::RARE;
 
-	icon = new ObImage(L"gear_icon_duracell.png");
+	icon = new ObImage(L"gear_icon_cheese.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -41,10 +41,9 @@ duracell::duracell() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"듀라셀";
-	text_explanation = L"차징 효율과 차징 공격력이 10% 증가합니다.";
+	text_name = L"치즈";
+	text_explanation = L"체력이 50 회복됩니다.";
 
 	// 아이템의 능력치
-	chargingTimeScale = 0.1f;
-	chargingDamageScale = 0.1f;
+	hp = 50;
 }

@@ -15,10 +15,15 @@
 
 // RARE
 #include "championBelt.h"
+#include "charger.h"
+#include "cheese.h"
 #include "grip.h"
+#include "heatedClub.h"
 #include "icepick.h"
+#include "joggingShoes.h"
 #include "magicSword.h"
 #include "rareGear.h"
+#include "teleScope.h"
 
 // EPIC
 #include "boxingGloves.h"
@@ -64,10 +69,15 @@ void ItemManager::Init()
 
 	// rare
 	itemData.emplace(101, new championBelt());
-	itemData.emplace(102, new magicSword());
-	itemData.emplace(103, new icepick());
+	itemData.emplace(102, new charger());
+	itemData.emplace(103, new cheese());
 	itemData.emplace(104, new grip());
-	itemData.emplace(105, new rareGear());
+	itemData.emplace(105, new heatedClub());
+	itemData.emplace(106, new icepick());
+	itemData.emplace(107, new joggingShoes());
+	itemData.emplace(108, new magicSword());
+	itemData.emplace(109, new rareGear());
+	itemData.emplace(110, new teleScope());
 
 	// epic
 	itemData.emplace(201, new boxingGloves());
@@ -101,7 +111,7 @@ void ItemManager::Init()
 
 	// ªÁ¿Ã¡Ó
 	itemSize[ItemGrade::NORMAL] = 10;
-	itemSize[ItemGrade::RARE] = 5;
+	itemSize[ItemGrade::RARE] = 10;
 	itemSize[ItemGrade::EPIC] = 10;
 	itemSize[ItemGrade::LEGENDARY] = 10;
 }

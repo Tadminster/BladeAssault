@@ -24,6 +24,8 @@ protected:
 	int			maxMp;
 
 	//ATTACK
+	float		attackRangeScale		= 1.0f;		// 공격 사정거리 스케일
+
 	float		damageScale				= 1.0f;		// 모든 공격력 스케일
 	float		normalDamageScale		= 1.0f;		// 일반 공격력 스케일
 	float		skillDamageScale		= 1.0f;		// 스킬 공격력 스케일

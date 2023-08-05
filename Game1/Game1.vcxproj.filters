@@ -216,6 +216,18 @@
     <ClInclude Include="heatedClub.h">
       <Filter>Object\Item\RARE</Filter>
     </ClInclude>
+    <ClInclude Include="charger.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
+    <ClInclude Include="cheese.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
+    <ClInclude Include="teleScope.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
+    <ClInclude Include="joggingShoes.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -430,6 +442,18 @@
       <Filter>Object\Item\EPIC</Filter>
     </ClCompile>
     <ClCompile Include="heatedClub.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="charger.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="cheese.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="teleScope.cpp">
+      <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="joggingShoes.cpp">
       <Filter>Object\Item\RARE</Filter>
     </ClCompile>
   </ItemGroup>

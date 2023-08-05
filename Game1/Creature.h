@@ -32,14 +32,14 @@ protected:
 	State		PrevState;
 	State		CurrentState;
 
-	int			hp;			// 체력
-	int			maxHp;		// 최대체력
+	int			hp;				// 체력
+	int			maxHp;			// 최대체력
 
-	int			damage;
-	int			defence;
-	int			attackRange;
-	float		attackSpeed;
-	float		moveSpeed;
+	int			damage;			// 공격력
+	int			defence;		// 방어력
+	int			attackRange;	// 사정거리 (최하위 자식클래스에서 정의)
+	float		attackSpeed;	// 공격속도 (최하위 자식클래스에서 정의)
+	float		moveSpeed;		// 이동속도 (최하위 자식클래스에서 정의)
 
 	float		jumpTime;
 	float		jumpSpeed;

@@ -23,11 +23,13 @@
     <ClInclude Include="boxingGloves.h" />
     <ClInclude Include="cactus.h" />
     <ClInclude Include="candle.h" />
+    <ClInclude Include="charger.h" />
     <ClInclude Include="cottonGloves.h" />
     <ClInclude Include="dart.h" />
     <ClInclude Include="duracell.h" />
     <ClInclude Include="epicGear.h" />
     <ClInclude Include="firstAidKit.h" />
+    <ClInclude Include="cheese.h" />
     <ClInclude Include="goldGrip.h" />
     <ClInclude Include="grip.h" />
     <ClInclude Include="heatedClub.h" />
@@ -35,6 +37,7 @@
     <ClInclude Include="huntersArmor.h" />
     <ClInclude Include="icepick.h" />
     <ClInclude Include="ironBullet.h" />
+    <ClInclude Include="joggingShoes.h" />
     <ClInclude Include="legendaryChampionBelt.h" />
     <ClInclude Include="legendaryGear.h" />
     <ClInclude Include="lv3helmet.h" />
@@ -88,6 +91,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="championBelt.h" />
     <ClInclude Include="syringe.h" />
+    <ClInclude Include="teleScope.h" />
     <ClInclude Include="trinity.h" />
     <ClInclude Include="uncommonChest.h" />
     <ClInclude Include="woodenShield.h" />
@@ -98,11 +102,13 @@
     <ClCompile Include="boxingGloves.cpp" />
     <ClCompile Include="cactus.cpp" />
     <ClCompile Include="candle.cpp" />
+    <ClCompile Include="charger.cpp" />
     <ClCompile Include="cottonGloves.cpp" />
     <ClCompile Include="dart.cpp" />
     <ClCompile Include="duracell.cpp" />
     <ClCompile Include="epicGear.cpp" />
     <ClCompile Include="firstAidKit.cpp" />
+    <ClCompile Include="cheese.cpp" />
     <ClCompile Include="goldGrip.cpp" />
     <ClCompile Include="grip.cpp" />
     <ClCompile Include="heatedClub.cpp" />
@@ -110,6 +116,7 @@
     <ClCompile Include="huntersArmor.cpp" />
     <ClCompile Include="icepick.cpp" />
     <ClCompile Include="ironBullet.cpp" />
+    <ClCompile Include="joggingShoes.cpp" />
     <ClCompile Include="legendaryChampionBelt.cpp" />
     <ClCompile Include="legendaryGear.cpp" />
     <ClCompile Include="lv3helmet.cpp" />
@@ -162,6 +169,7 @@
     <ClCompile Include="silverAxe.cpp" />
     <ClCompile Include="starBadge.cpp" />
     <ClCompile Include="syringe.cpp" />
+    <ClCompile Include="teleScope.cpp" />
     <ClCompile Include="trinity.cpp" />
     <ClCompile Include="uncommonChest.cpp" />
     <ClCompile Include="woodenShield.cpp" />
