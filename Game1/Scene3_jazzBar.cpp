@@ -6,7 +6,9 @@
 #include "Monster.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
+#include "ObjectManager.h"
 #include "EffectManager.h"
+#include "ItemManager.h"
 #include "redHairRat.h"
 #include "orangeHairRat.h"
 #include "greenHairRat.h"
@@ -111,6 +113,8 @@ void Scene3_jazzBar::Update()
 		if (next->Intersect(GM->player->GetCollider()))
 		{
 			GM->monster->ClearMonster();
+			GM->obj->ClearChests();
+			GM->item->ActivateAllItem();
 			SCENE->ChangeScene("sc4");
 		}
 	}

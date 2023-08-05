@@ -19,11 +19,6 @@ Chest::Chest()
 	presskey->scale.x		= presskey->imageSize.x;
 	presskey->scale.y		= presskey->imageSize.y;
 	//presskey->ChangeAnim(ANIMSTATE::LOOP, 0.15f, true);
-
-
-	state = ChestState::LOCKED;
-	isOpen  = false;
-	isSpawn = false;
 }
 
 Chest::~Chest()

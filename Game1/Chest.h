@@ -15,9 +15,9 @@ protected:
 	class ObImage* unlocked;
 	class ObImage* presskey;
 
-	ChestState state;
-	bool isOpen;
-	bool isSpawn;
+	ChestState state	= ChestState::LOCKED;
+	bool isOpen			= false;
+	bool isCleared		= false;
 
 	// µî±Þ È®·ü (normal, rare, epic, lengendary)
 	int gradeRate[4];
@@ -34,9 +34,9 @@ public:
 	ObRect* GetCollider() { return collider; };
 	ChestState GetState() { return state; }
 	bool GetIsOpen() { return isOpen; }
-	//bool GetIsSpawn() { return isSpawn; }
+	bool GetIsCleared() { return isCleared; }
 
 	// Set
 	void SetPosition(Vector2 pos) { collider->SetWorldPos(pos); }
+	void SetCleared() { isCleared = true; }
 };
-

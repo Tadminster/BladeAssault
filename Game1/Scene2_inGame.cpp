@@ -142,7 +142,11 @@ void Scene2_inGame::Update()
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
 		if (localtime > 1.0f)
+		{
+			GM->item->ActivateAllItem();
+			GM->obj->ClearChests();
 			SCENE->ChangeScene("sc3");
+		}
 	}
 
 

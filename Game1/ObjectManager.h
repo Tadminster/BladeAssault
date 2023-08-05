@@ -14,5 +14,6 @@ public:
 	void	Render();
 
 	void AddChest(Chest* chest);
+	void ClearChests();
 };
 
