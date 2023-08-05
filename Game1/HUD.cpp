@@ -169,7 +169,6 @@ HUD::HUD()
 
 	// colldown (dash)
 	Vector2 textBox_cooltime_dash_pos = Utility::WorldToScreen(frame_SPACE->GetWorldPos());
-	//Vector2 textBox_cooltime_dash_pos = frame_SPACE->GetWorldPos();
 	textBox_colldown_dash.left = textBox_cooltime_dash_pos.x + 15;
 	textBox_colldown_dash.top = textBox_cooltime_dash_pos.y - 55;
 	textBox_colldown_dash.right = textBox_colldown_dash.left + 1000;

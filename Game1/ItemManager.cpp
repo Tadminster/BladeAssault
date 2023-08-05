@@ -22,10 +22,13 @@
 #include "rareGear.h"
 
 // EPIC
+#include "boxingGloves.h"
 #include "candle.h"
 #include "epicGear.h"
 #include "reinforcedChampionBelt.h"
 #include "reinforcedGrip.h"
+#include "rogueMask.h"
+#include "silverAxe.h"
 
 // LEGENDARY
 #include "firstAidKit.h"
@@ -65,10 +68,13 @@ void ItemManager::Init()
 	itemData.emplace(105, new rareGear());
 
 	// epic
-	itemData.emplace(201, new candle());
-	itemData.emplace(202, new epicGear());
-	itemData.emplace(203, new reinforcedChampionBelt());
-	itemData.emplace(204, new reinforcedGrip());
+	itemData.emplace(201, new boxingGloves());
+	itemData.emplace(202, new candle());
+	itemData.emplace(203, new epicGear());
+	itemData.emplace(204, new reinforcedChampionBelt());
+	itemData.emplace(205, new reinforcedGrip());
+	itemData.emplace(206, new rogueMask());
+	itemData.emplace(207, new silverAxe());
 
 	// legendary
 	itemData.emplace(301, new firstAidKit());
@@ -91,7 +97,7 @@ void ItemManager::Init()
 	// ªÁ¿Ã¡Ó
 	itemSize[ItemGrade::NORMAL] = 10;
 	itemSize[ItemGrade::RARE] = 5;
-	itemSize[ItemGrade::EPIC] = 4;
+	itemSize[ItemGrade::EPIC] = 7;
 	itemSize[ItemGrade::LEGENDARY] = 10;
 }
 

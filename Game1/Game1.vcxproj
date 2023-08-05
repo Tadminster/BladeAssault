@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bearhat.h" />
+    <ClInclude Include="boxingGloves.h" />
     <ClInclude Include="candle.h" />
     <ClInclude Include="cottonGloves.h" />
     <ClInclude Include="dart.h" />
@@ -78,6 +79,7 @@
     <ClInclude Include="Scene6_undercity2.h" />
     <ClInclude Include="Scene7_undercity3.h" />
     <ClInclude Include="Scene_proto.h" />
+    <ClInclude Include="silverAxe.h" />
     <ClInclude Include="starBadge.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="championBelt.h" />
@@ -88,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bearhat.cpp" />
+    <ClCompile Include="boxingGloves.cpp" />
     <ClCompile Include="candle.cpp" />
     <ClCompile Include="cottonGloves.cpp" />
     <ClCompile Include="dart.cpp" />
@@ -147,6 +150,7 @@
     <ClCompile Include="Scene7_undercity3.cpp" />
     <ClCompile Include="Scene_proto.cpp" />
     <ClCompile Include="championBelt.cpp" />
+    <ClCompile Include="silverAxe.cpp" />
     <ClCompile Include="starBadge.cpp" />
     <ClCompile Include="trinity.cpp" />
     <ClCompile Include="uncommonChest.cpp" />

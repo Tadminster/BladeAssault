@@ -192,7 +192,15 @@
     <ClInclude Include="heroSword.h">
       <Filter>Object\Item\LEGENDARY</Filter>
     </ClInclude>
-    <ClInclude Include="rogueMask.h" />
+    <ClInclude Include="silverAxe.h">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClInclude>
+    <ClInclude Include="rogueMask.h">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClInclude>
+    <ClInclude Include="boxingGloves.h">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -385,7 +393,15 @@
     <ClCompile Include="heroSword.cpp">
       <Filter>Object\Item\LEGENDARY</Filter>
     </ClCompile>
-    <ClCompile Include="rogueMask.cpp" />
+    <ClCompile Include="rogueMask.cpp">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="silverAxe.cpp">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="boxingGloves.cpp">
+      <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
