@@ -34,5 +34,8 @@ public:
 	// 0: 랜덤 상자, 1: 일반 상자, 2: 희귀 상자, 3: 전설 상자
 	// @param pos 생성할 위치
 	virtual void CreateChest(int type, Vector2 pos);
+
+	// @brief 다음 맵으로 이동하기전 Object들을 정리
+	virtual void CleanupBeforeNewMap();
 };
 

@@ -143,8 +143,7 @@ void Scene2_inGame::Update()
 	{
 		if (localtime > 1.0f)
 		{
-			GM->item->ActivateAllItem();
-			GM->obj->ClearChests();
+			CleanupBeforeNewMap();
 			SCENE->ChangeScene("sc3");
 		}
 	}

@@ -195,6 +195,20 @@ void Scene_proto::CreateChest(int type, Vector2 pos)
 	GM->obj->AddChest(chest);
 }
 
+void Scene_proto::CleanupBeforeNewMap()
+{
+	// 다음맵으로 넘어가기전 불필요한 Object들을 삭제
+	
+	// 몬스터 삭제
+	GM->monster->ClearMonster();
+
+	// 아이템 삭제
+	GM->item->ActivateAllItem();
+
+	// 상자 삭제
+	GM->obj->ClearChests();
+}
+
 
 
 

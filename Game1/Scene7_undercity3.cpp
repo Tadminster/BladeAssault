@@ -48,14 +48,6 @@ void Scene7_undercity3::Init()
 {
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
-
-	//GM->monster->AddMonster(new redHairRat(Vector2(1450, 1525)));
-	//GM->monster->AddMonster(new orangeHairRat(Vector2(2000, 1250)));
-	//GM->monster->AddMonster(new redHairRat(Vector2(1450, 1075)));
-	//GM->monster->AddMonster(new redHairRat(Vector2(1850, 975)));
-	//GM->monster->AddMonster(new redHairRat(Vector2(1200, 725)));
-	//GM->monster->AddMonster(new orangeHairRat(Vector2(1500, 725)));
-	//GM->monster->AddMonster(new orangeHairRat(Vector2(1800, 725)));
 }
 
 void Scene7_undercity3::Release()
@@ -79,7 +71,7 @@ void Scene7_undercity3::Update()
 	// ´ÙÀ½ ¸Ê ÀÌµ¿
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
-		GM->monster->ClearMonster();
+		CleanupBeforeNewMap();
 		SCENE->ChangeScene("sc2");
 	}
 

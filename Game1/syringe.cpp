@@ -42,7 +42,7 @@ syringe::syringe() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"주사기";
-	text_explanation = L"공격당하면, 5% 확률로 체력이 10 회복됩니다..";
+	text_explanation = L"공격당하면, 5% 확률로 체력이 10 회복됩니다.";
 
 	// 아이템의 능력치
 	hasSyringe = true;

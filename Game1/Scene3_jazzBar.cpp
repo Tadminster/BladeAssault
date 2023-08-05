@@ -112,9 +112,8 @@ void Scene3_jazzBar::Update()
 	{
 		if (next->Intersect(GM->player->GetCollider()))
 		{
-			GM->monster->ClearMonster();
-			GM->obj->ClearChests();
-			GM->item->ActivateAllItem();
+			
+			CleanupBeforeNewMap();
 			SCENE->ChangeScene("sc4");
 		}
 	}

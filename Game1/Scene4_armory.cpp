@@ -46,8 +46,7 @@ Scene4_armory::Scene4_armory()
 	stair->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	stair->isFilled = true;
 
-	startPostion = Vector2(700, 600);
-	returnPosition = Vector2(600, 600);
+	startPostion = Vector2(700, 550);
 }
 
 Scene4_armory::~Scene4_armory()
@@ -94,7 +93,7 @@ void Scene4_armory::Update()
 	// ´ÙÀ½ ¸Ê ÀÌµ¿
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
-		GM->monster->ClearMonster();
+		CleanupBeforeNewMap();
 		SCENE->ChangeScene("sc5");
 	}
 

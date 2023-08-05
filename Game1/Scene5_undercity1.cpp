@@ -83,7 +83,7 @@ void Scene5_undercity1::Update()
 	// ´ÙÀ½ ¸Ê ÀÌµ¿
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
-		GM->monster->ClearMonster();
+		CleanupBeforeNewMap();
 		SCENE->ChangeScene("sc6");
 	}
 
