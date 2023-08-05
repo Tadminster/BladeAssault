@@ -76,6 +76,7 @@ public:
 	bool		hasCandle				= false;	// 캔들 소유 여부 (낮은 체력일 때 스킬 사용시 마나 소모가 없음)
 	bool		hasFirstAidKit			= false;	// 구급상자 소유 여부 (낮은 체력일 때 HP 재생)
 	bool		hasCactus				= false;	// 선인장 소유 여부 (피격시 데미지 반사)
+	bool		hasSyringe				= false;	// 주사기 소유 여부 (피격시 HP 재생)
 
 public:
 	Player();

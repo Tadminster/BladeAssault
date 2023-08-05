@@ -56,9 +56,10 @@ public:
 	float	skillCooldownScale	= 0.0f;		// 스킬 쿨타임 스케일
 	float	dashCooldownScale	= 0.0f;		// 대쉬 쿨타임 스케일
 
-	bool	hasCandle			= false;	// 캔들 보유 여부
-	bool    hasFirstAidKit		= false;	// 응급 처치 키트 보유 여부
-	bool	hasCactus			= false;	// 선인장 보유 여부
+	bool	hasCandle			= false;	// 캔들 소유 여부 (낮은 체력일 때 스킬 사용시 마나 소모가 없음)
+	bool    hasFirstAidKit		= false;	// 구급상자 소유 여부 (낮은 체력일 때 HP 재생)
+	bool	hasCactus			= false;	// 선인장 소유 여부 (피격시 데미지 반사)
+	bool	hasSyringe			= false;	// 주사기 소유 여부 (피격시 HP 재생)
 
 public:
 	Item();

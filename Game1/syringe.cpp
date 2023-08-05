@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "runeStone.h"
+#include "syringe.h"
 
-runeStone::runeStone() : Item()
+syringe::syringe() : Item()
 {
-	grade = ItemGrade::LEGENDARY;
+	grade = ItemGrade::EPIC;
 
-	icon = new ObImage(L"gear_icon_runestone.png");
+	icon = new ObImage(L"gear_icon_syringe.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -41,13 +41,9 @@ runeStone::runeStone() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"룬";
-	text_explanation = L"최대 체력과 최대 마나가 30 증가하고, 이동속도가 30% 증가합니다.";
+	text_name = L"주사기";
+	text_explanation = L"공격당하면, 5% 확률로 체력이 10 회복됩니다..";
 
 	// 아이템의 능력치
-	maxHp = 30;
-	maxMp = 30;
-	hp = 30;
-	mp = 30;
-	moveSpeedScale = 0.3f;
+	hasSyringe = true;
 }

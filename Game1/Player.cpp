@@ -762,6 +762,7 @@ void Player::activateItem(Item* item)
 	this->hasCandle = item->hasCandle;
 	this->hasFirstAidKit = item->hasFirstAidKit;
 	this->hasCactus = item->hasCactus;
+	this->hasSyringe = item->hasSyringe;
 }
 
 void Player::actionsWhenDamaged(float damage)
@@ -796,6 +797,18 @@ void Player::actionsWhenDamaged(float damage)
 	{
 		// 주변에 데미지 반사
 		DamageReflection(damage);
+	}
+
+	// 주사기 아이템 보유시
+	if (hasSyringe)
+	{
+		// 주사위를 굴려 5% 확률로
+		if (RANDOM->Int(1, 100) <= 5)
+		{
+			// 체력 회복
+			hp = min(maxHp, hp + 10);
+			GM->damageDP->AddText(collider->GetWorldPos(), 10, 5);
+		}
 	}
 
 	// 방어력 만큼 데미지 차감
