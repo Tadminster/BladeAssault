@@ -30,6 +30,7 @@
     <ClInclude Include="firstAidKit.h" />
     <ClInclude Include="goldGrip.h" />
     <ClInclude Include="grip.h" />
+    <ClInclude Include="heatedClub.h" />
     <ClInclude Include="heroSword.h" />
     <ClInclude Include="huntersArmor.h" />
     <ClInclude Include="icepick.h" />
@@ -104,6 +105,7 @@
     <ClCompile Include="firstAidKit.cpp" />
     <ClCompile Include="goldGrip.cpp" />
     <ClCompile Include="grip.cpp" />
+    <ClCompile Include="heatedClub.cpp" />
     <ClCompile Include="heroSword.cpp" />
     <ClCompile Include="huntersArmor.cpp" />
     <ClCompile Include="icepick.cpp" />

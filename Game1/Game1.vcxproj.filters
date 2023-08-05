@@ -213,6 +213,9 @@
     <ClInclude Include="huntersArmor.h">
       <Filter>Object\Item\EPIC</Filter>
     </ClInclude>
+    <ClInclude Include="heatedClub.h">
+      <Filter>Object\Item\RARE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -425,6 +428,9 @@
     </ClCompile>
     <ClCompile Include="huntersArmor.cpp">
       <Filter>Object\Item\EPIC</Filter>
+    </ClCompile>
+    <ClCompile Include="heatedClub.cpp">
+      <Filter>Object\Item\RARE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

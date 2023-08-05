@@ -3,6 +3,5 @@ class championBelt : public Item
 {
 public:
 	championBelt();
-
 };
 

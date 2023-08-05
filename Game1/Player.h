@@ -29,7 +29,8 @@ protected:
 	float		skillDamageScale		= 1.0f;		// 스킬 공격력 스케일
 	float		chargingDamageScale		= 1.0f;		// 차징 공격력 스케일
 	float		chargingTimeScale		= 1.0f;		// 차징 시간 스케일
-	float		fullLifeDamageScale		= 1.0f;		// 체력이 100%일 때 공격력 스케일
+	float		fullLifeDamageScale		= 1.0f;		// 체력이 100% 일 때 공격력 스케일
+	float		lowLifeDamageScale		= 1.0f;		// 체력이 30% 이하일 때 공격력 스케일
 
     int			criticalChance			= 0.1f;		// 크리티컬 확률
 	float		criticalDamage			= 1.5f;		// 크리티컬 데미지 배율
@@ -77,6 +78,7 @@ public:
 	bool		hasFirstAidKit			= false;	// 구급상자 소유 여부 (낮은 체력일 때 HP 재생)
 	bool		hasCactus				= false;	// 선인장 소유 여부 (피격시 데미지 반사)
 	bool		hasSyringe				= false;	// 주사기 소유 여부 (피격시 HP 재생)
+	bool		hasHeatedClub			= false;	// 히팅클럽 소유 여부 (낮은 체력일 때 데미지 증가)
 
 public:
 	Player();

@@ -53,7 +53,7 @@ void Player::Update()
 	else
 	{
 		isFullLife = false;
-		
+
 		// 체력이 30% 이하인지	
 		if (hp <= maxHp * 0.3f)
 		{
@@ -113,7 +113,7 @@ void Player::Update()
 			GM->damageDP->AddText(collider->GetWorldPos() + UP * collider->scale.y * 0.75f, 2, 5);
 		}
 	}
-	else 
+	else
 	{
 		secTimer += DELTA;
 	}
@@ -175,7 +175,7 @@ void Player::Update()
 			}
 		}
 
-		collider->MoveWorldPos(dir* moveSpeed* DELTA);
+		collider->MoveWorldPos(dir * moveSpeed * DELTA);
 	}
 	else if (CurrentState == State::CROUCH)
 	{
@@ -188,7 +188,7 @@ void Player::Update()
 		jump->frame.y = 1;
 		jumpTime += DELTA;
 		isLanding = false;
-			
+
 		// 하강 후 0.3s 이상 경과 && 바닥에 닿았으면 
 		if (jumpTime > 0.3f || onWall)
 		{
@@ -267,7 +267,7 @@ void Player::Update()
 	// 1. 바닥과 떨어져 있을 때
 	// 2. SPAWN 이나 STANDBY 상태가 아닐 때
 	// 중력적용
-	if (!onWall && !onFloor 
+	if (!onWall && !onFloor
 		&& CurrentState != State::SPAWN
 		&& CurrentState != State::STANDBY)
 	{
@@ -736,16 +736,17 @@ void Player::activateItem(Item* item)
 	this->maxMp += item->maxMp;
 	hp = min(this->maxHp, this->hp + item->hp);
 	mp = min(this->maxMp, this->mp + item->mp);
-	
+
 	this->damage += item->damage;
 	this->defence += item->defence;
-	
+
 	this->damageScale += item->damageScale;
 	this->normalDamageScale += item->normalDamageScale;
 	this->skillDamageScale += item->skillDamageScale;
 	this->chargingDamageScale += item->chargingDamageScale;
 	this->chargingTimeScale += item->chargingTimeScale;
 	this->fullLifeDamageScale += item->fullLifeDamageScale;
+	this->lowLifeDamageScale += item->lowLifeDamageScale;
 
 	this->damageRedution -= item->damageRedution;
 	this->dodgeChance += item->dodgeChance;
@@ -763,12 +764,13 @@ void Player::activateItem(Item* item)
 	this->hasFirstAidKit = item->hasFirstAidKit;
 	this->hasCactus = item->hasCactus;
 	this->hasSyringe = item->hasSyringe;
+	this->hasHeatedClub = item->hasHeatedClub;
 }
 
 void Player::actionsWhenDamaged(float damage)
 {
 	// 회피 확률
-	if ( RANDOM->Int(1, 100) <= dodgeChance)
+	if (RANDOM->Int(1, 100) <= dodgeChance)
 	{
 		// 회피 성공
 		// 회피 FX 출력을 위한
@@ -782,13 +784,13 @@ void Player::actionsWhenDamaged(float damage)
 	// 상태를 데미지 받음으로 변경
 	if (CurrentState == State::IDLE || CurrentState == State::RUN)
 		CurrentState = State::DAMAGED;
-	
+
 	// 데미지 받음 FX 출력을 위한
 	damageTaken = true;
 
 	// 스킨 컬러 변경
 	//damaged->color = Vector4(0.1, 0.1, 0.1, 0.5);
-	
+
 	// 데미지 받은 시간 기록
 	timeOfDamaged = TIMER->GetWorldTime();
 
@@ -819,7 +821,7 @@ void Player::actionsWhenDamaged(float damage)
 
 	// 체력 감소
 	hp = max(hp - damage, 0);
-	
+
 	// 데미지 텍스트 출력
 	Vector2 tempSpawnPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.5f);
 	GM->damageDP->AddText(tempSpawnPos, damage, 2);
@@ -841,6 +843,8 @@ void Player::DamageReflection(float reflectDamage)
 
 		// 공격력 계산
 		float totalDamage = ((reflectDamage * 2.0f) + this->damage) * damageScale;
+		if (isFullLife) totalDamage *= fullLifeDamageScale;
+		else if (isLowLife) totalDamage *= lowLifeDamageScale;
 
 		// 탄생성
 		player_damageReflection* proj = new player_damageReflection

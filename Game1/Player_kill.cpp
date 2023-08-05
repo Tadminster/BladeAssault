@@ -154,7 +154,7 @@ Player_kill::Player_kill()
 
 	chargingTime = 0.0f;			// 차징
 	chargingTimeMax = 3.0f;			// 차징 최대 시간
-	chargingStartFrame = 1;		
+	chargingStartFrame = 1;
 	chargingEndFrame = 4;
 
 	skillCooldown = 4.0f;			// 스킬 쿨타임
@@ -260,7 +260,8 @@ void Player_kill::Attack()
 
 		// 공격력 계산
 		float totalDamage = damage * (damageScale + normalDamageScale);
-		if (isFullLife) totalDamage* fullLifeDamageScale;
+		if (isFullLife) totalDamage *= fullLifeDamageScale;
+		else if (isLowLife) totalDamage *= lowLifeDamageScale;
 
 		// 탄생성
 		kill_barehand_atk* proj = new kill_barehand_atk
@@ -291,7 +292,8 @@ void Player_kill::ChargingAttack()
 
 	// 공격력 계산
 	float totalDamage = damage * (damageScale + chargingDamageScale) * chargingTime;
-	if (isFullLife) totalDamage* fullLifeDamageScale;
+	if (isFullLife) totalDamage *= fullLifeDamageScale;
+	else if (isLowLife) totalDamage *= lowLifeDamageScale;
 
 	// 탄생성
 	kill_barehand_ChargingAtk* proj = new kill_barehand_ChargingAtk
@@ -315,7 +317,7 @@ void Player_kill::ChargingAttack()
 
 void Player_kill::Skill()
 {
-	
+
 	// 스킬 재사용 대기시간이 남았으면 스킬 사용 불가
 	if (skillRemainingCooldown > 0.0f) return;
 
@@ -356,7 +358,8 @@ void Player_kill::SkillAttack()
 
 	// 공격력 계산
 	float totalDamage = damage * (damageScale + skillDamageScale) * 3.0f * skillScale;
-	if (isFullLife) totalDamage * fullLifeDamageScale;
+	if (isFullLife) totalDamage *= fullLifeDamageScale;
+	else if (isLowLife) totalDamage *= lowLifeDamageScale;
 
 	// 탄생성
 	kill_barehand_skill* proj = new kill_barehand_skill

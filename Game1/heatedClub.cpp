@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Item.h"
-#include "championBelt.h"
+#include "heatedClub.h"
 
-championBelt::championBelt() : Item()
+heatedClub::heatedClub() : Item()
 {
 	grade = ItemGrade::RARE;
-	
-	icon = new ObImage(L"gear_icon_championBelt.png");
+
+	icon = new ObImage(L"gear_icon_heatedClub.png");
 	icon->pivot = OFFSET_B;
 	icon->SetParentRT(*collider);
 	icon->scale.x = icon->imageSize.x * 2.0f;
@@ -41,10 +41,10 @@ championBelt::championBelt() : Item()
 	options->scale.y = options->imageSize.y;
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
-	text_name = L"챔피언벨트";
-	text_explanation = L"최대 체력이 20 증가합니다.";
+	text_name = L"히팅 클럽";
+	text_explanation = L"낮은 체력 상태일 때 데미지가 50% 증가합니다";
 
 	// 아이템의 능력치
-	hp = 20;
-	maxHp = 20;
+	hasHeatedClub = true;
+	lowLifeDamageScale = 0.5f;
 }
