@@ -7,12 +7,11 @@
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
 #include "EffectManager.h"
-#include "redHairRat.h"
-#include "orangeHairRat.h"
+#include "ratmotan.h"
 #include "Scene_proto.h"
-#include "Scene6_undercity2.h"
+#include "Scene8_undercity4.h"
 
-Scene6_undercity2::Scene6_undercity2()
+Scene8_undercity4::Scene8_undercity4()
 {
 	tileMap[0] = new ObTileMap();
 	tileMap[1] = new ObTileMap();
@@ -20,51 +19,48 @@ Scene6_undercity2::Scene6_undercity2()
 
 	nextMap = new ObRect();
 
-	tileMap[0]->file = "scene6_undercity2_0.txt";
-	tileMap[1]->file = "scene6_undercity2_1.txt";
-	tileMap[2]->file = "scene6_undercity2_2.txt";
+	tileMap[0]->file = "scene8_undercity4_0.txt";
+	tileMap[1]->file = "scene8_undercity4_1.txt";
+	tileMap[2]->file = "scene8_undercity4_2.txt";
 
 	tileMap[0]->Load();
 	tileMap[1]->Load();
 	tileMap[2]->Load();
 
 	nextMap->pivot = OFFSET_LB;
-	nextMap->SetWorldPos(Vector2(2150, 725));
+	nextMap->SetWorldPos(Vector2(4375, 825));
 	nextMap->scale = Vector2(100, 100);
 	nextMap->color = Vector4(0.5, 0.5, 0.5, 0.3);
 	nextMap->isFilled = true;
 
 	// 몬스터소환 트리거
 	spawnTrigger->pivot = OFFSET_LB;
-	spawnTrigger->SetWorldPos(Vector2(1150, 1250));
-	spawnTrigger->scale = Vector2(100, 100);
+	spawnTrigger->SetWorldPos(Vector2(1150, 1100));
+	spawnTrigger->scale = Vector2(100, 250);
 	spawnTrigger->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
 	spawnTrigger->isFilled = true;
 
-	startPostion = Vector2(1000, 1250);
+	startPostion = Vector2(875, 1100);
 }
 
-Scene6_undercity2::~Scene6_undercity2()
+Scene8_undercity4::~Scene8_undercity4()
 {
 	for (int i = 0; i < 3; i++)
 		delete[] tileMap[i];
 	delete nextMap;
-	delete spawnTrigger;
 }
 
-void Scene6_undercity2::Init()
+void Scene8_undercity4::Init()
 {
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
-
-	CreateChest(0, Vector2(1525, 725));
 }
 
-void Scene6_undercity2::Release()
+void Scene8_undercity4::Release()
 {
 }
 
-void Scene6_undercity2::Update()
+void Scene8_undercity4::Update()
 {
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
 
@@ -76,7 +72,7 @@ void Scene6_undercity2::Update()
 	if (nextMap->Intersect(GM->player->GetCollider()))
 	{
 		CleanupBeforeNewMap();
-		SCENE->ChangeScene("sc7");
+		SCENE->ChangeScene("sc2");
 	}
 
 	// 몬스터 소환
@@ -90,18 +86,19 @@ void Scene6_undercity2::Update()
 		}
 	}
 
+
 	for (auto& map : tileMap)
 		map->Update();
 	nextMap->Update();
 	Scene_proto::Update();
 }
 
-void Scene6_undercity2::LateUpdate()
+void Scene8_undercity4::LateUpdate()
 {
 	Scene_proto::LateUpdate();
 }
 
-void Scene6_undercity2::Render()
+void Scene8_undercity4::Render()
 {
 	tileMap[0]->Render();
 	tileMap[1]->Render();
@@ -113,18 +110,13 @@ void Scene6_undercity2::Render()
 	Scene_proto::Render();
 }
 
-void Scene6_undercity2::ResizeScreen()
+void Scene8_undercity4::ResizeScreen()
 {
 	GM->hud->Init();
 }
 
-void Scene6_undercity2::SummonMonster()
+void Scene8_undercity4::SummonMonster()
 {
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1525));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2000, 1250));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1075));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1850, 975));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1200, 725));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1500, 725));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1800, 725));
+	// BOSS
+	GM->monster->SpawnMonster(new ratmotan(), Vector2(3200, 650));
 }

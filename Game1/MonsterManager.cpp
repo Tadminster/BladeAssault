@@ -4,6 +4,7 @@
 #include "redHairRat.h"
 #include "orangeHairRat.h"
 #include "greenHairRat.h"
+#include "ratmotan.h"
 #include "Projectile.h"
 #include "MonsterManager.h"
 
@@ -21,8 +22,7 @@ void MonsterManager::Release()
 
 void MonsterManager::Update()
 {
-	for (auto& monster : enemy)
-		ImGui::Text("hp: %d", monster->GetHp());
+	ShowMonsterStat();
 
 	// 체력이 0 이하인 몬스터 삭제
 	enemy.erase(
@@ -93,4 +93,13 @@ void MonsterManager::SpawnMonster(class Monster* monster, Vector2 pos)
 	monster->Init();
 	// 몬스터를 벡터에 추가
 	this->enemy.emplace_back(monster);
+}
+
+void MonsterManager::ShowMonsterStat()
+{
+	if (!ImGui::CollapsingHeader(u8"몬스터"))
+		return;
+
+	for (auto& monster : enemy)
+		ImGui::Text("hp: %d", monster->GetHp());
 }

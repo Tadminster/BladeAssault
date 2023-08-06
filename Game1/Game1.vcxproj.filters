@@ -228,6 +228,12 @@
     <ClInclude Include="joggingShoes.h">
       <Filter>Object\Item\RARE</Filter>
     </ClInclude>
+    <ClInclude Include="Scene8_undercity4.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ratmotan.h">
+      <Filter>Object\Creature\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -455,6 +461,12 @@
     </ClCompile>
     <ClCompile Include="joggingShoes.cpp">
       <Filter>Object\Item\RARE</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene8_undercity4.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ratmotan.cpp">
+      <Filter>Object\Creature\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

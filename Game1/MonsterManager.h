@@ -23,5 +23,7 @@ public:
 
 	void	SpawnMonster(class Monster* monster, Vector2 pos);
 	void	ClearMonster() { enemy.clear(); }
+
+	void	ShowMonsterStat();
 };
 

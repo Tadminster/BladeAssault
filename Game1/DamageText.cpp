@@ -91,7 +91,8 @@ void DamageText::Update()
 void DamageText::LateUpdate()
 {
 	// 이동한 거리 계산
-	//ImGui::Text("traveledDistance %f\n", traveledDistance);
+	//
+	// ::Text("traveledDistance %f\n", traveledDistance);
 	//traveledDistance = Vector2(spawnPos - text->GetWorldPos()).Length();
 	traveledDistance = Vector2::Distance(spawnPos, text->GetWorldPos());
 }

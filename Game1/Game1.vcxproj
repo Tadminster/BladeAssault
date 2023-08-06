@@ -48,6 +48,7 @@
     <ClInclude Include="player_damageReflection.h" />
     <ClInclude Include="rareChest.h" />
     <ClInclude Include="rareGear.h" />
+    <ClInclude Include="ratmotan.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="commonChest.h" />
@@ -85,6 +86,7 @@
     <ClInclude Include="Scene5_undercity1.h" />
     <ClInclude Include="Scene6_undercity2.h" />
     <ClInclude Include="Scene7_undercity3.h" />
+    <ClInclude Include="Scene8_undercity4.h" />
     <ClInclude Include="Scene_proto.h" />
     <ClInclude Include="silverAxe.h" />
     <ClInclude Include="starBadge.h" />
@@ -127,6 +129,7 @@
     <ClCompile Include="player_damageReflection.cpp" />
     <ClCompile Include="rareChest.cpp" />
     <ClCompile Include="rareGear.cpp" />
+    <ClCompile Include="ratmotan.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="commonChest.cpp" />
@@ -164,6 +167,7 @@
     <ClCompile Include="Scene5_undercity1.cpp" />
     <ClCompile Include="Scene6_undercity2.cpp" />
     <ClCompile Include="Scene7_undercity3.cpp" />
+    <ClCompile Include="Scene8_undercity4.cpp" />
     <ClCompile Include="Scene_proto.cpp" />
     <ClCompile Include="championBelt.cpp" />
     <ClCompile Include="silverAxe.cpp" />

@@ -7,6 +7,7 @@
 #include "Scene5_undercity1.h"
 #include "Scene6_undercity2.h"
 #include "Scene7_undercity3.h"
+#include "Scene8_undercity4.h"
 #include "Main.h"
 
 Main::Main()
@@ -18,6 +19,7 @@ Main::Main()
 	sc5_undercity1 = new Scene5_undercity1();
 	sc6_undercity2 = new Scene6_undercity2();
 	sc7_undercity3 = new Scene7_undercity3();
+	sc8_undercity4 = new Scene8_undercity4();
 }
 
 Main::~Main()
@@ -34,6 +36,7 @@ void Main::Init()
 	SCENE->AddScene("sc5", sc5_undercity1);
 	SCENE->AddScene("sc6", sc6_undercity2);
 	SCENE->AddScene("sc7", sc7_undercity3);
+	SCENE->AddScene("sc8", sc8_undercity4);
 	SCENE->ChangeScene("sc1");
 }
 

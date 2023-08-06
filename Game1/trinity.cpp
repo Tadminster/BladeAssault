@@ -42,9 +42,10 @@ trinity::trinity() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"삼위일체";
-	text_explanation = L"공격속도가 30% 증가하고, 모든 공격력이 30% 증가합니다.";
+	text_explanation = L"공격속도가 30% 증가하고, 모든 공격력이 30% 증가합니다. 또한 충전효율이 30% 증가합니다.";
 
 	// 아이템의 능력치
-	attackSpeed = 0.3f;
+	attackSpeedScale = 0.3f;
 	damageScale = 0.3f;
+	chargingTimeScale = 0.3f;
 }

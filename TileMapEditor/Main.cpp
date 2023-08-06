@@ -31,9 +31,13 @@ Main::Main()
 	//tileMap[1]->file = "scene6_undercity2_1.txt";
 	//tileMap[2]->file = "scene6_undercity2_2.txt";
 
-	tileMap[0]->file = "scene7_undercity3_0.txt";
-	tileMap[1]->file = "scene7_undercity3_1.txt";
-	tileMap[2]->file = "scene7_undercity3_2.txt";
+	//tileMap[0]->file = "scene7_undercity3_0.txt";
+	//tileMap[1]->file = "scene7_undercity3_1.txt";
+	//tileMap[2]->file = "scene7_undercity3_2.txt";
+
+	tileMap[0]->file = "scene8_undercity4_0.txt";
+	tileMap[1]->file = "scene8_undercity4_1.txt";
+	tileMap[2]->file = "scene8_undercity4_2.txt";
 
 	tileMap[0]->Load();
 	tileMap[1]->Load();

@@ -903,11 +903,13 @@ void Player::ShowPlayerStat()
 
 		ImGui::Text(u8"모든 공격력 스케일: %f \n", damageScale);
 		ImGui::Text(u8"일반 공격력 스케일: %f \n", normalDamageScale);
-		ImGui::Text(u8"스킬 공격력 스케일: %f \n", skillDamageScale);
 		ImGui::Text(u8"풀라이프 공격력 스케일: %f \n", fullLifeDamageScale);
 		ImGui::Text(u8"로우라이프 공격력 스케일: %f \n", lowLifeDamageScale);
-		ImGui::Text(u8"공격 범위 스케일: %f \n", attackRangeScale);
-		ImGui::Text(u8"스킬 쿨타임 스케일: %f \n", skillCooldownScale);
+		ImGui::Text(u8"공격 범위 스케일: %f \n\n", attackRangeScale);
+		
+		ImGui::Text(u8"스킬 공격력 스케일: %f \n", skillDamageScale);
+		ImGui::Text(u8"스킬 쿨타임 스케일: %f \n\n", skillCooldownScale);
+		
 		ImGui::Text(u8"대쉬 쿨타임 스케일: %f \n\n", dashCooldownScale);
 
 		ImGui::Text(u8"차징시간 : %f\n", chargingTime);

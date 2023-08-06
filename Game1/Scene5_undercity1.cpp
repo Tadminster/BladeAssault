@@ -57,7 +57,7 @@ void Scene5_undercity1::Init()
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
 
-
+	CreateChest(0, Vector2(1250, 700));
 }
 
 void Scene5_undercity1::Release()
