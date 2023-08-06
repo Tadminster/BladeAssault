@@ -57,12 +57,6 @@ void Scene7_undercity3::Release()
 void Scene7_undercity3::Update()
 {
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
-	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
-	ImGui::Text("player_posY : %f\n", GM->player->GetCollider()->GetWorldPos().y);
-
-	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
-	ImGui::Text("onWall : %d\n", GM->player->onWall);
-	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -78,9 +72,6 @@ void Scene7_undercity3::Update()
 	for (auto& map : tileMap)
 		map->Update();
 	nextMap->Update();
-	GM->monster->Update();
-	GM->player->Update();
-	GM->hud->Update();
 	Scene_proto::Update();
 }
 
@@ -98,10 +89,6 @@ void Scene7_undercity3::Render()
 		tileMap[2]->Render();
 		nextMap->Render();
 	}
-
-	GM->monster->Render();
-	GM->player->Render();
-	GM->hud->Render();
 	Scene_proto::Render();
 }
 

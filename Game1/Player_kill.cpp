@@ -281,7 +281,7 @@ void Player_kill::Attack()
 
 		// 공속계산
 		lastShotTime = currentTime;
-		timeSinceLastTime = 1.0f / attackSpeed;
+		timeSinceLastTime = 1.0f / attackSpeed * attackSpeedScale;
 	}
 }
 

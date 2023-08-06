@@ -102,8 +102,6 @@ void Scene2_inGame::Update()
 {
 
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
-	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
-	ImGui::Text("player_posY : %f\n", GM->player->GetCollider()->GetWorldPos().y);
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -154,9 +152,6 @@ void Scene2_inGame::Update()
 	lightRoom->Update();
 	lightCeiling->Update();
 	nextMap->Update();
-	GM->monster->Update();
-	GM->player->Update();
-	GM->hud->Update();
 
 	Scene_proto::Update();
 }
@@ -183,9 +178,6 @@ void Scene2_inGame::Render()
 	}
 
 	Scene_proto::Render();
-	GM->monster->Render();
-	GM->player->Render();
-	GM->hud->Render();
 }
 
 void Scene2_inGame::ResizeScreen()

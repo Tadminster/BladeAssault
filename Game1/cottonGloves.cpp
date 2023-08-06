@@ -42,8 +42,8 @@ cottonGloves::cottonGloves() : Item()
 	options->SetLocalPosY(collider->scale.y * 0.8f);
 
 	text_name = L"면장갑";
-	text_explanation = L"일반 공격속도가 10% 증가합니다.";
+	text_explanation = L"일반 공격속도가 30 증가합니다.";
 
 	// 아이템의 능력치
-	attackSpeed = 0.1f;
+	attackSpeed = 0.3f;
 }

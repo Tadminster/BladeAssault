@@ -12,7 +12,8 @@ void DamageDisplayManager::Release()
 
 void DamageDisplayManager::Update()
 {
-	ImGui::Text("size %d\n", texts.size());
+	// texts size 출력
+	ImGui::Text("texts size: %d", texts.size());
 
 	// 데미지 표시가 일정거리 이상 벗어났으면 삭제
 	texts.erase(

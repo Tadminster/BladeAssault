@@ -45,5 +45,5 @@ boxingGloves::boxingGloves() : Item()
 	text_explanation = L"공격 속도가 40% 증가합니다.";
 
 	// 아이템의 능력치
-	attackSpeed = 0.4f;
+	attackSpeedScale = 0.4f;
 }

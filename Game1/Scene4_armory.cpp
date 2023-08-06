@@ -75,14 +75,6 @@ void Scene4_armory::Release()
 void Scene4_armory::Update()
 {
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
-	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
-	ImGui::Text("player_posY : %f\n", GM->player->GetCollider()->GetWorldPos().y);
-
-	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
-	ImGui::Text("onWall : %d\n", GM->player->onWall);
-	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
-
-	//Scene_proto::Update();
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -115,9 +107,7 @@ void Scene4_armory::Update()
 	previousMap->Update();
 	nextMap->Update();
 	stair->Update();
-	GM->monster->Update();
-	GM->player->Update();
-	GM->hud->Update();
+
 	Scene_proto::Update();
 }
 
@@ -138,11 +128,7 @@ void Scene4_armory::Render()
 		stair->Render();
 	}
 
-	GM->monster->Render();
-	GM->player->Render();
-	GM->hud->Render();
 	Scene_proto::Render();
-
 }
 
 void Scene4_armory::ResizeScreen()

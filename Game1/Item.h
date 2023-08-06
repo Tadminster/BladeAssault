@@ -34,6 +34,10 @@ public:
 	int		maxMp				= 0;		// 최대 마나
 	int		mp					= 0;		// 마나
 
+	int		criticalChance		= 0;		// 치명타 확률
+	float	criticalDamage		= 0;		// 치명타 피해량 스케일
+	int		defence				= 0;		// 방어력
+
 	int		damage				= 0;		// 모든 기본 공격력
 	float	damageScale			= 0.0f;		// 모든 공격력 스케일
 	float	normalDamageScale	= 0.0f;		// 일반 공격력 스케일
@@ -47,10 +51,8 @@ public:
 	float 	damageRedution		= 0.0f;		// 피해 감소
 	int		dodgeChance			= 0;		// 회피율
 
-	int		criticalChance		= 0;		// 치명타 확률
-	int		criticalDamage		= 0;		// 치명타 피해량
-	int		defence				= 0;		// 방어력
 	float	attackSpeed			= 0.0f;		// 공격 속도
+	float	attackSpeedScale	= 0.0f;		// 공격 속도 스케일
 
 	float	moveSpeed			= 0.0f;		// 이동 속도
 	float   moveSpeedScale		= 0.0f;		// 이동 속도 스케일

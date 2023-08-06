@@ -122,11 +122,6 @@ void ItemManager::Release()
 
 void ItemManager::Update()
 {
-	// itemData size 출력
-	ImGui::Text("itemData size : %d", itemData.size());
-	// dropItems size 출력
-	ImGui::Text("dropItems size : %d", dropItems.size());
-
 	// Active 된 아이템 삭제
 	dropItems.erase(
 		std::remove_if

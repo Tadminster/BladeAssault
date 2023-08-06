@@ -93,15 +93,7 @@ void Scene3_jazzBar::Release()
 
 void Scene3_jazzBar::Update()
 {
-	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
-	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
-	ImGui::Text("player_posY : %f\n", GM->player->GetCollider()->GetWorldPos().y);
-
-	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
-	ImGui::Text("onWall : %d\n", GM->player->onWall);
-	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
-
-	//Scene_proto::Update();
+	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());\
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -159,10 +151,6 @@ void Scene3_jazzBar::Update()
 	stairLeft->Update();
 	stairRight->Update();
 
-	GM->monster->Update();
-	GM->player->Update();
-	GM->hud->Update();
-	GM->damageDP->Update();
 	Scene_proto::Update();
 }
 
@@ -184,11 +172,8 @@ void Scene3_jazzBar::Render()
 		stairRight->Render();
 	}
 
-	GM->monster->Render();
-	GM->player->Render();
-	GM->hud->Render();
-	GM->damageDP->Render();
 	Scene_proto::Render();
+
 }
 
 void Scene3_jazzBar::ResizeScreen()

@@ -44,8 +44,11 @@ void Scene_proto::Update()
 	spawnTrigger->Update();
 	GM->item->Update();
 	GM->fx->Update();
-	GM->damageDP->Update();
 	GM->obj->Update();
+	GM->monster->Update();
+	GM->player->Update();
+	GM->hud->Update();
+	GM->damageDP->Update();
 }
 
 void Scene_proto::LateUpdate()
@@ -65,8 +68,11 @@ void Scene_proto::Render()
 	
 	GM->obj->Render();
 	GM->item->Render();
+	GM->monster->Render();
+	GM->player->Render();
 	GM->fx->Render();
 	GM->damageDP->Render();
+	GM->hud->Render();
 }
 
 void Scene_proto::ResizeScreen()

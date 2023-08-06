@@ -38,9 +38,7 @@ void Player::Init()
 
 void Player::Update()
 {
-	ImGui::Text("gravity : %f\n", GM->player->gravity);
-	ImGui::Text("playerState : %d\n", GM->player->CurrentState);
-	ImGui::Text("chargingTime : %f\n", chargingTime);
+	ShowPlayerStat();
 
 	lastPos = collider->GetWorldPos();
 	collider->Update();
@@ -867,4 +865,71 @@ void Player::DamageReflection(float reflectDamage)
 		lastReflectTime = currentTime;
 		timeSinceLastReflectTime = 1.0f / attackSpeed;
 	}
+}
+
+void Player::ShowPlayerStat()
+{
+	if (!ImGui::CollapsingHeader(u8"플레이어"))
+		return;
+
+
+
+	// 모든 플레이어 정보 출력
+	//if (ImGui::TreeNode(u8"디버그"))
+	//{
+		ImGui::Text(u8"좌표X: %f\n", collider->GetWorldPos().x);
+		ImGui::Text(u8"좌표Y: %f\n", collider->GetWorldPos().y); 
+		ImGui::Text(u8"상태 : %d\n", CurrentState);
+		ImGui::Text(u8"중력: %f\n\n", gravity);
+	//}
+
+	//if (ImGui::TreeNode(u8"상태"))
+	//{
+		ImGui::Text(u8"체력: %d / %d \n", hp, maxHp);
+		ImGui::Text(u8"마나: %d / %d \n\n", mp, maxMp);
+
+		ImGui::Text(u8"공격력: %d \n", damage);
+		ImGui::Text(u8"방어력: %d \n", defence);
+		ImGui::Text(u8"회피율: %d \n", dodgeChance);
+		ImGui::Text(u8"피해 감소: %f \n\n", damageRedution);
+
+		ImGui::Text(u8"공격 속도: %f \n", attackSpeed);
+		ImGui::Text(u8"공격 속도 스케일: %f \n", attackSpeedScale);
+		ImGui::Text(u8"이동 속도: %f \n", moveSpeed);
+		ImGui::Text(u8"이동 속도 스케일: %f \n\n", moveSpeedScale);
+
+		ImGui::Text(u8"치명타 확률: %d % \n", criticalChance);
+		ImGui::Text(u8"치명타 피해량: %f \n\n", criticalDamage);
+
+		ImGui::Text(u8"모든 공격력 스케일: %f \n", damageScale);
+		ImGui::Text(u8"일반 공격력 스케일: %f \n", normalDamageScale);
+		ImGui::Text(u8"스킬 공격력 스케일: %f \n", skillDamageScale);
+		ImGui::Text(u8"풀라이프 공격력 스케일: %f \n", fullLifeDamageScale);
+		ImGui::Text(u8"로우라이프 공격력 스케일: %f \n", lowLifeDamageScale);
+		ImGui::Text(u8"공격 범위 스케일: %f \n", attackRangeScale);
+		ImGui::Text(u8"스킬 쿨타임 스케일: %f \n", skillCooldownScale);
+		ImGui::Text(u8"대쉬 쿨타임 스케일: %f \n\n", dashCooldownScale);
+
+		ImGui::Text(u8"차징시간 : %f\n", chargingTime);
+		ImGui::Text(u8"차징 시간 스케일: %f \n", chargingTimeScale);
+		ImGui::Text(u8"차징 공격력 스케일: %f \n", chargingDamageScale);
+	//}
+
+	//if (ImGui::TreeNode(u8"기타"))
+	//{
+		ImGui::Text(u8"풀라이프 : %d\n", isFullLife);
+		ImGui::Text(u8"로우라이프 : %d\n\n", isLowLife);
+
+		ImGui::Text("onFloor : %d\n", onFloor);
+		ImGui::Text("onWall : %d\n", onWall);
+		ImGui::Text("onWallside : %d\n", onWallSlide);
+		ImGui::Text(u8"isCharging : %d\n", isCharging);
+		ImGui::Text(u8"isLanding : %d\n\n", isLanding);
+
+		ImGui::Text(u8"hasFirstAidKit : %d\n", hasFirstAidKit);
+		ImGui::Text(u8"hasCactus : %d\n", hasCactus);
+		ImGui::Text(u8"hasSyringe : %d\n", hasSyringe);
+		ImGui::Text(u8"hasHeatedClub : %d\n", hasHeatedClub);
+		ImGui::Text(u8"hasCandle : %d\n", hasCandle);
+	//}
 }

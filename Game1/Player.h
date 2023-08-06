@@ -24,6 +24,7 @@ protected:
 	int			maxMp;
 
 	//ATTACK
+	float		attackSpeedScale		= 1.0f;		// 공격 속도 스케일
 	float		attackRangeScale		= 1.0f;		// 공격 사정거리 스케일
 
 	float		damageScale				= 1.0f;		// 모든 공격력 스케일
@@ -34,7 +35,7 @@ protected:
 	float		fullLifeDamageScale		= 1.0f;		// 체력이 100% 일 때 공격력 스케일
 	float		lowLifeDamageScale		= 1.0f;		// 체력이 30% 이하일 때 공격력 스케일
 
-    int			criticalChance			= 0.1f;		// 크리티컬 확률
+    int			criticalChance			= 10;		// 크리티컬 확률
 	float		criticalDamage			= 1.5f;		// 크리티컬 데미지 배율
 
 	//DEFENCE
@@ -50,7 +51,7 @@ protected:
 	//SKILL
 	float		skillRemainingCooldown;				// 남은 재사용 대기시간 (자식에서 초기화)
 	float		skillCooldown;						// 스킬 사용 직후의 재사용 대기시간 (자식에서 초기화)
-	float		skillCooldownScale;					// 스킬 재사용 대기시간 감소량 (자식에서 초기화)
+	float		skillCooldownScale		= 1.0f;		// 스킬 재사용 대기시간 감소량
 	int			skillManaCost;						// 스킬 사용시 소모되는 마나 (자식에서 초기화)
 
 	//MOVE
@@ -64,7 +65,7 @@ protected:
 	float		dashWeight				= 0.0f;		// 대쉬 가중치
 	float		dashRemainingCooldown	= 0.0f;		// 남은 재사용 대기시간
 	float		dashCooldown			= 2.0f;		// 대쉬 사용 직후의 재사용 대기시간
-	float		dashCooldownScale;					// 대쉬 재사용 대기시간 감소량
+	float		dashCooldownScale		= 1.0f;		// 대쉬 재사용 대기시간 감소량
 
 	//ETC
 	float		timeOfDamaged			= 0.0f;		// 피격당한 시간 기록용
@@ -112,4 +113,7 @@ public:
 
 	// Set
 	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }
+
+	// Etc
+	void	ShowPlayerStat();
 };

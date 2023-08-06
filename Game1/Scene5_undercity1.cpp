@@ -67,12 +67,6 @@ void Scene5_undercity1::Release()
 void Scene5_undercity1::Update()
 {
 	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
-	ImGui::Text("player_posX : %f\n", GM->player->GetCollider()->GetWorldPos().x);
-	ImGui::Text("player_posY : %f\n", GM->player->GetCollider()->GetWorldPos().y);
-
-	ImGui::Text("onFloor : %d\n", GM->player->onFloor);
-	ImGui::Text("onWall : %d\n", GM->player->onWall);
-	ImGui::Text("onWallside : %d\n", GM->player->onWallSlide);
 
 	//Scene_proto::Update();
 
@@ -101,9 +95,6 @@ void Scene5_undercity1::Update()
 	for (auto& map : tileMap)
 		map->Update();
 	nextMap->Update();
-	GM->monster->Update();
-	GM->player->Update();
-	GM->hud->Update();
 	Scene_proto::Update();
 }
 
@@ -122,9 +113,6 @@ void Scene5_undercity1::Render()
 		nextMap->Render();
 	}
 
-	GM->monster->Render();
-	GM->player->Render();
-	GM->hud->Render();
 	Scene_proto::Render();
 }
 
