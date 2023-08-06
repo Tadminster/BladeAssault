@@ -135,10 +135,10 @@ void Scene5_undercity1::ResizeScreen()
 
 void Scene5_undercity1::SummonMonster()
 {
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(750, 900));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1000, 900));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1200, 900));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1500, 900));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1750, 900));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2000, 900));
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(750, 700));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1000, 700));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1200, 700));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1500, 700));
+	GM->monster->SpawnMonster(new redHairRat(), Vector2(1750, 700));
+	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2000, 700));
 }

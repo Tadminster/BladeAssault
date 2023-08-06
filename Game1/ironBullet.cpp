@@ -4,7 +4,7 @@
 
 ironBullet::ironBullet() : Item()
 {
-	grade = ItemGrade::RARE;
+	grade = ItemGrade::NORMAL;
 
 	icon = new ObImage(L"gear_icon_ironbullet.png");
 	icon->pivot = OFFSET_B;
@@ -45,5 +45,5 @@ ironBullet::ironBullet() : Item()
 	text_explanation = L"기본 공격력이 15% 증가합니다.";
 
 	// 아이템의 능력치
-	normalDamageScale = 0.2f;
+	normalDamageScale = 0.15f;
 }

@@ -62,6 +62,10 @@ void Scene4_armory::Init()
 {
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
+
+	CreateChest(1, Vector2(1100, 550));
+	CreateChest(2, Vector2(1600, 550));
+	CreateChest(3, Vector2(2100, 550));
 }
 
 void Scene4_armory::Release()

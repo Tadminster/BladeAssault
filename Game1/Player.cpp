@@ -740,6 +740,8 @@ void Player::activateItem(Item* item)
 	this->damage += item->damage;
 	this->defence += item->defence;
 
+	this->attackRangeScale += item->attackRangeScale;
+
 	this->damageScale += item->damageScale;
 	this->normalDamageScale += item->normalDamageScale;
 	this->skillDamageScale += item->skillDamageScale;

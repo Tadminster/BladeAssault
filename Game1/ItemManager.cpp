@@ -41,13 +41,13 @@
 #include "firstAidKit.h"
 #include "goldGrip.h"
 #include "heroSword.h"
+#include "hourGlass.h"
 #include "legendaryChampionBelt.h"
 #include "legendaryGear.h"
 #include "lv3helmet.h"
 #include "ringOfGiant.h"
 #include "runeStone.h"
 #include "trinity.h"
-#include "hourGlass.h"
 
 
 #include "ItemManager.h"
@@ -95,13 +95,13 @@ void ItemManager::Init()
 	itemData.emplace(301, new firstAidKit());
 	itemData.emplace(302, new goldGrip());
 	itemData.emplace(303, new heroSword());
-	itemData.emplace(304, new legendaryChampionBelt());
-	itemData.emplace(305, new legendaryGear());
-	itemData.emplace(306, new lv3helmet());
-	itemData.emplace(307, new ringOfGiant());
-	itemData.emplace(308, new runeStone());
-	itemData.emplace(309, new trinity());
-	itemData.emplace(310, new hourGlass());
+	itemData.emplace(304, new hourGlass());
+	itemData.emplace(305, new legendaryChampionBelt());
+	itemData.emplace(306, new legendaryGear());
+	itemData.emplace(307, new lv3helmet());
+	itemData.emplace(308, new ringOfGiant());
+	itemData.emplace(309, new runeStone());
+	itemData.emplace(310, new trinity());
 
 	// 기준
 	gradeCriteria[ItemGrade::NORMAL] = 0;
@@ -122,6 +122,11 @@ void ItemManager::Release()
 
 void ItemManager::Update()
 {
+	// itemData size 출력
+	ImGui::Text("itemData size : %d", itemData.size());
+	// dropItems size 출력
+	ImGui::Text("dropItems size : %d", dropItems.size());
+
 	// Active 된 아이템 삭제
 	dropItems.erase(
 		std::remove_if
@@ -132,6 +137,7 @@ void ItemManager::Update()
 			{
 				if (item->isActive)
 				{
+					item->isActive = false;
 					//delete item;
 					return true;
 				}
@@ -188,6 +194,8 @@ void ItemManager::CreateItem(int itemGrade[3], Vector2 spawnPos)
 		if (itemNum[0] != itemNum[1] && itemNum[0] != itemNum[2] && itemNum[1] != itemNum[2])
 			break;
 	}
+
+	cout << "itemNum : " << itemNum[0] << ", " << itemNum[1] << ", " << itemNum[2] << endl;
 
 	// item 생성
 	Item* itemLeft = itemData.at(itemNum[0]);

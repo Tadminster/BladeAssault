@@ -31,7 +31,7 @@ public:
 
 	// @brief 상자를 생성
 	// @param type 생성할 상자의 종류
-	// 0: 랜덤 상자, 1: 일반 상자, 2: 희귀 상자, 3: 전설 상자
+	// 0: 랜덤 상자, 1: common chest, 2: uncommon chest, 3: rare chest
 	// @param pos 생성할 위치
 	virtual void CreateChest(int type, Vector2 pos);
 
