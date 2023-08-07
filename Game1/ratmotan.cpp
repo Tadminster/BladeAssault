@@ -90,13 +90,13 @@ ratmotan::ratmotan()
     ui_gauge_bossHp->scale.x = ui_gauge_bossHp->imageSize.x * 2.0f;
     ui_gauge_bossHp->scale.y = ui_gauge_bossHp->imageSize.y * 2.0f;
 
-    // hp
-    Vector2 textBox_bossName_pos = Utility::WorldToScreen(ui_frame_bossHp->GetWorldPos());
-    textBox_bossName.left = textBox_bossName_pos.x;
-    textBox_bossName.top = textBox_bossName_pos.y;
+    // Boss Name
+    textBox_bossName.left = app.GetHalfWidth() * 0.92f;
+    textBox_bossName.top = app.GetHalfHeight() * 0.1f;
     textBox_bossName.right = textBox_bossName.left + 1000;
     textBox_bossName.bottom = textBox_bossName.top + 1000;
 
+    name = "ratmotan";
     CurrentState = State::SPAWN;
     dir = LEFT;
 
@@ -146,7 +146,7 @@ void ratmotan::Render()
         35.0f,
         L"Commando",
         Color(1, 1, 1, 1),
-        DWRITE_FONT_WEIGHT_ULTRA_LIGHT,
+        DWRITE_FONT_WEIGHT_REGULAR,
         DWRITE_FONT_STYLE_NORMAL,
         DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
 

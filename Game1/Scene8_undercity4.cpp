@@ -35,8 +35,8 @@ Scene8_undercity4::Scene8_undercity4()
 
 	// 몬스터소환 트리거
 	spawnTrigger->pivot = OFFSET_LB;
-	spawnTrigger->SetWorldPos(Vector2(1150, 1100));
-	spawnTrigger->scale = Vector2(100, 250);
+	spawnTrigger->SetWorldPos(Vector2(1450, 1100));
+	spawnTrigger->scale = Vector2(50, 250);
 	spawnTrigger->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
 	spawnTrigger->isFilled = true;
 

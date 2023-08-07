@@ -16,6 +16,8 @@ protected:
 
 	MonsterDamageTaken	dmgTaken;
 
+	string  name;					// 몬스터 이름
+
 	float	knockBackFactor;		// 넉백에 사용되는 계수
 	float	timeOfDamage;			// 데미지 받은 시간 기록
 
@@ -44,7 +46,9 @@ public:
 	void actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance);
 	void knockBack();
 
-
+	string& GetName()	{ return name; }
+	int		GetDamage() { return damage; }
+	int		GetRange()	{ return maxAttackDistance; }
 
 };
 

@@ -881,26 +881,7 @@ void Player::ShowPlayerStat()
 	
 
 		ImGui::Text(u8"ÇöÀçÀ§Ä¡(Scene): %s\n", SCENE->GetCurrentSceneKey().c_str());
-		const char* items[] = { "sc2", "sc3", "sc4", "sc5", "sc6", "sc7", "sc8"};
-		static int item_current_idx = 0; // Here we store our selection data as an index.
-		if (ImGui::BeginListBox(u8"¾À º¯°æ"))
-		{
-			for (int n = 0; n < IM_ARRAYSIZE(items); n++)
-			{
-				const bool is_selected = (item_current_idx == n);
-				if (ImGui::Selectable(items[n], is_selected))
-				{
-					item_current_idx = n;
-					SCENE->ChangeScene(items[item_current_idx]);
-				}
-
-				// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
-				if (is_selected)
-					ImGui::SetItemDefaultFocus();
-			}
-			
-			ImGui::EndListBox();
-		}
+		
 
 		ImGui::Text(u8"ÁÂÇ¥X: %f\n", collider->GetWorldPos().x);
 		ImGui::Text(u8"ÁÂÇ¥Y: %f\n", collider->GetWorldPos().y); 

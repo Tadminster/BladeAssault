@@ -80,8 +80,10 @@ greenHairRat::greenHairRat()
     ui_gauge_hp->SetLocalPosX(-collider->scale.x * 0.7f);
     ui_gauge_hp->SetLocalPosY(collider->scale.y * 1.1f);
 
+    name = "greenHairRat";
     CurrentState = State::SPAWN;
     dir = LEFT;
+
 
     hp = 70;
     maxHp = 70;

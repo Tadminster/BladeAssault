@@ -40,6 +40,8 @@ void Scene_proto::Release()
 
 void Scene_proto::Update()
 {
+	ShowSystemDebug();
+
 	localtime += DELTA;
 	spawnTrigger->Update();
 	GM->item->Update();
@@ -220,6 +222,34 @@ void Scene_proto::ShowSystemDebug()
 	if (!ImGui::CollapsingHeader(u8"시스템"))
 		return;
 
+	// 맵변경
+	// 실제로 변경될 scene의 key
+	const char* itemsBackend[] = { "sc2", "sc3", "sc4", "sc5", "sc6", "sc7", "sc8" };
+	// GUI에 보여질 이름
+	const char* itemsFrontend[] = { u8"행크룸", u8"재즈바", u8"아머리", u8"언더시티1", u8"언더시티2", u8"언더시티3", u8"랫모탄의 방" };
+	// 선택된 데이터의 인덱스를 저장할 변수
+	static int item_current_idx = 0; 
+	if (ImGui::BeginListBox(u8"맵 변경"))
+	{
+		for (int n = 0; n < IM_ARRAYSIZE(itemsBackend); n++)
+		{
+			const bool is_selected = (item_current_idx == n);
+			if (ImGui::Selectable(itemsFrontend[n], is_selected))
+			{
+				item_current_idx = n;
+				// 여러 오브젝트 삭제
+				CleanupBeforeNewMap();
+				// 씬 변경
+				SCENE->ChangeScene(itemsBackend[item_current_idx]);
+			}
+
+			// 콤보를 열 때 초기 포커스 설정
+			if (is_selected)
+				ImGui::SetItemDefaultFocus();
+		}
+
+		ImGui::EndListBox();
+	}
 
 }
 

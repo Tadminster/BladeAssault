@@ -101,5 +101,10 @@ void MonsterManager::ShowMonsterStat()
 		return;
 
 	for (auto& monster : enemy)
-		ImGui::Text("hp: %d", monster->GetHp());
+	{
+		ImGui::Text("[%s]"			, monster->GetName().c_str());
+		ImGui::Text("hp: %d"		, monster->GetHp());
+		ImGui::Text("damage: %d"	, monster->GetDamage());
+		ImGui::Text("range: %d\n\n"	, monster->GetRange());
+	}
 }
