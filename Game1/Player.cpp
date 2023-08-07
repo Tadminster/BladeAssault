@@ -755,6 +755,7 @@ void Player::activateItem(Item* item)
 	this->criticalDamage += item->criticalDamage;
 
 	this->attackSpeed += item->attackSpeed;
+	this->attackSpeedScale += item->attackSpeedScale;
 	this->moveSpeed += item->moveSpeed;
 
 	this->skillCooldownScale = max(0.0f, this->skillCooldownScale - item->skillCooldownScale);
@@ -875,16 +876,44 @@ void Player::ShowPlayerStat()
 
 
 	// 모든 플레이어 정보 출력
-	//if (ImGui::TreeNode(u8"디버그"))
-	//{
+	if (ImGui::TreeNode(u8"디버그"))
+	{
+	
+
+		ImGui::Text(u8"현재위치(Scene): %s\n", SCENE->GetCurrentSceneKey().c_str());
+		const char* items[] = { "sc2", "sc3", "sc4", "sc5", "sc6", "sc7", "sc8"};
+		static int item_current_idx = 0; // Here we store our selection data as an index.
+		if (ImGui::BeginListBox(u8"씬 변경"))
+		{
+			for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+			{
+				const bool is_selected = (item_current_idx == n);
+				if (ImGui::Selectable(items[n], is_selected))
+				{
+					item_current_idx = n;
+					SCENE->ChangeScene(items[item_current_idx]);
+				}
+
+				// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+				if (is_selected)
+					ImGui::SetItemDefaultFocus();
+			}
+			
+			ImGui::EndListBox();
+		}
+
 		ImGui::Text(u8"좌표X: %f\n", collider->GetWorldPos().x);
 		ImGui::Text(u8"좌표Y: %f\n", collider->GetWorldPos().y); 
-		ImGui::Text(u8"상태 : %d\n", CurrentState);
+		string stateTemp[13] = { "SPAWN", "STANDBY", "IDLE", "RUN", "DASH", "JUMP", "CROUCH", "CROUCH_DOWN", "ATTACK", "CHARGING", "SKILL", "DAMAGED", "DIE" };
+		ImGui::Text(u8"상태 : %d (%s) \n", CurrentState, stateTemp[static_cast<int>(CurrentState)].c_str());
 		ImGui::Text(u8"중력: %f\n\n", gravity);
-	//}
 
-	//if (ImGui::TreeNode(u8"상태"))
-	//{
+
+		ImGui::TreePop();
+	}
+
+	if (ImGui::TreeNode(u8"능력치"))
+	{
 		ImGui::Text(u8"체력: %d / %d \n", hp, maxHp);
 		ImGui::Text(u8"마나: %d / %d \n\n", mp, maxMp);
 
@@ -915,10 +944,12 @@ void Player::ShowPlayerStat()
 		ImGui::Text(u8"차징시간 : %f\n", chargingTime);
 		ImGui::Text(u8"차징 시간 스케일: %f \n", chargingTimeScale);
 		ImGui::Text(u8"차징 공격력 스케일: %f \n", chargingDamageScale);
-	//}
+		ImGui::TreePop();
+	}
 
-	//if (ImGui::TreeNode(u8"기타"))
-	//{
+	if (ImGui::TreeNode(u8"기타"))
+	{
+
 		ImGui::Text(u8"풀라이프 : %d\n", isFullLife);
 		ImGui::Text(u8"로우라이프 : %d\n\n", isLowLife);
 
@@ -933,5 +964,6 @@ void Player::ShowPlayerStat()
 		ImGui::Text(u8"hasSyringe : %d\n", hasSyringe);
 		ImGui::Text(u8"hasHeatedClub : %d\n", hasHeatedClub);
 		ImGui::Text(u8"hasCandle : %d\n", hasCandle);
-	//}
+		ImGui::TreePop();
+	}
 }

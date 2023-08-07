@@ -14,15 +14,11 @@ Monster::Monster()
 
 	ui_frame_hp->pivot = OFFSET_L;
 	ui_frame_hp->SetParentRT(*collider);
-	//ui_frame_hp->SetLocalPosX(-collider->scale.x);
-	//ui_frame_hp->SetLocalPosY(-collider->scale.y);
 	ui_frame_hp->scale.x = ui_frame_hp->imageSize.x * 0.2f;
 	ui_frame_hp->scale.y = ui_frame_hp->imageSize.y * 0.3f;
 
 	ui_gauge_hp->pivot = OFFSET_L;
 	ui_gauge_hp->SetParentRT(*collider);
-	//ui_gauge_hp->SetLocalPosX(-collider->scale.x);
-	//ui_gauge_hp->SetLocalPosY(-collider->scale.y);
 	ui_gauge_hp->scale.x = ui_gauge_hp->imageSize.x * 0.2f;
 	ui_gauge_hp->scale.y = ui_gauge_hp->imageSize.y * 0.3f;
 

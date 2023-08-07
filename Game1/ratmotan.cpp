@@ -16,19 +16,20 @@ ratmotan::ratmotan()
     jump = new ObImage(L"ratmotan_jump.png");
     attack = new ObImage(L"ratmotan_powersmash.png");
     shadow = new ObImage(L"character_shadow.png");
-
+    ui_frame_bossHp = new ObImage(L"gauge_boss_frame.png");
+    ui_gauge_bossHp = new ObImage(L"gauge_boss_full.png");
 
     collider->pivot = OFFSET_B;
     collider->isFilled = false;
-    collider->scale.x = 80;
-    collider->scale.y = 110;
+    collider->scale.x = 160;
+    collider->scale.y = 200;
 
     //spawn->SetLocalPosX(-collider->scale.x * 0.1f);
     spawn->SetLocalPosY(-collider->scale.y * 0.5f);
 
     idle->pivot = OFFSET_B;
     idle->SetParentRT(*collider);
-    idle->SetLocalPosY(-collider->scale.y * 0.7f);
+    idle->SetLocalPosY(-collider->scale.y * 0.4f);
     idle->maxFrame.x = 6;
     idle->maxFrame.y = 1;
     idle->scale.x = idle->imageSize.x / idle->maxFrame.x * 3.0f;
@@ -38,7 +39,7 @@ ratmotan::ratmotan()
 
     run->pivot = OFFSET_B;
     run->SetParentRT(*collider);
-    run->SetLocalPosY(-collider->scale.y * 0.7f);
+    run->SetLocalPosY(-collider->scale.y * 0.4f);
     run->maxFrame.x = 6;
     run->maxFrame.y = 1;
     run->scale.x = run->imageSize.x / run->maxFrame.x * 3.0f;
@@ -47,7 +48,7 @@ ratmotan::ratmotan()
 
     jump->pivot = OFFSET_B;
     jump->SetParentRT(*collider);
-    jump->SetLocalPosY(-collider->scale.y * 0.7f);
+    jump->SetLocalPosY(-collider->scale.y * 0.4f);
     jump->maxFrame.x = 2;
     jump->maxFrame.y = 2;
     jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 3.0f;
@@ -56,7 +57,7 @@ ratmotan::ratmotan()
 
     attack->pivot = OFFSET_B;
     attack->SetParentRT(*collider);
-    attack->SetLocalPosY(-collider->scale.y * 0.7f);
+    attack->SetLocalPosY(-collider->scale.y * 0.4f);
     attack->maxFrame.x = 12;
     attack->maxFrame.y = 1;
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3.0f;
@@ -73,10 +74,28 @@ ratmotan::ratmotan()
     shadow->color.w = 0.2f;
     shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
-    ui_frame_hp->SetLocalPosX(-collider->scale.x * 0.7f);
-    ui_frame_hp->SetLocalPosY(collider->scale.y * 1.1f);
-    ui_gauge_hp->SetLocalPosX(-collider->scale.x * 0.7f);
-    ui_gauge_hp->SetLocalPosY(collider->scale.y * 1.1f);
+    ui_frame_hp->scale = Vector2(0, 0);
+    ui_gauge_hp->scale = Vector2(0, 0);
+
+    ui_frame_bossHp->space = SPACE::SCREEN;
+    ui_frame_bossHp->pivot = OFFSET_L;
+    
+    ui_frame_bossHp->SetWorldPos(Vector2(-app.GetWidth() * 0.26f, app.GetHeight() * 0.35f));
+    ui_frame_bossHp->scale.x = ui_frame_bossHp->imageSize.x * 2.0f;
+    ui_frame_bossHp->scale.y = ui_frame_bossHp->imageSize.y * 2.0f;
+
+    ui_gauge_bossHp->space = SPACE::SCREEN;
+    ui_gauge_bossHp->pivot = OFFSET_L;
+    ui_gauge_bossHp->SetParentRT(*ui_frame_bossHp);
+    ui_gauge_bossHp->scale.x = ui_gauge_bossHp->imageSize.x * 2.0f;
+    ui_gauge_bossHp->scale.y = ui_gauge_bossHp->imageSize.y * 2.0f;
+
+    // hp
+    Vector2 textBox_bossName_pos = Utility::WorldToScreen(ui_frame_bossHp->GetWorldPos());
+    textBox_bossName.left = textBox_bossName_pos.x;
+    textBox_bossName.top = textBox_bossName_pos.y;
+    textBox_bossName.right = textBox_bossName.left + 1000;
+    textBox_bossName.bottom = textBox_bossName.top + 1000;
 
     CurrentState = State::SPAWN;
     dir = LEFT;
@@ -101,16 +120,36 @@ ratmotan::ratmotan()
 
 ratmotan::~ratmotan()
 {
+    delete ui_frame_bossHp;
+    delete ui_gauge_bossHp;
 }
 
 void ratmotan::Update()
 {
+    ui_gauge_bossHp->scale.x = ui_gauge_bossHp->imageSize.x * 2.0f * ((float)hp / (float)maxHp);
+
     Monster::Update();
+    ui_frame_bossHp->Update();
+    ui_gauge_bossHp->Update();
 }
 
 void ratmotan::Render()
 {
     Monster::Render();
+    ui_gauge_bossHp->Render();
+    ui_frame_bossHp->Render();
+
+    // HP
+    DWRITE->RenderText(
+        L"·¿¸ðÅº",
+        textBox_bossName,
+        35.0f,
+        L"Commando",
+        Color(1, 1, 1, 1),
+        DWRITE_FONT_WEIGHT_ULTRA_LIGHT,
+        DWRITE_FONT_STYLE_NORMAL,
+        DWRITE_FONT_STRETCH_ULTRA_EXPANDED);
+
 }
 
 void ratmotan::Attack()

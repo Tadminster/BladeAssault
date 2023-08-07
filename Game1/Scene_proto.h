@@ -37,5 +37,6 @@ public:
 
 	// @brief 다음 맵으로 이동하기전 Object들을 정리
 	void CleanupBeforeNewMap();
+	void ShowSystemDebug();
 };
 

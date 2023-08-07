@@ -215,6 +215,14 @@ void Scene_proto::CleanupBeforeNewMap()
 	GM->obj->ClearChests();
 }
 
+void Scene_proto::ShowSystemDebug()
+{
+	if (!ImGui::CollapsingHeader(u8"╫ц╫╨еш"))
+		return;
+
+
+}
+
 
 
 
