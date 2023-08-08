@@ -234,6 +234,9 @@
     <ClInclude Include="ratmotan.h">
       <Filter>Object\Creature\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="ratmotan_atk.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -467,6 +470,9 @@
     </ClCompile>
     <ClCompile Include="ratmotan.cpp">
       <Filter>Object\Creature\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="ratmotan_atk.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

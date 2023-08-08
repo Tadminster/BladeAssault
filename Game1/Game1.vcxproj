@@ -49,6 +49,7 @@
     <ClInclude Include="rareChest.h" />
     <ClInclude Include="rareGear.h" />
     <ClInclude Include="ratmotan.h" />
+    <ClInclude Include="ratmotan_atk.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="commonChest.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="rareChest.cpp" />
     <ClCompile Include="rareGear.cpp" />
     <ClCompile Include="ratmotan.cpp" />
+    <ClCompile Include="ratmotan_atk.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="commonChest.cpp" />

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "Projectile.h"
-#include "redHairRat_atk.h"
+#include "ratmotan_atk.h"
 
 #include "MonsterManager.h"
 
@@ -58,11 +58,11 @@ ratmotan::ratmotan()
     attack->pivot = OFFSET_B;
     attack->SetParentRT(*collider);
     attack->SetLocalPosY(-collider->scale.y * 0.4f);
-    attack->maxFrame.x = 12;
+    attack->maxFrame.x = 13;
     attack->maxFrame.y = 1;
     attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3.0f;
     attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3.0f;
-    attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
+    attack->ChangeAnim(ANIMSTATE::ONCE, 0.08f, true);
 
     shadow->pivot = OFFSET_B;
     shadow->SetParentRT(*collider);
@@ -103,7 +103,7 @@ ratmotan::ratmotan()
     hp = 500;
     maxHp = 500;
     damage = 30;
-    attackSpeed = 0.4f;
+    attackSpeed = 0.2f;
     attackFrame = 6;
     attackRange = 1;
     moveSpeed = 140;
@@ -161,14 +161,14 @@ void ratmotan::Attack()
         + UP * collider->scale.y * 0.8;
 
     // 탄생성
-    redHairRat_atk* proj = new redHairRat_atk
+    ratmotan_atk* proj = new ratmotan_atk
     (
         spawnPos,										// 생성위치
         dir,										    // 각도
-        5,   											// 발사체 속도
-        attackRange, 									// 사거리
+        3,   											// 발사체 속도
+        1,          									// 사거리
         damage,											// 공격력
-        1,												// 관통력
+        99,												// 관통력
         1												// 폭발범위
     );
 
