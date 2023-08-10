@@ -26,6 +26,9 @@ public:
 
     vector<class Monster*> crash;
 
+    bool            isDeleteOnWallSide  { false };   // 벽에 부딪치면 삭제는 발사체인지
+    bool            onWallSide          { false };  // 벽에 부딪쳤는지 
+
 public:
 
     Projectile() = default;
@@ -53,6 +56,8 @@ public:
     bool                hasTraveledTooFar() const;
     // @brief 탄의 관통횟수가 전부 소모되었는지 확인
     bool                hasPenetration() const { return penetration <= 0; }
+    // @brief 탄이 벽에 부딪쳤는지 확인
+    bool                hasCollideWithWallSide() { return onWallSide; }
 
     virtual void       AfterEffect();
 };

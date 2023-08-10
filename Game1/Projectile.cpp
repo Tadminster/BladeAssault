@@ -178,6 +178,12 @@ bool Projectile::hasCollideWithMonster()
 
 bool Projectile::hasCollideWithPlayer()
 {
+    // 피격당한지 0.3초가 지나지 않았으면 데미지 받지 않음
+    if (TIMER->GetWorldTime() < GM->player->timeOfDamaged + 0.3f)
+    {
+        return false;
+    }
+
     if (collider->Intersect(GM->player->GetCollider()))
     {
         // 충돌 이펙트
@@ -185,8 +191,19 @@ bool Projectile::hasCollideWithPlayer()
 
         // 플레이어 데미지 액션
         GM->player->actionsWhenDamaged(damage);
-        delete this;
-        return true;
+
+        // 발사체가 관통 타입이면 삭제하지 않음
+        if (this->tag == DamageType::PENETRATION)
+        {
+            return false;
+        }
+        else
+        {
+            // 그외면 삭제
+            return true;
+            delete this;
+        }
+
     }
 
     return false;
@@ -201,6 +218,7 @@ bool Projectile::hasTraveledTooFar() const
     }
     return false;
 }
+
 
 void Projectile::AfterEffect()
 {

@@ -22,6 +22,7 @@ public:
 	virtual void ResizeScreen();
 
 	void HandleTerrainCollision(class Creature* creature);
+	void HandleTerrainProjectile(class Projectile* projectile);
 	bool OnFloor(class Creature* creature);
 	bool OnWall(class Creature* creature);
 	bool OnWallside(class Creature* creature);

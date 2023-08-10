@@ -120,11 +120,11 @@ void Scene6_undercity2::ResizeScreen()
 
 void Scene6_undercity2::SummonMonster()
 {
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1525));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2000, 1250));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1075));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1850, 975));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1200, 725));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1500, 725));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1800, 725));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1450, 1525));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(2000, 1250));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1450, 1075));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1850, 975));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1200, 725));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(1500, 725));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(1800, 725));
 }

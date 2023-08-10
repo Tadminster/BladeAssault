@@ -138,7 +138,7 @@ void Player::Update()
 
 		// dash 가중치가 1.0f 이상이거나 벽에 붙어있으면
 		// dash -> PrevState
-		if (dashWeight >= 1.0f || onWallSlide)
+		if (dashWeight >= 1.0f || onWallSide)
 		{
 			CurrentState = PrevState;
 		}
@@ -936,7 +936,7 @@ void Player::ShowPlayerStat()
 
 		ImGui::Text("onFloor : %d\n", onFloor);
 		ImGui::Text("onWall : %d\n", onWall);
-		ImGui::Text("onWallside : %d\n", onWallSlide);
+		ImGui::Text("onWallside : %d\n", onWallSide);
 		ImGui::Text(u8"isCharging : %d\n", isCharging);
 		ImGui::Text(u8"isLanding : %d\n\n", isLanding);
 

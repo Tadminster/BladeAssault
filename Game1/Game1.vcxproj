@@ -50,6 +50,8 @@
     <ClInclude Include="rareGear.h" />
     <ClInclude Include="ratmotan.h" />
     <ClInclude Include="ratmotan_atk.h" />
+    <ClInclude Include="ratmotan_dashAtk.h" />
+    <ClInclude Include="ratmotan_shockwave.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
     <ClInclude Include="commonChest.h" />
@@ -89,6 +91,7 @@
     <ClInclude Include="Scene7_undercity3.h" />
     <ClInclude Include="Scene8_undercity4.h" />
     <ClInclude Include="Scene_proto.h" />
+    <ClInclude Include="shockwaveGenerator.h" />
     <ClInclude Include="silverAxe.h" />
     <ClInclude Include="starBadge.h" />
     <ClInclude Include="stdafx.h" />
@@ -132,6 +135,8 @@
     <ClCompile Include="rareGear.cpp" />
     <ClCompile Include="ratmotan.cpp" />
     <ClCompile Include="ratmotan_atk.cpp" />
+    <ClCompile Include="ratmotan_dashAtk.cpp" />
+    <ClCompile Include="ratmotan_shockwave.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="commonChest.cpp" />
@@ -172,6 +177,7 @@
     <ClCompile Include="Scene8_undercity4.cpp" />
     <ClCompile Include="Scene_proto.cpp" />
     <ClCompile Include="championBelt.cpp" />
+    <ClCompile Include="shockwaveGenerator.cpp" />
     <ClCompile Include="silverAxe.cpp" />
     <ClCompile Include="starBadge.cpp" />
     <ClCompile Include="syringe.cpp" />

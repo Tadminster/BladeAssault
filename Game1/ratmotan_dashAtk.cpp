@@ -3,9 +3,9 @@
 #include "player.h"
 #include "EffectManager.h"
 #include "Projectile.h"
-#include "ratmotan_atk.h"
+#include "ratmotan_dashAtk.h"
 
-ratmotan_atk::ratmotan_atk(
+ratmotan_dashAtk::ratmotan_dashAtk(
 	Vector2 spawnPos,
 	Vector2 dir,
 	float speed,
@@ -14,12 +14,11 @@ ratmotan_atk::ratmotan_atk(
 	int   penetration,
 	float explosionRange)
 {
-	tag = DamageType::PENETRATION;
+	tag = DamageType::NORMAL;
 
 	collider = new ObRect();
-	collider->pivot = OFFSET_B;
 	collider->SetWorldPos(spawnPos);
-	collider->scale = Vector2(650, 200);
+	collider->scale = Vector2(160, 200);
 	collider->isFilled = false;
 
 	collider_range = nullptr;
@@ -42,20 +41,19 @@ ratmotan_atk::ratmotan_atk(
 	shove = 350;
 }
 
-void ratmotan_atk::Update()
+void ratmotan_dashAtk::Update()
 {
 	Projectile::Update();
 	//collider_range->Update();
 }
 
-void ratmotan_atk::Render()
+void ratmotan_dashAtk::Render()
 {
 	if (GM->DEBUG_MODE)
 		collider->Render();
-	skin->Render();
 }
 
-void ratmotan_atk::AfterEffect()
+void ratmotan_dashAtk::AfterEffect()
 {
 	ObImage* effect = new ObImage(L"fx_redHairRat_proj.png");
 

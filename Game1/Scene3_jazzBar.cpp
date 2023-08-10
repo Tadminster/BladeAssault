@@ -183,7 +183,7 @@ void Scene3_jazzBar::ResizeScreen()
 
 void Scene3_jazzBar::SummonMonster()
 {
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(3500, 2000));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(3600, 2000));
-	GM->monster->SpawnMonster(new greenHairRat(), Vector2(3700, 2000));
+	GM->monster->SpawnMonster("redHairRat", Vector2(3500, 2000));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(3600, 2000));
+	GM->monster->SpawnMonster("greenHairRat", Vector2(3700, 2000));
 }

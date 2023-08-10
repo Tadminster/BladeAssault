@@ -4,7 +4,7 @@ class MonsterManager
 {
 private:
 	map<string, Monster*> monsterList;
-	vector<class Monster*> enemy;
+	vector<class Monster*> monsters;
 	vector<class Projectile*> projectiles;
 
 public:
@@ -17,12 +17,16 @@ public:
 	void	Render();
 
 
-	vector<class Monster*>&		GetEnemy()			{ return enemy; }
+	vector<class Monster*>&		GetEnemy()			{ return monsters; }
 	vector<class Projectile*>&	GetProjectiles()	{ return projectiles; }
-	int							getEnemyCount()		{ return enemy.size(); }
+	int							getEnemyCount()		{ return monsters.size(); }
 
-	void	SpawnMonster(class Monster* monster, Vector2 pos);
-	void	ClearMonster() { enemy.clear(); }
+	// @brief	몬스터 소환
+	// @param monsterName 소환할 몬스터 이름
+	// "redHairRat", "orangeHairRat", "greenHairRat", "ratmotan", "shockwaveGenerator"
+	// @param pos 소환할 위치
+	void	SpawnMonster(string&& monsterName, Vector2 pos);
+	void	ClearMonster() { monsters.clear(); }
 
 	void	ShowMonsterStat();
 };

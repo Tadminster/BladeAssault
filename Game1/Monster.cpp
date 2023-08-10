@@ -30,15 +30,9 @@ Monster::Monster()
 	spawn->scale.y = spawn->imageSize.y / spawn->maxFrame.y * 1.2f;
 	spawn->ChangeAnim(ANIMSTATE::ONCE, 0.1f);
 
-
-
 	onFloor = false;
 	isLanding = true;
 }
-
-//Monster::Monster(Vector2 spawnPos)
-//{
-//}
 
 Monster::~Monster()
 {
@@ -52,7 +46,6 @@ void Monster::Update()
 
 	lastPos = collider->GetWorldPos();
 
-	Vector2 target = GM->player->GetCollider()->GetWorldPos();
 
 	// 사망 처리
 	if (hp == 0 && CurrentState != State::DIE)
@@ -60,6 +53,7 @@ void Monster::Update()
 		CurrentState = State::DIE;
 	}
 
+	Vector2 target = GM->player->GetCollider()->GetWorldPos();
 	// 방향 계산
 	if (target.x - collider->GetWorldPos().x > 0)
 		dir = RIGHT;
@@ -293,8 +287,10 @@ void Monster::Render()
 		ui_gauge_hp->Render();
 	}
 
-	shadow->Render();
-	switch (CurrentState)
+	if (onWall || onFloor)
+		shadow->Update();
+	
+		switch (CurrentState)
 	{
 	case State::IDLE:
 		idle->Render();
@@ -315,7 +311,6 @@ void Monster::Render()
 		if (spawn->frame.x > 5)
 			idle->Render();
 		spawn->Render();
-		break;
 		break;
 	}
 
@@ -405,8 +400,6 @@ void Monster::actionsWhenDamaged(int damage, int knockBackFactor, int criticalCh
 
 	// 체력 감소
 	this->hp = max(0, hp - damage);
-
-
 }
 
 void Monster::knockBack()

@@ -118,5 +118,5 @@ void Scene8_undercity4::ResizeScreen()
 void Scene8_undercity4::SummonMonster()
 {
 	// BOSS
-	GM->monster->SpawnMonster(new ratmotan(), Vector2(3200, 650));
+	GM->monster->SpawnMonster("ratmotan", Vector2(3200, 650));
 }

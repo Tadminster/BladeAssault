@@ -5,7 +5,11 @@
 #include "orangeHairRat.h"
 #include "greenHairRat.h"
 #include "ratmotan.h"
+#include "shockwaveGenerator.h"
 #include "Projectile.h"
+
+#include <excpt.h>
+
 #include "MonsterManager.h"
 
 void MonsterManager::Init()
@@ -25,25 +29,37 @@ void MonsterManager::Update()
 	ShowMonsterStat();
 
 	// 체력이 0 이하인 몬스터 삭제
-	enemy.erase(
+	monsters.erase(
 		std::remove_if
 		(
-			enemy.begin(),
-			enemy.end(),
+			monsters.begin(),
+			monsters.end(),
 			[](Monster* monster)
-			{ 
+			{
 				if (monster->isDead())
 				{
 					delete monster;
 					return true;
 				}
-				else false;
+				else return false;
 			}
 		),
-		enemy.end()
+		monsters.end()
 	);
 
 	// 탄이 플레이어와 충돌하면
+	projectiles.erase(
+		std::remove_if
+		(
+			projectiles.begin(),
+			projectiles.end(),
+			[](Projectile* pr) { return pr->hasCollideWithPlayer(); }
+		),
+		projectiles.end()
+	);
+
+
+	// 탄이 벽(wallside)과 충돌했으면
 	projectiles.erase(
 		std::remove_if
 		(
@@ -65,12 +81,14 @@ void MonsterManager::Update()
 		projectiles.end()
 	);
 
-	// 적 업데이트
-	for (auto& enemy : this->enemy)
-		enemy->Update();
+
 	// 탄 업데이트
 	for (auto& projectiles : projectiles)
 		projectiles->Update();
+
+	// 적 업데이트
+	for (auto& monster : this->monsters)
+		monster->Update();
 }
 
 void MonsterManager::LateUpdate()
@@ -79,20 +97,47 @@ void MonsterManager::LateUpdate()
 
 void MonsterManager::Render()
 {
-	for (auto& enemy : this->enemy)
-		enemy->Render();
+	for (auto& monster : this->monsters)
+		monster->Render();
 
 	for (auto& projectiles : projectiles)
 		projectiles->Render();
 }
 
-void MonsterManager::SpawnMonster(class Monster* monster, Vector2 pos)
+void MonsterManager::SpawnMonster(string&& monsterName, Vector2 pos)
 {
+	Monster* monster = nullptr;
+	if (monsterName == "redHairRat")
+	{
+		monster = new redHairRat();
+	}
+	else if (monsterName == "orangeHairRat")
+	{
+		monster = new orangeHairRat();
+	}
+	else if (monsterName == "greenHairRat")
+	{
+		monster = new greenHairRat();
+	}
+	else if (monsterName == "ratmotan")
+	{
+		monster = new ratmotan();
+	}
+	else if (monsterName == "shockwaveGenerator")
+	{
+		monster = new shockwaveGenerator();
+	}
+	else
+	{
+		cout << "몬스터 이름이 잘못되었습니다." << endl;
+		return;
+	}
+
 	// 몬스터 위치 설정
 	monster->GetCollider()->SetWorldPos(pos);
 	monster->Init();
 	// 몬스터를 벡터에 추가
-	this->enemy.emplace_back(monster);
+	this->monsters.emplace_back(monster);
 }
 
 void MonsterManager::ShowMonsterStat()
@@ -100,11 +145,13 @@ void MonsterManager::ShowMonsterStat()
 	if (!ImGui::CollapsingHeader(u8"몬스터"))
 		return;
 
-	for (auto& monster : enemy)
+	for (auto& monster : monsters)
 	{
 		ImGui::Text("[%s]"			, monster->GetName().c_str());
 		ImGui::Text("hp: %d"		, monster->GetHp());
 		ImGui::Text("damage: %d"	, monster->GetDamage());
-		ImGui::Text("range: %d\n\n"	, monster->GetRange());
+		ImGui::Text("posX: %f"		, monster->GetPosition().x);
+		ImGui::Text("posY: %f"		, monster->GetPosition().y);
+		ImGui::Text("\n");
 	}
 }

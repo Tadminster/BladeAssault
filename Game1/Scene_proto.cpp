@@ -10,6 +10,8 @@
 #include "uncommonChest.h"
 #include "rareChest.h"
 
+#include "Projectile.h"
+
 #include "HUD.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
@@ -56,9 +58,20 @@ void Scene_proto::Update()
 void Scene_proto::LateUpdate()
 {
 	// 지형지물 충돌처리
-	HandleTerrainCollision(GM->player);				// 플레이어
-	for (auto& monster : GM->monster->GetEnemy())	// 몬스터
+	HandleTerrainCollision(GM->player);					// 플레이어
+	
+	for (auto& monster : GM->monster->GetEnemy())		// 몬스터
 		HandleTerrainCollision(monster);
+
+	for (auto& proj : GM->monster->GetProjectiles())	// 몬스터 발사체
+	{
+		// 지형지물에 사라지는 발사체라면
+		if (proj->isDeleteOnWallSide)
+		{
+			// 벽과 충돌여부 판정
+			HandleTerrainProjectile(proj);
+		}
+	}
 
 	GM->damageDP->LateUpdate();
 }
@@ -70,8 +83,8 @@ void Scene_proto::Render()
 	
 	GM->obj->Render();
 	GM->item->Render();
-	GM->monster->Render();
 	GM->player->Render();
+	GM->monster->Render();
 	GM->fx->Render();
 	GM->damageDP->Render();
 	GM->hud->Render();
@@ -95,7 +108,7 @@ void Scene_proto::HandleTerrainCollision(Creature* creature)
 	if (OnWallside(creature))
 	{
 		// 벽에 붙어있는 상태
-		creature->onWallSlide = true;
+		creature->onWallSide = true;
 
 		// 점프중이면
 		if (creature->GetState() == State::JUMP)
@@ -104,7 +117,7 @@ void Scene_proto::HandleTerrainCollision(Creature* creature)
 		else
 			creature->GoBack();
 	}
-	else creature->onWallSlide = false;
+	else creature->onWallSide = false;
 
 	// 바닥(TILE_FLOOR)과 부딪쳤으면
 	if (OnFloor(creature))
@@ -112,6 +125,18 @@ void Scene_proto::HandleTerrainCollision(Creature* creature)
 		creature->OnFloorAction();
 	}
 	else creature->onFloor = false;
+}
+
+void Scene_proto::HandleTerrainProjectile(Projectile* projectile)
+{
+	Int2 projectileIndex;
+	if (tileMap[2]->WorldPosToTileIdx(projectile->collider->GetWorldPos(), projectileIndex))
+	{
+		if (tileMap[2]->GetTileState(projectileIndex) == TILE_WALL)
+		{
+			projectile->onWallSide = true;
+		}
+	}
 }
 
 

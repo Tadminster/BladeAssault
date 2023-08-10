@@ -7,9 +7,6 @@
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
 #include "EffectManager.h"
-#include "redHairRat.h"
-#include "orangeHairRat.h"
-#include "greenHairRat.h"
 #include "Scene_proto.h"
 #include "Scene7_undercity3.h"
 
@@ -121,19 +118,19 @@ void Scene7_undercity3::ResizeScreen()
 
 void Scene7_undercity3::SummonMonster()
 {
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1350, 1050));
-	GM->monster->SpawnMonster(new greenHairRat(), Vector2(1850, 1125));
-	GM->monster->SpawnMonster(new greenHairRat(), Vector2(2300, 1125));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1900, 825));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(2000, 825));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(2100, 825));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2200, 825));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2300, 825));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1350, 1050));
+	GM->monster->SpawnMonster("greenHairRat", Vector2(1850, 1125));
+	GM->monster->SpawnMonster("greenHairRat", Vector2(2300, 1125));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1900, 825));
+	GM->monster->SpawnMonster("redHairRat", Vector2(2000, 825));
+	GM->monster->SpawnMonster("redHairRat", Vector2(2100, 825));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(2200, 825));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(2300, 825));
 
-	GM->monster->SpawnMonster(new greenHairRat(), Vector2(3625, 1125));
-	GM->monster->SpawnMonster(new greenHairRat(), Vector2(3825, 1125));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(3650, 825));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(3750, 825));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(3850, 825));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(3900, 825));
+	GM->monster->SpawnMonster("greenHairRat", Vector2(3625, 1125));
+	GM->monster->SpawnMonster("greenHairRat", Vector2(3825, 1125));
+	GM->monster->SpawnMonster("redHairRat", Vector2(3650, 825));
+	GM->monster->SpawnMonster("redHairRat", Vector2(3750, 825));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(3850, 825));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(3900, 825));
 }

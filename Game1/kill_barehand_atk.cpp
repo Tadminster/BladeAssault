@@ -13,7 +13,7 @@ kill_barehand_atk::kill_barehand_atk(
 	float explosionRange,
 	int   critical)
 {
-	tag = DamageType::NORMAL;
+	tag = DamageType::PENETRATION;
 
 	collider = new ObRect();
 	collider->SetWorldPos(spawnPos);

@@ -98,11 +98,6 @@ greenHairRat::greenHairRat()
     timeTakenToAttackOnce = 1.0f / attackSpeed;
 }
 
-//greenHairRat::greenHairRat(Vector2 spawnPos) : greenHairRat()
-//{
-//    collider->SetWorldPos(spawnPos);
-//}
-
 greenHairRat::~greenHairRat()
 {
 
