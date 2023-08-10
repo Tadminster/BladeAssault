@@ -42,9 +42,6 @@
     <ClInclude Include="Scene_proto.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Scene5_undercity1.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Scene6_undercity2.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -245,6 +242,12 @@
     </ClInclude>
     <ClInclude Include="ratmotan_dashAtk.h">
       <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="ratmotan_dashFinish.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene5_undercity1.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -490,6 +493,9 @@
       <Filter>Object\Projectile\monsterProj</Filter>
     </ClCompile>
     <ClCompile Include="ratmotan_dashAtk.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="ratmotan_dashFinish.cpp">
       <Filter>Object\Projectile\monsterProj</Filter>
     </ClCompile>
   </ItemGroup>

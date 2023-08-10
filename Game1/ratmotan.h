@@ -28,6 +28,7 @@ public:
 	bool isDashColldown();
 	void Dash();
 	void DashAttack();
+	void DashFinish();
 	
 	bool isJumpColldown();
 	void Jump() override;

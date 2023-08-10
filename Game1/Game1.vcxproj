@@ -51,6 +51,7 @@
     <ClInclude Include="ratmotan.h" />
     <ClInclude Include="ratmotan_atk.h" />
     <ClInclude Include="ratmotan_dashAtk.h" />
+    <ClInclude Include="ratmotan_dashFinish.h" />
     <ClInclude Include="ratmotan_shockwave.h" />
     <ClInclude Include="reinforcedChampionBelt.h" />
     <ClInclude Include="Chest.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="ratmotan.cpp" />
     <ClCompile Include="ratmotan_atk.cpp" />
     <ClCompile Include="ratmotan_dashAtk.cpp" />
+    <ClCompile Include="ratmotan_dashFinish.cpp" />
     <ClCompile Include="ratmotan_shockwave.cpp" />
     <ClCompile Include="reinforcedChampionBelt.cpp" />
     <ClCompile Include="Chest.cpp" />

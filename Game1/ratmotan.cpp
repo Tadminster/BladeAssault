@@ -3,7 +3,7 @@
 #include "Projectile.h"
 #include "ratmotan_atk.h"
 #include "ratmotan_dashAtk.h"
-
+#include "ratmotan_dashFinish.h"
 
 #include "MonsterManager.h"
 
@@ -266,6 +266,7 @@ void ratmotan::Update()
 		// DASH->IDLE
 		if (onWallSide)
 		{
+			DashFinish();
 			CurrentState = State::IDLE;
 		}
 	}
@@ -489,6 +490,27 @@ void ratmotan::DashAttack()
 		dashSpeed,   									// 발사체 속도
 		2000,          									// 사거리
 		damage * 1.5f,									// 공격력
+		99,												// 관통력
+		1												// 폭발범위
+	);
+
+	//벡터에 탄 push
+	GM->monster->GetProjectiles().emplace_back(proj);
+}
+
+void ratmotan::DashFinish()
+{
+	// 발사 위치 계산
+	Vector2 spawnPos = collider->GetWorldPos() + dir * collider->scale.x * 0.4f;
+
+	// 탄생성
+	ratmotan_dashFinish* proj = new ratmotan_dashFinish
+	(
+		spawnPos,										// 생성위치
+		dir,										    // 각도
+		3,			  									// 발사체 속도
+		2,          									// 사거리
+		damage * 2.0f,									// 공격력
 		99,												// 관통력
 		1												// 폭발범위
 	);
