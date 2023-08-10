@@ -53,7 +53,15 @@ void MonsterManager::Update()
 		(
 			projectiles.begin(),
 			projectiles.end(),
-			[](Projectile* pr) { return pr->hasCollideWithPlayer(); }
+			[](Projectile* pr) 
+			{ 
+				if (pr->hasCollideWithPlayer())
+				{
+					delete pr;
+					return true;
+				}
+				else return false;
+			}
 		),
 		projectiles.end()
 	);
@@ -65,7 +73,15 @@ void MonsterManager::Update()
 		(
 			projectiles.begin(),
 			projectiles.end(),
-			[](Projectile* pr) { return pr->hasCollideWithPlayer(); }
+			[](Projectile* pr)
+			{
+				if (pr->hasCollideWithWallSide())
+				{
+					delete pr;
+					return true;
+				}
+				else return false;
+			}
 		),
 		projectiles.end()
 	);
@@ -76,7 +92,15 @@ void MonsterManager::Update()
 		(
 			projectiles.begin(),
 			projectiles.end(),
-			[](Projectile* pr) { return pr->hasTraveledTooFar(); }
+			[](Projectile* pr) 
+			{
+				if (pr->hasTraveledTooFar())
+				{
+					delete pr;
+					return true;
+				}
+				else return false;
+			}
 		),
 		projectiles.end()
 	);

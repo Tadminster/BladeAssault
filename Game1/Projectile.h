@@ -57,7 +57,7 @@ public:
     // @brief 탄의 관통횟수가 전부 소모되었는지 확인
     bool                hasPenetration() const { return penetration <= 0; }
     // @brief 탄이 벽에 부딪쳤는지 확인
-    bool                hasCollideWithWallSide() { return onWallSide; }
+    bool                hasCollideWithWallSide() { return onWallSide && isDeleteOnWallSide; }
 
     virtual void       AfterEffect();
 };

@@ -14,9 +14,11 @@ ratmotan_dashAtk::ratmotan_dashAtk(
 	int   penetration,
 	float explosionRange)
 {
-	tag = DamageType::NORMAL;
+	tag = DamageType::PENETRATION;
+	isDeleteOnWallSide = true;
 
 	collider = new ObRect();
+	collider->pivot = OFFSET_B;
 	collider->SetWorldPos(spawnPos);
 	collider->scale = Vector2(160, 200);
 	collider->isFilled = false;

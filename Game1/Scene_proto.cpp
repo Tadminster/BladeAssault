@@ -132,7 +132,7 @@ void Scene_proto::HandleTerrainProjectile(Projectile* projectile)
 	Int2 projectileIndex;
 	if (tileMap[2]->WorldPosToTileIdx(projectile->collider->GetWorldPos(), projectileIndex))
 	{
-		if (tileMap[2]->GetTileState(projectileIndex) == TILE_WALL)
+		if (tileMap[2]->GetTileState(projectileIndex) == TILE_WALLSIDE)
 		{
 			projectile->onWallSide = true;
 		}

@@ -2,6 +2,8 @@
 
 #include "Projectile.h"
 #include "ratmotan_atk.h"
+#include "ratmotan_dashAtk.h"
+
 
 #include "MonsterManager.h"
 
@@ -253,6 +255,12 @@ void ratmotan::Update()
 		if (dash->frame.x > 5)
 		{
 			collider->MoveWorldPos(dir * dashSpeed * DELTA);
+
+			if (realDashAttack)
+			{
+				realDashAttack = false;
+				DashAttack();
+			}
 		}
 
 		// DASH->IDLE
@@ -419,10 +427,7 @@ void ratmotan::Render()
 void ratmotan::Attack()
 {
 	// 발사 위치 계산
-	Vector2 spawnPos =
-		collider->GetWorldPos();
-	+dir * collider->scale.x * 0.2f
-		+ UP * collider->scale.y * 0.5f;
+	Vector2 spawnPos = collider->GetWorldPos();
 
 	// 탄생성
 	ratmotan_atk* proj = new ratmotan_atk
@@ -466,8 +471,30 @@ bool ratmotan::isDashColldown()
 void ratmotan::Dash()
 {
 	dash->frame.x = 0;
+	realDashAttack = true;
 	dash->ChangeAnim(ANIMSTATE::ONCE, 0.15f);
 	CurrentState = State::DASH;
+}
+
+void ratmotan::DashAttack()
+{
+	// 발사 위치 계산
+	Vector2 spawnPos = collider->GetWorldPos();
+
+	// 탄생성
+	ratmotan_dashAtk* proj = new ratmotan_dashAtk
+	(
+		spawnPos,										// 생성위치
+		dir,										    // 각도
+		dashSpeed,   									// 발사체 속도
+		2000,          									// 사거리
+		damage * 1.5f,									// 공격력
+		99,												// 관통력
+		1												// 폭발범위
+	);
+
+	//벡터에 탄 push
+	GM->monster->GetProjectiles().emplace_back(proj);
 }
 
 bool ratmotan::isJumpColldown()

@@ -53,6 +53,7 @@ Projectile::Projectile
 {
 }
 
+
 Projectile::~Projectile()
 {
 	delete collider;
@@ -213,7 +214,6 @@ bool Projectile::hasTraveledTooFar() const
 {
     if (traveledDistance >= range)
     {
-        delete this;
         return true;
     }
     return false;
