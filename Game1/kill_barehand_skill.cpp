@@ -94,4 +94,8 @@ void kill_barehand_skill::AfterEffect()
 
 
 	//GM->afterEffectManager.emplace_back(afterImg);
+
+
+	SOUND->Stop("kill_skill_hit");
+	SOUND->Play("kill_skill_hit");
 }

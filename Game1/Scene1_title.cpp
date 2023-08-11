@@ -69,10 +69,13 @@ void Scene1_title::Init()
 	textBox_exit.top = textBox_exit_pos.y - 20;
 	textBox_exit.right = textBox_exit.left + 1000;
 	textBox_exit.bottom = textBox_exit.top + 1000;
+
+	SOUND->Play("bgm_title");
 }
 
 void Scene1_title::Release()
 {
+	SOUND->Stop("bgm_title");
 }
 
 void Scene1_title::Update()
@@ -113,23 +116,7 @@ void Scene1_title::Update()
 
 void Scene1_title::LateUpdate()
 {
-	//if (btnStart->Intersect(INPUT->GetWorldMousePos()))
-	//{
-	//	cout << " 마우스 올라감" << endl;
-	//	btnStart->color = Vector4(1, 0, 0, 0.5);
-	//} 
 
-	//if (btnStart->IntersectScreenMouse(INPUT->GetScreenMousePos()))
-	//{
-	//	btnStart->color = Vector4(1, 0, 0, 0.5);
-	//}
-	//else btnStart->color = Vector4(0.5, 0.5, 0.5, 0.5);
-
-	//if (btnExit->IntersectScreenMouse(INPUT->GetScreenMousePos()))
-	//{
-	//	btnExit->color = Vector4(1, 0, 0, 0.5);
-	//}
-	//else btnExit->color = Vector4(0.5, 0.5, 0.5, 0.5);
 }
 
 void Scene1_title::Render()
@@ -251,21 +238,53 @@ void Scene1_title::ResizeText(int type)
 		textBox_exit.right = textBox_exit.left + 500;
 		textBox_exit.bottom = textBox_exit.top + 500;
 	}
-
-
 }
 
 void Scene1_title::OnClick()
 {
-	if (INPUT->KeyDown(VK_LBUTTON))
+
+	// 시작하기
+	if (btnStart->IntersectScreenMouse(INPUT->GetScreenMousePos()))
 	{
-		if (btnStart->IntersectScreenMouse(INPUT->GetScreenMousePos()))
+		if (!onBtn_1)
 		{
+			SOUND->Stop("UI_move");
+			SOUND->Play("UI_move");
+			onBtn_1 = true;
+		}
+
+		if (INPUT->KeyDown(VK_LBUTTON))
+		{
+			SOUND->Stop("UI_select");
+			SOUND->Play("UI_select");
 			SCENE->ChangeScene("sc2");
 		}
-		if (btnExit->IntersectScreenMouse(INPUT->GetScreenMousePos()))
+	}
+	else
+	{
+		if (onBtn_1) onBtn_1 = false;
+	}
+
+	// 종료하기
+	if (btnExit->IntersectScreenMouse(INPUT->GetScreenMousePos()))
+	{
+		if (!onBtn_2)
 		{
+			SOUND->Stop("UI_move");
+			SOUND->Play("UI_move");
+			onBtn_2 = true;
+		}
+
+		if (INPUT->KeyDown(VK_LBUTTON))
+		{
+			SOUND->Stop("UI_select");
+			SOUND->Play("UI_select");
 			exit(1);
 		}
 	}
+	else
+	{
+		if (onBtn_2) onBtn_2 = false;
+	}
+	
 }

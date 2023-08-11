@@ -249,6 +249,9 @@
     <ClInclude Include="Scene5_undercity1.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="SoundDB.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -497,6 +500,9 @@
     </ClCompile>
     <ClCompile Include="ratmotan_dashFinish.cpp">
       <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundDB.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

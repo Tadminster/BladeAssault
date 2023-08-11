@@ -94,6 +94,7 @@
     <ClInclude Include="Scene_proto.h" />
     <ClInclude Include="shockwaveGenerator.h" />
     <ClInclude Include="silverAxe.h" />
+    <ClInclude Include="SoundDB.h" />
     <ClInclude Include="starBadge.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="championBelt.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="championBelt.cpp" />
     <ClCompile Include="shockwaveGenerator.cpp" />
     <ClCompile Include="silverAxe.cpp" />
+    <ClCompile Include="SoundDB.cpp" />
     <ClCompile Include="starBadge.cpp" />
     <ClCompile Include="syringe.cpp" />
     <ClCompile Include="teleScope.cpp" />

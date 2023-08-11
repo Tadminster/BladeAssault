@@ -56,11 +56,14 @@ void Scene5_undercity1::Init()
 	GM->player->SetPosition(startPostion);
 
 	CreateChest(0, Vector2(1250, 700));
+
+	SOUND->Play("bgm_undercity");
 }
 
 void Scene5_undercity1::Release()
 {
 	Scene_proto::Release();
+	SOUND->Stop("bgm_undercity");
 }
 
 void Scene5_undercity1::Update()

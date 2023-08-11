@@ -89,4 +89,7 @@ void kill_barehand_ChargingAtk::AfterEffect()
 
 
 	//GM->afterEffectManager.emplace_back(afterImg);
+
+	SOUND->Stop("kill_chargeAttack_hit");
+	SOUND->Play("kill_chargeAttack_hit");
 }

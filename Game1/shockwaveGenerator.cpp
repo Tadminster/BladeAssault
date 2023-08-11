@@ -12,8 +12,6 @@
 
 shockwaveGenerator::shockwaveGenerator()
 {
-    cout << "생성" << endl;
-
     idle    = nullptr;
     run     = nullptr;
     jump    = nullptr;
@@ -46,7 +44,6 @@ shockwaveGenerator::shockwaveGenerator()
 
 shockwaveGenerator::~shockwaveGenerator()
 {
-    cout << "삭제" << endl;
 }
 
 void shockwaveGenerator::Update()

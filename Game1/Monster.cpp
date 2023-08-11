@@ -50,6 +50,11 @@ void Monster::Update()
 	// 사망 처리
 	if (hp == 0 && CurrentState != State::DIE)
 	{
+		// 사운드 출력
+		SOUND->Stop("rat_die");
+		SOUND->Play("rat_die");
+
+		// 상태변경
 		CurrentState = State::DIE;
 	}
 

@@ -45,6 +45,11 @@ void Chest::Update()
 			presskey->Update();
 			if (INPUT->KeyDown('F'))
 			{
+				// 사운드 출력
+				SOUND->Stop("gearBox_open");
+				SOUND->Play("gearBox_open");
+
+				// 오픈
 				state = ChestState::UNlOCKING;
 			}
 		}

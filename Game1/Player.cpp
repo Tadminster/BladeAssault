@@ -139,14 +139,14 @@ void Player::Update()
 		// dash -> PrevState
 		if (dashWeight >= 1.0f || onWallSide)
 		{
+			SOUND->Stop("dash");
 			CurrentState = PrevState;
 		}
 
-
 		// dash
+		// 선형보간으로 이동
 		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, DELTA * 10.0f));
 
-		// 선형보간으로 이동
 
 	}
 	else if (CurrentState == State::JUMP)
@@ -221,6 +221,7 @@ void Player::Update()
 		// 프레임이 끝나면 charging -> idle
 		if (charging->frame.x == charging->maxFrame.x - 1)
 		{
+			SOUND->Stop("kill_charging");
 			CurrentState = State::IDLE;
 		}
 	}
@@ -400,8 +401,6 @@ void Player::Control()
 	// 상태 업데이트
 	if (CurrentState == State::IDLE)
 	{
-
-
 		// idle -> run
 		if (INPUT->KeyPress('A'))
 		{
@@ -456,6 +455,8 @@ void Player::Control()
 	}
 	else if (CurrentState == State::RUN)
 	{
+		SOUND->Play("run1");
+
 		// runing
 		if (INPUT->KeyPress('A'))
 		{
@@ -518,6 +519,8 @@ void Player::Control()
 		// jump -> double jump
 		if (INPUT->KeyDown('W') && jumpCount < jumpCountMax)
 		{
+			SOUND->Stop("doubleJump");
+			SOUND->Play("doubleJump");
 			jumpCount++;
 			gravity = -900;
 		}
@@ -564,6 +567,10 @@ void Player::Control()
 			jumpCount = 1;
 			gravity = 0;
 			CurrentState = State::CROUCH_DOWN;
+			
+			// 사운드 출력
+			SOUND->Stop("crouchDown");
+			SOUND->Play("crouchDown");
 		}
 	}
 	else if (CurrentState == State::ATTACK)
@@ -598,7 +605,6 @@ void Player::Control()
 		// charging -> idle
 		if (INPUT->KeyUp(VK_LBUTTON))
 		{
-
 			ChargingAttack();
 		}
 
@@ -725,6 +731,9 @@ void Player::Dash()
 		if (onFloor || onWall) PrevState = State::IDLE;
 		else PrevState = State::JUMP;
 	CurrentState = State::DASH;
+
+	SOUND->Stop("dash");
+	SOUND->Play("dash");
 }
 
 void Player::activateItem(Item* item)
@@ -825,6 +834,10 @@ void Player::actionsWhenDamaged(float damage)
 	// 데미지 텍스트 출력
 	Vector2 tempSpawnPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.5f);
 	GM->damageDP->AddText(tempSpawnPos, damage, 2);
+
+	// 사운드 출력
+	SOUND->Stop("damaged");
+	SOUND->Play("damaged");
 }
 
 void Player::DamageReflection(float reflectDamage)

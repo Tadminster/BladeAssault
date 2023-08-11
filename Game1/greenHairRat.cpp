@@ -138,4 +138,8 @@ void greenHairRat::Attack()
 
     //º¤ÅÍ¿¡ Åº push
     GM->monster->GetProjectiles().emplace_back(proj);
+
+    // »ç¿îµåÃâ·Â
+    SOUND->Stop("greenHairRat_attack");
+    SOUND->Play("greenHairRat_attack");
 }

@@ -52,11 +52,15 @@ void Scene8_undercity4::Init()
 {
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
+
+	SOUND->Play("bgm_boss1");
 }
 
 void Scene8_undercity4::Release()
 {
 	Scene_proto::Release();
+
+	SOUND->Stop("bgm_boss1");
 }
 
 void Scene8_undercity4::Update()

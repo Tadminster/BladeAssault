@@ -138,4 +138,8 @@ void orangeHairRat::Attack()
 
     //º¤ÅÍ¿¡ Åº push
     GM->monster->GetProjectiles().emplace_back(proj);
+
+    // »ç¿îµåÃâ·Â
+    SOUND->Stop("orangeHairRat_attack");
+    SOUND->Play("orangeHairRat_attack");
 }

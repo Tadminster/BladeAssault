@@ -13,7 +13,7 @@ kill_barehand_atk::kill_barehand_atk(
 	float explosionRange,
 	int   critical)
 {
-	tag = DamageType::PENETRATION;
+	tag = DamageType::NORMAL;
 
 	collider = new ObRect();
 	collider->SetWorldPos(spawnPos);
@@ -80,4 +80,7 @@ void kill_barehand_atk::AfterEffect()
 	if (dir == LEFT) effect->reverseLR = true;
 
 	GM->fx->AddEffects(effect);
+
+	SOUND->Stop("kill_attack_hit");
+	SOUND->Play("kill_attack_hit");
 }

@@ -105,6 +105,9 @@ bool Projectile::hasCollideWithMonster()
 
                     // 몬스터 데미지 액션
                     monster->actionsWhenDamaged(damage, shove, criticalChance);
+
+                    // 충돌 이펙트
+                    AfterEffect();
                 }
             }
         }

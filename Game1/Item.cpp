@@ -79,6 +79,10 @@ void Item::Update()
 
 		if (INPUT->KeyDown('F'))
 		{
+			// 사운드
+			SOUND->Stop("UI_purchase");
+			SOUND->Play("UI_purchase");
+
 			// 아이템의 능력치를 적용
 			GM->player->activateItem(this);
 

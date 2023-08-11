@@ -81,16 +81,19 @@ void Scene3_jazzBar::Init()
 {
 	GM->player->SetPosition(startPostion);
 
+	SOUND->Play("bgm_jazzBar");
 }
 
 void Scene3_jazzBar::Release()
 {
 	Scene_proto::Release();
+
+	SOUND->Stop("bgm_jazzBar");
 }
 
 void Scene3_jazzBar::Update()
 {
-	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());\
+	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;

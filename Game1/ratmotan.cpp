@@ -140,6 +140,17 @@ void ratmotan::Update()
 	// 체력바 게이지 설정
 	ui_gauge_bossHp->scale.x = ui_gauge_bossHp->imageSize.x * 2.0f * ((float)hp / (float)maxHp);
 
+	// 사망 처리
+	if (hp == 0 && CurrentState != State::DIE)
+	{
+		// 사운드 출력
+		SOUND->Stop("ratmotan_die");
+		SOUND->Play("ratmotan_die");
+
+		// 상태변경
+		CurrentState = State::DIE;
+	}
+
 	Vector2 target = GM->player->GetCollider()->GetWorldPos();
 	// 공격 중이나 점프 중이 아니면
 	if (CurrentState != State::ATTACK && CurrentState != State::JUMP && CurrentState != State::DASH)
@@ -150,8 +161,6 @@ void ratmotan::Update()
 		else
 			dir = LEFT;
 	}
-
-
 	// 스킨 방향 설정
 	if (dir == LEFT)
 	{
@@ -210,14 +219,14 @@ void ratmotan::Update()
 				CurrentState = State::ATTACK;
 			}
 
-			// 점프가 가능하다면 점프
+			// 점프가 가능하다면
 			else if (isJumpColldown())
 			{
 				// IDEL -> JUMP
 				Jump();
 			}
 
-			// 대시가 가능하다면 점프
+			// 대시가 가능하다면
 			else if (isDashColldown())
 			{
 				// IDEL -> Dash
@@ -291,7 +300,6 @@ void ratmotan::Update()
 			// jump -> idle
 			if (onFloor || onWall)
 			{
-
 				CurrentState = State::ATTACK;
 				Attack();
 			}
@@ -446,7 +454,8 @@ void ratmotan::Attack()
 	//벡터에 탄 push
 	GM->monster->GetProjectiles().emplace_back(proj);
 
-
+	SOUND->Stop("ratmotan_jumpAttack");
+	SOUND->Play("ratmotan_jumpAttack");
 }
 
 void ratmotan::Shockwave()
@@ -497,6 +506,9 @@ void ratmotan::DashAttack()
 
 	//벡터에 탄 push
 	GM->monster->GetProjectiles().emplace_back(proj);
+
+	SOUND->Stop("ratmotan_dashAttack");
+	SOUND->Play("ratmotan_dashAttack");
 }
 
 void ratmotan::DashFinish()
@@ -518,6 +530,9 @@ void ratmotan::DashFinish()
 
 	//벡터에 탄 push
 	GM->monster->GetProjectiles().emplace_back(proj);
+
+	SOUND->Stop("ratmotan_dashCollision");
+	SOUND->Play("ratmotan_dashCollision");
 }
 
 bool ratmotan::isJumpColldown()
@@ -543,5 +558,7 @@ void ratmotan::Jump()
 {
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
 	gravity = -jumpSpeed;
+	SOUND->Stop("ratmotan_jumpStart");
+	SOUND->Play("ratmotan_jumpStart");
 	CurrentState = State::JUMP;
 }
