@@ -252,6 +252,9 @@
     <ClInclude Include="SoundDB.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="npc_proto.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -504,6 +507,9 @@
     <ClCompile Include="SoundDB.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="npc_proto.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -556,6 +562,9 @@
     </Filter>
     <Filter Include="Object\ProjGenerator">
       <UniqueIdentifier>{481516bb-7182-42df-a518-46aa0e2a328a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Npc">
+      <UniqueIdentifier>{e0f9d489-6dce-40ad-b97e-30655f108c4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

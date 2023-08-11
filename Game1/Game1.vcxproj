@@ -43,6 +43,7 @@
     <ClInclude Include="lv3helmet.h" />
     <ClInclude Include="magicSword.h" />
     <ClInclude Include="normalGear.h" />
+    <ClInclude Include="npc_proto.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="oldSneakers.h" />
     <ClInclude Include="player_damageReflection.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="lv3helmet.cpp" />
     <ClCompile Include="magicSword.cpp" />
     <ClCompile Include="normalGear.cpp" />
+    <ClCompile Include="npc_proto.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="oldSneakers.cpp" />
     <ClCompile Include="player_damageReflection.cpp" />
