@@ -72,12 +72,8 @@ Scene3_jazzBar::Scene3_jazzBar()
 
 Scene3_jazzBar::~Scene3_jazzBar()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
-
 	for (int i = 0; i < 2; i++)
 		delete nextMap[i];
-	delete spawnTrigger;
 	delete stairLeft;
 }
 
@@ -89,6 +85,7 @@ void Scene3_jazzBar::Init()
 
 void Scene3_jazzBar::Release()
 {
+	Scene_proto::Release();
 }
 
 void Scene3_jazzBar::Update()

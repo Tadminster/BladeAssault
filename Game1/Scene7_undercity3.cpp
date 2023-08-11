@@ -44,8 +44,6 @@ Scene7_undercity3::Scene7_undercity3()
 
 Scene7_undercity3::~Scene7_undercity3()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
 	delete nextMap;
 }
 
@@ -59,6 +57,7 @@ void Scene7_undercity3::Init()
 
 void Scene7_undercity3::Release()
 {
+	Scene_proto::Release();
 }
 
 void Scene7_undercity3::Update()

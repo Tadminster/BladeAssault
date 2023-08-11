@@ -6,11 +6,14 @@ protected:
 	ObRect*			spawnTrigger;
 
 	Vector2			startPostion;
-	float			localtime = 0;
+	float			localtime	{ 0.0f };
+	float			fadeout		{ 0.0f };
+
 
 	// 몬스터를 소환한 적이 있는지 체크
-	bool			isSummoned{ false };
-
+	bool			isSummoned		{ false };
+	// 플레이어 사망 이벤트
+	bool			PlayerDeadEvent	{ true };
 public:
 	Scene_proto();
 	~Scene_proto();

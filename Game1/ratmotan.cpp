@@ -128,6 +128,7 @@ ratmotan::ratmotan()
 
 ratmotan::~ratmotan()
 {
+	delete dash;
 	delete ui_frame_bossHp;
 	delete ui_gauge_bossHp;
 }

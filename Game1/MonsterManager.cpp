@@ -164,6 +164,12 @@ void MonsterManager::SpawnMonster(string&& monsterName, Vector2 pos)
 	this->monsters.emplace_back(monster);
 }
 
+void MonsterManager::ClearMonster()
+{
+	for (auto& monster : this->monsters)
+		monster->kill();
+}
+
 void MonsterManager::ShowMonsterStat()
 {
 	if (!ImGui::CollapsingHeader(u8"∏ÛΩ∫≈Õ"))

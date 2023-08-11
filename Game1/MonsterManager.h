@@ -26,7 +26,7 @@ public:
 	// "redHairRat", "orangeHairRat", "greenHairRat", "ratmotan", "shockwaveGenerator"
 	// @param pos 소환할 위치
 	void	SpawnMonster(string&& monsterName, Vector2 pos);
-	void	ClearMonster() { monsters.clear(); }
+	void	ClearMonster();
 
 	void	ShowMonsterStat();
 };

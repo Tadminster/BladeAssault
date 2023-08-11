@@ -20,7 +20,6 @@
 
 Scene2_inGame::Scene2_inGame()
 {
-	;
 	tileMap[0] = new ObTileMap();
 	tileMap[1] = new ObTileMap();
 	tileMap[2] = new ObTileMap();
@@ -30,7 +29,6 @@ Scene2_inGame::Scene2_inGame()
 	lightRoom = new ObImage(L"squareGlow.png");
 	
 	GM->hud = new HUD();
-	GM->player = new Player_kill();
 	GM->monster = new MonsterManager();
 	GM->damageDP = new DamageDisplayManager();
 	GM->fx = new EffectManager();
@@ -76,26 +74,25 @@ Scene2_inGame::Scene2_inGame()
 
 Scene2_inGame::~Scene2_inGame()
 {
-	//Scene_proto::~Scene_proto();
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
-	delete nextMap;
-
 	delete lightCeiling;
 	delete lightRoom;
 }
 
 void Scene2_inGame::Init()
 {
+	if (GM->player == nullptr)
+	{
+		GM->player = new Player_kill();
+	}
+
 	GM->item->Init();
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
-
-
 }
 
 void Scene2_inGame::Release()
 {
+	Scene_proto::Release();
 }
 
 void Scene2_inGame::Update()

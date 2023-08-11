@@ -13,7 +13,6 @@ Player::Player()
 
 Player::~Player()
 {
-	Creature::~Creature();
 	delete dash;
 	delete crouch;
 	delete damaged;

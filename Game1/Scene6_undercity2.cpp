@@ -46,10 +46,7 @@ Scene6_undercity2::Scene6_undercity2()
 
 Scene6_undercity2::~Scene6_undercity2()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
 	delete nextMap;
-	delete spawnTrigger;
 }
 
 void Scene6_undercity2::Init()
@@ -62,6 +59,7 @@ void Scene6_undercity2::Init()
 
 void Scene6_undercity2::Release()
 {
+	Scene_proto::Release();
 }
 
 void Scene6_undercity2::Update()

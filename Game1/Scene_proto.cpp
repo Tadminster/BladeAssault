@@ -28,8 +28,9 @@ Scene_proto::Scene_proto()
 
 Scene_proto::~Scene_proto()
 {
-	//for (int i = 0; i < 3; i++)
-		//delete[] tileMap[i];
+	for (int i = 0; i < 3; i++)
+		delete[] tileMap[i];
+	delete spawnTrigger;
 }
 
 void Scene_proto::Init()
@@ -38,10 +39,34 @@ void Scene_proto::Init()
 
 void Scene_proto::Release()
 {
+	LIGHT->lightColor.x = 0.5f;
+	LIGHT->lightColor.y = 0.5f;
+	LIGHT->lightColor.z = 0.5f;
+
+	if (GM->player->GetState() == State::DIE)
+	{
+		delete GM->player;
+		GM->monster->ClearMonster();
+		GM->player = nullptr;
+	}
 }
 
 void Scene_proto::Update()
 {
+	if (GM->player->GetState() == State::DIE && PlayerDeadEvent)
+	{
+		PlayerDeadEvent = false;
+		fadeout = 2.0f;
+		SCENE->ChangeScene("sc1", 3.0f);
+	}
+
+	if (fadeout > 0.0f)
+	{
+		fadeout -= DELTA;
+		LIGHT->lightColor.y = fadeout / 4.0f;
+		LIGHT->lightColor.z = fadeout / 4.0f;
+	}
+
 	ShowSystemDebug();
 
 	localtime += DELTA;

@@ -51,8 +51,6 @@ Scene4_armory::Scene4_armory()
 
 Scene4_armory::~Scene4_armory()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
 	delete nextMap;
 	delete previousMap;
 	delete stair;
@@ -70,6 +68,7 @@ void Scene4_armory::Init()
 
 void Scene4_armory::Release()
 {
+	Scene_proto::Release();
 }
 
 void Scene4_armory::Update()

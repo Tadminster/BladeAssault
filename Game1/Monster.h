@@ -42,6 +42,7 @@ public:
 	virtual	bool isDead() const; 
 	void actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance);
 	void knockBack();
+	void kill() { CurrentState = State::DIE; }
 
 	string& GetName()		{ return name; }
 	int		GetDamage()		{ return damage; }
