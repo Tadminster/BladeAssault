@@ -35,8 +35,8 @@ Scene8_undercity4::Scene8_undercity4()
 
 	// 몬스터소환 트리거
 	spawnTrigger->pivot = OFFSET_LB;
-	spawnTrigger->SetWorldPos(Vector2(1150, 1100));
-	spawnTrigger->scale = Vector2(100, 250);
+	spawnTrigger->SetWorldPos(Vector2(1450, 1100));
+	spawnTrigger->scale = Vector2(50, 250);
 	spawnTrigger->color = Vector4(0.5f, 0.5f, 0.5f, 0.3f);
 	spawnTrigger->isFilled = true;
 
@@ -45,8 +45,6 @@ Scene8_undercity4::Scene8_undercity4()
 
 Scene8_undercity4::~Scene8_undercity4()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
 	delete nextMap;
 }
 
@@ -54,10 +52,15 @@ void Scene8_undercity4::Init()
 {
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
+
+	SOUND->Play("bgm_boss1");
 }
 
 void Scene8_undercity4::Release()
 {
+	Scene_proto::Release();
+
+	SOUND->Stop("bgm_boss1");
 }
 
 void Scene8_undercity4::Update()
@@ -118,5 +121,5 @@ void Scene8_undercity4::ResizeScreen()
 void Scene8_undercity4::SummonMonster()
 {
 	// BOSS
-	GM->monster->SpawnMonster(new ratmotan(), Vector2(3200, 650));
+	GM->monster->SpawnMonster("ratmotan", Vector2(3200, 650));
 }

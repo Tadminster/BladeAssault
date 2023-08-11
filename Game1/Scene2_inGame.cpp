@@ -14,13 +14,13 @@
 #include "EffectManager.h"
 #include "ItemManager.h"
 #include "ObjectManager.h"
+#include "SoundDB.h"
 
 #include "Scene_proto.h"
 #include "Scene2_inGame.h"
 
 Scene2_inGame::Scene2_inGame()
 {
-	;
 	tileMap[0] = new ObTileMap();
 	tileMap[1] = new ObTileMap();
 	tileMap[2] = new ObTileMap();
@@ -29,13 +29,14 @@ Scene2_inGame::Scene2_inGame()
 	lightCeiling = new ObImage(L"hankroom_light.png");
 	lightRoom = new ObImage(L"squareGlow.png");
 	
-	GM->hud = new HUD();
-	GM->player = new Player_kill();
-	GM->monster = new MonsterManager();
-	GM->damageDP = new DamageDisplayManager();
-	GM->fx = new EffectManager();
-	GM->item = new ItemManager();
-	GM->obj = new ObjectManager();
+	GM->hud			= new HUD();
+	GM->monster		= new MonsterManager();
+	GM->damageDP	= new DamageDisplayManager();
+	GM->fx			= new EffectManager();
+	GM->item		= new ItemManager();
+	GM->obj			= new ObjectManager();
+	GM->sound		= new SoundDB();
+	GM->sound->Init();
 
 	tileMap[0]->file = "scene2_hankroom_0.txt";
 	tileMap[1]->file = "scene2_hankroom_1.txt";
@@ -76,26 +77,29 @@ Scene2_inGame::Scene2_inGame()
 
 Scene2_inGame::~Scene2_inGame()
 {
-	//Scene_proto::~Scene_proto();
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
-	delete nextMap;
-
 	delete lightCeiling;
 	delete lightRoom;
 }
 
 void Scene2_inGame::Init()
 {
+	if (GM->player == nullptr)
+	{
+		GM->player = new Player_kill();
+	}
+
 	GM->item->Init();
 	GM->player->Init();
 	GM->player->SetPosition(startPostion);
 
-
+	SOUND->Play("bgm_hankroom");
 }
 
 void Scene2_inGame::Release()
 {
+	Scene_proto::Release();
+
+	SOUND->Stop("bgm_hankroom");
 }
 
 void Scene2_inGame::Update()
@@ -154,11 +158,14 @@ void Scene2_inGame::Update()
 	nextMap->Update();
 
 	Scene_proto::Update();
+
+
 }
 
 void Scene2_inGame::LateUpdate()
 {
 	Scene_proto::LateUpdate();
+
 }
 
 void Scene2_inGame::Render()

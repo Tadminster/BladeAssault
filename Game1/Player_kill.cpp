@@ -230,7 +230,9 @@ void Player_kill::Update()
 	}
 
 	if (CurrentState == State::CHARGING)
+	{
 		chargingFx->Update();
+	}
 
 	Player::Update();
 }
@@ -282,11 +284,17 @@ void Player_kill::Attack()
 		// 공속계산
 		lastShotTime = currentTime;
 		timeSinceLastTime = 1.0f / attackSpeed * attackSpeedScale;
+
+		// 사운드 재생
+		SOUND->Stop("kill_attack");
+		SOUND->Play("kill_attack");
 	}
 }
 
 void Player_kill::ChargingAttack()
 {
+
+
 	// 발사 위치 계산
 	Vector2 spawnPos = collider->GetWorldPos() + lastDir * collider->scale.x + (UP * collider->scale.y * 0.65);
 
@@ -313,6 +321,10 @@ void Player_kill::ChargingAttack()
 
 	//벡터에 탄 push
 	projectiles.emplace_back(proj);
+
+
+	SOUND->Stop("kill_chargeAttack");
+	SOUND->Play("kill_chargeAttack");
 }
 
 void Player_kill::Skill()
@@ -350,8 +362,6 @@ void Player_kill::SkillAttack()
 {
 	// 발사 위치 계산
 	Vector2 spawnPos = collider->GetWorldPos() + (lastDir * collider->scale.x * 0.5);
-	cout << spawnPos.x << endl;
-	cout << spawnPos.y << endl;
 
 	// Scale 계산
 	float skillScale = skill->frame.x / 11.0f;
@@ -380,4 +390,8 @@ void Player_kill::SkillAttack()
 
 	//벡터에 탄 push
 	projectiles.emplace_back(proj);
+
+	// 사운드 재생
+	SOUND->Stop("kill_skill");
+	SOUND->Play("kill_skill");
 }

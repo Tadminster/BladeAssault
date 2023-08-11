@@ -42,9 +42,6 @@
     <ClInclude Include="Scene_proto.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Scene5_undercity1.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Scene6_undercity2.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -233,6 +230,27 @@
     </ClInclude>
     <ClInclude Include="ratmotan.h">
       <Filter>Object\Creature\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ratmotan_atk.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="shockwaveGenerator.h">
+      <Filter>Object\ProjGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="ratmotan_shockwave.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="ratmotan_dashAtk.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="ratmotan_dashFinish.h">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene5_undercity1.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundDB.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -468,6 +486,24 @@
     <ClCompile Include="ratmotan.cpp">
       <Filter>Object\Creature\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="ratmotan_atk.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="shockwaveGenerator.cpp">
+      <Filter>Object\ProjGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="ratmotan_shockwave.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="ratmotan_dashAtk.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="ratmotan_dashFinish.cpp">
+      <Filter>Object\Projectile\monsterProj</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundDB.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -478,9 +514,6 @@
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{c87bda9f-da72-4617-a343-cc9148ae49d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Weapon">
-      <UniqueIdentifier>{dba54104-7890-4102-a614-01cedfe87b3e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object\Projectile">
       <UniqueIdentifier>{6cf875f2-5dc1-4bd9-a2d4-5b5a4363535e}</UniqueIdentifier>
@@ -520,6 +553,9 @@
     </Filter>
     <Filter Include="Object\Item\LEGENDARY">
       <UniqueIdentifier>{c62d915d-30cd-447e-8f5b-dae128eaa34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\ProjGenerator">
+      <UniqueIdentifier>{481516bb-7182-42df-a518-46aa0e2a328a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

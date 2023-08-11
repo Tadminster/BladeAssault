@@ -10,6 +10,8 @@
 #include "uncommonChest.h"
 #include "rareChest.h"
 
+#include "Projectile.h"
+
 #include "HUD.h"
 #include "MonsterManager.h"
 #include "DamageDisplayManager.h"
@@ -26,8 +28,9 @@ Scene_proto::Scene_proto()
 
 Scene_proto::~Scene_proto()
 {
-	//for (int i = 0; i < 3; i++)
-		//delete[] tileMap[i];
+	for (int i = 0; i < 3; i++)
+		delete[] tileMap[i];
+	delete spawnTrigger;
 }
 
 void Scene_proto::Init()
@@ -36,10 +39,36 @@ void Scene_proto::Init()
 
 void Scene_proto::Release()
 {
+	LIGHT->lightColor.x = 0.5f;
+	LIGHT->lightColor.y = 0.5f;
+	LIGHT->lightColor.z = 0.5f;
+
+	if (GM->player->GetState() == State::DIE)
+	{
+		delete GM->player;
+		GM->monster->ClearMonster();
+		GM->player = nullptr;
+	}
 }
 
 void Scene_proto::Update()
 {
+	if (GM->player->GetState() == State::DIE && PlayerDeadEvent)
+	{
+		PlayerDeadEvent = false;
+		fadeout = 2.0f;
+		SCENE->ChangeScene("sc1", 3.0f);
+	}
+
+	if (fadeout > 0.0f)
+	{
+		fadeout -= DELTA;
+		LIGHT->lightColor.y = fadeout / 4.0f;
+		LIGHT->lightColor.z = fadeout / 4.0f;
+	}
+
+	ShowSystemDebug();
+
 	localtime += DELTA;
 	spawnTrigger->Update();
 	GM->item->Update();
@@ -54,9 +83,20 @@ void Scene_proto::Update()
 void Scene_proto::LateUpdate()
 {
 	// 지형지물 충돌처리
-	HandleTerrainCollision(GM->player);				// 플레이어
-	for (auto& monster : GM->monster->GetEnemy())	// 몬스터
+	HandleTerrainCollision(GM->player);					// 플레이어
+	
+	for (auto& monster : GM->monster->GetEnemy())		// 몬스터
 		HandleTerrainCollision(monster);
+
+	for (auto& proj : GM->monster->GetProjectiles())	// 몬스터 발사체
+	{
+		// 지형지물에 사라지는 발사체라면
+		if (proj->isDeleteOnWallSide)
+		{
+			// 벽과 충돌여부 판정
+			HandleTerrainProjectile(proj);
+		}
+	}
 
 	GM->damageDP->LateUpdate();
 }
@@ -68,8 +108,8 @@ void Scene_proto::Render()
 	
 	GM->obj->Render();
 	GM->item->Render();
-	GM->monster->Render();
 	GM->player->Render();
+	GM->monster->Render();
 	GM->fx->Render();
 	GM->damageDP->Render();
 	GM->hud->Render();
@@ -93,7 +133,7 @@ void Scene_proto::HandleTerrainCollision(Creature* creature)
 	if (OnWallside(creature))
 	{
 		// 벽에 붙어있는 상태
-		creature->onWallSlide = true;
+		creature->onWallSide = true;
 
 		// 점프중이면
 		if (creature->GetState() == State::JUMP)
@@ -102,7 +142,7 @@ void Scene_proto::HandleTerrainCollision(Creature* creature)
 		else
 			creature->GoBack();
 	}
-	else creature->onWallSlide = false;
+	else creature->onWallSide = false;
 
 	// 바닥(TILE_FLOOR)과 부딪쳤으면
 	if (OnFloor(creature))
@@ -110,6 +150,18 @@ void Scene_proto::HandleTerrainCollision(Creature* creature)
 		creature->OnFloorAction();
 	}
 	else creature->onFloor = false;
+}
+
+void Scene_proto::HandleTerrainProjectile(Projectile* projectile)
+{
+	Int2 projectileIndex;
+	if (tileMap[2]->WorldPosToTileIdx(projectile->collider->GetWorldPos(), projectileIndex))
+	{
+		if (tileMap[2]->GetTileState(projectileIndex) == TILE_WALLSIDE)
+		{
+			projectile->onWallSide = true;
+		}
+	}
 }
 
 
@@ -213,6 +265,42 @@ void Scene_proto::CleanupBeforeNewMap()
 
 	// 상자 삭제
 	GM->obj->ClearChests();
+}
+
+void Scene_proto::ShowSystemDebug()
+{
+	if (!ImGui::CollapsingHeader(u8"시스템"))
+		return;
+
+	// 맵변경
+	// 실제로 변경될 scene의 key
+	const char* itemsBackend[] = { "sc2", "sc3", "sc4", "sc5", "sc6", "sc7", "sc8" };
+	// GUI에 보여질 이름
+	const char* itemsFrontend[] = { u8"행크룸", u8"재즈바", u8"아머리", u8"언더시티1", u8"언더시티2", u8"언더시티3", u8"랫모탄의 방" };
+	// 선택된 데이터의 인덱스를 저장할 변수
+	static int item_current_idx = 0; 
+	if (ImGui::BeginListBox(u8"맵 변경"))
+	{
+		for (int n = 0; n < IM_ARRAYSIZE(itemsBackend); n++)
+		{
+			const bool is_selected = (item_current_idx == n);
+			if (ImGui::Selectable(itemsFrontend[n], is_selected))
+			{
+				item_current_idx = n;
+				// 여러 오브젝트 삭제
+				CleanupBeforeNewMap();
+				// 씬 변경
+				SCENE->ChangeScene(itemsBackend[item_current_idx]);
+			}
+
+			// 콤보를 열 때 초기 포커스 설정
+			if (is_selected)
+				ImGui::SetItemDefaultFocus();
+		}
+
+		ImGui::EndListBox();
+	}
+
 }
 
 

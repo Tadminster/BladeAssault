@@ -12,6 +12,10 @@ private:
 	RECT textBox_start;
 	RECT textBox_exit;
 
+	bool onBtn_1{ false };
+	bool onBtn_2{ false };
+
+	// 타이틀 로고 애니메이션
 	float titleAnimTime = 0.0f;
 
 public:

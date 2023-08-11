@@ -80,8 +80,10 @@ greenHairRat::greenHairRat()
     ui_gauge_hp->SetLocalPosX(-collider->scale.x * 0.7f);
     ui_gauge_hp->SetLocalPosY(collider->scale.y * 1.1f);
 
+    name = "greenHairRat";
     CurrentState = State::SPAWN;
     dir = LEFT;
+
 
     hp = 70;
     maxHp = 70;
@@ -95,11 +97,6 @@ greenHairRat::greenHairRat()
 
     timeTakenToAttackOnce = 1.0f / attackSpeed;
 }
-
-//greenHairRat::greenHairRat(Vector2 spawnPos) : greenHairRat()
-//{
-//    collider->SetWorldPos(spawnPos);
-//}
 
 greenHairRat::~greenHairRat()
 {
@@ -141,4 +138,8 @@ void greenHairRat::Attack()
 
     //º¤ÅÍ¿¡ Åº push
     GM->monster->GetProjectiles().emplace_back(proj);
+
+    // »ç¿îµåÃâ·Â
+    SOUND->Stop("greenHairRat_attack");
+    SOUND->Play("greenHairRat_attack");
 }

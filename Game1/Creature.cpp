@@ -30,6 +30,9 @@ void Creature::Render()
 
 void Creature::Jump()
 {
+	SOUND->Stop("jump");
+	SOUND->Play("jump");
+
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
 	gravity = -jumpSpeed;
 	CurrentState = State::JUMP;

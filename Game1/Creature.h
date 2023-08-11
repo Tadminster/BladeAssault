@@ -51,7 +51,7 @@ public:
 	float		gravity;
 	bool		onFloor;
 	bool		onWall;
-	bool		onWallSlide;
+	bool		onWallSide;
 	bool		isLanding;
 
 public:

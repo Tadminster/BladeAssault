@@ -13,7 +13,6 @@ Player::Player()
 
 Player::~Player()
 {
-	Creature::~Creature();
 	delete dash;
 	delete crouch;
 	delete damaged;
@@ -138,16 +137,16 @@ void Player::Update()
 
 		// dash 가중치가 1.0f 이상이거나 벽에 붙어있으면
 		// dash -> PrevState
-		if (dashWeight >= 1.0f || onWallSlide)
+		if (dashWeight >= 1.0f || onWallSide)
 		{
+			SOUND->Stop("dash");
 			CurrentState = PrevState;
 		}
 
-
 		// dash
+		// 선형보간으로 이동
 		collider->SetWorldPos(Vector2::Lerp(collider->GetWorldPos(), dashTargetPos, DELTA * 10.0f));
 
-		// 선형보간으로 이동
 
 	}
 	else if (CurrentState == State::JUMP)
@@ -222,6 +221,7 @@ void Player::Update()
 		// 프레임이 끝나면 charging -> idle
 		if (charging->frame.x == charging->maxFrame.x - 1)
 		{
+			SOUND->Stop("kill_charging");
 			CurrentState = State::IDLE;
 		}
 	}
@@ -401,8 +401,6 @@ void Player::Control()
 	// 상태 업데이트
 	if (CurrentState == State::IDLE)
 	{
-
-
 		// idle -> run
 		if (INPUT->KeyPress('A'))
 		{
@@ -457,6 +455,8 @@ void Player::Control()
 	}
 	else if (CurrentState == State::RUN)
 	{
+		SOUND->Play("run1");
+
 		// runing
 		if (INPUT->KeyPress('A'))
 		{
@@ -519,6 +519,8 @@ void Player::Control()
 		// jump -> double jump
 		if (INPUT->KeyDown('W') && jumpCount < jumpCountMax)
 		{
+			SOUND->Stop("doubleJump");
+			SOUND->Play("doubleJump");
 			jumpCount++;
 			gravity = -900;
 		}
@@ -565,6 +567,10 @@ void Player::Control()
 			jumpCount = 1;
 			gravity = 0;
 			CurrentState = State::CROUCH_DOWN;
+			
+			// 사운드 출력
+			SOUND->Stop("crouchDown");
+			SOUND->Play("crouchDown");
 		}
 	}
 	else if (CurrentState == State::ATTACK)
@@ -599,7 +605,6 @@ void Player::Control()
 		// charging -> idle
 		if (INPUT->KeyUp(VK_LBUTTON))
 		{
-
 			ChargingAttack();
 		}
 
@@ -726,6 +731,9 @@ void Player::Dash()
 		if (onFloor || onWall) PrevState = State::IDLE;
 		else PrevState = State::JUMP;
 	CurrentState = State::DASH;
+
+	SOUND->Stop("dash");
+	SOUND->Play("dash");
 }
 
 void Player::activateItem(Item* item)
@@ -755,6 +763,7 @@ void Player::activateItem(Item* item)
 	this->criticalDamage += item->criticalDamage;
 
 	this->attackSpeed += item->attackSpeed;
+	this->attackSpeedScale += item->attackSpeedScale;
 	this->moveSpeed += item->moveSpeed;
 
 	this->skillCooldownScale = max(0.0f, this->skillCooldownScale - item->skillCooldownScale);
@@ -825,6 +834,10 @@ void Player::actionsWhenDamaged(float damage)
 	// 데미지 텍스트 출력
 	Vector2 tempSpawnPos = collider->GetWorldPos() + Vector2(0, collider->scale.y * 0.5f);
 	GM->damageDP->AddText(tempSpawnPos, damage, 2);
+
+	// 사운드 출력
+	SOUND->Stop("damaged");
+	SOUND->Play("damaged");
 }
 
 void Player::DamageReflection(float reflectDamage)
@@ -875,16 +888,25 @@ void Player::ShowPlayerStat()
 
 
 	// 모든 플레이어 정보 출력
-	//if (ImGui::TreeNode(u8"디버그"))
-	//{
+	if (ImGui::TreeNode(u8"디버그"))
+	{
+	
+
+		ImGui::Text(u8"현재위치(Scene): %s\n", SCENE->GetCurrentSceneKey().c_str());
+		
+
 		ImGui::Text(u8"좌표X: %f\n", collider->GetWorldPos().x);
 		ImGui::Text(u8"좌표Y: %f\n", collider->GetWorldPos().y); 
-		ImGui::Text(u8"상태 : %d\n", CurrentState);
+		string stateTemp[13] = { "SPAWN", "STANDBY", "IDLE", "RUN", "DASH", "JUMP", "CROUCH", "CROUCH_DOWN", "ATTACK", "CHARGING", "SKILL", "DAMAGED", "DIE" };
+		ImGui::Text(u8"상태 : %d (%s) \n", CurrentState, stateTemp[static_cast<int>(CurrentState)].c_str());
 		ImGui::Text(u8"중력: %f\n\n", gravity);
-	//}
 
-	//if (ImGui::TreeNode(u8"상태"))
-	//{
+
+		ImGui::TreePop();
+	}
+
+	if (ImGui::TreeNode(u8"능력치"))
+	{
 		ImGui::Text(u8"체력: %d / %d \n", hp, maxHp);
 		ImGui::Text(u8"마나: %d / %d \n\n", mp, maxMp);
 
@@ -915,16 +937,18 @@ void Player::ShowPlayerStat()
 		ImGui::Text(u8"차징시간 : %f\n", chargingTime);
 		ImGui::Text(u8"차징 시간 스케일: %f \n", chargingTimeScale);
 		ImGui::Text(u8"차징 공격력 스케일: %f \n", chargingDamageScale);
-	//}
+		ImGui::TreePop();
+	}
 
-	//if (ImGui::TreeNode(u8"기타"))
-	//{
+	if (ImGui::TreeNode(u8"기타"))
+	{
+
 		ImGui::Text(u8"풀라이프 : %d\n", isFullLife);
 		ImGui::Text(u8"로우라이프 : %d\n\n", isLowLife);
 
 		ImGui::Text("onFloor : %d\n", onFloor);
 		ImGui::Text("onWall : %d\n", onWall);
-		ImGui::Text("onWallside : %d\n", onWallSlide);
+		ImGui::Text("onWallside : %d\n", onWallSide);
 		ImGui::Text(u8"isCharging : %d\n", isCharging);
 		ImGui::Text(u8"isLanding : %d\n\n", isLanding);
 
@@ -933,5 +957,6 @@ void Player::ShowPlayerStat()
 		ImGui::Text(u8"hasSyringe : %d\n", hasSyringe);
 		ImGui::Text(u8"hasHeatedClub : %d\n", hasHeatedClub);
 		ImGui::Text(u8"hasCandle : %d\n", hasCandle);
-	//}
+		ImGui::TreePop();
+	}
 }

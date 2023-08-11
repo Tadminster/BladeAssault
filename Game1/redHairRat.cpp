@@ -41,8 +41,8 @@ redHairRat::redHairRat()
     run->SetLocalPosY(-collider->scale.y * 0.5f);
     run->maxFrame.x = 7;
     run->maxFrame.y = 1;
-    run->scale.x = run->imageSize.x / run->maxFrame.x * 3;
-    run->scale.y = run->imageSize.y / run->maxFrame.y * 3;
+    run->scale.x = run->imageSize.x / run->maxFrame.x * 3.0f;
+    run->scale.y = run->imageSize.y / run->maxFrame.y * 3.0f;
     run->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     jump->pivot = OFFSET_B;
@@ -50,8 +50,8 @@ redHairRat::redHairRat()
     jump->SetLocalPosY(-collider->scale.y * 0.5f);
     jump->maxFrame.x = 2;
     jump->maxFrame.y = 2;
-    jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 2.8;
-    jump->scale.y = jump->imageSize.y / jump->maxFrame.y * 2.8;
+    jump->scale.x = jump->imageSize.x / jump->maxFrame.x * 2.8f;
+    jump->scale.y = jump->imageSize.y / jump->maxFrame.y * 2.8f;
     jump->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
 
     attack->pivot = OFFSET_B;
@@ -59,8 +59,8 @@ redHairRat::redHairRat()
     attack->SetLocalPosY(-collider->scale.y * 0.5f);
     attack->maxFrame.x = 9;
     attack->maxFrame.y = 1;
-    attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3;
-    attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3;
+    attack->scale.x = attack->imageSize.x / attack->maxFrame.x * 3.0f;
+    attack->scale.y = attack->imageSize.y / attack->maxFrame.y * 3.0f;
     attack->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
     shadow->pivot = OFFSET_B;
@@ -68,8 +68,8 @@ redHairRat::redHairRat()
     shadow->SetLocalPosY(-collider->scale.y * 0.4f);
     shadow->maxFrame.x = 1;
     shadow->maxFrame.y = 1;
-    shadow->scale.x = shadow->imageSize.x / shadow->maxFrame.x * 3;
-    shadow->scale.y = shadow->imageSize.y / shadow->maxFrame.y * 3;
+    shadow->scale.x = shadow->imageSize.x / shadow->maxFrame.x * 3.0f;
+    shadow->scale.y = shadow->imageSize.y / shadow->maxFrame.y * 3.0f;
     shadow->color.w = 0.2f;
     shadow->ChangeAnim(ANIMSTATE::ONCE, 0.1f, true);
 
@@ -78,6 +78,7 @@ redHairRat::redHairRat()
     ui_gauge_hp->SetLocalPosX(-collider->scale.x * 0.7f);
     ui_gauge_hp->SetLocalPosY(collider->scale.y * 1.1f);
 
+    name = "redHairRat";
     CurrentState = State::SPAWN;
     dir = LEFT;
 
@@ -93,11 +94,6 @@ redHairRat::redHairRat()
 
     timeTakenToAttackOnce = 1.0f / attackSpeed;
 }
-
-//redHairRat::redHairRat(Vector2 spawnPos) : redHairRat()
-//{
-//    collider->SetWorldPos(spawnPos);
-//}
 
 redHairRat::~redHairRat()
 {
@@ -118,8 +114,8 @@ void redHairRat::Attack()
     // 발사 위치 계산
     Vector2 spawnPos =
         collider->GetWorldPos()
-        + dir * collider->scale.x * 0.8
-        + UP * collider->scale.y * 0.8;
+        + dir * collider->scale.x * 0.8f
+        + UP * collider->scale.y * 0.8f;
 
     // 탄생성
     redHairRat_atk* proj = new redHairRat_atk
@@ -135,4 +131,8 @@ void redHairRat::Attack()
 
     //벡터에 탄 push
     GM->monster->GetProjectiles().emplace_back(proj);
+
+    // 사운드출력
+    SOUND->Stop("redHairRat_attack");
+    SOUND->Play("redHairRat_attack");
 }

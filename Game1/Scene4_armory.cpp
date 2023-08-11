@@ -51,8 +51,6 @@ Scene4_armory::Scene4_armory()
 
 Scene4_armory::~Scene4_armory()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
 	delete nextMap;
 	delete previousMap;
 	delete stair;
@@ -66,10 +64,14 @@ void Scene4_armory::Init()
 	CreateChest(1, Vector2(1100, 550));
 	CreateChest(2, Vector2(1600, 550));
 	CreateChest(3, Vector2(2100, 550));
+
+	SOUND->Play("bgm_armory");
 }
 
 void Scene4_armory::Release()
 {
+	Scene_proto::Release();
+	SOUND->Stop("bgm_armory");
 }
 
 void Scene4_armory::Update()

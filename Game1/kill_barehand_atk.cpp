@@ -80,4 +80,7 @@ void kill_barehand_atk::AfterEffect()
 	if (dir == LEFT) effect->reverseLR = true;
 
 	GM->fx->AddEffects(effect);
+
+	SOUND->Stop("kill_attack_hit");
+	SOUND->Play("kill_attack_hit");
 }

@@ -9,6 +9,7 @@ public:
     class EffectManager*        fx;
     class ItemManager*          item;
     class ObjectManager*        obj;
+    class SoundDB*              sound;
 
     bool	DEBUG_MODE = false;
 

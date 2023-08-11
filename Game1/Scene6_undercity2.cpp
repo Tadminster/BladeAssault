@@ -46,10 +46,7 @@ Scene6_undercity2::Scene6_undercity2()
 
 Scene6_undercity2::~Scene6_undercity2()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
 	delete nextMap;
-	delete spawnTrigger;
 }
 
 void Scene6_undercity2::Init()
@@ -58,10 +55,15 @@ void Scene6_undercity2::Init()
 	GM->player->SetPosition(startPostion);
 
 	CreateChest(0, Vector2(1525, 725));
+
+	SOUND->Play("bgm_undercity");
 }
 
 void Scene6_undercity2::Release()
 {
+	Scene_proto::Release();
+
+	SOUND->Stop("bgm_undercity");
 }
 
 void Scene6_undercity2::Update()
@@ -120,11 +122,11 @@ void Scene6_undercity2::ResizeScreen()
 
 void Scene6_undercity2::SummonMonster()
 {
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1525));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(2000, 1250));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1450, 1075));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1850, 975));
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(1200, 725));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1500, 725));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(1800, 725));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1450, 1525));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(2000, 1250));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1450, 1075));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1850, 975));
+	GM->monster->SpawnMonster("redHairRat", Vector2(1200, 725));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(1500, 725));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(1800, 725));
 }

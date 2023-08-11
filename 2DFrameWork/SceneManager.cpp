@@ -42,6 +42,7 @@ bool SceneManager::DeleteScene(string key)
 Scene * SceneManager::ChangeScene(string key, float changingTime)
 {
     Scene * temp = GetScene(key);
+    currentSceneKey = move(key);
 
     if (temp)
     {

@@ -72,12 +72,8 @@ Scene3_jazzBar::Scene3_jazzBar()
 
 Scene3_jazzBar::~Scene3_jazzBar()
 {
-	for (int i = 0; i < 3; i++)
-		delete[] tileMap[i];
-
 	for (int i = 0; i < 2; i++)
 		delete nextMap[i];
-	delete spawnTrigger;
 	delete stairLeft;
 }
 
@@ -85,15 +81,19 @@ void Scene3_jazzBar::Init()
 {
 	GM->player->SetPosition(startPostion);
 
+	SOUND->Play("bgm_jazzBar");
 }
 
 void Scene3_jazzBar::Release()
 {
+	Scene_proto::Release();
+
+	SOUND->Stop("bgm_jazzBar");
 }
 
 void Scene3_jazzBar::Update()
 {
-	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());\
+	ImGui::Text("FPS : %d\n", (int)TIMER->GetFramePerSecond());
 
 	// 카메라 위치
 	CAM->position.x = GM->player->GetCollider()->GetWorldPos().x;
@@ -183,7 +183,7 @@ void Scene3_jazzBar::ResizeScreen()
 
 void Scene3_jazzBar::SummonMonster()
 {
-	GM->monster->SpawnMonster(new redHairRat(), Vector2(3500, 2000));
-	GM->monster->SpawnMonster(new orangeHairRat(), Vector2(3600, 2000));
-	GM->monster->SpawnMonster(new greenHairRat(), Vector2(3700, 2000));
+	GM->monster->SpawnMonster("redHairRat", Vector2(3500, 2000));
+	GM->monster->SpawnMonster("orangeHairRat", Vector2(3600, 2000));
+	GM->monster->SpawnMonster("greenHairRat", Vector2(3700, 2000));
 }

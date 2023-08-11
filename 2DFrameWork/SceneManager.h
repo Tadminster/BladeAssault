@@ -9,6 +9,7 @@ private:
 
     float changingTime = 0.0f;
 
+    string                  currentSceneKey = "";
 public:
     ~SceneManager();
 
@@ -22,6 +23,8 @@ public:
     Scene * GetScene(string key);
     //현재 씬 가져오기
     Scene * GetCurrentScene();
+    //현재 씬 key 리턴
+    string&  GetCurrentSceneKey() { return currentSceneKey; };
 
     void    Release();
     void    Update();

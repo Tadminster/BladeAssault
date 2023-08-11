@@ -16,6 +16,8 @@ protected:
 
 	MonsterDamageTaken	dmgTaken;
 
+	string  name;					// 몬스터 이름
+
 	float	knockBackFactor;		// 넉백에 사용되는 계수
 	float	timeOfDamage;			// 데미지 받은 시간 기록
 
@@ -23,14 +25,11 @@ protected:
 	int		attackFrame;			// 공격 프레임
 	bool	realAttack;				// 실제 공격을 위한	bool
 
-	float	lastAttackTime{0};		// 마지막 공격 시간
-	float	timeTakenToAttackOnce;  // 한번 공격하는데 걸리는 시간
+	float	lastAttackTime{ 0.0f };	// 마지막 공격 시간
+	float	timeTakenToAttackOnce;  // 한번 공격하는데 걸리는 시간 
 
 public:
 	Monster();
-
-	// deep copy
-	void operator=(Monster* monster);
 
 	virtual ~Monster();
 	virtual void Update();
@@ -40,11 +39,13 @@ public:
 	virtual void Attack();
 
 	//
-	bool isDead() const; 
+	virtual	bool isDead() const; 
 	void actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance);
 	void knockBack();
+	void kill() { CurrentState = State::DIE; }
 
-
-
+	string& GetName()		{ return name; }
+	int		GetDamage()		{ return damage; }
+	Vector2 GetPosition()	{ return collider->GetWorldPos(); }
 };
 

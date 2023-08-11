@@ -68,9 +68,9 @@ protected:
 	float		dashCooldownScale		= 1.0f;		// 대쉬 재사용 대기시간 감소량
 
 	//ETC
-	float		timeOfDamaged			= 0.0f;		// 피격당한 시간 기록용
 
 public:
+
 	bool		isFullLife				= true;		// 최대 체력일 때인지 여부
 	bool		isLowLife				= false;	// 낮은 체력일 때인지 여부
 	bool		isCharging				= false;	// 차징 중인지 여부
@@ -83,6 +83,8 @@ public:
 	bool		hasSyringe				= false;	// 주사기 소유 여부 (피격시 HP 재생)
 	bool		hasHeatedClub			= false;	// 히팅클럽 소유 여부 (낮은 체력일 때 데미지 증가)
 
+	// ETC
+	float		timeOfDamaged			= 0.0f;		// 피격당한 시간 기록용
 public:
 	Player();
 	virtual ~Player();
