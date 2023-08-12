@@ -20,18 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bearhat.h" />
+    <ClInclude Include="bigmam.h" />
     <ClInclude Include="boxingGloves.h" />
     <ClInclude Include="cactus.h" />
     <ClInclude Include="candle.h" />
     <ClInclude Include="charger.h" />
     <ClInclude Include="cottonGloves.h" />
     <ClInclude Include="dart.h" />
+    <ClInclude Include="djang.h" />
+    <ClInclude Include="doctor.h" />
     <ClInclude Include="duracell.h" />
     <ClInclude Include="epicGear.h" />
     <ClInclude Include="firstAidKit.h" />
     <ClInclude Include="cheese.h" />
     <ClInclude Include="goldGrip.h" />
     <ClInclude Include="grip.h" />
+    <ClInclude Include="hank.h" />
     <ClInclude Include="heatedClub.h" />
     <ClInclude Include="heroSword.h" />
     <ClInclude Include="huntersArmor.h" />
@@ -46,6 +50,7 @@
     <ClInclude Include="npc_proto.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="oldSneakers.h" />
+    <ClInclude Include="pianoman.h" />
     <ClInclude Include="player_damageReflection.h" />
     <ClInclude Include="rareChest.h" />
     <ClInclude Include="rareGear.h" />
@@ -84,6 +89,7 @@
     <ClInclude Include="ringOfGiant.h" />
     <ClInclude Include="rogueMask.h" />
     <ClInclude Include="runeStone.h" />
+    <ClInclude Include="saxman.h" />
     <ClInclude Include="Scene2_inGame.h" />
     <ClInclude Include="Scene1_title.h" />
     <ClInclude Include="Scene3_jazzBar.h" />
@@ -108,18 +114,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bearhat.cpp" />
+    <ClCompile Include="bigmam.cpp" />
     <ClCompile Include="boxingGloves.cpp" />
     <ClCompile Include="cactus.cpp" />
     <ClCompile Include="candle.cpp" />
     <ClCompile Include="charger.cpp" />
     <ClCompile Include="cottonGloves.cpp" />
     <ClCompile Include="dart.cpp" />
+    <ClCompile Include="djang.cpp" />
+    <ClCompile Include="doctor.cpp" />
     <ClCompile Include="duracell.cpp" />
     <ClCompile Include="epicGear.cpp" />
     <ClCompile Include="firstAidKit.cpp" />
     <ClCompile Include="cheese.cpp" />
     <ClCompile Include="goldGrip.cpp" />
     <ClCompile Include="grip.cpp" />
+    <ClCompile Include="hank.cpp" />
     <ClCompile Include="heatedClub.cpp" />
     <ClCompile Include="heroSword.cpp" />
     <ClCompile Include="huntersArmor.cpp" />
@@ -134,6 +144,7 @@
     <ClCompile Include="npc_proto.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="oldSneakers.cpp" />
+    <ClCompile Include="pianoman.cpp" />
     <ClCompile Include="player_damageReflection.cpp" />
     <ClCompile Include="rareChest.cpp" />
     <ClCompile Include="rareGear.cpp" />
@@ -172,6 +183,7 @@
     <ClCompile Include="ringOfGiant.cpp" />
     <ClCompile Include="rogueMask.cpp" />
     <ClCompile Include="runeStone.cpp" />
+    <ClCompile Include="saxman.cpp" />
     <ClCompile Include="Scene2_inGame.cpp" />
     <ClCompile Include="Scene1_title.cpp" />
     <ClCompile Include="Scene3_jazzBar.cpp" />

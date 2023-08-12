@@ -6,6 +6,11 @@ private:
 	ObRect*			stairLeft;
 	ObRect*			stairRight;
 
+	class bigmam*	npcBigmam;
+	class pianoman*	npcPianoman;
+	class saxman*	npcSaxman;
+	class djang*	npcDjang;
+
 public:
 	Scene3_jazzBar();
 	~Scene3_jazzBar();

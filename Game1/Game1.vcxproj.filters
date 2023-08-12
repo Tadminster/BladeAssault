@@ -255,6 +255,24 @@
     <ClInclude Include="npc_proto.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
+    <ClInclude Include="djang.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="bigmam.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="saxman.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="hank.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="pianoman.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="doctor.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -508,6 +526,24 @@
       <Filter>System</Filter>
     </ClCompile>
     <ClCompile Include="npc_proto.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="djang.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="bigmam.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="saxman.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="hank.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="pianoman.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="doctor.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
   </ItemGroup>

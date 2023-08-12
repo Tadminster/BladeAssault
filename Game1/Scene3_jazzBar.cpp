@@ -1,4 +1,11 @@
 #include "stdafx.h"
+#include "npc_proto.h"
+#include "bigmam.h"
+#include "pianoman.h"
+#include "saxman.h"
+#include "djang.h"
+#include "hank.h"
+
 #include "HUD.h"
 #include "Creature.h"
 #include "Player.h"
@@ -26,6 +33,12 @@ Scene3_jazzBar::Scene3_jazzBar()
 	//spawnTrigger = new ObRect();
 	stairLeft = new ObRect();
 	stairRight = new ObRect();
+
+	npcBigmam = new bigmam(Vector2(1825, 1175));
+	npcPianoman = new pianoman(Vector2(1875, 1200));
+	npcSaxman = new saxman(Vector2(1775, 1200));
+	npcDjang = new djang(Vector2(2250, 1200));
+
 
 	tileMap[0]->file = "scene3_jazzbar_0.txt";
 	tileMap[1]->file = "scene3_jazzbar_1.txt";
@@ -151,6 +164,11 @@ void Scene3_jazzBar::Update()
 	stairLeft->Update();
 	stairRight->Update();
 
+	npcBigmam->Update();
+	npcPianoman->Update();
+	npcSaxman->Update();
+	npcDjang->Update();
+
 	Scene_proto::Update();
 }
 
@@ -171,6 +189,11 @@ void Scene3_jazzBar::Render()
 		stairLeft->Render();
 		stairRight->Render();
 	}
+
+	npcSaxman->Render();
+	npcPianoman->Render();
+	npcBigmam->Render();
+	npcDjang->Render();
 
 	Scene_proto::Render();
 
