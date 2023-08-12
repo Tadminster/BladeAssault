@@ -1,5 +1,10 @@
 #include "stdafx.h"
 #include "HUD.h"
+
+#include "npcProto.h"
+#include "npcHank.h"
+#include "npcDoctor.h"
+
 #include "Creature.h"
 #include "Player.h"
 #include "Player_kill.h"
@@ -20,6 +25,9 @@ Scene4_armory::Scene4_armory()
 	nextMap = new ObRect();
 	previousMap = new ObRect();
 	stair = new ObRect();
+
+	npc_hank = new npcHank(Vector2(800, 550));
+	npc_doctor = new npcDoctor(Vector2(3435, 600));
 
 	tileMap[0]->file = "scene4_armory_0.txt";
 	tileMap[1]->file = "scene4_armory_1.txt";
@@ -54,6 +62,8 @@ Scene4_armory::~Scene4_armory()
 	delete nextMap;
 	delete previousMap;
 	delete stair;
+	delete npc_hank;
+	delete npc_doctor;
 }
 
 void Scene4_armory::Init()
@@ -110,6 +120,9 @@ void Scene4_armory::Update()
 	nextMap->Update();
 	stair->Update();
 
+	npc_hank->Update();
+	npc_doctor->Update();
+
 	Scene_proto::Update();
 }
 
@@ -129,6 +142,9 @@ void Scene4_armory::Render()
 		nextMap->Render();
 		stair->Render();
 	}
+
+	npc_hank->Render();
+	npc_doctor->Render();
 
 	Scene_proto::Render();
 }

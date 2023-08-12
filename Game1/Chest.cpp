@@ -8,7 +8,7 @@ Chest::Chest()
 {
 	collider				= new ObRect();
 	collider->pivot			= OFFSET_B;
-	collider->scale			= Vector2(100, 100);
+	collider->scale			= Vector2(150, 100);
 	collider->isFilled		= false;
 	collider->SetWorldPos(Vector2());
 

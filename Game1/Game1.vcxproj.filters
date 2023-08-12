@@ -252,25 +252,40 @@
     <ClInclude Include="SoundDB.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="npc_proto.h">
+    <ClInclude Include="npcProto.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="djang.h">
+    <ClInclude Include="npcDjang.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="bigmam.h">
+    <ClInclude Include="npcBigmam.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="saxman.h">
+    <ClInclude Include="npcSaxman.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="hank.h">
+    <ClInclude Include="npcHank.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="pianoman.h">
+    <ClInclude Include="npcPianoman.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="doctor.h">
+    <ClInclude Include="npcDoctor.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcMax.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcZett.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcDarcy.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcJenny.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcJack.h">
       <Filter>Object\Npc</Filter>
     </ClInclude>
   </ItemGroup>
@@ -525,25 +540,40 @@
     <ClCompile Include="SoundDB.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="npc_proto.cpp">
+    <ClCompile Include="npcProto.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="djang.cpp">
+    <ClCompile Include="npcDjang.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="bigmam.cpp">
+    <ClCompile Include="npcBigmam.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="saxman.cpp">
+    <ClCompile Include="npcSaxman.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="hank.cpp">
+    <ClCompile Include="npcHank.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="pianoman.cpp">
+    <ClCompile Include="npcPianoman.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="doctor.cpp">
+    <ClCompile Include="npcDoctor.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcMax.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcDarcy.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcJenny.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcZett.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcJack.cpp">
       <Filter>Object\Npc</Filter>
     </ClCompile>
   </ItemGroup>

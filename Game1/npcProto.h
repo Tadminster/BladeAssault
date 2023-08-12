@@ -1,14 +1,14 @@
 #pragma once
-class npc_proto
+class npcProto
 {
 protected:
 	ObRect*		collider;
 	ObImage*	skin;
 
 public:
-	npc_proto() = default;
-	explicit npc_proto(Vector2 spawnPos);
-	~npc_proto();
+	npcProto() = default;
+	explicit npcProto(Vector2 spawnPos);
+	~npcProto();
 	virtual void Update();
 	virtual void Render();
 };

@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "npc_proto.h"
+#include "npcProto.h"
 
-npc_proto::npc_proto(Vector2 spawnPos)
+npcProto::npcProto(Vector2 spawnPos)
 {
 	collider = new ObRect();
 	collider->pivot = OFFSET_B;
@@ -9,19 +9,19 @@ npc_proto::npc_proto(Vector2 spawnPos)
 	collider->SetLocalPos(spawnPos);
 }
 
-npc_proto::~npc_proto()
+npcProto::~npcProto()
 {
 	delete collider;
 	delete skin;
 }
 
-void npc_proto::Update()
+void npcProto::Update()
 {
 	collider->Update();
 	skin->Update();
 }
 
-void npc_proto::Render()
+void npcProto::Render()
 {
 	if (GM->DEBUG_MODE)
 		collider->Render();
