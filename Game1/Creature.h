@@ -60,7 +60,6 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
-
 	virtual	void Jump();
 	virtual void Attack();
 

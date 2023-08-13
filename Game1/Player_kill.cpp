@@ -48,8 +48,8 @@ Player_kill::Player_kill()
 	run->maxFrame.y = 1;
 	run->scale.x = run->imageSize.x / run->maxFrame.x * 3.0f;
 	run->scale.y = run->imageSize.y / run->maxFrame.y * 3.0f;
-	run->SetLocalPosY(-collider->scale.y * 0.3f);
 	run->ChangeAnim(ANIMSTATE::LOOP, 0.1f, true);
+	run->SetLocalPosY(-collider->scale.y * 0.3f);
 
 	dash->pivot = OFFSET_B;
 	dash->SetParentRT(*collider);
@@ -231,7 +231,12 @@ void Player_kill::Update()
 
 	if (CurrentState == State::CHARGING)
 	{
+		SOUND->Play("kill_charging");
 		chargingFx->Update();
+	}
+	else
+	{
+		SOUND->Stop("kill_charging");
 	}
 
 	Player::Update();

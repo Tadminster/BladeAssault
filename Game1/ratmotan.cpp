@@ -558,6 +558,7 @@ void ratmotan::Jump()
 {
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
 	gravity = -jumpSpeed;
+	realAttack = false;
 	SOUND->Stop("ratmotan_jumpStart");
 	SOUND->Play("ratmotan_jumpStart");
 	CurrentState = State::JUMP;
