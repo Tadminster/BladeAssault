@@ -128,7 +128,7 @@ void MonsterManager::Render()
 		projectiles->Render();
 }
 
-void MonsterManager::SpawnMonster(string&& monsterName, Vector2 pos)
+void MonsterManager::SpawnMonster(string&& monsterName, Vector2 pos, Vector2 dir)
 {
 	Monster* monster = nullptr;
 	if (monsterName == "redHairRat")
@@ -159,7 +159,7 @@ void MonsterManager::SpawnMonster(string&& monsterName, Vector2 pos)
 
 	// 몬스터 위치 설정
 	monster->GetCollider()->SetWorldPos(pos);
-	monster->Init();
+	monster->SetDirection(dir);
 	// 몬스터를 벡터에 추가
 	this->monsters.emplace_back(monster);
 }

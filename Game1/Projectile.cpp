@@ -98,6 +98,8 @@ bool Projectile::hasCollideWithMonster()
                 for (auto& crashedMonster : crash)
                     if (crashedMonster == monster) return false;
 
+                GM->player->SetMp(2);
+
                 // 충돌한 적이 없으면
                 {
                     // 충돌 벡터에 추가
@@ -138,6 +140,8 @@ bool Projectile::hasCollideWithMonster()
                     {
                         // 몬스터 데미지 액션
                         monster->actionsWhenDamaged(damage, shove, criticalChance);
+
+                        GM->player->SetMp(3);
                     }
 
 

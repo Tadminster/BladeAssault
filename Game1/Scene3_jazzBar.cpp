@@ -145,7 +145,7 @@ void Scene3_jazzBar::Update()
 	if (spawnTrigger->Intersect(GM->player->GetCollider()))
 	{
 		// 몬스터가 소환된 적이 없다면
-		if (!isSummoned)
+		if (!isSummoned && GM->DEBUG_MODE)
 		{
 			isSummoned = true;
 			SummonMonster();

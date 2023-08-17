@@ -371,6 +371,9 @@ bool Monster::isDead() const
 
 void Monster::actionsWhenDamaged(int damage, int knockBackFactor, int criticalChance)
 {
+	// 이뮨 타입은 데미지 받지 않음.
+	if (dmgTaken== MonsterDamageTaken::IMMUNE) return;
+
 	// 상태를 데미지 받음으로 변경
 	dmgTaken = MonsterDamageTaken::DAMAGED;
 	// 데미지 받은 시간 기록

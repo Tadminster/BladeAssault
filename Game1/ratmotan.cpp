@@ -460,7 +460,7 @@ void ratmotan::Attack()
 
 void ratmotan::Shockwave()
 {
-	GM->monster->SpawnMonster("shockwaveGenerator", collider->GetWorldPos() + dir * collider->scale.x * 0.5f);
+	GM->monster->SpawnMonster("shockwaveGenerator", collider->GetWorldPos() + dir * collider->scale.x * 0.5f, dir);
 }
 
 bool ratmotan::isDashColldown()

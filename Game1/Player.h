@@ -114,7 +114,8 @@ public:
 	ObRect* GetCollider()			{ return collider; }
 
 	// Set
-	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }
+	void	SetPosition(Vector2 position)	{ collider->SetWorldPos(position); }
+	void	SetMp(int vlaue)				{ mp = min(maxMp, mp + vlaue); }
 
 	// Etc
 	void	ShowPlayerStat();

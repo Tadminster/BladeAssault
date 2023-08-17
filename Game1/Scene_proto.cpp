@@ -43,6 +43,8 @@ void Scene_proto::Release()
 	LIGHT->lightColor.y = 0.5f;
 	LIGHT->lightColor.z = 0.5f;
 
+	isSummoned = false;
+
 	if (GM->player->GetState() == State::DIE)
 	{
 		delete GM->player;

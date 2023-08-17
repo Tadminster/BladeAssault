@@ -78,6 +78,9 @@ public:
 	int		GetHp()			{ return hp; }
 	int		GetMaxHp()		{ return maxHp; }
 
+	// Set
+	void    SetDirection(Vector2 direction) { dir = direction; }
+
 	//
 	void GoBack();
 };
