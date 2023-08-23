@@ -252,6 +252,42 @@
     <ClInclude Include="SoundDB.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="npcProto.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcDjang.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcBigmam.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcSaxman.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcHank.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcPianoman.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcDoctor.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcMax.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcZett.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcDarcy.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcJenny.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="npcJack.h">
+      <Filter>Object\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scene1_title.cpp">
@@ -504,6 +540,42 @@
     <ClCompile Include="SoundDB.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="npcProto.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcDjang.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcBigmam.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcSaxman.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcHank.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcPianoman.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcDoctor.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcMax.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcDarcy.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcJenny.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcZett.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="npcJack.cpp">
+      <Filter>Object\Npc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -556,6 +628,9 @@
     </Filter>
     <Filter Include="Object\ProjGenerator">
       <UniqueIdentifier>{481516bb-7182-42df-a518-46aa0e2a328a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Npc">
+      <UniqueIdentifier>{e0f9d489-6dce-40ad-b97e-30655f108c4b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -218,9 +218,18 @@ void Player::Update()
 			charging->frame.x = chargingStartFrame;
 		}
 
+		if (chargingTime >= chargingTimeMax)
+		{
+			// 차징 완료
+			charging->color = Color(0.8f, 0.7f, 0.4f, 0.5f);
+			SOUND->Play("kill_maxCharging");
+		}
+
 		// 프레임이 끝나면 charging -> idle
 		if (charging->frame.x == charging->maxFrame.x - 1)
 		{
+			charging->color = Color(0.5f, 0.5f, 0.5f, 0.5f);
+			SOUND->Stop("kill_maxCharging");
 			SOUND->Stop("kill_charging");
 			CurrentState = State::IDLE;
 		}

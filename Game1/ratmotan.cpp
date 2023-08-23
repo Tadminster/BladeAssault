@@ -460,7 +460,7 @@ void ratmotan::Attack()
 
 void ratmotan::Shockwave()
 {
-	GM->monster->SpawnMonster("shockwaveGenerator", collider->GetWorldPos() + dir * collider->scale.x * 0.5f);
+	GM->monster->SpawnMonster("shockwaveGenerator", collider->GetWorldPos() + dir * collider->scale.x * 0.5f, dir);
 }
 
 bool ratmotan::isDashColldown()
@@ -558,6 +558,7 @@ void ratmotan::Jump()
 {
 	collider->SetWorldPosY(collider->GetWorldPos().y + 5);
 	gravity = -jumpSpeed;
+	realAttack = false;
 	SOUND->Stop("ratmotan_jumpStart");
 	SOUND->Play("ratmotan_jumpStart");
 	CurrentState = State::JUMP;

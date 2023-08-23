@@ -38,6 +38,7 @@ SoundDB::SoundDB()
 	SOUND->AddSound("kill_chargeAttack.wav"			, "kill_chargeAttack"		, false);
 	SOUND->AddSound("kill_chargeAttack_hit.wav"		, "kill_chargeAttack_hit"	, false);
 	SOUND->AddSound("kill_charging.wav"				, "kill_charging"			, false);
+	SOUND->AddSound("kill_maxCharging.wav"			, "kill_maxCharging"		, false);
 
 	// Monster
 	SOUND->AddSound("redHairRat_attack.wav"			, "redHairRat_attack"		, false); // rat

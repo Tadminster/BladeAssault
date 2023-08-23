@@ -7,6 +7,9 @@ private:
 	
 	ObRect* stair;
 
+	class npcHank*		npc_hank;
+	class npcDoctor*	npc_doctor;
+
 	Vector2			startPostion;
 	Vector2			returnPosition;
 

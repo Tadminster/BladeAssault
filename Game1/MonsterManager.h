@@ -25,7 +25,7 @@ public:
 	// @param monsterName 소환할 몬스터 이름
 	// "redHairRat", "orangeHairRat", "greenHairRat", "ratmotan", "shockwaveGenerator"
 	// @param pos 소환할 위치
-	void	SpawnMonster(string&& monsterName, Vector2 pos);
+	void	SpawnMonster(string&& monsterName, Vector2 pos, Vector2 dir = LEFT);
 	void	ClearMonster();
 
 	void	ShowMonsterStat();

@@ -25,9 +25,9 @@ shockwaveGenerator::shockwaveGenerator()
     collider->scale.y = 50;
 
     name = "shockwaveGenerator";
+    dmgTaken = MonsterDamageTaken::IMMUNE;
     CurrentState = State::RUN;
     dir = LEFT;
-
 
     hp = 10;
     maxHp = 10;

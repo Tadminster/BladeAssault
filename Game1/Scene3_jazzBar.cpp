@@ -1,4 +1,15 @@
 #include "stdafx.h"
+#include "npcProto.h"
+#include "npcBigmam.h"
+#include "npcPianoman.h"
+#include "npcSaxman.h"
+#include "npcDjang.h"
+#include "npcMax.h"
+#include "npcJack.h"
+#include "npcDarcy.h"
+#include "npcJenny.h"
+#include "npcZett.h"
+
 #include "HUD.h"
 #include "Creature.h"
 #include "Player.h"
@@ -26,6 +37,17 @@ Scene3_jazzBar::Scene3_jazzBar()
 	//spawnTrigger = new ObRect();
 	stairLeft = new ObRect();
 	stairRight = new ObRect();
+
+	npc_bigmam = new npcBigmam(Vector2(1825, 1175));
+	npc_pianoman = new npcPianoman(Vector2(1875, 1200));
+	npc_saxman = new npcSaxman(Vector2(1775, 1200));
+	npc_djang = new npcDjang(Vector2(2250, 1200));
+	npc_max = new npcMax(Vector2(1825, 1800));
+	npc_jack = new npcJack(Vector2(3625, 1800));
+	npc_darcy = new npcDarcy(Vector2(1525, 1800));
+	npc_jenny = new npcJenny(Vector2(1675, 1800));
+	npc_zett = new npcZett(Vector2(2080, 1800));
+
 
 	tileMap[0]->file = "scene3_jazzbar_0.txt";
 	tileMap[1]->file = "scene3_jazzbar_1.txt";
@@ -75,6 +97,15 @@ Scene3_jazzBar::~Scene3_jazzBar()
 	for (int i = 0; i < 2; i++)
 		delete nextMap[i];
 	delete stairLeft;
+	delete stairRight;
+	delete npc_bigmam;
+	delete npc_pianoman;
+	delete npc_saxman;
+	delete npc_djang;
+	delete npc_jack;
+	delete npc_darcy;
+	delete npc_jenny;
+	delete npc_zett;
 }
 
 void Scene3_jazzBar::Init()
@@ -114,7 +145,7 @@ void Scene3_jazzBar::Update()
 	if (spawnTrigger->Intersect(GM->player->GetCollider()))
 	{
 		// 몬스터가 소환된 적이 없다면
-		if (!isSummoned)
+		if (!isSummoned && GM->DEBUG_MODE)
 		{
 			isSummoned = true;
 			SummonMonster();
@@ -151,6 +182,16 @@ void Scene3_jazzBar::Update()
 	stairLeft->Update();
 	stairRight->Update();
 
+	npc_bigmam->Update();
+	npc_pianoman->Update();
+	npc_saxman->Update();
+	npc_djang->Update();
+	npc_max->Update();
+	npc_jack->Update();
+	npc_darcy->Update();
+	npc_jenny->Update();
+	npc_zett->Update();
+
 	Scene_proto::Update();
 }
 
@@ -171,6 +212,16 @@ void Scene3_jazzBar::Render()
 		stairLeft->Render();
 		stairRight->Render();
 	}
+
+	npc_saxman->Render();
+	npc_pianoman->Render();
+	npc_bigmam->Render();
+	npc_djang->Render();
+	npc_max->Render();
+	npc_jack->Render();
+	npc_darcy->Render();
+	npc_jenny->Render();
+	npc_zett->Render();
 
 	Scene_proto::Render();
 

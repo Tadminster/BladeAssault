@@ -60,7 +60,6 @@ public:
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();
-
 	virtual	void Jump();
 	virtual void Attack();
 
@@ -78,6 +77,9 @@ public:
 
 	int		GetHp()			{ return hp; }
 	int		GetMaxHp()		{ return maxHp; }
+
+	// Set
+	void    SetDirection(Vector2 direction) { dir = direction; }
 
 	//
 	void GoBack();

@@ -1,7 +1,7 @@
 #pragma once
 #include "Item.h"
 
-// @brief		모든 플레이어 캐릭터의 부모 클래스
+// @brief		모든 플레이어 캐릭터의 proto 클래스
 class Player : public Creature
 {
 protected:
@@ -114,7 +114,8 @@ public:
 	ObRect* GetCollider()			{ return collider; }
 
 	// Set
-	void	SetPosition(Vector2 position) { collider->SetWorldPos(position); }
+	void	SetPosition(Vector2 position)	{ collider->SetWorldPos(position); }
+	void	SetMp(int vlaue)				{ mp = min(maxMp, mp + vlaue); }
 
 	// Etc
 	void	ShowPlayerStat();
